@@ -1,0 +1,14 @@
+package br.com.rascunhos;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+import meucursoJPA.model.administrativo.Cargo;
+
+@Generated(value="Dali", date="2022-05-20T03:05:51.013-0300")
+@StaticMetamodel(Cargo.class)
+public class Cargo_ {
+	public static volatile SingularAttribute<Cargo, Long> codigo;
+	public static volatile SingularAttribute<Cargo, String> descricao;
+}

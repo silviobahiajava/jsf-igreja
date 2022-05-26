@@ -1,0 +1,135 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the contato database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Contato.findAll", query="SELECT c FROM Contato c")
+public class Contato implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String celular;
+	private String email;
+	private String facebook;
+	private String skype;
+	private String telefoneFixo;
+	private List<Membro> membros;
+	private List<Membroinativo> membroinativos;
+
+	public Contato() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getCelular() {
+		return this.celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getFacebook() {
+		return this.facebook;
+	}
+
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}
+
+
+	public String getSkype() {
+		return this.skype;
+	}
+
+	public void setSkype(String skype) {
+		this.skype = skype;
+	}
+
+
+	@Column(name="telefone_fixo")
+	public String getTelefoneFixo() {
+		return this.telefoneFixo;
+	}
+
+	public void setTelefoneFixo(String telefoneFixo) {
+		this.telefoneFixo = telefoneFixo;
+	}
+
+
+	//bi-directional many-to-one association to Membro
+	@OneToMany(mappedBy="contato")
+	public List<Membro> getMembros() {
+		return this.membros;
+	}
+
+	public void setMembros(List<Membro> membros) {
+		this.membros = membros;
+	}
+
+	public Membro addMembro(Membro membro) {
+		getMembros().add(membro);
+		membro.setContato(this);
+
+		return membro;
+	}
+
+	public Membro removeMembro(Membro membro) {
+		getMembros().remove(membro);
+		membro.setContato(null);
+
+		return membro;
+	}
+
+
+	//bi-directional many-to-one association to Membroinativo
+	@OneToMany(mappedBy="contato")
+	public List<Membroinativo> getMembroinativos() {
+		return this.membroinativos;
+	}
+
+	public void setMembroinativos(List<Membroinativo> membroinativos) {
+		this.membroinativos = membroinativos;
+	}
+
+	public Membroinativo addMembroinativo(Membroinativo membroinativo) {
+		getMembroinativos().add(membroinativo);
+		membroinativo.setContato(this);
+
+		return membroinativo;
+	}
+
+	public Membroinativo removeMembroinativo(Membroinativo membroinativo) {
+		getMembroinativos().remove(membroinativo);
+		membroinativo.setContato(null);
+
+		return membroinativo;
+	}
+
+}

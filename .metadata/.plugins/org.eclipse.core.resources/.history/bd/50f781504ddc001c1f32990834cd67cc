@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	 xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+    <title>cadastro de membros</title>
+   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="/image/favicon.png"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<h:body>
+		<div class="container">
+		   <div class="row">
+				<div class="col-xs-12 col-md-12 col-lg-12">
+					<h3>Cadastro de Membros</h3>
+				</div>
+			</div>
+		<form 
+			enctype="multipart/form-data"
+			method="POST">
+		<div class="row">
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="codigo">nome</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9" >
+					 <input type="text" name="nome"
+						th:field="*{nome}"  class="form-control"
+						id="nome" aria-describedby="nome" />
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="nacionalidade">nacionalidade</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9" >
+					 <input type="text" name="nacionalidade"
+						th:field="*{nacionalidade}"  class="form-control"
+						id="nacionalidade" aria-describedby="nacionalidade" />
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="naturalidade">naturalidade</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9" >
+					 <input type="text" name="naturalidade"
+						th:field="*{naturalidade}"  class="form-control"
+						id="naturalidade" aria-describedby="naturalidade" />
+				</div>
+				
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="estado">Estado</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9" >
+					<select 
+      				th:field="*{estadosBrasileiros}"
+      				id="estadosBrasileiros" 
+      				class="form-control">
+       				 <option 
+        				th:each="eb : ${listaEstadoBrasileiro}"
+        				th:text="${eb.descricao}"
+        				th:value="${eb.descricao}"
+                       >
+                   </option>
+        
+      </select>
+				</div>
+				
+				
+		</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="email">email</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="contato.email"
+						th:field="*{contato.email}" class="form-control" id="email"
+						aria-describedby="email" />
+				</div>
+			<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="celular">Celular</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="contato.celular"
+						th:field="*{contato.celular}" class="form-control" id="celular"
+						aria-describedby="celular" />
+				</div>
+			
+			<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="telefone">Telefone</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="contato.telefoneFixo"
+						th:field="*{contato.telefoneFixo}" class="form-control" id="telefone"
+						aria-describedby="telefone" />
+				</div>
+			
+			</div>
+			
+			
+				
+				<div class="row">
+					<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="estado">nome do pai</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="filiacao.nomeDoPai"
+						th:field="*{filiacao.nomeDoPai}" class="form-control" id="nomeDoPai"
+						aria-describedby="nomeDoPai" />
+				</div>
+				
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="estado">nome da mãe</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="filiacao.nomeDaMae"
+						th:field="*{filiacao.nomeDaMae}" class="form-control" id="nome"
+						aria-describedby="nomedamae" />
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="estado">Data de Aniversário</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					 <input 
+              	class="form-control" 
+              	type="date" 
+              	name="aniversario" 
+              	th:field="*{aniversario}"
+              	id="aniversario" 
+              	placeholder="digite a data do seu aniversário...">
+            </div>
+            <div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="estado">foto</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="file"
+						name="file" 
+						class="form-control" id="file"
+						aria-describedby="file" />
+				</div>
+            
+				</div>
+				
+				<div class="row">
+				<div class="col-xs-12 col-md-3 col-lg-3" >
+					<button type="submit" class="btn btn-primary">cadastrar</button>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3" >
+					<a href="http://localhost:8080/membros/index">testes</a>
+				</div>
+				</div>
+				
+			</form>
+		
+	</div>
+
+<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/formulario.js"></script>
+
+</h:body>
+
+
+</html>
+

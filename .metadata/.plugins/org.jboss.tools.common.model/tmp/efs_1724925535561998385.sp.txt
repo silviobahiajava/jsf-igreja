@@ -1,0 +1,268 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+			<p:panel 
+				header="Registro de Despesas Pagas" style="color:red;">
+								<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:180px;margin-left:5px;"
+				paginator="true" value="#{despesaBean.despesasDaIgreja}" var="despesa" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Registrar Despesas Pagas" oncomplete="PF('dialogo').show();"
+						style="background-color:#FAF0E6;color:#006400;"
+						actionListener="#{despesaBean.novo}" update=":formCadastro:painel" />
+						
+						<p:commandButton value="Registrar Despesas Pendentes" oncomplete="PF('dialogo2').show();"
+						style="background-color:#FAF0E6;color:#006400;"
+						actionListener="#{despesaBean.novo}" update=":formCadastro2:painel2" />
+						
+						<p:button value="lançar no caixa da igreja" href="/igreja/lancamentodespesaspagasdaigreja.xhtml">
+							<p:graphicImage library="fotos" name="financeiro01.jpg"/>
+						</p:button>
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data de pagamento"
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:14px;" 
+						>
+						<h:outputText value="#{despesa.dataPagamentoDespesaDaIgreja}"
+							style="color: #000080;font-size:14px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data de vencimento" 
+						
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:14px;" 
+						>
+						<h:outputText value="#{despesa.dataVencimentoDespesaDaIgreja}"
+							
+							style="color: #000080;font-size:14px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+				
+				<p:column headerText="Tipo de despesa" sortBy="#{despesa.tipoDespesaEnum.descricao}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:14px;" 
+					filterBy="#{despesa.tipoDespesaEnum.descricao}">
+					<h:outputText value="#{despesa.tipoDespesaEnum.descricao}" 
+					style="color: #000080;font-size:14px;"
+					/>
+				</p:column>
+				
+				<p:column headerText="descrição" sortBy="#{despesa.tipoDespesaEnum.descricao}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:14px;" 
+					filterBy="#{despesa.tipoDespesaEnum.descricao}">
+					<h:outputText value="#{despesa.descricaoDespesaDaIgreja}" 
+					style="color: #000080;font-size:14px;"
+					/>
+				</p:column>
+					
+				
+				<p:column headerText="Valor da despesa" 
+					width="30"
+					sortBy="#{despesa.valorDespescaDaIgreja}"
+					style="background-color:#C0C0C0;color:red;font-size:14px;" 
+					filterBy="#{despesa.valorDespescaDaIgreja}">
+					<h:outputText value="#{despesa.valorDespescaDaIgreja}" 
+					style="color: #000080;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="situação da despesa" sortBy="#{despesa.tipoDespesaEnum.descricao}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:14px;" 
+					filterBy="#{despesa.situacaoDaDespesaEnum.descricao}">
+					<h:outputText value="#{despesa.situacaoDaDespesaEnum.descricao}" 
+					style="color: #000080;font-size:14px;"
+					/>
+				</p:column>
+				
+			</p:dataTable>
+          
+</p:panel>
+</h:form>
+					
+
+
+
+
+					
+				<p:dialog header="registro de despesas pagas" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" 
+		position="left"
+		width="280"
+		style="background-color:#ADD8E6;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+		<div class="ui-fluid">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data de pagamento:" 
+				style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="50" size="30"
+					effect="fold"
+					value="#{despesaBean.despesaDaIgreja.dataPagamentoDespesaDaIgreja}" 
+					locale="pt_BR"/>
+					
+					
+					<h:outputLabel value="tipo de despesa:" for="tipodespesa"
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"/>
+					<h:selectOneMenu id="tipodespesa" 
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+						value="#{despesaBean.despesaDaIgreja.tipoDespesaEnum}" 
+						>
+		
+						
+						<f:selectItem  itemLabel="SELECIONE O TIPO DE DESPESA" />
+						<f:selectItem itemValue="IMOVEISEEDIFICIOS" itemLabel="IMÓVEIS E EIDFÍCIOS" />
+						<f:selectItem itemValue="MOVEISEUTENSILIOS" itemLabel="MÓVEIS E UTENSÍLIOS" />
+						<f:selectItem itemValue="ALUGUEL" itemLabel="ALUGUEL" />
+			
+						
+						<f:selectItem itemValue="OBRAMISSIONARIA" itemLabel="OBRA MISSIONÁRIA" />
+						<f:selectItem itemValue="OBRIGACOESSOCIAIS" itemLabel="OBRIGAÇÕES SOCIAIS" />
+						<f:selectItem itemValue="PAGAMENTOLUZ" itemLabel="PAGAMENTO DE LUZ" />
+				
+						<f:selectItem itemValue="PAGAMENTOAGUA" itemLabel="PAGAMENTO DE AGUA" />
+						<f:selectItem itemValue="PAGAMENTOGAS" itemLabel="PAGAMENTO DE GAS" />
+						<f:selectItem itemValue="PAGAMENTOTELEFONE" itemLabel="PAGAMENTO DE TELEFONE" />
+						
+			
+						<f:selectItem itemValue="ALIMENTACAO" itemLabel="ALIMENTACAO" />
+						<f:selectItem itemValue="EVANGELIZACAO" itemLabel="EVANGELIZACAO" />
+						<f:selectItem itemValue="DESPESASDIVERSAS" itemLabel="DESPESAS DIVERSAS" />
+						
+					</h:selectOneMenu>
+					<h:outputLabel value="descrição  da despesa:" 
+					style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+					<p:inputText maxlength="50" size="30"
+					value="#{despesaBean.despesaDaIgreja.descricaoDespesaDaIgreja}">
+					</p:inputText>
+					
+					<h:outputLabel value="Valor da despesa:" 
+					style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="50" size="30"
+					value="#{despesaBean.despesaDaIgreja.valorDespescaDaIgreja}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="registrar despesa paga"
+						style="background-color:#FAF0E6;color:#006400;"
+					actionListener="#{despesaBean.registrarDespesaPagaTeste}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+			</div>
+		</h:form>
+	</p:dialog>
+	
+	
+	
+	
+	
+	
+	
+	
+			
+				<p:dialog header="registro de despesas pendentes" widgetVar="dialogo2"
+		hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro2">
+		<div class="ui-fluid">
+			<h:panelGrid id="painel2" columns="2">
+				<h:outputLabel value="Data de vencimento:" 
+				style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="50" size="30"
+					effect="fold"
+					value="#{despesaBean.despesaDaIgreja.dataVencimentoDespesaDaIgreja}" 
+					locale="pt_BR"/>
+					
+					
+					<h:outputLabel value="tipo de despesa:" for="tipodespesa"
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"/>
+					<h:selectOneMenu id="tipodespesa" 
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+						value="#{despesaBean.despesaDaIgreja.tipoDespesaEnum}" 
+						>
+		
+						
+						<f:selectItem  itemLabel="SELECIONE O TIPO DE DESPESA" />
+						<f:selectItem itemValue="IMOVEISEEDIFICIOS" itemLabel="IMÓVEIS E EIDFÍCIOS" />
+						<f:selectItem itemValue="MOVEISEUTENSILIOS" itemLabel="MÓVEIS E UTENSÍLIOS" />
+						<f:selectItem itemValue="ALUGUEL" itemLabel="ALUGUEL" />
+			
+						
+						<f:selectItem itemValue="OBRAMISSIONARIA" itemLabel="OBRA MISSIONÁRIA" />
+						<f:selectItem itemValue="OBRIGACOESSOCIAIS" itemLabel="OBRIGAÇÕES SOCIAIS" />
+						<f:selectItem itemValue="PAGAMENTOLUZ" itemLabel="PAGAMENTO DE LUZ" />
+				
+						<f:selectItem itemValue="PAGAMENTOAGUA" itemLabel="PAGAMENTO DE AGUA" />
+						<f:selectItem itemValue="PAGAMENTOGAS" itemLabel="PAGAMENTO DE GAS" />
+						<f:selectItem itemValue="PAGAMENTOTELEFONE" itemLabel="PAGAMENTO DE TELEFONE" />
+						
+			
+						<f:selectItem itemValue="ALIMENTACAO" itemLabel="ALIMENTACAO" />
+						<f:selectItem itemValue="EVANGELIZACAO" itemLabel="EVANGELIZACAO" />
+						<f:selectItem itemValue="DESPESASDIVERSAS" itemLabel="DESPESAS DIVERSAS" />
+						
+					</h:selectOneMenu>
+					<h:outputLabel value="descrição  da despesa:" 
+					style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+					<p:inputText maxlength="50" size="30"
+					value="#{despesaBean.despesaDaIgreja.descricaoDespesaDaIgreja}">
+					</p:inputText>
+					
+					<h:outputLabel value="Valor da despesa:" 
+					style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="50" size="30"
+					value="#{despesaBean.despesaDaIgreja.valorDespescaDaIgreja}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="registrar despesa pendente"
+						style="background-color:#FAF0E6;color:#006400;"
+					actionListener="#{despesaBean.registrarDespesaPendenteTeste}"
+					update=":mensagem  :formCadastro2:painel2 :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo2').hide();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+			</div>
+		</h:form>
+	</p:dialog>
+		
+	</ui:define>
+
+</ui:composition>
+
+

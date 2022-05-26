@@ -1,0 +1,11 @@
+package br.com.jsf_igreja.secretaria.repository;
+
+import br.com.jsf_igreja.secretaria.model.*;
+
+public class MembroRepository {
+
+	public void salvar(Membro membro) {
+		
+	}
+	
+}

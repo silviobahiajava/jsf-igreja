@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>cadastro de clientes</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="/image/favicon.png"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+
+       <h1>clientes cadastrados</h1>
+    <div class="row" > 
+    <div class="col-md-6">
+       <a th:href="@{/clientes/cadastro}" >
+	        novo clientre
+	     </a>
+	  </div>
+	  <div class="col-md-6">   
+	     <a th:href="@{/clientes/relatorios}" >
+	        gerar relatorio
+	     </a>
+	    </div>
+	  </div>   
+	   <div class="row">
+	      <form method="post"
+	      action="/clientes/buscarporparametros" 
+       	
+	      >
+	       <div class="row">
+	        <span th:text="${resultado}"></span>
+	      	
+	      	
+	      	<div class="col-md-4">
+	      		<label for="nomeCliente">nome</label>
+	      		<input type="text" name="nomeCliente" id="nomeCliente" th:value="${nomeCliente}"> 
+	      	</div>
+	      	
+	      	<div class="col-md-4">
+	      		<label for="emailCliente">email</label>
+	      		<input type="text" name="emailCliente" id="emailCliente" th:value="${emailCliente}"> 
+	      	</div>
+	      	<div class="col-md-4">
+	      		<input type="submit"value="pesquisar">
+	      		<a th:href="@{/clientes/listarclientes}" >
+	        		listar todos
+	     		</a>
+	     		
+	     		
+	      	</div>
+	      	
+	      
+	      	</div>
+	      </form>
+	     
+	     </div>
+       <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">codigo</th>
+      <th scope="col">nome</th>
+      <th scope="col">email</th>
+      <th scope="col">cpf</th>
+      <th scope="col">ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="c:${clientes.content}">
+       <td th:text="${c.codigo}"/>
+      <td><a th:href="@{/clientes/{codigo}/selecionardocumentos(codigo=${c.codigo})}" ><span th:text="${c.nomeCliente}"></span></a></td>
+      <td th:text="${c.emailCliente}"/>
+      <td th:text="${c.cpfCliente}"/>
+      <td>
+	     <a th:href="@{/clientes/{codigo}/selecionarclientes(codigo=${c.codigo})}" >
+	        editar
+	     </a>
+	  </td>
+    </tr>
+   
+  </tbody>
+</table>
+ <div class="row" style="margin-left:50%">
+ <center>
+ 
+     <span th:if="${clientes.hasPrevious()}">
+         <a  style="color:red;font-size:20px;"  th:href="@{/clientes/clientespag(page=${clientes.number-1},size=${clientes.size},nomeCliente=${nomeCliente},emailCliente=${emailCliente})}">Anterior</a>
+     </span>
+ 
+    <th:block th:each="i: ${#numbers.sequence(0, clientes.totalPages - 1)}"> 
+            <a  style="color:blue;font-size:20px;"  th:href="@{/clientes/clientespag(page=${i},size=${clientes.size},nomeCliente=${nomeCliente},emailCliente=${emailCliente})}">[[ ${i} + 1 ]]</a>
+    </th:block>
+    
+    <span th:if="${clientes.hasNext()}">
+         <a style="color:green;font-size:20px;"  th:href="@{/clientes/clientespag(page=${clientes.number+1},size=${clientes.size},nomeCliente=${nomeCliente},emailCliente=${emailCliente})}">Próximo</a>
+     </span>
+    
+ </center>
+</div>
+
+
+	     
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>cadastro de clientes</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="/image/favicon.png"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+       
+  
+       <div class="container">
+  <div class="row">
+    
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          
+          <form 
+          	method="post"
+          	id="frmCadastro" 
+          	th:object="${cliente}" 
+          	action="/clientes/cadastrarcliente" >
+          <h4>Dados Pessoais</h4>
+            <div class="form-group">
+              <label for="nome">Nome:</label>
+              <input 
+              	class="form-control" 
+              	type="text" 
+              	name="nomeCliente" 
+              	th:field="*{nomeCliente}"
+              	id="nomeCliente" 
+              	placeholder="Digite o seu nome...">
+            </div>
+            <div class="form-group">
+              <label for="emailCliente">Email:</label>
+             <input 
+              	class="form-control" 
+              	type="email" 
+              	name="emailCliente" 
+              	th:field="*{emailCliente}"
+              	id="emailCliente" 
+              	>
+            </div>
+
+            <div class="form-group">
+              <label for="nome">Cpf:</label>
+            <input 
+              	class="form-control" 
+              	type="text" 
+              	name="cpfCliente" 
+              	th:field="*{cpfCliente}"
+              	id="cpfCliente" 
+              	placeholder="digite o cpf do cliente">
+            </div>
+              
+          <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">CADASTRAR</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+
+
+ 
+                 
+</body>
+</html>

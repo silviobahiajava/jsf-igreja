@@ -1,0 +1,115 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
+
+
+/**
+ * The persistent class for the produto_fabricado database table.
+ * 
+ */
+@Entity
+@Table(name="produto_fabricado")
+@NamedQuery(name="ProdutoFabricado.findAll", query="SELECT p FROM ProdutoFabricado p")
+public class ProdutoFabricado implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String descricao;
+	private BigDecimal precoDeVenda;
+	private int quantidadeFabricada;
+	private int quantidadeMateriaPrimaUsada;
+	private List<MateriaPrima> materiaPrimas;
+	private Grupo grupo;
+
+	public ProdutoFabricado() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="preco_de_venda")
+	public BigDecimal getPrecoDeVenda() {
+		return this.precoDeVenda;
+	}
+
+	public void setPrecoDeVenda(BigDecimal precoDeVenda) {
+		this.precoDeVenda = precoDeVenda;
+	}
+
+
+	@Column(name="quantidade_fabricada")
+	public int getQuantidadeFabricada() {
+		return this.quantidadeFabricada;
+	}
+
+	public void setQuantidadeFabricada(int quantidadeFabricada) {
+		this.quantidadeFabricada = quantidadeFabricada;
+	}
+
+
+	@Column(name="quantidade_materia_prima_usada")
+	public int getQuantidadeMateriaPrimaUsada() {
+		return this.quantidadeMateriaPrimaUsada;
+	}
+
+	public void setQuantidadeMateriaPrimaUsada(int quantidadeMateriaPrimaUsada) {
+		this.quantidadeMateriaPrimaUsada = quantidadeMateriaPrimaUsada;
+	}
+
+
+	//bi-directional many-to-one association to MateriaPrima
+	@OneToMany(mappedBy="produtoFabricado")
+	public List<MateriaPrima> getMateriaPrimas() {
+		return this.materiaPrimas;
+	}
+
+	public void setMateriaPrimas(List<MateriaPrima> materiaPrimas) {
+		this.materiaPrimas = materiaPrimas;
+	}
+
+	public MateriaPrima addMateriaPrima(MateriaPrima materiaPrima) {
+		getMateriaPrimas().add(materiaPrima);
+		materiaPrima.setProdutoFabricado(this);
+
+		return materiaPrima;
+	}
+
+	public MateriaPrima removeMateriaPrima(MateriaPrima materiaPrima) {
+		getMateriaPrimas().remove(materiaPrima);
+		materiaPrima.setProdutoFabricado(null);
+
+		return materiaPrima;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+}

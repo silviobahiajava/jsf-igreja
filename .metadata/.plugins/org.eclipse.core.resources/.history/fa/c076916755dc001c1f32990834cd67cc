@@ -1,0 +1,139 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+ 			
+
+		<h:form id="formListagem">
+		
+		<p:panel header="lista de chamada">
+		
+		   <p:outputLabel value="Classe:" 
+		   style="color:#994422;font-size:10px;"
+		   />
+				<p:selectOneMenu filter="true" value="#{aulaEscolaDominicalBean.aula.classe}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Por favor selecione a classe deste aluno">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione uma classe para este aluno" />
+					<f:selectItems value="#{aulaEscolaDominicalBean.classes}" var="classe"
+						itemValue="#{classe}" itemLabel="#{classe.nomeClasse}" />
+						<p:ajax 
+							listener="#{aulaEscolaDominicalBean.popular}" 
+							update=":formListagem:matriculados :formListagem:totalMatriculados :mensagem"
+							event="change"/>
+				</p:selectOneMenu>
+			
+			<p:spacer height="20"/>
+			
+			<p:dataTable id="matriculados"
+				style="margin-top:50px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{aulaEscolaDominicalBean.matriculados}" var="matriculado" rows="5">
+				<f:facet name="header">
+					<h:outputLabel value="alunos matriculados"/>
+					<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="escoladominical"/>
+				</f:facet>
+				<p:column headerText="Nome" sortBy="#{matriculado.membro.nome}"
+					width="50"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{matriculado.membro.nome}">
+					<h:outputText value="#{matriculado.membro.nome}" />
+				</p:column>
+				<p:column headerText="Opções"
+					width="50"
+				style="color:#994422;font-size:12px;">
+					<p:commandButton value="presença"
+						actionListener="#{aulaEscolaDominicalBean.definirPresenca(matriculado)}"
+						update=":formListagem:presente :mensagem :formListagem:totalPresentes">
+					</p:commandButton>
+					
+					<p:commandButton value="falta"
+						actionListener="#{aulaEscolaDominicalBean.definirFalta(matriculado)}"
+						update=":formListagem:falta :mensagem :formListagem:totalAusentes">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			
+			<p:spacer height="30"/>
+			<p:dataTable id="presente" emptyMessage="Nenhum registro encontrado."
+				
+				
+				paginator="true"
+				value="#{aulaEscolaDominicalBean.presentes}" var="presente" rows="5">
+				<f:facet name="header">
+					<h:outputLabel value="alunos presentes"/>
+				</f:facet>
+				<p:column headerText="Nome"
+					style="color:#994422;font-size:12px;"
+					sortBy="#{presente.matriculado.membro.nome}"
+					filterBy="#{presente.matriculado.membro.nome}">
+					<h:outputText value="#{presente.matriculado.membro.nome}" />
+				</p:column>
+			</p:dataTable>
+			
+			<p:spacer height="30"/>
+			<p:dataTable id="falta" emptyMessage="Nenhum registro encontrado"
+				paginator="true" value="#{aulaEscolaDominicalBean.ausentes}" var="ausente" rows="5">
+				<f:facet name="header">
+					<h:outputLabel value="alunos ausentes"/>
+				</f:facet>
+				<p:column headerText="Nome"
+					style="color:#994422;font-size:12px;"
+					sortBy="#{ausente.matriculado.membro.nome}" filterBy="#{ausente.matriculado.membro.nome}">
+					<h:outputText value="#{ausente.matriculado.membro.nome}" />
+				</p:column>
+			</p:dataTable>	
+			
+			<h:panelGrid columns="2">
+				<h:outputLabel value="matriculados" style="color:red;font-size:12px;font-style:italic"/>
+			<h:outputText value="#{aulaEscolaDominicalBean.totalDeMatriculados}" id="totalMatriculados"/>
+			
+			<h:outputLabel value="ausentes" style="color:red;font-size:12px;font-style:italic"/>
+			<h:outputText value="#{aulaEscolaDominicalBean.totalDeAlunosAusentes}" id="totalAusentes"/>
+			
+			<h:outputLabel value="presentes" style="color:red;font-size:12px;font-style:italic"/>
+			<h:outputText value="#{aulaEscolaDominicalBean.totalDeAlunosPresentes}" id="totalPresentes"/>
+			
+			<h:outputLabel value="Biblias" style="color:red;font-size:12px;font-style:italic" />
+			<p:inputText value="#{aulaEscolaDominicalBean.aula.totalBiblias}"/>
+			
+			<h:outputLabel value="Revistas" style="color:red;font-size:12px;font-style:italic"/>
+			<p:inputText value="#{aulaEscolaDominicalBean.aula.totalRevistas}"/>
+			
+			<h:outputLabel value="oferta" style="color:red;font-size:12px;font-style:italic"/>
+			<p:inputText value="#{aulaEscolaDominicalBean.aula.totalOfertas}">	
+				<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+			</p:inputText>
+			
+			<h:outputLabel value="data da aula" style="color:red;font-size:12px;font-style:italic"/>
+			<p:calendar value="#{aulaEscolaDominicalBean.aula.dataAula}"/>
+			
+			<p:commandButton value="resumo"
+			actionListener="#{aulaEscolaDominicalBean.salvar}"
+			update=":mensagem"/>
+			
+			</h:panelGrid>
+			
+<!-- 			<h:panelGrid columns="1" style="top:500px;position:absolute"> -->
+<!-- 				<p:commandButton value="resumo" -->
+<!-- 			actionListener="#{aulaEscolaDominicalBean.salvar}" -->
+<!-- 			update=":mensagem"/> -->
+<!-- 			</h:panelGrid> -->
+			
+		</p:panel>
+
+	</h:form>
+	
+	</ui:define>
+
+</ui:composition>
+
+

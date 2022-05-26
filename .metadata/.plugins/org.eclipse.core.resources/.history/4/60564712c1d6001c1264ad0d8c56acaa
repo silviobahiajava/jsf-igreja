@@ -1,0 +1,135 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the compra_da_missao database table.
+ * 
+ */
+@Entity
+@Table(name="compra_da_missao")
+@NamedQuery(name="CompraDaMissao.findAll", query="SELECT c FROM CompraDaMissao c")
+public class CompraDaMissao implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte compraAprazoMissao;
+	private byte compraAvistaMissao;
+	private Date dataCompraMissao;
+	private String descricao;
+	private String numeroNota;
+	private String tipoCompra;
+	private BigDecimal valorCompraMissao;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public CompraDaMissao() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="compra_aprazo_missao")
+	public byte getCompraAprazoMissao() {
+		return this.compraAprazoMissao;
+	}
+
+	public void setCompraAprazoMissao(byte compraAprazoMissao) {
+		this.compraAprazoMissao = compraAprazoMissao;
+	}
+
+
+	@Column(name="compra_avista_missao")
+	public byte getCompraAvistaMissao() {
+		return this.compraAvistaMissao;
+	}
+
+	public void setCompraAvistaMissao(byte compraAvistaMissao) {
+		this.compraAvistaMissao = compraAvistaMissao;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_compra_missao")
+	public Date getDataCompraMissao() {
+		return this.dataCompraMissao;
+	}
+
+	public void setDataCompraMissao(Date dataCompraMissao) {
+		this.dataCompraMissao = dataCompraMissao;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="numero_nota")
+	public String getNumeroNota() {
+		return this.numeroNota;
+	}
+
+	public void setNumeroNota(String numeroNota) {
+		this.numeroNota = numeroNota;
+	}
+
+
+	@Column(name="tipo_compra")
+	public String getTipoCompra() {
+		return this.tipoCompra;
+	}
+
+	public void setTipoCompra(String tipoCompra) {
+		this.tipoCompra = tipoCompra;
+	}
+
+
+	@Column(name="valor_compra_missao")
+	public BigDecimal getValorCompraMissao() {
+		return this.valorCompraMissao;
+	}
+
+	public void setValorCompraMissao(BigDecimal valorCompraMissao) {
+		this.valorCompraMissao = valorCompraMissao;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

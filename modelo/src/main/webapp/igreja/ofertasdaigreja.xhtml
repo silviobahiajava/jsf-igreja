@@ -1,0 +1,138 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	
+	
+		<h:form id="formListagem">
+		<p:panel header="Registro de Ofertas da Igreja">
+					
+				
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:180px;margin-left:5px;"
+				paginator="true" value="#{ofertadaigrejaBean.ofertas}" var="oferta" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Nova oferta" oncomplete="PF('dialogo').show();"
+						actionListener="#{ofertadaigrejaBean.novo}" update=":formCadastro:painel" />
+					<h:panelGroup>
+						<h:outputLabel value="pesquisar ofertas por data" 
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:calendar maxlength="50" size="30"
+							effect="fold"
+							value="#{ofertadaigrejaBean.oferta.dataOfertaIgreja}" 
+							locale="pt_BR"/>
+						<p:commandButton 
+							actionListener="#{ofertadaigrejaBean.listarOfertaPorData}"
+							update=":mensagem :formListagem:tabela"
+							icon="ui-icon-search"/>
+							
+							<h:outputLabel value="ou de" 
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:calendar maxlength="50" size="30"
+							effect="fold"
+							value="#{ofertadaigrejaBean.dataInical}" 
+							locale="pt_BR"/>
+							<h:outputLabel value="até" 
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:calendar maxlength="50" size="30"
+							effect="fold"
+							value="#{ofertadaigrejaBean.dataFinal}" 
+							locale="pt_BR"/>
+						<p:commandButton 
+							actionListener="#{ofertadaigrejaBean.listarOfertasPorPeriodo}"
+							update=":mensagem :formListagem:tabela"
+							icon="ui-icon-search"/>
+							
+							
+					</h:panelGroup>	
+					<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data de entrega da oferta" 
+				 width="30"
+					style="background-color:#C0C0C0;color:red;font-size:10px;" >
+					<h:outputText value="#{oferta.dataOfertaIgreja}" 
+						style="color: #000080;font-size:10px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				
+					
+					
+				<p:column headerText="Valor da oferta" sortBy="#{oferta.valorOfertaIgreja}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:10px;" 
+					filterBy="#{oferta.valorOfertaIgreja}">
+					<h:outputText value="#{oferta.valorOfertaIgreja}" 
+					style="color: #000080;font-size:10px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				
+			</p:dataTable>
+        
+			
+		</p:panel>
+	</h:form>
+
+
+	<p:dialog header="nova oferta" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" 
+		position="left"
+		width="280"
+		style="background-color:#ADD8E6;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+		 
+			<h:panelGrid id="painel" columns="1">
+				<h:outputLabel value="Data da oferta:" 
+					style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+				<p:calendar maxlength="50" size="30"
+					effect="fold"
+					value="#{ofertadaigrejaBean.oferta.dataOfertaIgreja}" 
+					locale="pt_BR"/>
+        	
+        
+					<h:outputLabel value="Valor da oferta:" 
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="50" size="30"
+					value="#{ofertadaigrejaBean.oferta.valorOfertaIgreja}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{ofertadaigrejaBean.salvar}"
+						style="background-color:#FAF0E6;color:#006400;"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+   
+	</ui:define>
+
+</ui:composition>
+
+

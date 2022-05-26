@@ -1,0 +1,909 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the lancamento database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Lancamento.findAll", query="SELECT l FROM Lancamento l")
+public class Lancamento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte caixaAberto;
+	private String caixaEnum;
+	private byte caixaFechado;
+	private Date data;
+	private String descricao;
+	private BigDecimal despesa;
+	private String historico;
+	private BigDecimal receita;
+	private BigDecimal saldo;
+	private BigDecimal saldoFinal;
+	private BigDecimal saldoInicial;
+	private String tipo;
+	private String tipoDespesa;
+	private String tipoReceita;
+	private List<AulaEscolaDominical> aulaEscolaDominicals;
+	private List<Campanha> campanhas;
+	private List<CampanhaDaIgreja> campanhaDaIgrejas;
+	private List<CampanhaDasCrianca> campanhaDasCriancas;
+	private List<CampanhaDoPeCrianca> campanhaDoPeCriancas;
+	private List<Compra> compras;
+	private List<CompraDaMissao> compraDaMissaos;
+	private List<CompraDasCrianca> compraDasCriancas;
+	private List<CompraDosVaroe> compraDosVaroes;
+	private List<CompraIgreja> compraIgrejas;
+	private List<ContasPaga> contasPagas;
+	private List<ContasParaPagar> contasParaPagars;
+	private List<Contribuicao> contribuicaos;
+	private List<ContribuicaoDaIgreja> contribuicaoDaIgrejas;
+	private List<ContribuicaoDasCrianca> contribuicaoDasCriancas;
+	private List<DespesaCrianca> despesaCriancas;
+	private List<DespesaDaIgreja> despesaDaIgrejas;
+	private List<DespesasPagasDaIgreja> despesasPagasDaIgrejas;
+	private List<DespesasPendentesDaIgreja> despesasPendentesDaIgrejas;
+	private List<Dizimo> dizimos;
+	private List<DizimoDaIgreja> dizimoDaIgrejas;
+	private DataLancamento dataLancamento;
+	private Grupo grupo;
+	private List<Oferta> ofertas;
+	private List<OfertaDaIgreja> ofertaDaIgrejas;
+	private List<OfertaDasCrianca> ofertaDasCriancas;
+	private List<OfertaDosVaroe> ofertaDosVaroes;
+	private List<OfertaEscolaDominical> ofertaEscolaDominicals;
+	private List<Venda> vendas;
+
+	public Lancamento() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="caixa_aberto")
+	public byte getCaixaAberto() {
+		return this.caixaAberto;
+	}
+
+	public void setCaixaAberto(byte caixaAberto) {
+		this.caixaAberto = caixaAberto;
+	}
+
+
+	@Column(name="caixa_enum")
+	public String getCaixaEnum() {
+		return this.caixaEnum;
+	}
+
+	public void setCaixaEnum(String caixaEnum) {
+		this.caixaEnum = caixaEnum;
+	}
+
+
+	@Column(name="caixa_fechado")
+	public byte getCaixaFechado() {
+		return this.caixaFechado;
+	}
+
+	public void setCaixaFechado(byte caixaFechado) {
+		this.caixaFechado = caixaFechado;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getData() {
+		return this.data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	public BigDecimal getDespesa() {
+		return this.despesa;
+	}
+
+	public void setDespesa(BigDecimal despesa) {
+		this.despesa = despesa;
+	}
+
+
+	public String getHistorico() {
+		return this.historico;
+	}
+
+	public void setHistorico(String historico) {
+		this.historico = historico;
+	}
+
+
+	public BigDecimal getReceita() {
+		return this.receita;
+	}
+
+	public void setReceita(BigDecimal receita) {
+		this.receita = receita;
+	}
+
+
+	public BigDecimal getSaldo() {
+		return this.saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+	}
+
+
+	@Column(name="saldo_final")
+	public BigDecimal getSaldoFinal() {
+		return this.saldoFinal;
+	}
+
+	public void setSaldoFinal(BigDecimal saldoFinal) {
+		this.saldoFinal = saldoFinal;
+	}
+
+
+	@Column(name="saldo_inicial")
+	public BigDecimal getSaldoInicial() {
+		return this.saldoInicial;
+	}
+
+	public void setSaldoInicial(BigDecimal saldoInicial) {
+		this.saldoInicial = saldoInicial;
+	}
+
+
+	public String getTipo() {
+		return this.tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	@Column(name="tipo_despesa")
+	public String getTipoDespesa() {
+		return this.tipoDespesa;
+	}
+
+	public void setTipoDespesa(String tipoDespesa) {
+		this.tipoDespesa = tipoDespesa;
+	}
+
+
+	@Column(name="tipo_receita")
+	public String getTipoReceita() {
+		return this.tipoReceita;
+	}
+
+	public void setTipoReceita(String tipoReceita) {
+		this.tipoReceita = tipoReceita;
+	}
+
+
+	//bi-directional many-to-one association to AulaEscolaDominical
+	@OneToMany(mappedBy="lancamento")
+	public List<AulaEscolaDominical> getAulaEscolaDominicals() {
+		return this.aulaEscolaDominicals;
+	}
+
+	public void setAulaEscolaDominicals(List<AulaEscolaDominical> aulaEscolaDominicals) {
+		this.aulaEscolaDominicals = aulaEscolaDominicals;
+	}
+
+	public AulaEscolaDominical addAulaEscolaDominical(AulaEscolaDominical aulaEscolaDominical) {
+		getAulaEscolaDominicals().add(aulaEscolaDominical);
+		aulaEscolaDominical.setLancamento(this);
+
+		return aulaEscolaDominical;
+	}
+
+	public AulaEscolaDominical removeAulaEscolaDominical(AulaEscolaDominical aulaEscolaDominical) {
+		getAulaEscolaDominicals().remove(aulaEscolaDominical);
+		aulaEscolaDominical.setLancamento(null);
+
+		return aulaEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Campanha
+	@OneToMany(mappedBy="lancamento")
+	public List<Campanha> getCampanhas() {
+		return this.campanhas;
+	}
+
+	public void setCampanhas(List<Campanha> campanhas) {
+		this.campanhas = campanhas;
+	}
+
+	public Campanha addCampanha(Campanha campanha) {
+		getCampanhas().add(campanha);
+		campanha.setLancamento(this);
+
+		return campanha;
+	}
+
+	public Campanha removeCampanha(Campanha campanha) {
+		getCampanhas().remove(campanha);
+		campanha.setLancamento(null);
+
+		return campanha;
+	}
+
+
+	//bi-directional many-to-one association to CampanhaDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<CampanhaDaIgreja> getCampanhaDaIgrejas() {
+		return this.campanhaDaIgrejas;
+	}
+
+	public void setCampanhaDaIgrejas(List<CampanhaDaIgreja> campanhaDaIgrejas) {
+		this.campanhaDaIgrejas = campanhaDaIgrejas;
+	}
+
+	public CampanhaDaIgreja addCampanhaDaIgreja(CampanhaDaIgreja campanhaDaIgreja) {
+		getCampanhaDaIgrejas().add(campanhaDaIgreja);
+		campanhaDaIgreja.setLancamento(this);
+
+		return campanhaDaIgreja;
+	}
+
+	public CampanhaDaIgreja removeCampanhaDaIgreja(CampanhaDaIgreja campanhaDaIgreja) {
+		getCampanhaDaIgrejas().remove(campanhaDaIgreja);
+		campanhaDaIgreja.setLancamento(null);
+
+		return campanhaDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to CampanhaDasCrianca
+	@OneToMany(mappedBy="lancamento")
+	public List<CampanhaDasCrianca> getCampanhaDasCriancas() {
+		return this.campanhaDasCriancas;
+	}
+
+	public void setCampanhaDasCriancas(List<CampanhaDasCrianca> campanhaDasCriancas) {
+		this.campanhaDasCriancas = campanhaDasCriancas;
+	}
+
+	public CampanhaDasCrianca addCampanhaDasCrianca(CampanhaDasCrianca campanhaDasCrianca) {
+		getCampanhaDasCriancas().add(campanhaDasCrianca);
+		campanhaDasCrianca.setLancamento(this);
+
+		return campanhaDasCrianca;
+	}
+
+	public CampanhaDasCrianca removeCampanhaDasCrianca(CampanhaDasCrianca campanhaDasCrianca) {
+		getCampanhaDasCriancas().remove(campanhaDasCrianca);
+		campanhaDasCrianca.setLancamento(null);
+
+		return campanhaDasCrianca;
+	}
+
+
+	//bi-directional many-to-one association to CampanhaDoPeCrianca
+	@OneToMany(mappedBy="lancamento")
+	public List<CampanhaDoPeCrianca> getCampanhaDoPeCriancas() {
+		return this.campanhaDoPeCriancas;
+	}
+
+	public void setCampanhaDoPeCriancas(List<CampanhaDoPeCrianca> campanhaDoPeCriancas) {
+		this.campanhaDoPeCriancas = campanhaDoPeCriancas;
+	}
+
+	public CampanhaDoPeCrianca addCampanhaDoPeCrianca(CampanhaDoPeCrianca campanhaDoPeCrianca) {
+		getCampanhaDoPeCriancas().add(campanhaDoPeCrianca);
+		campanhaDoPeCrianca.setLancamento(this);
+
+		return campanhaDoPeCrianca;
+	}
+
+	public CampanhaDoPeCrianca removeCampanhaDoPeCrianca(CampanhaDoPeCrianca campanhaDoPeCrianca) {
+		getCampanhaDoPeCriancas().remove(campanhaDoPeCrianca);
+		campanhaDoPeCrianca.setLancamento(null);
+
+		return campanhaDoPeCrianca;
+	}
+
+
+	//bi-directional many-to-one association to Compra
+	@OneToMany(mappedBy="lancamento")
+	public List<Compra> getCompras() {
+		return this.compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public Compra addCompra(Compra compra) {
+		getCompras().add(compra);
+		compra.setLancamento(this);
+
+		return compra;
+	}
+
+	public Compra removeCompra(Compra compra) {
+		getCompras().remove(compra);
+		compra.setLancamento(null);
+
+		return compra;
+	}
+
+
+	//bi-directional many-to-one association to CompraDaMissao
+	@OneToMany(mappedBy="lancamento")
+	public List<CompraDaMissao> getCompraDaMissaos() {
+		return this.compraDaMissaos;
+	}
+
+	public void setCompraDaMissaos(List<CompraDaMissao> compraDaMissaos) {
+		this.compraDaMissaos = compraDaMissaos;
+	}
+
+	public CompraDaMissao addCompraDaMissao(CompraDaMissao compraDaMissao) {
+		getCompraDaMissaos().add(compraDaMissao);
+		compraDaMissao.setLancamento(this);
+
+		return compraDaMissao;
+	}
+
+	public CompraDaMissao removeCompraDaMissao(CompraDaMissao compraDaMissao) {
+		getCompraDaMissaos().remove(compraDaMissao);
+		compraDaMissao.setLancamento(null);
+
+		return compraDaMissao;
+	}
+
+
+	//bi-directional many-to-one association to CompraDasCrianca
+	@OneToMany(mappedBy="lancamento")
+	public List<CompraDasCrianca> getCompraDasCriancas() {
+		return this.compraDasCriancas;
+	}
+
+	public void setCompraDasCriancas(List<CompraDasCrianca> compraDasCriancas) {
+		this.compraDasCriancas = compraDasCriancas;
+	}
+
+	public CompraDasCrianca addCompraDasCrianca(CompraDasCrianca compraDasCrianca) {
+		getCompraDasCriancas().add(compraDasCrianca);
+		compraDasCrianca.setLancamento(this);
+
+		return compraDasCrianca;
+	}
+
+	public CompraDasCrianca removeCompraDasCrianca(CompraDasCrianca compraDasCrianca) {
+		getCompraDasCriancas().remove(compraDasCrianca);
+		compraDasCrianca.setLancamento(null);
+
+		return compraDasCrianca;
+	}
+
+
+	//bi-directional many-to-one association to CompraDosVaroe
+	@OneToMany(mappedBy="lancamento")
+	public List<CompraDosVaroe> getCompraDosVaroes() {
+		return this.compraDosVaroes;
+	}
+
+	public void setCompraDosVaroes(List<CompraDosVaroe> compraDosVaroes) {
+		this.compraDosVaroes = compraDosVaroes;
+	}
+
+	public CompraDosVaroe addCompraDosVaroe(CompraDosVaroe compraDosVaroe) {
+		getCompraDosVaroes().add(compraDosVaroe);
+		compraDosVaroe.setLancamento(this);
+
+		return compraDosVaroe;
+	}
+
+	public CompraDosVaroe removeCompraDosVaroe(CompraDosVaroe compraDosVaroe) {
+		getCompraDosVaroes().remove(compraDosVaroe);
+		compraDosVaroe.setLancamento(null);
+
+		return compraDosVaroe;
+	}
+
+
+	//bi-directional many-to-one association to CompraIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<CompraIgreja> getCompraIgrejas() {
+		return this.compraIgrejas;
+	}
+
+	public void setCompraIgrejas(List<CompraIgreja> compraIgrejas) {
+		this.compraIgrejas = compraIgrejas;
+	}
+
+	public CompraIgreja addCompraIgreja(CompraIgreja compraIgreja) {
+		getCompraIgrejas().add(compraIgreja);
+		compraIgreja.setLancamento(this);
+
+		return compraIgreja;
+	}
+
+	public CompraIgreja removeCompraIgreja(CompraIgreja compraIgreja) {
+		getCompraIgrejas().remove(compraIgreja);
+		compraIgreja.setLancamento(null);
+
+		return compraIgreja;
+	}
+
+
+	//bi-directional many-to-one association to ContasPaga
+	@OneToMany(mappedBy="lancamento")
+	public List<ContasPaga> getContasPagas() {
+		return this.contasPagas;
+	}
+
+	public void setContasPagas(List<ContasPaga> contasPagas) {
+		this.contasPagas = contasPagas;
+	}
+
+	public ContasPaga addContasPaga(ContasPaga contasPaga) {
+		getContasPagas().add(contasPaga);
+		contasPaga.setLancamento(this);
+
+		return contasPaga;
+	}
+
+	public ContasPaga removeContasPaga(ContasPaga contasPaga) {
+		getContasPagas().remove(contasPaga);
+		contasPaga.setLancamento(null);
+
+		return contasPaga;
+	}
+
+
+	//bi-directional many-to-one association to ContasParaPagar
+	@OneToMany(mappedBy="lancamento")
+	public List<ContasParaPagar> getContasParaPagars() {
+		return this.contasParaPagars;
+	}
+
+	public void setContasParaPagars(List<ContasParaPagar> contasParaPagars) {
+		this.contasParaPagars = contasParaPagars;
+	}
+
+	public ContasParaPagar addContasParaPagar(ContasParaPagar contasParaPagar) {
+		getContasParaPagars().add(contasParaPagar);
+		contasParaPagar.setLancamento(this);
+
+		return contasParaPagar;
+	}
+
+	public ContasParaPagar removeContasParaPagar(ContasParaPagar contasParaPagar) {
+		getContasParaPagars().remove(contasParaPagar);
+		contasParaPagar.setLancamento(null);
+
+		return contasParaPagar;
+	}
+
+
+	//bi-directional many-to-one association to Contribuicao
+	@OneToMany(mappedBy="lancamento")
+	public List<Contribuicao> getContribuicaos() {
+		return this.contribuicaos;
+	}
+
+	public void setContribuicaos(List<Contribuicao> contribuicaos) {
+		this.contribuicaos = contribuicaos;
+	}
+
+	public Contribuicao addContribuicao(Contribuicao contribuicao) {
+		getContribuicaos().add(contribuicao);
+		contribuicao.setLancamento(this);
+
+		return contribuicao;
+	}
+
+	public Contribuicao removeContribuicao(Contribuicao contribuicao) {
+		getContribuicaos().remove(contribuicao);
+		contribuicao.setLancamento(null);
+
+		return contribuicao;
+	}
+
+
+	//bi-directional many-to-one association to ContribuicaoDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<ContribuicaoDaIgreja> getContribuicaoDaIgrejas() {
+		return this.contribuicaoDaIgrejas;
+	}
+
+	public void setContribuicaoDaIgrejas(List<ContribuicaoDaIgreja> contribuicaoDaIgrejas) {
+		this.contribuicaoDaIgrejas = contribuicaoDaIgrejas;
+	}
+
+	public ContribuicaoDaIgreja addContribuicaoDaIgreja(ContribuicaoDaIgreja contribuicaoDaIgreja) {
+		getContribuicaoDaIgrejas().add(contribuicaoDaIgreja);
+		contribuicaoDaIgreja.setLancamento(this);
+
+		return contribuicaoDaIgreja;
+	}
+
+	public ContribuicaoDaIgreja removeContribuicaoDaIgreja(ContribuicaoDaIgreja contribuicaoDaIgreja) {
+		getContribuicaoDaIgrejas().remove(contribuicaoDaIgreja);
+		contribuicaoDaIgreja.setLancamento(null);
+
+		return contribuicaoDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to ContribuicaoDasCrianca
+	@OneToMany(mappedBy="lancamento")
+	public List<ContribuicaoDasCrianca> getContribuicaoDasCriancas() {
+		return this.contribuicaoDasCriancas;
+	}
+
+	public void setContribuicaoDasCriancas(List<ContribuicaoDasCrianca> contribuicaoDasCriancas) {
+		this.contribuicaoDasCriancas = contribuicaoDasCriancas;
+	}
+
+	public ContribuicaoDasCrianca addContribuicaoDasCrianca(ContribuicaoDasCrianca contribuicaoDasCrianca) {
+		getContribuicaoDasCriancas().add(contribuicaoDasCrianca);
+		contribuicaoDasCrianca.setLancamento(this);
+
+		return contribuicaoDasCrianca;
+	}
+
+	public ContribuicaoDasCrianca removeContribuicaoDasCrianca(ContribuicaoDasCrianca contribuicaoDasCrianca) {
+		getContribuicaoDasCriancas().remove(contribuicaoDasCrianca);
+		contribuicaoDasCrianca.setLancamento(null);
+
+		return contribuicaoDasCrianca;
+	}
+
+
+	//bi-directional many-to-one association to DespesaCrianca
+	@OneToMany(mappedBy="lancamento")
+	public List<DespesaCrianca> getDespesaCriancas() {
+		return this.despesaCriancas;
+	}
+
+	public void setDespesaCriancas(List<DespesaCrianca> despesaCriancas) {
+		this.despesaCriancas = despesaCriancas;
+	}
+
+	public DespesaCrianca addDespesaCrianca(DespesaCrianca despesaCrianca) {
+		getDespesaCriancas().add(despesaCrianca);
+		despesaCrianca.setLancamento(this);
+
+		return despesaCrianca;
+	}
+
+	public DespesaCrianca removeDespesaCrianca(DespesaCrianca despesaCrianca) {
+		getDespesaCriancas().remove(despesaCrianca);
+		despesaCrianca.setLancamento(null);
+
+		return despesaCrianca;
+	}
+
+
+	//bi-directional many-to-one association to DespesaDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<DespesaDaIgreja> getDespesaDaIgrejas() {
+		return this.despesaDaIgrejas;
+	}
+
+	public void setDespesaDaIgrejas(List<DespesaDaIgreja> despesaDaIgrejas) {
+		this.despesaDaIgrejas = despesaDaIgrejas;
+	}
+
+	public DespesaDaIgreja addDespesaDaIgreja(DespesaDaIgreja despesaDaIgreja) {
+		getDespesaDaIgrejas().add(despesaDaIgreja);
+		despesaDaIgreja.setLancamento(this);
+
+		return despesaDaIgreja;
+	}
+
+	public DespesaDaIgreja removeDespesaDaIgreja(DespesaDaIgreja despesaDaIgreja) {
+		getDespesaDaIgrejas().remove(despesaDaIgreja);
+		despesaDaIgreja.setLancamento(null);
+
+		return despesaDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to DespesasPagasDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<DespesasPagasDaIgreja> getDespesasPagasDaIgrejas() {
+		return this.despesasPagasDaIgrejas;
+	}
+
+	public void setDespesasPagasDaIgrejas(List<DespesasPagasDaIgreja> despesasPagasDaIgrejas) {
+		this.despesasPagasDaIgrejas = despesasPagasDaIgrejas;
+	}
+
+	public DespesasPagasDaIgreja addDespesasPagasDaIgreja(DespesasPagasDaIgreja despesasPagasDaIgreja) {
+		getDespesasPagasDaIgrejas().add(despesasPagasDaIgreja);
+		despesasPagasDaIgreja.setLancamento(this);
+
+		return despesasPagasDaIgreja;
+	}
+
+	public DespesasPagasDaIgreja removeDespesasPagasDaIgreja(DespesasPagasDaIgreja despesasPagasDaIgreja) {
+		getDespesasPagasDaIgrejas().remove(despesasPagasDaIgreja);
+		despesasPagasDaIgreja.setLancamento(null);
+
+		return despesasPagasDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to DespesasPendentesDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<DespesasPendentesDaIgreja> getDespesasPendentesDaIgrejas() {
+		return this.despesasPendentesDaIgrejas;
+	}
+
+	public void setDespesasPendentesDaIgrejas(List<DespesasPendentesDaIgreja> despesasPendentesDaIgrejas) {
+		this.despesasPendentesDaIgrejas = despesasPendentesDaIgrejas;
+	}
+
+	public DespesasPendentesDaIgreja addDespesasPendentesDaIgreja(DespesasPendentesDaIgreja despesasPendentesDaIgreja) {
+		getDespesasPendentesDaIgrejas().add(despesasPendentesDaIgreja);
+		despesasPendentesDaIgreja.setLancamento(this);
+
+		return despesasPendentesDaIgreja;
+	}
+
+	public DespesasPendentesDaIgreja removeDespesasPendentesDaIgreja(DespesasPendentesDaIgreja despesasPendentesDaIgreja) {
+		getDespesasPendentesDaIgrejas().remove(despesasPendentesDaIgreja);
+		despesasPendentesDaIgreja.setLancamento(null);
+
+		return despesasPendentesDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to Dizimo
+	@OneToMany(mappedBy="lancamento")
+	public List<Dizimo> getDizimos() {
+		return this.dizimos;
+	}
+
+	public void setDizimos(List<Dizimo> dizimos) {
+		this.dizimos = dizimos;
+	}
+
+	public Dizimo addDizimo(Dizimo dizimo) {
+		getDizimos().add(dizimo);
+		dizimo.setLancamento(this);
+
+		return dizimo;
+	}
+
+	public Dizimo removeDizimo(Dizimo dizimo) {
+		getDizimos().remove(dizimo);
+		dizimo.setLancamento(null);
+
+		return dizimo;
+	}
+
+
+	//bi-directional many-to-one association to DizimoDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<DizimoDaIgreja> getDizimoDaIgrejas() {
+		return this.dizimoDaIgrejas;
+	}
+
+	public void setDizimoDaIgrejas(List<DizimoDaIgreja> dizimoDaIgrejas) {
+		this.dizimoDaIgrejas = dizimoDaIgrejas;
+	}
+
+	public DizimoDaIgreja addDizimoDaIgreja(DizimoDaIgreja dizimoDaIgreja) {
+		getDizimoDaIgrejas().add(dizimoDaIgreja);
+		dizimoDaIgreja.setLancamento(this);
+
+		return dizimoDaIgreja;
+	}
+
+	public DizimoDaIgreja removeDizimoDaIgreja(DizimoDaIgreja dizimoDaIgreja) {
+		getDizimoDaIgrejas().remove(dizimoDaIgreja);
+		dizimoDaIgreja.setLancamento(null);
+
+		return dizimoDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to DataLancamento
+	@ManyToOne
+	@JoinColumn(name="data_lancamento_codigo")
+	public DataLancamento getDataLancamento() {
+		return this.dataLancamento;
+	}
+
+	public void setDataLancamento(DataLancamento dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Oferta
+	@OneToMany(mappedBy="lancamento")
+	public List<Oferta> getOfertas() {
+		return this.ofertas;
+	}
+
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+	public Oferta addOferta(Oferta oferta) {
+		getOfertas().add(oferta);
+		oferta.setLancamento(this);
+
+		return oferta;
+	}
+
+	public Oferta removeOferta(Oferta oferta) {
+		getOfertas().remove(oferta);
+		oferta.setLancamento(null);
+
+		return oferta;
+	}
+
+
+	//bi-directional many-to-one association to OfertaDaIgreja
+	@OneToMany(mappedBy="lancamento")
+	public List<OfertaDaIgreja> getOfertaDaIgrejas() {
+		return this.ofertaDaIgrejas;
+	}
+
+	public void setOfertaDaIgrejas(List<OfertaDaIgreja> ofertaDaIgrejas) {
+		this.ofertaDaIgrejas = ofertaDaIgrejas;
+	}
+
+	public OfertaDaIgreja addOfertaDaIgreja(OfertaDaIgreja ofertaDaIgreja) {
+		getOfertaDaIgrejas().add(ofertaDaIgreja);
+		ofertaDaIgreja.setLancamento(this);
+
+		return ofertaDaIgreja;
+	}
+
+	public OfertaDaIgreja removeOfertaDaIgreja(OfertaDaIgreja ofertaDaIgreja) {
+		getOfertaDaIgrejas().remove(ofertaDaIgreja);
+		ofertaDaIgreja.setLancamento(null);
+
+		return ofertaDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to OfertaDasCrianca
+	@OneToMany(mappedBy="lancamento")
+	public List<OfertaDasCrianca> getOfertaDasCriancas() {
+		return this.ofertaDasCriancas;
+	}
+
+	public void setOfertaDasCriancas(List<OfertaDasCrianca> ofertaDasCriancas) {
+		this.ofertaDasCriancas = ofertaDasCriancas;
+	}
+
+	public OfertaDasCrianca addOfertaDasCrianca(OfertaDasCrianca ofertaDasCrianca) {
+		getOfertaDasCriancas().add(ofertaDasCrianca);
+		ofertaDasCrianca.setLancamento(this);
+
+		return ofertaDasCrianca;
+	}
+
+	public OfertaDasCrianca removeOfertaDasCrianca(OfertaDasCrianca ofertaDasCrianca) {
+		getOfertaDasCriancas().remove(ofertaDasCrianca);
+		ofertaDasCrianca.setLancamento(null);
+
+		return ofertaDasCrianca;
+	}
+
+
+	//bi-directional many-to-one association to OfertaDosVaroe
+	@OneToMany(mappedBy="lancamento")
+	public List<OfertaDosVaroe> getOfertaDosVaroes() {
+		return this.ofertaDosVaroes;
+	}
+
+	public void setOfertaDosVaroes(List<OfertaDosVaroe> ofertaDosVaroes) {
+		this.ofertaDosVaroes = ofertaDosVaroes;
+	}
+
+	public OfertaDosVaroe addOfertaDosVaroe(OfertaDosVaroe ofertaDosVaroe) {
+		getOfertaDosVaroes().add(ofertaDosVaroe);
+		ofertaDosVaroe.setLancamento(this);
+
+		return ofertaDosVaroe;
+	}
+
+	public OfertaDosVaroe removeOfertaDosVaroe(OfertaDosVaroe ofertaDosVaroe) {
+		getOfertaDosVaroes().remove(ofertaDosVaroe);
+		ofertaDosVaroe.setLancamento(null);
+
+		return ofertaDosVaroe;
+	}
+
+
+	//bi-directional many-to-one association to OfertaEscolaDominical
+	@OneToMany(mappedBy="lancamento")
+	public List<OfertaEscolaDominical> getOfertaEscolaDominicals() {
+		return this.ofertaEscolaDominicals;
+	}
+
+	public void setOfertaEscolaDominicals(List<OfertaEscolaDominical> ofertaEscolaDominicals) {
+		this.ofertaEscolaDominicals = ofertaEscolaDominicals;
+	}
+
+	public OfertaEscolaDominical addOfertaEscolaDominical(OfertaEscolaDominical ofertaEscolaDominical) {
+		getOfertaEscolaDominicals().add(ofertaEscolaDominical);
+		ofertaEscolaDominical.setLancamento(this);
+
+		return ofertaEscolaDominical;
+	}
+
+	public OfertaEscolaDominical removeOfertaEscolaDominical(OfertaEscolaDominical ofertaEscolaDominical) {
+		getOfertaEscolaDominicals().remove(ofertaEscolaDominical);
+		ofertaEscolaDominical.setLancamento(null);
+
+		return ofertaEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Venda
+	@OneToMany(mappedBy="lancamento")
+	public List<Venda> getVendas() {
+		return this.vendas;
+	}
+
+	public void setVendas(List<Venda> vendas) {
+		this.vendas = vendas;
+	}
+
+	public Venda addVenda(Venda venda) {
+		getVendas().add(venda);
+		venda.setLancamento(this);
+
+		return venda;
+	}
+
+	public Venda removeVenda(Venda venda) {
+		getVendas().remove(venda);
+		venda.setLancamento(null);
+
+		return venda;
+	}
+
+}

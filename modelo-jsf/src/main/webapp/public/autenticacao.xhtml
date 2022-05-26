@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			
+		
+		<div style="background-color:#F0E68C;position:relative;left:300px;width:400px; height: 250px;top:10px;background-image: url(fotoigreja1.jpg); ">
+		
+			<h:form>
+				
+			<h:panelGrid columns="2">
+					
+				<h:graphicImage name="images/login3.jpg"  library="adamantium-layout" style="height:50px;"/>
+				<h:outputLabel value="Acesso ao Sistema IADMIF" style="color:#8B0000;"/>
+				
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+				<h:outputLabel value="CPF" 
+					style="color:#000000;font-size:14px;font-style:italic;font-weight:bold"
+					/>
+					<p:inputMask mask="999.999.999-99" value="#{autenticaoBean.usuario.cpf}" maxlength="15" size="15"/>
+				
+				 <h:outputLabel value="FUNÇÃO:" 
+				    style="color:#000;font-size:14px;font-style:italic;font-weight:bold;"
+		   			/>
+				<p:selectOneMenu filter="true" value="#{autenticaoBean.usuario.funcaoUsuario}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Por favor selecione a funçao">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione a função deste usuario" />
+					<f:selectItems value="#{autenticaoBean.funcoes}" var="fun"
+						itemValue="#{fun}" itemLabel="#{fun.descricao}" />
+						
+				</p:selectOneMenu>
+				 
+				<h:outputLabel value="SENHA" 
+				style="color:#000;font-size:12px;font-style:italic;font-weight:bold;margin-left:5px;"
+				
+				/>
+				<p:password value="#{autenticaoBean.usuario.senha}" maxlength="30" size="30"/>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="1">
+				<p:commandButton value="acessar o sistema" 
+				style="position:relativve;left:70px;"
+				actionListener="#{autenticaoBean.acessarSistema}"
+				update=":mensagem"/>
+				
+			</h:panelGrid>
+				
+		
+		</h:form>
+<!-- 		<h:outputLabel value="meu cartão de membro" /> -->
+<!-- 		<h:link outcome="/areademembros/meucartao"> -->
+<!-- 				<p:graphicImage name="images/cartaodemembro02.jpg"  library="adamantium-layout"/> -->
+<!-- 		</h:link> -->
+	
+		
+		</div>
+		
+			
+	</ui:define>
+
+</ui:composition>
+
+

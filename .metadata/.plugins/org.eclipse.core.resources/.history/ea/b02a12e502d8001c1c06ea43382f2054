@@ -1,0 +1,69 @@
+package meucursoJPA.model.administrativo;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the funcao_usuario database table.
+ * 
+ */
+@Entity
+@Table(name="funcao_usuario")
+@NamedQuery(name="FuncaoUsuario.findAll", query="SELECT f FROM FuncaoUsuario f")
+public class FuncaoUsuario extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String descricao;
+	private List<Usuario> usuarios;
+
+	public FuncaoUsuario() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="funcaoUsuario")
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setFuncaoUsuario(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setFuncaoUsuario(null);
+
+		return usuario;
+	}
+
+}

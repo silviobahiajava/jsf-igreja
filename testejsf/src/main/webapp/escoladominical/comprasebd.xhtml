@@ -1,0 +1,177 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			 
+		<h:form id="formListagem">
+		<p:panel header="Registro de compras da Escola Dominical">
+		
+				
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:50px;"
+				paginator="true" value="#{compraescoladominicalBean.compras}" var="compra" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						style="background-color:#FAF0E6;color:#006400;"
+						actionListener="#{compraescoladominicalBean.novo}" update=":formCadastro:painel" />
+						
+						<h:panelGroup>
+						<h:outputLabel value="pesquisar compras por data" 
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:calendar maxlength="50" size="30"
+							effect="fold"
+							value="#{compraescoladominicalBean.compra.dataCompraEBD}" 
+							locale="pt_BR"/>
+						<p:commandButton 
+							actionListener="#{compraescoladominicalBean.listarComprasPorData}"
+							update=":mensagem :formListagem:tabela"
+							icon="ui-icon-search"/>
+							
+							<h:outputLabel value="ou de" 
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:calendar maxlength="50" size="30"
+							effect="fold"
+							value="#{compraescoladominicalBean.dataInical}" 
+							locale="pt_BR"/>
+							<h:outputLabel value="até" 
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:calendar maxlength="50" size="30"
+							effect="fold"
+							value="#{compraescoladominicalBean.dataFinal}" 
+							locale="pt_BR"/>
+						<p:commandButton 
+							actionListener="#{compraescoladominicalBean.listarCompraDasCriancasPorPeriodo}"
+							update=":mensagem :formListagem:tabela"
+							icon="ui-icon-search"/>
+							
+							
+					</h:panelGroup>	
+				</f:facet>
+
+				<p:column headerText="Data da compra" 
+					style="background-color:#C0C0C0;color:red;font-size:12px;" >
+					<h:outputText value="#{compra.dataCompraEBD}" 
+						style="color: #000080;font-size:12px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Tipo de compra" sortBy="#{compra.tipoCompra.descricao}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{compra.tipoCompra.descricao}">
+					<h:outputText value="#{compra.tipoCompra.descricao}" style="color: #000080;font-size:12px;" />
+				</p:column>
+					
+					<p:column headerText="Numero do pedido" sortBy="#{compra.numeroNota}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{compra.numeroNota}">
+					<h:outputText value="#{compra.numeroNota}" style="color: #000080;font-size:12px;"/>
+				</p:column>
+				<p:column headerText="Valor da compra" 
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					>
+					<h:outputText value="#{compra.valor}"  style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Descricao" sortBy="#{compra.descricao}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{compra.descricao}">
+					<h:outputText value="#{compra.descricao}"  style="color: #000080;font-size:12px;"/>
+				</p:column>
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="registro de compras do Ministério Infantil" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:calendar maxlength="30" size="30"
+					effect="fold"
+					value="#{compraescoladominicalBean.compra.dataCompraEBD}" 
+					locale="pt_BR"/>
+					
+					<p:outputLabel  value="compra a vista:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+        <p:selectBooleanCheckbox value="#{compraescoladominicalBean.compraAVista}">
+           
+        </p:selectBooleanCheckbox>
+        
+        	<h:outputLabel  value="compra a prazo:" 
+        	style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+        <p:selectBooleanCheckbox value="#{compraescoladominicalBean.compraAPrazo}">
+        </p:selectBooleanCheckbox>
+        
+					<h:outputLabel value="Num.º pedido:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:inputText maxlength="50" size="50"
+					value="#{compraescoladominicalBean.compra.numeroNota}" />
+					
+					<h:outputLabel value="Quantidade:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+					<p:inputNumber value="#{compraescoladominicalBean.compra.quantidade}"/>
+					
+					
+	
+					
+					<h:outputLabel value="tipo de compra:" for="tipocompra"
+						style="color:#A52A2A;font-size:15px;" />
+					<h:selectOneMenu id="tipocompra" style="color:brown;font-size:15px;"
+						value="#{compraescoladominicalBean.compra.tipoCompraEBDEnum}" required="true"
+						requiredMessage="informe o tipo de compra">
+						<f:selectItem itemLabel="selecione o tipo de compra" 
+						/>
+						<f:selectItem itemValue="REVISTAS" itemLabel="REVISTAS" />
+						<f:selectItem itemValue="LIVROS" itemLabel="LIVROS" />
+						<f:selectItem itemValue="MATERIALESCOLAR" itemLabel="MATERIAL ESCOLAR" />
+						<f:selectItem itemValue="BRINDES" itemLabel="BRINDES" />
+						<f:selectItem itemValue="LEMBRANCAS" itemLabel="LEMBRANÇAS" />
+						
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="Valor:" style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:inputText maxlength="30" size="30"
+					value="#{compraescoladominicalBean.compra.valor}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					<h:outputLabel value="Descrição:" style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:inputText maxlength="50" size="50"
+					value="#{compraescoladominicalBean.compra.descricao}" />
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{compraescoladominicalBean.salvar}"
+					style="background-color:#FAF0E6;color:#006400;"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+					
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+				/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

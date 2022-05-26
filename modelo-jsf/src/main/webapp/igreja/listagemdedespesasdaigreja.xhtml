@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	<f:metadata>
+		<f:viewAction action="#{membroBean2.listar}"/>
+	</f:metadata>
+	
+	
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{tipodespesaigrejaBean.listaTipoDesesasIgreja}" var="de"
+					rows="5">
+					<f:facet name="header">
+								<h:button value="cadastrar novo despesa"
+							 		style="font-size:16px;color:blue"
+								outcome="/igreja/inclusaodedespesasdaigreja.xhtml">
+								</h:button>
+								<p:spacer width="10"/>
+								<p:button
+							value="voltar"
+							outcome="financeiro"/>
+							</f:facet>
+					
+					
+					<p:column headerText="codigo" 
+						width="30"
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold" 
+						>
+						<h:outputText value="#{d.codigo}"
+							style="color:red;font-size:14px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="descrição" sortBy="#{d.descricao}"
+						width="30"
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+						filterBy="#{d.descricao}">
+						<h:outputText value="#{d.desricao}"
+							style="color:red;font-size:14px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					
+
+					
+					
+					
+
+					<p:column headerText="Opções" width="30"
+					style="color:red;font-size:14px;font-style:italic;font-weight:bold" >
+							<p:button value="editar"
+							outcome="/igreja/edicaodedespesasdaigreja.xhtml">
+							<f:param name="codigo" value="#{d.codigo}"/>
+							</p:button>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+		
+
+	</ui:define>
+
+</ui:composition>
+
+
+

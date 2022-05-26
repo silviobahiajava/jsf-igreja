@@ -1,0 +1,41 @@
+package meucursoJPA.model.administrativo;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the cargo database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Cargo.findAll", query="SELECT c FROM Cargo c")
+public class Cargo extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String descricao;
+
+	public Cargo() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+}

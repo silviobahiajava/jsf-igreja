@@ -1,0 +1,47 @@
+package meucursoJPA.model.escoladominical;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the aluno database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Aluno.findAll", query="SELECT a FROM Aluno a")
+public class Aluno extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Classe classe;
+
+	public Aluno() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	//bi-directional many-to-one association to Classe
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="codigo"),
+		@JoinColumn(name="nome", referencedColumnName="nome_classe")
+		})
+	public Classe getClasse() {
+		return this.classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+}

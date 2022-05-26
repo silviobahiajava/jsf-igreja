@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recemnascidojrxml" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="316986ba-eb6d-42ac-a18c-3a6ab4d00b48">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nomeDoRecemNascido" class="java.lang.String"/>
+	<field name="dataDeNascimentoDoRecemNascido" class="java.util.Date"/>
+	<field name="nomeDoPai" class="java.lang.String"/>
+	<field name="nomeDaMae" class="java.lang.String"/>
+	<field name="diaDeApresentacao" class="java.lang.String"/>
+	<field name="mesDeApresentacao" class="java.lang.String"/>
+	<field name="anoDeApresentacao" class="java.lang.String"/>
+	<field name="nomepastorLocal" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="-60" width="590" height="440" backcolor="#90EE90" uuid="1a6688db-656a-4921-b096-6d6de2b9f36d"/>
+			</rectangle>
+		</band>
+	</background>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="60" y="20" width="390" height="30" uuid="60508e60-cf78-4478-bed0-ef0059d28d1d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICADO DE APRESENTAÇÃO DE RECÉM NASCIDO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="390" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="70" height="20" uuid="aec6f85d-8bae-4ab4-a216-2524dd289fdd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Certifico que]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="90" height="20" uuid="4e0768d6-7d23-461c-aff5-7cc1e8a8d6f2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nascido no dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="350" height="20" uuid="141489fb-f1fc-488d-ae74-f36742f039de">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[foi apresentado ao Senhor Jesus Cristo conforme a palavra de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="120" height="20" uuid="5cdb2866-0fe0-43dd-bf26-9ebcfc5bb28a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Deus em Lucas 2:22]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="100" height="20" uuid="540748e4-4a16-404e-b390-8fce1519100d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[pelo pastor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="130" width="31" height="20" uuid="408a9905-47cc-4f74-8e9c-6487c35463e6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="50" width="20" height="20" uuid="1fd596a0-22f5-4a6f-9b05-ad6654aa867c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[e]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="10" width="430" height="20" uuid="141a8140-a92b-4513-9de5-bd74296b2d2b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d0dfad6c-8be0-4709-b6db-20b63c7dde4d"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeDoRecemNascido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="30" width="95" height="20" uuid="1f7fbb64-32d4-42ab-a51b-da4dfa89fd29">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="54d009e2-2285-49fe-888e-83b91b8c26ca"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataDeNascimentoDoRecemNascido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="30" width="120" height="20" uuid="9be709c8-053c-4c33-8eae-ff70ec8e7e10">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[filho amado e querido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="25" height="20" uuid="9723a7d7-1be1-49f7-9d04-2bf9a6de03ad">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="50" width="270" height="20" uuid="c8043d45-9971-432d-a34f-2968d8bb387c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb82f33f-abbe-4930-a80c-aa389ed6e4aa"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeDoPai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="50" width="244" height="20" uuid="df2fd63b-9e76-4c3b-84f2-b1a091173065">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76fea7ec-60bd-4abf-a58b-0b57bb847650"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeDaMae}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="130" width="82" height="20" uuid="e184b769-1487-43fc-8886-a18248147aec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f855d2cc-d1b3-41b3-924a-0faa15e2a8d1"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diaDeApresentacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="130" width="157" height="20" uuid="e8c7afeb-57ad-4393-a87f-5c7dc40dd826">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e2ee562b-c7c9-4e27-b8ae-5befdfc41594"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mesDeApresentacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="130" width="31" height="20" uuid="9756071f-7a58-41ed-9e92-ed6c594e0d06">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="396" y="130" width="64" height="20" uuid="0acb99ae-7517-4129-ac64-a519e8c9904f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="920d7d32-ab75-43b8-a5e7-43198d834951"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anoDeApresentacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="110" width="130" height="20" uuid="61a1637a-9ff8-4c91-b934-17e4826de907">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8875e33a-7638-40c5-84a8-bccd5046979d"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomepastorLocal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="250" width="174" height="1" uuid="56ab7037-fdf2-4a12-80de-152fc66af197"/>
+			</line>
+			<image>
+				<reportElement x="330" y="200" width="101" height="50" uuid="b20f1737-a4b5-4875-aa6d-6a437a0ca02f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["C:/Users/SOUZAWEB SISTEMAS/Desktop/MEUS PROJETOS/sistemaparaigreja/CARTERINHAS/DIGITALVERDE2.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="20" y="190" width="120" height="50" uuid="bebf73a1-a07b-43f4-a219-f57667e63643">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["C:/Users/SOUZAWEB SISTEMAS/Desktop/MEUS PROJETOS/sistemaparaigreja/CARTERINHAS/DIGITALDEOBREIRO.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="260" width="234" height="21" uuid="d4281b31-b1d8-4271-84f8-27d68fe028f9"/>
+				<text><![CDATA[PR. PRESIDENTE JOSÉ ANTÔNIO DOS SANTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="260" width="220" height="21" uuid="91b6837e-710d-4d40-ab3b-952f02d38b60">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[SECRETÁRIA ROSANA FELIX S.PEREIRA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="314" y="250" width="174" height="1" uuid="9cf9402a-5d82-425e-b8b7-a4dc371f5577">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

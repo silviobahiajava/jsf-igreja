@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	  <h3 style="color:#4169E1">ANIVERSARIANTES DA IGREJA</h3>
+	 
+	<h:form id="formListagem">
+		<p:panel header="ANIVERSARIANTES DE HOJE" style="font-size:20px;color:red;">
+			<p:dataTable id="tabela" emptyMessage="Nenhum aniversariante para hoje"
+				paginator="true" value="#{aniversarianteadultoBean.aniversariantes}" var="item" rows="5">
+				<f:facet name="header">
+						<p:commandButton value="ver aniversariantes do mes"
+							actionListener="#{aniversarianteadultoBean.mostarAniversariantesDoMes}" update=":formListagem:tabela"
+							style="font-size:12px;color:white" />
+							<p:spacer width="10"/>
+							<p:commandButton value="imprimir"
+							actionListener="#{aniversarianteadultoBean.gerarListaAniversariantes}" update=":mensagem"
+							style="font-size:12px;color:white" />
+					</f:facet>
+					<p:column 
+						width="120"
+						headerText="aniversariantes do dia" 
+						sortBy="#{item.nome}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"  
+						filterBy="#{item.nome}">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+				<p:column headerText="foto" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						width="40">
+						<p:graphicImage 
+							cache="false" 
+							width="60" 
+							height="60" 
+							url="http://localhost:8081/uploads/#{item.codigo}.jpg"/> 
+					</p:column>
+				<p:column headerText="Data" sortBy="#{item.dataNascimento}"
+						width="30"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"  
+						filterBy="#{item.dataNascimento}">
+						<h:outputText value="#{item.dataNascimento}"
+							style="color: #000080;font-size:16px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+		<p:button 
+				value="voltar"
+				style="background-color:#FAF0E6;color:#006400;font-size:12px;"
+				outcome="/secretaria/secretaria.xhtml">
+			</p:button>
+	</h:form>
+	
+	</ui:define>
+
+</ui:composition>
+

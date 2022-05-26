@@ -1,0 +1,80 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the filicacao database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Filicacao.findAll", query="SELECT f FROM Filicacao f")
+public class Filicacao implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String nomeDaMae;
+	private String nomeDoPai;
+	private List<Crianca> criancas;
+
+	public Filicacao() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="nome_da_mae")
+	public String getNomeDaMae() {
+		return this.nomeDaMae;
+	}
+
+	public void setNomeDaMae(String nomeDaMae) {
+		this.nomeDaMae = nomeDaMae;
+	}
+
+
+	@Column(name="nome_do_pai")
+	public String getNomeDoPai() {
+		return this.nomeDoPai;
+	}
+
+	public void setNomeDoPai(String nomeDoPai) {
+		this.nomeDoPai = nomeDoPai;
+	}
+
+
+	//bi-directional many-to-one association to Crianca
+	@OneToMany(mappedBy="filicacao")
+	public List<Crianca> getCriancas() {
+		return this.criancas;
+	}
+
+	public void setCriancas(List<Crianca> criancas) {
+		this.criancas = criancas;
+	}
+
+	public Crianca addCrianca(Crianca crianca) {
+		getCriancas().add(crianca);
+		crianca.setFilicacao(this);
+
+		return crianca;
+	}
+
+	public Crianca removeCrianca(Crianca crianca) {
+		getCriancas().remove(crianca);
+		crianca.setFilicacao(null);
+
+		return crianca;
+	}
+
+}

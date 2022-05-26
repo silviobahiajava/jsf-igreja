@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	 xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+        <title>SouzaWeb Sistemas</title>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        
+    </h:head>
+    <h:body>
+    <div class="container">
+
+		<h:form>
+			<p:menubar
+				style="background-color:#F4A460;
+							
+							font-size:10px;
+							position:absolute;
+							top:220px;">
+
+
+
+				<p:submenu label="Administrador do Sistema"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario == 'ADMINISTRADOR DO SISTEMA '}">
+					<p:menuitem value="cadastro de usuários"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/admin/usuario.xhtml" />
+
+					<p:menuitem value="cadastro de grupos"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/admin/grupos.xhtml" />
+
+				</p:submenu>
+
+
+				<p:submenu label="Secretaria geral da Igreja"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario =='SECRETARIO GERAL DA IGREJA'}">
+					
+					<p:menuitem value="secretaria"
+						url="/secretaria/secretaria.xhtml"
+						style="color:red;font-size:14px;font-style:italic" />
+					
+					<p:menuitem value="membros"
+						url="/secretaria/listagemdemembros.xhtml"
+						style="color:red;font-size:14px;font-style:italic" />
+						
+						<p:menuitem value="membros inativos"
+						url="/secretaria/listagemdemembrosinativos.xhtml"
+						style="color:red;font-size:14px;font-style:italic" />
+
+
+					<p:menuitem value="cartão de membro"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/secretaria/cartaodemembros.xhtml" />
+
+					<p:menuitem value="aniversário de membros"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/secretaria/aniversarioadultos.xhtml" />
+						<p:menuitem value="meu cartão de membro"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/areademembros/meucartao" />
+  				</p:submenu>
+				
+
+
+
+
+				<p:submenu label="Secretaria da Escola Dominical"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario =='SECRETARIO(A) DA ESCOLA DOMINICAL'}">
+					<p:menuitem value="escola dominical"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/escoladominical/aulaescoladominical.xhtml" />
+
+					<p:menuitem value="aula"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/escoladominical/aula.xhtml" />
+
+					<p:menuitem value="classes"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/escoladominical/classe.xhtml" />
+
+					<p:menuitem value="matriculados"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/escoladominical/matriculadosnaescoladominical.xhtml" />
+
+				</p:submenu>
+
+
+
+				<p:submenu label="financeiro"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario =='TESOUREIRO GERAL DA IGREJA'}">
+					<p:menuitem value="financeiro"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/igreja/financeiro.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="ministerio infantil"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario == 'SECRETARIO(A) DO MINISTERIO INFANTIL'}">
+					<p:menuitem value="financeiro"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/ministerioinfantil/financeiro.xhtml" />
+					<p:menuitem value="Livro Caixa"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/ministerioinfantil/lancamentocrianca.xhtml" />
+
+					<p:menuitem value="crianças"
+						url="/ministerioinfantil/listagemdecriancas.xhtml"
+						style="color:red;font-size:14px;font-style:italic" />
+				</p:submenu>
+
+				<p:submenu label="financeiro"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario == 'LIDER DE VAROES'}">
+					<p:menuitem value="financeiro"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/varoes/financeiro.xhtml" />
+					<p:menuitem value="caixa do grupo de Varões"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/varoes/lancamentovarao.xhtml" />
+
+					<p:menuitem value="lançamento de ofertas"
+						style="color:red;font-size:14px;font-style:italic"
+						url="varoes/lancamentoofertadosvaroes.xhtml" />
+
+					<p:menuitem value="oferta do grupo de Varões"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/varoes/ofertadosvaroes.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="MISSOES"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario == 'LIDER DE MISSOES'}">
+					<p:menuitem value="financeiro"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/missao/financeiro.xhtml" />
+					<p:menuitem value="caixa de Missões"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/missao/lancamentomissao.xhtml" />
+
+					<p:menuitem value="oferta de missões"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/missao/ofertadamissao.xhtml" />
+
+					<p:menuitem value="despesas de missões"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/missao/despesasdamissao.xhtml" />
+
+					
+
+					<p:menuitem value="contribuições de missões"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/missao/contribuicaodamissao.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="financeiro"
+					rendered="#{autenticaoBean.usuarioLogado.funcaoUsuario =='TESOUREIRO(A) DO MINISTERIO INFANTIL'}">
+					<p:menuitem value="ofertas"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/escoladominical/ofertaescoladominical.xhtml" />
+
+					<p:menuitem value="classe da escola dominical"
+						style="color:red;font-size:14px;font-style:italic"
+						url="/escoladominical/lancamentoescoladominical" />
+
+				</p:submenu>
+
+  				
+
+
+
+
+			</p:menubar>
+			
+			
+		
+ 
+          
+ 
+   
+		
+		
+			
+			
+		</h:form>
+
+
+  </div>
+</h:body>
+</html>

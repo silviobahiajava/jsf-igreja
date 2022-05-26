@@ -1,0 +1,10 @@
+package meucursoJPA4.model;
+
+public class TestesJPA {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

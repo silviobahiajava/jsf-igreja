@@ -1,0 +1,43 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the membro_documentos_membro database table.
+ * 
+ */
+@Entity
+@Table(name="membro_documentos_membro")
+@NamedQuery(name="MembroDocumentosMembro.findAll", query="SELECT m FROM MembroDocumentosMembro m")
+public class MembroDocumentosMembro implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private BigInteger documentosMembroCodigo;
+	private BigInteger membroCodigo;
+
+	public MembroDocumentosMembro() {
+	}
+
+
+	@Column(name="documentos_membro_codigo")
+	public BigInteger getDocumentosMembroCodigo() {
+		return this.documentosMembroCodigo;
+	}
+
+	public void setDocumentosMembroCodigo(BigInteger documentosMembroCodigo) {
+		this.documentosMembroCodigo = documentosMembroCodigo;
+	}
+
+
+	@Column(name="membro_codigo")
+	public BigInteger getMembroCodigo() {
+		return this.membroCodigo;
+	}
+
+	public void setMembroCodigo(BigInteger membroCodigo) {
+		this.membroCodigo = membroCodigo;
+	}
+
+}

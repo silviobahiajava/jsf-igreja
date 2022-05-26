@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>cadastro de clientes</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="/image/favicon.png" />
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div th:each="cli :${cliente}">
+   <p>Código :<span th:text="${cli.codigo}"></span></p>
+   <p>Nome :<span th:text="${cli.nomeCliente}"></span></p>
+   <p>Id :<span th:text="${cli.emailCliente}"></span></p>
+   <form 
+   		th:object="${telefone}"
+		th:action="@{/clientes/{codigo}/addTelefone(codigo=${cli.codigo})}"
+		method="post" 
+		class="col s12">
+		<div class="row">
+			<div class="input-field col s6">
+				<label class="active" for="numero">número</label>
+				<input 
+					id="numero" 
+					name="numero"
+					class="validate">
+			</div>
+			<div class="input-field col s6">
+				<label class="active" for="tipo">tipo</label>
+				<input 
+					id="tipo" 
+					name="tipo"
+       	  		    class="validate">
+			</div>
+			
+			<input type="submit" class="btn btn-primary" value="add telefones">
+		</div>
+	</form>
+	<table class="striped"> 
+ 	<tr th:each="t :${telefonescliente}"> 
+	  <td th:text="${t.numero}"></td> 
+	  <td th:text="${t.tipo}"></td> 
+	</tr> 
+	</table> 
+</div>	
+</body>
+</html>

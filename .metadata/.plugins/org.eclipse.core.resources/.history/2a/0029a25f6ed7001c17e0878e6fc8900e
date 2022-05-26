@@ -1,0 +1,82 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the receita database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Receita.findAll", query="SELECT r FROM Receita r")
+public class Receita extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	
+	private Date dataLancamento;
+	private String descricaoDaReceita;
+	private String tipoDeReceita;
+	private BigDecimal valorDaReceita;
+	private Grupo grupo;
+
+	public Receita() {
+	}
+
+
+
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_lancamento")
+	public Date getDataLancamento() {
+		return this.dataLancamento;
+	}
+
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+
+	@Column(name="descricao_da_receita")
+	public String getDescricaoDaReceita() {
+		return this.descricaoDaReceita;
+	}
+
+	public void setDescricaoDaReceita(String descricaoDaReceita) {
+		this.descricaoDaReceita = descricaoDaReceita;
+	}
+
+
+	@Column(name="tipo_de_receita")
+	public String getTipoDeReceita() {
+		return this.tipoDeReceita;
+	}
+
+	public void setTipoDeReceita(String tipoDeReceita) {
+		this.tipoDeReceita = tipoDeReceita;
+	}
+
+
+	@Column(name="valor_da_receita")
+	public BigDecimal getValorDaReceita() {
+		return this.valorDaReceita;
+	}
+
+	public void setValorDaReceita(BigDecimal valorDaReceita) {
+		this.valorDaReceita = valorDaReceita;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+}

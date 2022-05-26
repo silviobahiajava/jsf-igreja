@@ -1,0 +1,124 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			
+				  
+			<p:spacer height="120"/>
+			
+				
+		<h:form id="formListagem">
+		<p:panel header="Registro de compras da igreja">
+		<div style="position: absolute;width:90%;background-color:#EAEAAE;margin-left:100px;top:95px;">
+		
+						<h:button value="lancamentos" outcome="/ministerioinfantil/lancamentocrianca.xhtml"
+							image="/resources/fotos/livrocaixa3.jpg"
+							style="background-color:blue;font-color:white;font-size:12px;margin-left:10px;top:5px;position:relative">
+						</h:button>
+						<h3>
+							<span
+								style="color: #236B8E; position: absolute; top:20px; left:50px;">lançar no livro caixa</span>
+						</h3>
+						
+						
+						
+						
+						
+						
+						
+						
+					</div>
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:50px;"
+				paginator="true" value="#{campanhadascriancasBean.lista}" var="campanha" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						style="background-color:#FAF0E6;color:#006400;"
+						actionListener="#{campanhadascriancasBean.novo}" update=":formCadastro:painel" />
+				</f:facet>
+
+				<p:column headerText="Iníico" sortBy="#{campanha.dataCampanha}"
+						width="150"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{campanha.dataCampanha}">
+						<h:outputText value="#{campanha.dataCampanha}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+				
+				<p:column headerText="Nome da Campanha" sortBy="#{campanha.nomeCampanhaDasCriancas}"
+					width="120"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{campanha.nomeCampanhaDasCriancas}">
+					<h:outputText value="#{campanha.nomeCampanhaDasCriancas}" 
+					style="color: #000080;font-size:12px;"
+					/>
+				</p:column>
+					
+					<p:column headerText="Objetivo da Campanha" sortBy="#{campanha.objetivoCampanhaDasCriancas}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{campanha.objetivoCampanhaDasCriancas}">
+					<h:outputText value="#{campanha.objetivoCampanhaDasCriancas}"
+					style="color: #000080;font-size:12px;" />
+				</p:column>
+				
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="cadastro de campanhas" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data de Início da Campanha:" 
+				style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="50" size="30"
+					effect="fold"
+					value="#{campanhadascriancasBean.campanha.dataCampanha}" 
+					locale="pt_BR"/>
+					
+					<h:outputLabel value="Nome da Campanha:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="50" size="30"
+					value="#{campanhadascriancasBean.campanha.nomeCampanhaDasCriancas}" />
+					
+					<h:outputLabel value="Objetivo da Campanha:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="50" size="30"
+					value="#{campanhadascriancasBean.campanha.objetivoCampanhaDasCriancas}" />
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{campanhadascriancasBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

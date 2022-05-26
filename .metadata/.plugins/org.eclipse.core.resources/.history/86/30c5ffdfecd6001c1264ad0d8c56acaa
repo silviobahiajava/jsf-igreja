@@ -1,0 +1,81 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the modulo database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Modulo.findAll", query="SELECT m FROM Modulo m")
+public class Modulo extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String nome;
+	private List<Aula> aulas;
+	private Curso curso;
+
+	public Modulo() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	//bi-directional many-to-one association to Aula
+	@OneToMany(mappedBy="modulo")
+	public List<Aula> getAulas() {
+		return this.aulas;
+	}
+
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
+	}
+
+	public Aula addAula(Aula aula) {
+		getAulas().add(aula);
+		aula.setModulo(this);
+
+		return aula;
+	}
+
+	public Aula removeAula(Aula aula) {
+		getAulas().remove(aula);
+		aula.setModulo(null);
+
+		return aula;
+	}
+
+
+	//bi-directional many-to-one association to Curso
+	@ManyToOne
+	@JoinColumn(name="curso_id")
+	public Curso getCurso() {
+		return this.curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+}

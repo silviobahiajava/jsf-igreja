@@ -1,0 +1,202 @@
+package meucursoJPA.model.secretaria;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+import meucursoJPA.model.escoladominical.Matriculado;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the aula_escola_dominical database table.
+ * 
+ */
+@Entity
+@Table(name="aula_escola_dominical")
+@NamedQuery(name="AulaEscolaDominical.findAll", query="SELECT a FROM AulaEscolaDominical a")
+public class AulaEscolaDominical extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataAula;
+	private java.math.BigInteger grupoCodigo;
+	private java.math.BigInteger lancamentoCodigo;
+	private int totalAlunosAusentes;
+	private int totalAlunosPresentes;
+	private int totalBiblias;
+	private int totalMatriculado;
+	private BigDecimal totalOfertas;
+	private int totalRevistas;
+	private List<AlunoAusenteEscolaDominical> alunoAusenteEscolaDominicals;
+	private Classe classe;
+	private List<Matriculado> matriculados;
+
+	public AulaEscolaDominical() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_aula")
+	public Date getDataAula() {
+		return this.dataAula;
+	}
+
+	public void setDataAula(Date dataAula) {
+		this.dataAula = dataAula;
+	}
+
+
+	@Column(name="grupo_codigo")
+	public java.math.BigInteger getGrupoCodigo() {
+		return this.grupoCodigo;
+	}
+
+	public void setGrupoCodigo(java.math.BigInteger grupoCodigo) {
+		this.grupoCodigo = grupoCodigo;
+	}
+
+
+	@Column(name="lancamento_codigo")
+	public java.math.BigInteger getLancamentoCodigo() {
+		return this.lancamentoCodigo;
+	}
+
+	public void setLancamentoCodigo(java.math.BigInteger lancamentoCodigo) {
+		this.lancamentoCodigo = lancamentoCodigo;
+	}
+
+
+	@Column(name="total_alunos_ausentes")
+	public int getTotalAlunosAusentes() {
+		return this.totalAlunosAusentes;
+	}
+
+	public void setTotalAlunosAusentes(int totalAlunosAusentes) {
+		this.totalAlunosAusentes = totalAlunosAusentes;
+	}
+
+
+	@Column(name="total_alunos_presentes")
+	public int getTotalAlunosPresentes() {
+		return this.totalAlunosPresentes;
+	}
+
+	public void setTotalAlunosPresentes(int totalAlunosPresentes) {
+		this.totalAlunosPresentes = totalAlunosPresentes;
+	}
+
+
+	@Column(name="total_biblias")
+	public int getTotalBiblias() {
+		return this.totalBiblias;
+	}
+
+	public void setTotalBiblias(int totalBiblias) {
+		this.totalBiblias = totalBiblias;
+	}
+
+
+	@Column(name="total_matriculado")
+	public int getTotalMatriculado() {
+		return this.totalMatriculado;
+	}
+
+	public void setTotalMatriculado(int totalMatriculado) {
+		this.totalMatriculado = totalMatriculado;
+	}
+
+
+	@Column(name="total_ofertas")
+	public BigDecimal getTotalOfertas() {
+		return this.totalOfertas;
+	}
+
+	public void setTotalOfertas(BigDecimal totalOfertas) {
+		this.totalOfertas = totalOfertas;
+	}
+
+
+	@Column(name="total_revistas")
+	public int getTotalRevistas() {
+		return this.totalRevistas;
+	}
+
+	public void setTotalRevistas(int totalRevistas) {
+		this.totalRevistas = totalRevistas;
+	}
+
+
+	//bi-directional many-to-one association to AlunoAusenteEscolaDominical
+	@OneToMany(mappedBy="aulaEscolaDominical")
+	public List<AlunoAusenteEscolaDominical> getAlunoAusenteEscolaDominicals() {
+		return this.alunoAusenteEscolaDominicals;
+	}
+
+	public void setAlunoAusenteEscolaDominicals(List<AlunoAusenteEscolaDominical> alunoAusenteEscolaDominicals) {
+		this.alunoAusenteEscolaDominicals = alunoAusenteEscolaDominicals;
+	}
+
+	public AlunoAusenteEscolaDominical addAlunoAusenteEscolaDominical(AlunoAusenteEscolaDominical alunoAusenteEscolaDominical) {
+		getAlunoAusenteEscolaDominicals().add(alunoAusenteEscolaDominical);
+		alunoAusenteEscolaDominical.setAulaEscolaDominical(this);
+
+		return alunoAusenteEscolaDominical;
+	}
+
+	public AlunoAusenteEscolaDominical removeAlunoAusenteEscolaDominical(AlunoAusenteEscolaDominical alunoAusenteEscolaDominical) {
+		getAlunoAusenteEscolaDominicals().remove(alunoAusenteEscolaDominical);
+		alunoAusenteEscolaDominical.setAulaEscolaDominical(null);
+
+		return alunoAusenteEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Classe
+	@ManyToOne
+	public Classe getClasse() {
+		return this.classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+
+	//bi-directional many-to-one association to Matriculado
+	@OneToMany(mappedBy="aulaEscolaDominical")
+	public List<Matriculado> getMatriculados() {
+		return this.matriculados;
+	}
+
+	public void setMatriculados(List<Matriculado> matriculados) {
+		this.matriculados = matriculados;
+	}
+
+	public Matriculado addMatriculado(Matriculado matriculado) {
+		getMatriculados().add(matriculado);
+		matriculado.setAulaEscolaDominical(this);
+
+		return matriculado;
+	}
+
+	public Matriculado removeMatriculado(Matriculado matriculado) {
+		getMatriculados().remove(matriculado);
+		matriculado.setAulaEscolaDominical(null);
+
+		return matriculado;
+	}
+
+}

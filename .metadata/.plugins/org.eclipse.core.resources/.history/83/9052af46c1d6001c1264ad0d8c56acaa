@@ -1,0 +1,62 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the telefone database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Telefone.findAll", query="SELECT t FROM Telefone t")
+public class Telefone implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private BigInteger codigo;
+	private String numero;
+	private String tipo;
+	private Cliente cliente;
+
+	public Telefone() {
+	}
+
+
+	public BigInteger getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(BigInteger codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
+	public String getTipo() {
+		return this.tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	//bi-directional many-to-one association to Cliente
+	@ManyToOne
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+}

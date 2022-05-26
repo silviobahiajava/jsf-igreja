@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/templates/modelo.xhtml">
+	<ui:define name="conteudo">
+	
+	<div style="background-color:#778899;height:900px;position: relative">
+	
+		<div class="ui-fluid"
+				style="background-color: blue; width: 360px; height: 120px; margin-left: 80px; position: relative; margin-top: 20px;">
+				<p:outputLabel
+					value="Assembléia de Deus Missão e Fé"
+					style="color: #8B0000; position: relative; left: 10px; top: 90px; font-style: italic; font-weight: bold">
+					
+				</p:outputLabel>
+				
+
+
+				<p:graphicImage library="fotos" name="logoigreja5.jpg"
+					style="position:absolute;top:5px;left:10px;" />
+			</div>
+			  <div>
+					<p:menubar 
+					style="background-color:#F4A460;
+							
+							font-size:15px;
+							position:absolute;
+							top:45+px;">
+				<p:submenu label="Sobre nós">
+					<p:menuitem value="Quem somos" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Nossa História" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Nossos valores e objetivos" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="nossas congregacções" url="/pages/public/adolescentes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="onde estamos localizados" url="/pages/public/criancas.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="Grupos">
+					<p:menuitem value="Varões" url="/pages/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Círculo de Oração" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Mocidade" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Adolescentes" url="/pages/public/adolescentes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Crianças" url="/pages/public/criancas.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="Congressos e Eventos">
+					<p:menuitem value="Varões" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Círculo de Oração" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Mocidade" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Adolescentes" url="/pages/public/adolescentes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Crianças" url="/pages/public/criancas.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="Congressos e Eventos">
+					<p:menuitem value="Varões" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Círculo de Oração" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Mocidade" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Adolescentes" url="/pages/public/adolescentes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Crianças" url="/pages/public/criancas.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="Mensagens">
+					<p:menuitem value="Palavra do Pastor" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Pregações" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Testemunhos" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					
+					
+				</p:submenu>
+				<p:submenu label="ensinamento bíblico">
+					<p:menuitem value="Culto de Doutrina" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Escolinha Infantil" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Escola Dominical" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="EBF" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="louvor e adoração">
+					<p:menuitem value="Nossa Orquestra" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value=" Louvor" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value=" Coreografia" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Peça teatral" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="Notícias">
+					<p:menuitem value="Acontece na Convenção" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Israel O relógio de Deus" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="A igreja e a política" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				<p:submenu label="Sobre a Assembléia de Deus">
+					<p:menuitem value="O início de tudo" url="/pages/public/mocidade.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Assembléia de Deus no Brasil" url="/pages/public/varoes.xhtml" style="color:#8B0000;"/>
+					<p:menuitem value="Os pioneiros desta obra" url="/pages/public/circulodeoracao.xhtml" style="color:#8B0000;"/>
+				</p:submenu>
+				
+			</p:menubar>
+			</div>
+		<h:form id="formListagem">
+		<p:panel header="Os grupos de nossa igreja">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{grupoBean.grupos}" var="grupo" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						actionListener="#{grupoBean.novo}" update=":formCadastro:painel" />
+				</f:facet>
+
+				<p:column headerText="Nome" sortBy="#{grupo.nome}"
+					width="80"
+					filterBy="#{grupo.nome}">
+					<h:outputText value="#{grupo.nome}" />
+				</p:column>
+
+				
+				<p:column headerText="Opções"
+					width="80">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{grupoBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						<p:confirm header="Confirmação" message="Deseja excluir este grupo?"
+							icon="ui-icon-alert" />
+						<f:attribute name="grupoSelecionado" value="#{grupo}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{grupoBean.editar}"
+						update=":formCadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="grupoSelecionado" value="#{grupo}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Cadastro de grupos" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" style="background-color:#993300"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<p:outputLabel value="Nome do grupo:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{grupoBean.grupo.nome}" />
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{grupoBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>

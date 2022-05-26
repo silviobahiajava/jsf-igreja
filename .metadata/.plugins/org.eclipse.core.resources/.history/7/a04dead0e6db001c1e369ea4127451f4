@@ -1,0 +1,21 @@
+package br.com.jsf_igreja.secretaria.repository;
+
+import br.com.jsf_igreja.secretaria.model.*;
+import jakarta.persistence.EntityManager;
+import utils.ConexaoBanco;
+
+public class MembroRepository {
+
+	public void salvar(Membro membro) {
+		EntityManager em=ConexaoBanco.conectar();
+		try {
+		em.getTransaction().begin();
+		em.persist(membro);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			em.close();
+		}
+	}
+	
+}

@@ -1,0 +1,62 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@NamedQuery(name="Paginacao.findAll", query="SELECT p FROM Paginacao p")
+public class Paginacao extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+
+
+	private Date data;
+	private Date dataCadastro;
+	private String dataStr;
+	private String nome;
+
+	public Paginacao() {
+	}
+
+
+	
+	@Temporal(TemporalType.DATE)
+	public Date getData() {
+		return this.data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_cadastro")
+	public Date getDataCadastro() {
+		return this.dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+
+	@Column(name="data_str")
+	public String getDataStr() {
+		return this.dataStr;
+	}
+
+	public void setDataStr(String dataStr) {
+		this.dataStr = dataStr;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+}

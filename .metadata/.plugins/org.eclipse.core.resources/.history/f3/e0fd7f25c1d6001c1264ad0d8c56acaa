@@ -1,0 +1,81 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the documentacao_membro database table.
+ * 
+ */
+@Entity
+@Table(name="documentacao_membro")
+@NamedQuery(name="DocumentacaoMembro.findAll", query="SELECT d FROM DocumentacaoMembro d")
+public class DocumentacaoMembro implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String cpfMembro;
+	private String rgMembro;
+	private List<Membro> membros;
+
+	public DocumentacaoMembro() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="cpf_membro")
+	public String getCpfMembro() {
+		return this.cpfMembro;
+	}
+
+	public void setCpfMembro(String cpfMembro) {
+		this.cpfMembro = cpfMembro;
+	}
+
+
+	@Column(name="rg_membro")
+	public String getRgMembro() {
+		return this.rgMembro;
+	}
+
+	public void setRgMembro(String rgMembro) {
+		this.rgMembro = rgMembro;
+	}
+
+
+	//bi-directional many-to-one association to Membro
+	@OneToMany(mappedBy="documentacaoMembroBean")
+	public List<Membro> getMembros() {
+		return this.membros;
+	}
+
+	public void setMembros(List<Membro> membros) {
+		this.membros = membros;
+	}
+
+	public Membro addMembro(Membro membro) {
+		getMembros().add(membro);
+		membro.setDocumentacaoMembroBean(this);
+
+		return membro;
+	}
+
+	public Membro removeMembro(Membro membro) {
+		getMembros().remove(membro);
+		membro.setDocumentacaoMembroBean(null);
+
+		return membro;
+	}
+
+}

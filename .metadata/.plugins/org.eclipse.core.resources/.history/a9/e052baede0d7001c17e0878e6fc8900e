@@ -1,0 +1,59 @@
+package meucursoJPA.model.escoladominical;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the aula database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Aula.findAll", query="SELECT a FROM Aula a")
+public class Aula extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	private java.math.BigInteger moduloId;
+	private String nome;
+	private Aluno aluno;
+
+	public Aula() {
+	}
+
+
+	
+
+	
+
+
+	@Column(name="modulo_id")
+	public java.math.BigInteger getModuloId() {
+		return this.moduloId;
+	}
+
+	public void setModuloId(java.math.BigInteger moduloId) {
+		this.moduloId = moduloId;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	//bi-directional many-to-one association to Aluno
+	@ManyToOne
+	@JoinColumn(name="codigo")
+	public Aluno getAluno() {
+		return this.aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+}

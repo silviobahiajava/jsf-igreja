@@ -1,0 +1,253 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the aula_escola_dominical database table.
+ * 
+ */
+@Entity
+@Table(name="aula_escola_dominical")
+@NamedQuery(name="AulaEscolaDominical.findAll", query="SELECT a FROM AulaEscolaDominical a")
+public class AulaEscolaDominical extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataAula;
+	private int totalAlunosAusentes;
+	private int totalAlunosPresentes;
+	private int totalBiblias;
+	private int totalMatriculado;
+	private BigDecimal totalOfertas;
+	private int totalRevistas;
+	private List<AlunoAusenteEscolaDominical> alunoAusenteEscolaDominicals;
+	private List<AlunosPresenteEscolaDominical> alunosPresenteEscolaDominicals;
+	private Classe classe;
+	private Grupo grupo;
+	private Lancamento lancamento;
+	private List<CriancaMatriculadaNaEscolinha> criancaMatriculadaNaEscolinhas;
+	private List<Matriculado> matriculados;
+
+	public AulaEscolaDominical() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_aula")
+	public Date getDataAula() {
+		return this.dataAula;
+	}
+
+	public void setDataAula(Date dataAula) {
+		this.dataAula = dataAula;
+	}
+
+
+	@Column(name="total_alunos_ausentes")
+	public int getTotalAlunosAusentes() {
+		return this.totalAlunosAusentes;
+	}
+
+	public void setTotalAlunosAusentes(int totalAlunosAusentes) {
+		this.totalAlunosAusentes = totalAlunosAusentes;
+	}
+
+
+	@Column(name="total_alunos_presentes")
+	public int getTotalAlunosPresentes() {
+		return this.totalAlunosPresentes;
+	}
+
+	public void setTotalAlunosPresentes(int totalAlunosPresentes) {
+		this.totalAlunosPresentes = totalAlunosPresentes;
+	}
+
+
+	@Column(name="total_biblias")
+	public int getTotalBiblias() {
+		return this.totalBiblias;
+	}
+
+	public void setTotalBiblias(int totalBiblias) {
+		this.totalBiblias = totalBiblias;
+	}
+
+
+	@Column(name="total_matriculado")
+	public int getTotalMatriculado() {
+		return this.totalMatriculado;
+	}
+
+	public void setTotalMatriculado(int totalMatriculado) {
+		this.totalMatriculado = totalMatriculado;
+	}
+
+
+	@Column(name="total_ofertas")
+	public BigDecimal getTotalOfertas() {
+		return this.totalOfertas;
+	}
+
+	public void setTotalOfertas(BigDecimal totalOfertas) {
+		this.totalOfertas = totalOfertas;
+	}
+
+
+	@Column(name="total_revistas")
+	public int getTotalRevistas() {
+		return this.totalRevistas;
+	}
+
+	public void setTotalRevistas(int totalRevistas) {
+		this.totalRevistas = totalRevistas;
+	}
+
+
+	//bi-directional many-to-one association to AlunoAusenteEscolaDominical
+	@OneToMany(mappedBy="aulaEscolaDominical")
+	public List<AlunoAusenteEscolaDominical> getAlunoAusenteEscolaDominicals() {
+		return this.alunoAusenteEscolaDominicals;
+	}
+
+	public void setAlunoAusenteEscolaDominicals(List<AlunoAusenteEscolaDominical> alunoAusenteEscolaDominicals) {
+		this.alunoAusenteEscolaDominicals = alunoAusenteEscolaDominicals;
+	}
+
+	public AlunoAusenteEscolaDominical addAlunoAusenteEscolaDominical(AlunoAusenteEscolaDominical alunoAusenteEscolaDominical) {
+		getAlunoAusenteEscolaDominicals().add(alunoAusenteEscolaDominical);
+		alunoAusenteEscolaDominical.setAulaEscolaDominical(this);
+
+		return alunoAusenteEscolaDominical;
+	}
+
+	public AlunoAusenteEscolaDominical removeAlunoAusenteEscolaDominical(AlunoAusenteEscolaDominical alunoAusenteEscolaDominical) {
+		getAlunoAusenteEscolaDominicals().remove(alunoAusenteEscolaDominical);
+		alunoAusenteEscolaDominical.setAulaEscolaDominical(null);
+
+		return alunoAusenteEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to AlunosPresenteEscolaDominical
+	@OneToMany(mappedBy="aulaEscolaDominical")
+	public List<AlunosPresenteEscolaDominical> getAlunosPresenteEscolaDominicals() {
+		return this.alunosPresenteEscolaDominicals;
+	}
+
+	public void setAlunosPresenteEscolaDominicals(List<AlunosPresenteEscolaDominical> alunosPresenteEscolaDominicals) {
+		this.alunosPresenteEscolaDominicals = alunosPresenteEscolaDominicals;
+	}
+
+	public AlunosPresenteEscolaDominical addAlunosPresenteEscolaDominical(AlunosPresenteEscolaDominical alunosPresenteEscolaDominical) {
+		getAlunosPresenteEscolaDominicals().add(alunosPresenteEscolaDominical);
+		alunosPresenteEscolaDominical.setAulaEscolaDominical(this);
+
+		return alunosPresenteEscolaDominical;
+	}
+
+	public AlunosPresenteEscolaDominical removeAlunosPresenteEscolaDominical(AlunosPresenteEscolaDominical alunosPresenteEscolaDominical) {
+		getAlunosPresenteEscolaDominicals().remove(alunosPresenteEscolaDominical);
+		alunosPresenteEscolaDominical.setAulaEscolaDominical(null);
+
+		return alunosPresenteEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Classe
+	@ManyToOne
+	public Classe getClasse() {
+		return this.classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+
+	//bi-directional many-to-one association to CriancaMatriculadaNaEscolinha
+	@OneToMany(mappedBy="aulaEscolaDominical")
+	public List<CriancaMatriculadaNaEscolinha> getCriancaMatriculadaNaEscolinhas() {
+		return this.criancaMatriculadaNaEscolinhas;
+	}
+
+	public void setCriancaMatriculadaNaEscolinhas(List<CriancaMatriculadaNaEscolinha> criancaMatriculadaNaEscolinhas) {
+		this.criancaMatriculadaNaEscolinhas = criancaMatriculadaNaEscolinhas;
+	}
+
+	public CriancaMatriculadaNaEscolinha addCriancaMatriculadaNaEscolinha(CriancaMatriculadaNaEscolinha criancaMatriculadaNaEscolinha) {
+		getCriancaMatriculadaNaEscolinhas().add(criancaMatriculadaNaEscolinha);
+		criancaMatriculadaNaEscolinha.setAulaEscolaDominical(this);
+
+		return criancaMatriculadaNaEscolinha;
+	}
+
+	public CriancaMatriculadaNaEscolinha removeCriancaMatriculadaNaEscolinha(CriancaMatriculadaNaEscolinha criancaMatriculadaNaEscolinha) {
+		getCriancaMatriculadaNaEscolinhas().remove(criancaMatriculadaNaEscolinha);
+		criancaMatriculadaNaEscolinha.setAulaEscolaDominical(null);
+
+		return criancaMatriculadaNaEscolinha;
+	}
+
+
+	//bi-directional many-to-one association to Matriculado
+	@OneToMany(mappedBy="aulaEscolaDominical")
+	public List<Matriculado> getMatriculados() {
+		return this.matriculados;
+	}
+
+	public void setMatriculados(List<Matriculado> matriculados) {
+		this.matriculados = matriculados;
+	}
+
+	public Matriculado addMatriculado(Matriculado matriculado) {
+		getMatriculados().add(matriculado);
+		matriculado.setAulaEscolaDominical(this);
+
+		return matriculado;
+	}
+
+	public Matriculado removeMatriculado(Matriculado matriculado) {
+		getMatriculados().remove(matriculado);
+		matriculado.setAulaEscolaDominical(null);
+
+		return matriculado;
+	}
+
+}

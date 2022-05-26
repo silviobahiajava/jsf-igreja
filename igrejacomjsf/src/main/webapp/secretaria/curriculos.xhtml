@@ -1,0 +1,361 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+			
+			<p:tabView widgetVar="tab" id="tab">
+				<p:tab title="dados pessoais">
+					<h:panelGrid columns="2">
+					<h:outputLabel value="Nome completo:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="nome"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.nomeCompleto}" />
+						
+						<h:outputLabel value="Data de nascimento:" for="datanascimento"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:calendar id="datanascimento" 
+						mask="true"
+						pattern="dd/MM/yyyy"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.dataNascimento}">
+					</p:calendar>
+					</h:panelGrid>
+				</p:tab>
+				
+				<p:tab title="contato">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Telefone Celular:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputMask mask="(99)9 9999-9999" value="#{curriculoprofissionalBean.curriculoProfissional.telefoneCelular}"
+						style="color:green;font-size:12px;">
+						</p:inputMask>
+						
+						<h:outputLabel value="Telefone Residencial:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputMask mask="(99)9999-9999" value="#{curriculoprofissionalBean.curriculoProfissional.telefoneCelular}"
+						style="color:green;font-size:12px;">
+				  </p:inputMask>
+						
+																																																						
+				</h:panelGrid>
+						
+				</p:tab>
+				<p:tab title="endereco">
+						<h:panelGrid columns="2">
+						<h:outputLabel value="Endereço:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="endereco"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.endereco}" />
+						
+						<h:outputLabel value="Número:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="numero"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.numeroEndereco}" />
+						
+						<h:outputLabel value="Bairro:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="bairro"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.bairro}" />
+						
+						<h:outputLabel value="Cidade:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="cidade"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.cidade}" />
+						
+						<h:outputLabel value="Estado:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="estado"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.estado}" />
+				</h:panelGrid>
+				</p:tab>	
+				<p:tab title="dados profissionais">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Objetivo:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="objetivo"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.objetivoCurriculo}" />
+						
+						<h:outputLabel value="Perfil profissional:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="perfil"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.perfilProfissional}" />
+						</h:panelGrid>
+				</p:tab>		
+				
+				<p:tab title="formação escolar">
+					<h:panelGrid columns="2">
+					<h:outputLabel value="Formação Escolar:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="formacao"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.cursoFormcaoAcademica}" />
+						
+						<h:outputLabel value="Período:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="periodo"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.periodoFormacaoAcademica}" />
+						
+							<h:outputLabel value="Instituição:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="escola"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.curriculoProfissional.escolaFormacaoAcademica}" />
+						</h:panelGrid>
+				</p:tab>
+				<p:tab title="curso profissionalizante">
+				<h:panelGrid columns="2">
+					
+							<h:outputLabel value="Nome do curso:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="curso"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.cursoProfissional.nomeCurso}" />
+						
+						<h:outputLabel value="instituição:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="instituicao"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.cursoProfissional.instituicaoCurso}" />
+						
+							<h:outputLabel value="data início:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="datainiciocurso"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.cursoProfissional.dataInicioCurso}" />
+						
+							<h:outputLabel value="data conclusão:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="datafimcurso"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.cursoProfissional.dataConclusaoCurso}" />
+						
+						<h:outputLabel value="carga horária"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						
+					<p:inputText maxlength="100" size="80"
+						id="cargahoraria"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.cursoProfissional.cargaHorariaCurso}">
+						</p:inputText>
+					</h:panelGrid>	
+					
+				
+				</p:tab>
+				<p:tab title="experiencia profissional">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Empresa"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="empresa"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.experienciaProfissional.nomeDaEmpresa}" />
+					 
+						<h:outputLabel value="Cargo"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="cargo"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.experienciaProfissional.cargo}" />
+						
+						<h:outputLabel value="Data de início:" for="datainicioemprsa"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:calendar id="datainicioempresa" 
+						mask="true"
+						pattern="dd/MM/yyyy"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.experienciaProfissional.dataDeAdmmissao}">
+					</p:calendar>
+					
+					<h:outputLabel value="Data de conclusão:" for="datafimempresa"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:calendar id="datafimempresa" 
+						mask="true"
+						pattern="dd/MM/yyyy"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.experienciaProfissional.dataDeDemissao}">
+					</p:calendar>
+					
+					 <h:outputLabel value="Funções realizadas"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="funcoes"
+						style="color:green;font-size:12px;"
+						value="#{curriculoprofissionalBean.experienciaProfissional.funcoesRealizadas}" />
+ 						</h:panelGrid> 
+						
+				</p:tab>
+			</p:tabView>
+					
+					<h:panelGrid columns="2">
+				      <p:commandButton 
+				      	actionListener="#{curriculoprofissionalBean.adicionarCursos}"
+				      	update=":formListagem:curso"
+				      	value="adicionar cursos"/>
+					
+					 
+					 
+						
+						  <p:commandButton 
+				      	actionListener="#{curriculoprofissionalBean.adicionarExperienciaProfissional}"
+				      	update=":formListagem:experiencia"
+				      	value="adicionar experiencia profissional"/>
+				      	<p:commandButton value="mostrar currículo na tela"
+							action="#{curriculoprofissionalBean.registrarCurriculo}"
+							onclick="this.form.target='_blank'"
+								ajax="false"
+							 />
+							 <p:button 
+				value="voltar"
+				style="background-color:#FAF0E6;color:#006400;font-size:12px;"
+				outcome="/secretaria/secretaria.xhtml">
+			</p:button>
+				</h:panelGrid>
+				
+				      	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+							 
+						<p:dataTable value="#{curriculoprofissionalBean.listaCursos}"
+							id="curso"
+							var="c"
+							>
+			 <p:column headerText="curso"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{c.nomeCurso}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+			 
+			 <p:column headerText="instituição"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{c.instituicaoCurso}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+			 
+			 <p:column headerText="data início"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{c.dataInicioCurso}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+ 					
+ 					<p:column headerText="data conclusão"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{c.dataConclusaoCurso}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+ 					
+ 					
+ 					<p:column headerText="carga horária"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{c.cargaHorariaCurso}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+			</p:dataTable>
+			
+			<p:dataTable value="#{curriculoprofissionalBean.listaExperienciaProfissional}"
+					id="experiencia"
+					var="e"
+			>
+			 <p:column headerText="empresa"
+			 		
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{e.nomeDaEmpresa}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+			 
+			 <p:column headerText="cargo"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{e.cargo}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+			 
+			 <p:column headerText="data início"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{e.dataDeAdmmissao}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+ 					
+ 					<p:column headerText="data demissão"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{e.dataDeDemissao}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+ 					
+ 					
+ 					<p:column headerText="funções"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{e.funcoesRealizadas}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+			</p:dataTable>
+			<p:commandButton value="registrar curriculo"
+						actionListener="#{curriculoprofissionalBean.salvarCurriculo}"
+						update=":mensagem"
+						/>
+						
+		</h:form>
+		
+
+		
+		
+	</ui:define>
+
+</ui:composition>
+
+
+

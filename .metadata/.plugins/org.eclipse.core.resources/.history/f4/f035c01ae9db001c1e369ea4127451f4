@@ -1,0 +1,42 @@
+package testes.teste_secretaria;
+
+import javax.swing.JOptionPane;
+
+import br.com.jsf_igreja.secretaria.model.*;
+import jakarta.persistence.EntityManager;
+
+
+public class TesteMembro {
+
+	   //fazendo cadastros one to one
+	   public static void cadastrarMembro(EntityManager em) {
+		  
+		   em.getTransaction().begin();
+		 
+		  
+		   Endereco endereco=new Endereco();
+		   endereco.setEndereco("Rua Jos� Makocsi");
+		   endereco.setNumero("115");
+		   endereco.setBairro("Erdei");
+		   endereco.setCidade("Rolandia");
+		   endereco.setEstado("PR");
+		   endereco.setCep("86606-088");
+		   em.persist(endereco);
+		   
+		   Filiacao filiacao=new Filiacao();
+		   filiacao.setNomeDaMae("Ivanildes Silva");
+		   filiacao.setNomeDoPai("Luiz Carlos");
+		   em.persist(filiacao);
+		   
+		   Membro membro=new Membro();
+		   membro.setNome("Silvio Silva de Souza");
+		   membro.setCpf("21682124819");
+		   membro.setRg("380672212");
+		   membro.setEndereco(endereco);
+		   membro.setFiliacao(filiacao);
+		   em.persist(membro);
+		   em.getTransaction().commit();
+		   JOptionPane.showMessageDialog(null,"cadastro feito com sucesso");
+	   }
+
+}

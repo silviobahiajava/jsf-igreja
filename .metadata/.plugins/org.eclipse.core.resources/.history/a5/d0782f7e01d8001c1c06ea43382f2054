@@ -1,0 +1,33 @@
+package meucursoJPA4.model;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+
+import meucursoJPA.model.secretaria.Cargo;
+
+public class TestesJPA {
+
+	public static void main(String[] args) {
+		/*EntityManagerFactory emf=Persistence.createEntityManagerFactory("meucursoJPA4");
+		EntityManager em = emf.createEntityManager();
+		Cargo cargo=new Cargo();
+		cargo.setDescricao("DIACONO");
+		em.getTransaction().begin();
+		try {
+			em.persist(cargo);
+			em.getTransaction().commit();
+			JOptionPane.showMessageDialog(null,"cadastro feito com sucesso");
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"erro ao cadastrar");
+			e.printStackTrace();
+		}finally {
+			em.close();
+			emf.close();
+		}
+		*/
+
+	}
+
+}

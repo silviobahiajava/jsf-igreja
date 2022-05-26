@@ -1,0 +1,271 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the curriculo_profissional database table.
+ * 
+ */
+@Entity
+@Table(name="curriculo_profissional")
+@NamedQuery(name="CurriculoProfissional.findAll", query="SELECT c FROM CurriculoProfissional c")
+public class CurriculoProfissional implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String bairro;
+	private String cidade;
+	private String cursoFormcaoAcademica;
+	private byte[] cursoProfissional;
+	private Date dataNascimento;
+	private String email;
+	private String endereco;
+	private String escolaFormacaoAcademica;
+	private String estado;
+	private byte[] experienciaProfissional;
+	private String nomeCompleto;
+	private String numeroEndereco;
+	private String objetivoCurriculo;
+	private String perfilProfissional;
+	private String periodoFormacaoAcademica;
+	private String telefoneCelular;
+	private String telefoneResidencial;
+	private List<CursoProfissional> cursoProfissionals;
+	private List<ExperienciaProfissional> experienciaProfissionals;
+
+	public CurriculoProfissional() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getBairro() {
+		return this.bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+
+	public String getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+
+	@Column(name="curso_formcao_academica")
+	public String getCursoFormcaoAcademica() {
+		return this.cursoFormcaoAcademica;
+	}
+
+	public void setCursoFormcaoAcademica(String cursoFormcaoAcademica) {
+		this.cursoFormcaoAcademica = cursoFormcaoAcademica;
+	}
+
+
+	@Lob
+	@Column(name="curso_profissional")
+	public byte[] getCursoProfissional() {
+		return this.cursoProfissional;
+	}
+
+	public void setCursoProfissional(byte[] cursoProfissional) {
+		this.cursoProfissional = cursoProfissional;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_nascimento")
+	public Date getDataNascimento() {
+		return this.dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getEndereco() {
+		return this.endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
+	@Column(name="escola_formacao_academica")
+	public String getEscolaFormacaoAcademica() {
+		return this.escolaFormacaoAcademica;
+	}
+
+	public void setEscolaFormacaoAcademica(String escolaFormacaoAcademica) {
+		this.escolaFormacaoAcademica = escolaFormacaoAcademica;
+	}
+
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	@Lob
+	@Column(name="experiencia_profissional")
+	public byte[] getExperienciaProfissional() {
+		return this.experienciaProfissional;
+	}
+
+	public void setExperienciaProfissional(byte[] experienciaProfissional) {
+		this.experienciaProfissional = experienciaProfissional;
+	}
+
+
+	@Column(name="nome_completo")
+	public String getNomeCompleto() {
+		return this.nomeCompleto;
+	}
+
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+
+
+	@Column(name="numero_endereco")
+	public String getNumeroEndereco() {
+		return this.numeroEndereco;
+	}
+
+	public void setNumeroEndereco(String numeroEndereco) {
+		this.numeroEndereco = numeroEndereco;
+	}
+
+
+	@Column(name="objetivo_curriculo")
+	public String getObjetivoCurriculo() {
+		return this.objetivoCurriculo;
+	}
+
+	public void setObjetivoCurriculo(String objetivoCurriculo) {
+		this.objetivoCurriculo = objetivoCurriculo;
+	}
+
+
+	@Column(name="perfil_profissional")
+	public String getPerfilProfissional() {
+		return this.perfilProfissional;
+	}
+
+	public void setPerfilProfissional(String perfilProfissional) {
+		this.perfilProfissional = perfilProfissional;
+	}
+
+
+	@Column(name="periodo_formacao_academica")
+	public String getPeriodoFormacaoAcademica() {
+		return this.periodoFormacaoAcademica;
+	}
+
+	public void setPeriodoFormacaoAcademica(String periodoFormacaoAcademica) {
+		this.periodoFormacaoAcademica = periodoFormacaoAcademica;
+	}
+
+
+	@Column(name="telefone_celular")
+	public String getTelefoneCelular() {
+		return this.telefoneCelular;
+	}
+
+	public void setTelefoneCelular(String telefoneCelular) {
+		this.telefoneCelular = telefoneCelular;
+	}
+
+
+	@Column(name="telefone_residencial")
+	public String getTelefoneResidencial() {
+		return this.telefoneResidencial;
+	}
+
+	public void setTelefoneResidencial(String telefoneResidencial) {
+		this.telefoneResidencial = telefoneResidencial;
+	}
+
+
+	//bi-directional many-to-one association to CursoProfissional
+	@OneToMany(mappedBy="curriculoProfissional")
+	public List<CursoProfissional> getCursoProfissionals() {
+		return this.cursoProfissionals;
+	}
+
+	public void setCursoProfissionals(List<CursoProfissional> cursoProfissionals) {
+		this.cursoProfissionals = cursoProfissionals;
+	}
+
+	public CursoProfissional addCursoProfissional(CursoProfissional cursoProfissional) {
+		getCursoProfissionals().add(cursoProfissional);
+		cursoProfissional.setCurriculoProfissional(this);
+
+		return cursoProfissional;
+	}
+
+	public CursoProfissional removeCursoProfissional(CursoProfissional cursoProfissional) {
+		getCursoProfissionals().remove(cursoProfissional);
+		cursoProfissional.setCurriculoProfissional(null);
+
+		return cursoProfissional;
+	}
+
+
+	//bi-directional many-to-one association to ExperienciaProfissional
+	@OneToMany(mappedBy="curriculoProfissional")
+	public List<ExperienciaProfissional> getExperienciaProfissionals() {
+		return this.experienciaProfissionals;
+	}
+
+	public void setExperienciaProfissionals(List<ExperienciaProfissional> experienciaProfissionals) {
+		this.experienciaProfissionals = experienciaProfissionals;
+	}
+
+	public ExperienciaProfissional addExperienciaProfissional(ExperienciaProfissional experienciaProfissional) {
+		getExperienciaProfissionals().add(experienciaProfissional);
+		experienciaProfissional.setCurriculoProfissional(this);
+
+		return experienciaProfissional;
+	}
+
+	public ExperienciaProfissional removeExperienciaProfissional(ExperienciaProfissional experienciaProfissional) {
+		getExperienciaProfissionals().remove(experienciaProfissional);
+		experienciaProfissional.setCurriculoProfissional(null);
+
+		return experienciaProfissional;
+	}
+
+}

@@ -1,0 +1,98 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the data_lancamento database table.
+ * 
+ */
+@Entity
+@Table(name="data_lancamento")
+@NamedQuery(name="DataLancamento.findAll", query="SELECT d FROM DataLancamento d")
+public class DataLancamento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataLancamento;
+	private List<Compra> compras;
+	private List<Lancamento> lancamentos;
+
+	public DataLancamento() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_lancamento")
+	public Date getDataLancamento() {
+		return this.dataLancamento;
+	}
+
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+
+	//bi-directional many-to-one association to Compra
+	@OneToMany(mappedBy="dataLancamento")
+	public List<Compra> getCompras() {
+		return this.compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public Compra addCompra(Compra compra) {
+		getCompras().add(compra);
+		compra.setDataLancamento(this);
+
+		return compra;
+	}
+
+	public Compra removeCompra(Compra compra) {
+		getCompras().remove(compra);
+		compra.setDataLancamento(null);
+
+		return compra;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@OneToMany(mappedBy="dataLancamento")
+	public List<Lancamento> getLancamentos() {
+		return this.lancamentos;
+	}
+
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
+	}
+
+	public Lancamento addLancamento(Lancamento lancamento) {
+		getLancamentos().add(lancamento);
+		lancamento.setDataLancamento(this);
+
+		return lancamento;
+	}
+
+	public Lancamento removeLancamento(Lancamento lancamento) {
+		getLancamentos().remove(lancamento);
+		lancamento.setDataLancamento(null);
+
+		return lancamento;
+	}
+
+}

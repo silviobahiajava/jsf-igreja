@@ -1,0 +1,145 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the contas_para_pagar database table.
+ * 
+ */
+@Entity
+@Table(name="contas_para_pagar")
+@NamedQuery(name="ContasParaPagar.findAll", query="SELECT c FROM ContasParaPagar c")
+public class ContasParaPagar implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String credor;
+	private Date dataVencimento;
+	private String descricaoConta;
+	private String nota;
+	private String observacao;
+	private byte pago;
+	private BigDecimal valorContaParaPagar;
+	private ContasPaga contasPaga;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public ContasParaPagar() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getCredor() {
+		return this.credor;
+	}
+
+	public void setCredor(String credor) {
+		this.credor = credor;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_vencimento")
+	public Date getDataVencimento() {
+		return this.dataVencimento;
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+
+	@Column(name="descricao_conta")
+	public String getDescricaoConta() {
+		return this.descricaoConta;
+	}
+
+	public void setDescricaoConta(String descricaoConta) {
+		this.descricaoConta = descricaoConta;
+	}
+
+
+	public String getNota() {
+		return this.nota;
+	}
+
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
+
+
+	public String getObservacao() {
+		return this.observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+
+	public byte getPago() {
+		return this.pago;
+	}
+
+	public void setPago(byte pago) {
+		this.pago = pago;
+	}
+
+
+	@Column(name="valor_conta_para_pagar")
+	public BigDecimal getValorContaParaPagar() {
+		return this.valorContaParaPagar;
+	}
+
+	public void setValorContaParaPagar(BigDecimal valorContaParaPagar) {
+		this.valorContaParaPagar = valorContaParaPagar;
+	}
+
+
+	//bi-directional many-to-one association to ContasPaga
+	@ManyToOne
+	@JoinColumn(name="conta_paga_codigo")
+	public ContasPaga getContasPaga() {
+		return this.contasPaga;
+	}
+
+	public void setContasPaga(ContasPaga contasPaga) {
+		this.contasPaga = contasPaga;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

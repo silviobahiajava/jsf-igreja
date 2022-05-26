@@ -1,0 +1,117 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
+
+
+/**
+ * The persistent class for the produto database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Produto.findAll", query="SELECT p FROM Produto p")
+public class Produto extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	
+	private String descricao;
+	private BigDecimal preco;
+	private int quantidade;
+	private BigDecimal total;
+	private List<EntradaItem> entradaItems;
+	private List<ItensVenda> itensVendas;
+
+	public Produto() {
+	}
+
+
+
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	public BigDecimal getPreco() {
+		return this.preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
+
+	public int getQuantidade() {
+		return this.quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+	public BigDecimal getTotal() {
+		return this.total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+
+	//bi-directional many-to-one association to EntradaItem
+	@OneToMany(mappedBy="produto")
+	public List<EntradaItem> getEntradaItems() {
+		return this.entradaItems;
+	}
+
+	public void setEntradaItems(List<EntradaItem> entradaItems) {
+		this.entradaItems = entradaItems;
+	}
+
+	public EntradaItem addEntradaItem(EntradaItem entradaItem) {
+		getEntradaItems().add(entradaItem);
+		entradaItem.setProduto(this);
+
+		return entradaItem;
+	}
+
+	public EntradaItem removeEntradaItem(EntradaItem entradaItem) {
+		getEntradaItems().remove(entradaItem);
+		entradaItem.setProduto(null);
+
+		return entradaItem;
+	}
+
+
+	//bi-directional many-to-one association to ItensVenda
+	@OneToMany(mappedBy="produto")
+	public List<ItensVenda> getItensVendas() {
+		return this.itensVendas;
+	}
+
+	public void setItensVendas(List<ItensVenda> itensVendas) {
+		this.itensVendas = itensVendas;
+	}
+
+	public ItensVenda addItensVenda(ItensVenda itensVenda) {
+		getItensVendas().add(itensVenda);
+		itensVenda.setProduto(this);
+
+		return itensVenda;
+	}
+
+	public ItensVenda removeItensVenda(ItensVenda itensVenda) {
+		getItensVendas().remove(itensVenda);
+		itensVenda.setProduto(null);
+
+		return itensVenda;
+	}
+
+}

@@ -1,0 +1,79 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+
+/**
+ * The persistent class for the itens_venda database table.
+ * 
+ */
+@Entity
+@Table(name="itens_venda")
+@NamedQuery(name="ItensVenda.findAll", query="SELECT i FROM ItensVenda i")
+public class ItensVenda implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigDecimal precoParcial;
+	private int quantidade;
+	private Produto produto;
+	private Venda venda;
+
+	public ItensVenda() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="preco_parcial")
+	public BigDecimal getPrecoParcial() {
+		return this.precoParcial;
+	}
+
+	public void setPrecoParcial(BigDecimal precoParcial) {
+		this.precoParcial = precoParcial;
+	}
+
+
+	public int getQuantidade() {
+		return this.quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+	//bi-directional many-to-one association to Produto
+	@ManyToOne
+	public Produto getProduto() {
+		return this.produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+
+	//bi-directional many-to-one association to Venda
+	@ManyToOne
+	@JoinColumn(name="vendas_codigo")
+	public Venda getVenda() {
+		return this.venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
+}

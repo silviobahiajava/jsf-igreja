@@ -1,0 +1,90 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the endereco database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Endereco.findAll", query="SELECT e FROM Endereco e")
+public class Endereco implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private String bairro;
+	private String cep;
+	private String cidade;
+	private BigInteger codigo;
+	private String endereco;
+	private String estado;
+	private String numero;
+
+	public Endereco() {
+	}
+
+
+	public String getBairro() {
+		return this.bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+
+	public String getCep() {
+		return this.cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+
+	public String getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+
+	public BigInteger getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(BigInteger codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getEndereco() {
+		return this.endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	public String getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+}

@@ -1,0 +1,7 @@
+package br.com.jsf_igreja.secretaria.model;
+
+public class Filiacao {
+
+	private String nomePai;
+	private String nomeMae;
+}

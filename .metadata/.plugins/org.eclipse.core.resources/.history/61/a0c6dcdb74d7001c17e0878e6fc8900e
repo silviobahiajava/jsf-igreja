@@ -1,0 +1,5 @@
+package meucursoJPA.model;
+
+public class Receber {
+
+}

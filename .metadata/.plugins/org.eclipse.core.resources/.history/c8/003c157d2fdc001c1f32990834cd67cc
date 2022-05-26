@@ -1,0 +1,58 @@
+package br.com.jsf_igreja.secretaria.model;
+import enums.EstadosBrasileirosEnum;
+import jakarta.persistence.*;
+import utils.GenericDomain;
+@Entity
+@Table
+public class Endereco extends GenericDomain{
+	private static final long serialVersionUID = 1L;
+	private String endreco;
+	private String numero;
+	private String bairro;
+	private String cidade;
+	
+	@Enumerated(EnumType.STRING)
+	private EstadosBrasileirosEnum estadoEnum;
+
+	public String getEndreco() {
+		return endreco;
+	}
+
+	public void setEndreco(String endreco) {
+		this.endreco = endreco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public EstadosBrasileirosEnum getEstadoEnum() {
+		return estadoEnum;
+	}
+
+	public void setEstadoEnum(EstadosBrasileirosEnum estadoEnum) {
+		this.estadoEnum = estadoEnum;
+	}
+	
+
+}

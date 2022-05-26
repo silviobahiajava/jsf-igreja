@@ -1,0 +1,25 @@
+package br.com.jsf_igreja.secretaria.model;
+import jakarta.persistence.*;
+import utils.GenericDomain;
+@Entity
+@Table(name="filiacao")
+public class Filiacao extends GenericDomain{
+
+	private static final long serialVersionUID = 1L;
+	private String nomePai;
+	private String nomeMae;
+	public String getNomePai() {
+		return nomePai;
+	}
+	public void setNomePai(String nomePai) {
+		this.nomePai = nomePai;
+	}
+	public String getNomeMae() {
+		return nomeMae;
+	}
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
+	}
+	
+	
+}

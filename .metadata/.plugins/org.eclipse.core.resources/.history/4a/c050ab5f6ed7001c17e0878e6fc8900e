@@ -1,0 +1,131 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the aula_escolinha_crianca database table.
+ * 
+ */
+@Entity
+@Table(name="aula_escolinha_crianca")
+@NamedQuery(name="AulaEscolinhaCrianca.findAll", query="SELECT a FROM AulaEscolinhaCrianca a")
+public class AulaEscolinhaCrianca implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataAula;
+	private int totalCriancasAusentes;
+	private int totalCriancasPresentes;
+	private int totalMatriculado;
+	private List<CriancaMatriculadaNaEscolinhaAusente> criancaMatriculadaNaEscolinhaAusentes;
+	private List<CriancaNaEscolinhaPresente> criancaNaEscolinhaPresentes;
+
+	public AulaEscolinhaCrianca() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_aula")
+	public Date getDataAula() {
+		return this.dataAula;
+	}
+
+	public void setDataAula(Date dataAula) {
+		this.dataAula = dataAula;
+	}
+
+
+	@Column(name="total_criancas_ausentes")
+	public int getTotalCriancasAusentes() {
+		return this.totalCriancasAusentes;
+	}
+
+	public void setTotalCriancasAusentes(int totalCriancasAusentes) {
+		this.totalCriancasAusentes = totalCriancasAusentes;
+	}
+
+
+	@Column(name="total_criancas_presentes")
+	public int getTotalCriancasPresentes() {
+		return this.totalCriancasPresentes;
+	}
+
+	public void setTotalCriancasPresentes(int totalCriancasPresentes) {
+		this.totalCriancasPresentes = totalCriancasPresentes;
+	}
+
+
+	@Column(name="total_matriculado")
+	public int getTotalMatriculado() {
+		return this.totalMatriculado;
+	}
+
+	public void setTotalMatriculado(int totalMatriculado) {
+		this.totalMatriculado = totalMatriculado;
+	}
+
+
+	//bi-directional many-to-one association to CriancaMatriculadaNaEscolinhaAusente
+	@OneToMany(mappedBy="aulaEscolinhaCrianca")
+	public List<CriancaMatriculadaNaEscolinhaAusente> getCriancaMatriculadaNaEscolinhaAusentes() {
+		return this.criancaMatriculadaNaEscolinhaAusentes;
+	}
+
+	public void setCriancaMatriculadaNaEscolinhaAusentes(List<CriancaMatriculadaNaEscolinhaAusente> criancaMatriculadaNaEscolinhaAusentes) {
+		this.criancaMatriculadaNaEscolinhaAusentes = criancaMatriculadaNaEscolinhaAusentes;
+	}
+
+	public CriancaMatriculadaNaEscolinhaAusente addCriancaMatriculadaNaEscolinhaAusente(CriancaMatriculadaNaEscolinhaAusente criancaMatriculadaNaEscolinhaAusente) {
+		getCriancaMatriculadaNaEscolinhaAusentes().add(criancaMatriculadaNaEscolinhaAusente);
+		criancaMatriculadaNaEscolinhaAusente.setAulaEscolinhaCrianca(this);
+
+		return criancaMatriculadaNaEscolinhaAusente;
+	}
+
+	public CriancaMatriculadaNaEscolinhaAusente removeCriancaMatriculadaNaEscolinhaAusente(CriancaMatriculadaNaEscolinhaAusente criancaMatriculadaNaEscolinhaAusente) {
+		getCriancaMatriculadaNaEscolinhaAusentes().remove(criancaMatriculadaNaEscolinhaAusente);
+		criancaMatriculadaNaEscolinhaAusente.setAulaEscolinhaCrianca(null);
+
+		return criancaMatriculadaNaEscolinhaAusente;
+	}
+
+
+	//bi-directional many-to-one association to CriancaNaEscolinhaPresente
+	@OneToMany(mappedBy="aulaEscolinhaCrianca")
+	public List<CriancaNaEscolinhaPresente> getCriancaNaEscolinhaPresentes() {
+		return this.criancaNaEscolinhaPresentes;
+	}
+
+	public void setCriancaNaEscolinhaPresentes(List<CriancaNaEscolinhaPresente> criancaNaEscolinhaPresentes) {
+		this.criancaNaEscolinhaPresentes = criancaNaEscolinhaPresentes;
+	}
+
+	public CriancaNaEscolinhaPresente addCriancaNaEscolinhaPresente(CriancaNaEscolinhaPresente criancaNaEscolinhaPresente) {
+		getCriancaNaEscolinhaPresentes().add(criancaNaEscolinhaPresente);
+		criancaNaEscolinhaPresente.setAulaEscolinhaCrianca(this);
+
+		return criancaNaEscolinhaPresente;
+	}
+
+	public CriancaNaEscolinhaPresente removeCriancaNaEscolinhaPresente(CriancaNaEscolinhaPresente criancaNaEscolinhaPresente) {
+		getCriancaNaEscolinhaPresentes().remove(criancaNaEscolinhaPresente);
+		criancaNaEscolinhaPresente.setAulaEscolinhaCrianca(null);
+
+		return criancaNaEscolinhaPresente;
+	}
+
+}

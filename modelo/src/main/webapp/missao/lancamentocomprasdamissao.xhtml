@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+		<p:panel header="Lançamento de compras" style="background-color:red">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{lancamentocompradamissaoBean.listaDeCompras}" var="item" rows="5">
+				<f:facet name="header">
+					
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data" sortBy="#{item.dataCompraMissao}"
+					width="30"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{item.dataCompraMissao}">
+					<h:outputText value="#{item.dataCompraMissao}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+					
+					<p:column headerText="Num.º Pedido" sortBy="#{item.numeroNota}"
+					  width="30"
+					style="color:#994422;
+					font-size:12px;"
+					filterBy="#{item.numeroNota}">
+					<h:outputText value="#{item.numeroNota}" />
+				</p:column>
+				<p:column headerText="Valor" sortBy="#{item.valorCompraMissao}"
+					 width="30"
+					style="color:#994422;
+					font-size:12px;"
+					filterBy="#{item.valorCompraMissao}">
+					<h:outputText value="#{item.valorCompraMissao}" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="descricao" sortBy="#{item.descricao}"
+					filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" />
+				</p:column>
+				
+				
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-plus"
+						value="registrar no caixa"
+						actionListener="#{lancamentocompradamissaoBean.adicionarCompras}"
+						update=":mensagem :formlancamento:painelcompralancamento :formListagem:tabela ">
+						<f:attribute name="compraSelecionada" value="#{item}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+	<h:form id="formlancamento">
+ <p:panel header="Compras do grupo de varóes para lancar no livro caixa do Departamento de Missão" id="painelcompralancamento">
+			<p:dataTable id="tabelacompralancamento"
+				style="width:600px;margin-top:40px;margin-lefr:300px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{lancamentocompradamissaoBean.listaDeComprasPraLancamento}" var="compra" rows="5"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Descrição">
+					<h:outputText value="#{compra.descricao}" />
+				</p:column>
+
+				<p:column headerText="Valor da Compra">
+					<h:outputText value="#{compra.valorCompraMissao}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Data da Compra">
+					<h:outputText value="#{compra.dataCompraMissao}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				
+
+<!-- 				<p:column headerText="Opções"> -->
+<!-- 					<p:commandButton icon="ui-icon-minus" -->
+<!-- 						actionListener="#{vendaBean.remover}" -->
+<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			</p:dataTable>
+			<p:panelGrid id="total" columns="2">
+				<h:outputLabel value="total" />
+				<h:outputText value="#{lancamentocompradamissaoBean.lancamento.despesa}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			</p:panelGrid>
+			<h:panelGrid>	
+					<p:commandButton value="confirmar lançamento no livro caixa"
+					actionListener="#{lancamentocompradamissaoBean.salvarLancamentoDeCompras}"
+					update=":mensagem :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		
+		</p:panel>
+
+		</h:form>	
+	
+     
+	</ui:define>
+
+</ui:composition>
+
+

@@ -1,0 +1,77 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the convidado database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Convidado.findAll", query="SELECT c FROM Convidado c")
+public class Convidado implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String nomeConvidado;
+	private String rg;
+	private Evento evento;
+	private List<Evento> eventos;
+
+	public Convidado() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getId() {
+		return this.id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	@Column(name="nome_convidado")
+	public String getNomeConvidado() {
+		return this.nomeConvidado;
+	}
+
+	public void setNomeConvidado(String nomeConvidado) {
+		this.nomeConvidado = nomeConvidado;
+	}
+
+
+	public String getRg() {
+		return this.rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+
+	//bi-directional many-to-one association to Evento
+	@ManyToOne
+	public Evento getEvento() {
+		return this.evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+
+	//bi-directional many-to-many association to Evento
+	@ManyToMany(mappedBy="convidados2")
+	public List<Evento> getEventos() {
+		return this.eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
+	}
+
+}

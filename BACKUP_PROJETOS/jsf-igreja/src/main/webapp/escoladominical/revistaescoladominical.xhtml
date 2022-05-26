@@ -1,0 +1,179 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+
+		<h:form id="formListagem">
+		<p:panel header="Alunos Matriculados">
+		
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{PedidoRevistaBean.pedidoRevistas}" var="pv" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo Aluno" 
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{PedidoRevistaBean.novo}" 
+						update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="escoladominical"/>
+				</f:facet>
+
+				<p:column headerText="aluno" sortBy="#{pv.membroRevista.nome}"
+					width="50"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{pv.membroRevista.nome}">
+					<h:outputText value="#{pv.membroRevista.nome}" />
+				</p:column>
+				<p:column headerText="classe" sortBy="#{pv.classe.nomeClasse}"
+					width="50"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{pv.classe.nomeClasse}">
+					<h:outputText value="#{pv.classe.nomeClasse}" />
+				</p:column>
+				
+				<p:column headerText="total a pagar" 
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					>
+					<h:outputText value="#{pv.valorTotal}" 
+					style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="situação" sortBy="#{pv.situacaoDaConta.descricao}"
+					width="50"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{pv.situacaoDaConta.descricao}">
+					<h:outputText value="#{pv.situacaoDaConta.descricao}" />
+				</p:column>
+			
+
+				
+
+				<p:column headerText="Opções"
+					width="50">
+					<p:commandButton icon="ui-icon-trash"
+						value="cancelar pedido"
+						actionListener="#{PedidoRevistaBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						
+						
+						<p:confirm header="Confirmação" message="Deseja cancelar esta revista?"
+							icon="ui-icon-alert" />
+						<f:attribute name="pedidoRevistaSelecionado" value="#{pv}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{PedidoRevistaBean.editar}"
+						update=":formCadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="pedidoRevistaSelecionado" value="#{pv}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		
+			
+				
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog 
+		header="Pedido de Revistas" 
+		widgetVar="dialogo"
+		width="300"
+		position="left"
+		hideEffect="puff" showEffect="puff" style="background-color:#C0C0C0;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<p:outputLabel value="aluno:" 
+				style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+				
+				<p:selectOneMenu filter="true"
+					value="#{PedidoRevistaBean.pedidoRevista.membroRevista.nome}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Por favor selecione o nome do aluno">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="nome do aluno" />
+					<f:selectItems value="#{PedidoRevistaBean.alunos}" var="aluno"
+						itemValue="#{aluno}" itemLabel="#{aluno.nome}" />
+				</p:selectOneMenu>
+					
+					
+						<p:outputLabel value="Classe:" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+				<p:selectOneMenu filter="true"
+					value="#{PedidoRevistaBean.pedidoRevista.classe}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Por favor selecione a classe deste aluno">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione uma classe para este aluno" />
+					<f:selectItems value="#{PedidoRevistaBean.classes}" var="c"
+						itemValue="#{c}" itemLabel="#{c.nomeClasse}" />
+				</p:selectOneMenu>
+				
+				<h:outputLabel value="preco da revista:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="30" size="30" id="valortotal"
+					value="#{PedidoRevistaBean.pedidoRevista.valor}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+				
+				<h:outputLabel value="quantidade:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="30" size="30"
+					value="#{PedidoRevistaBean.pedidoRevista.quantidade}">
+						<p:ajax 
+							listener="#{PedidoRevistaBean.calcularValorTotal}"
+							event="blur"
+							update=":formCadastro:valortotal" />
+					</p:inputText>
+					
+					
+						<h:outputLabel value="Valor total a pagar:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="30" size="30" id="valordope"
+					value="#{PedidoRevistaBean.pedidoRevista.valorTotal}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+				
+				
+					
+					
+					
+					
+
+				
+					
+				
+				
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="registrar pedido"
+					actionListener="#{PedidoRevistaBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	</ui:define>
+
+</ui:composition>
+
+

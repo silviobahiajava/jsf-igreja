@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	<h:form>
+		
+     <h:link outcome="/igreja/lancamentos">
+					<p:graphicImage library="fotos" name="boleto04.jpg"/>
+				</h:link>
+				<p:spacer width="20"/>
+				<h:link outcome="/escoladominical/escoladominical">
+					<p:graphicImage library="fotos" name="boleto05.jpg"/>
+				</h:link>
+				<p:spacer width="20"/>
+				<h:link outcome="/ministerioinfantil/lancamentocrianca2">
+					<p:graphicImage library="fotos" name="boletovencimento02.jpg"/>
+				</h:link>
+				<p:spacer width="20"/>
+				<h:link outcome="/secretaria/secretaria">
+					<p:graphicImage library="fotos" name="boletovencimento.jpg"/>
+				</h:link>
+				
+				
+		
+		</h:form>
+	</ui:define>
+</ui:composition>

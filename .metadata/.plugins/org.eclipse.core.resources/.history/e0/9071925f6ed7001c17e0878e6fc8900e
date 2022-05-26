@@ -1,0 +1,79 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the teste_paginacao database table.
+ * 
+ */
+@Entity
+@Table(name="teste_paginacao")
+@NamedQuery(name="TestePaginacao.findAll", query="SELECT t FROM TestePaginacao t")
+public class TestePaginacao extends GenericDomain{
+	private static final long serialVersionUID = 1L;
+	
+	private Date data;
+	private Date dataCadastro;
+	private String dataStr;
+	private String nome;
+	private String nomeImagem;
+
+	public TestePaginacao() {
+	}
+
+
+	
+
+	@Temporal(TemporalType.DATE)
+	public Date getData() {
+		return this.data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_cadastro")
+	public Date getDataCadastro() {
+		return this.dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+
+	@Column(name="data_str")
+	public String getDataStr() {
+		return this.dataStr;
+	}
+
+	public void setDataStr(String dataStr) {
+		this.dataStr = dataStr;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	@Column(name="nome_imagem")
+	public String getNomeImagem() {
+		return this.nomeImagem;
+	}
+
+	public void setNomeImagem(String nomeImagem) {
+		this.nomeImagem = nomeImagem;
+	}
+
+}

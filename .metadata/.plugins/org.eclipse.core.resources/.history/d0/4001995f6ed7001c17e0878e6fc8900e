@@ -1,0 +1,65 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the estabelecimento_de_compras database table.
+ * 
+ */
+@Entity
+@Table(name="estabelecimento_de_compras")
+@NamedQuery(name="EstabelecimentoDeCompra.findAll", query="SELECT e FROM EstabelecimentoDeCompra e")
+public class EstabelecimentoDeCompra implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String cnpjEstabelecimento;
+	private String enderecoEstabelecimento;
+	private String nomeEstabelcimento;
+
+	public EstabelecimentoDeCompra() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="cnpj_estabelecimento")
+	public String getCnpjEstabelecimento() {
+		return this.cnpjEstabelecimento;
+	}
+
+	public void setCnpjEstabelecimento(String cnpjEstabelecimento) {
+		this.cnpjEstabelecimento = cnpjEstabelecimento;
+	}
+
+
+	@Column(name="endereco_estabelecimento")
+	public String getEnderecoEstabelecimento() {
+		return this.enderecoEstabelecimento;
+	}
+
+	public void setEnderecoEstabelecimento(String enderecoEstabelecimento) {
+		this.enderecoEstabelecimento = enderecoEstabelecimento;
+	}
+
+
+	@Column(name="nome_estabelcimento")
+	public String getNomeEstabelcimento() {
+		return this.nomeEstabelcimento;
+	}
+
+	public void setNomeEstabelcimento(String nomeEstabelcimento) {
+		this.nomeEstabelcimento = nomeEstabelcimento;
+	}
+
+}

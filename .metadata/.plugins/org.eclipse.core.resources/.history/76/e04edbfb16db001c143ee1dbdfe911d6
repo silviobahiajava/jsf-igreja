@@ -1,0 +1,5 @@
+package cadastrocursos.model;
+
+public class Membro {
+
+}

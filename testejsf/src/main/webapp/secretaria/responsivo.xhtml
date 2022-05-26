@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	<div class="ui-grid">
+<div class="ui-grid-col-4">Sistem para Igreja Sistema para Igrejas Sistem para Igreja Sistema para Igrejas Sistem para Igreja Sistema para Igrejas</div>
+<div class="ui-grid-col-4">Sistem para Igreja Sistema para Igrejas Sistem para Igreja Sistema para Igrejas Sistem para Igreja Sistema para Igrejas</div>
+<div class="ui-grid-col-4">
+		
+		<p:outputLabel value="Sistem para Igreja Sistema para Igrejas Sistem para Igreja Sistema para Igrejas Sistem para Igreja Sistema para Igrejas"
+		 style="color:orange"/>
+		 
+</div>
+<div class="ui-grid-col-4">
+
+<h:form>
+
+   <p:menubar>
+	<p:submenu label="secretaria">
+		<p:menuitem value="membros"/>
+		<p:menuitem value="carterinhas"/>
+	</p:submenu>
+	
+	<p:submenu label="financeiro">
+		<p:menuitem value="dizimos"/>
+		<p:menuitem value="ofertas"/>
+	</p:submenu>
+</p:menubar>
+	<p:dataTable value="#{membroBean2.membros}" var="m">
+	 	
+		 	<p:column headerText="nome" style="font-size:12px">
+		 		<h:outputText value="#{m.nome}"/>
+		 		
+		 	</p:column>
+		 	<p:column headerText="documento" style="font-size:12px">
+		 		<h:outputText value="#{m.cpf}"/>
+		 		
+		 	</p:column>
+		 </p:dataTable>
+	 </h:form>
+</div>
+
+<div class="ui-grid-col-4">
+	<p:graphicImage
+		library="fotos"
+		name="restrito6.jpg"/>
+</div>
+
+
+</div>
+</h:body>
+</html>

@@ -1,0 +1,158 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			<p:spacer height="120"/>
+		<h:form id="formListagem">
+			<p:panel 
+				header="Registro de Despesas Pagas" style="color:red;">
+				
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado." 
+				style="margin-top:180px;margin-left:1px;"
+				paginator="true" value="#{despesaspagasdaigrejabean.listaDeDespesasPagas}" var="pago" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Registrar Pagamento de despesa" oncomplete="PF('dialogo').show();"
+						actionListener="#{despesaspagasdaigrejabean.novo}" update=":formCadastro:painel" />
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+						
+				</f:facet>
+
+				<p:column headerText="Data de pagamento"
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						>
+						<h:outputText value="#{pago.dataPagamentoDespesaDaIgreja}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+				
+				<p:column headerText="Tipo de despesa" sortBy="#{pago.tipoDespesaEnum.descricao}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{pago.tipoDespesaEnum.descricao}">
+					<h:outputText value="#{pago.tipoDespesaEnum.descricao}" 
+					style="color: #000080;font-size:12px;"
+					/>
+				</p:column>
+				
+				<p:column headerText="descrição" sortBy="#{pago.descricaoDespesaDaIgreja}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{pago.descricaoDespesaDaIgreja}">
+					<h:outputText value="#{pago.descricaoDespesaDaIgreja}" 
+					style="color: #000080;font-size:12px;"
+					/>
+				</p:column>
+					
+				
+				<p:column headerText="Valor" 
+					width="30"
+					sortBy="#{pago.valorDespescaDaIgreja}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{pago.valorDespescaDaIgreja}">
+					<h:outputText value="#{pago.valorDespescaDaIgreja}" 
+					style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+			</p:dataTable>
+          
+</p:panel>
+</h:form>
+					
+
+
+
+
+					
+				<p:dialog header="registro de despesas pagas" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff"
+		position="left"
+		width="320"
+		style="background-color:#ADD8E6;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+		<div class="ui-fluid">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data de pagamento:" 
+				style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="50" size="30"
+					
+					effect="fold"
+					value="#{despesaspagasdaigrejabean.despesaPagaDaIgreja.dataPagamentoDespesaDaIgreja}" 
+					locale="pt_BR"/>
+					
+					
+					<h:outputLabel value="tipo de despesa:" for="tipodespesa"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+					<h:selectOneMenu id="tipodespesa" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						value="#{despesaspagasdaigrejabean.despesaPagaDaIgreja.tipoDespesaEnum}" 
+						>
+		
+						
+						<f:selectItem  itemLabel="SELECIONE O TIPO DE DESPESA" />
+						<f:selectItem itemValue="IMOVEISEEDIFICIOS" itemLabel="IMÓVEIS E EIDFÍCIOS" />
+						<f:selectItem itemValue="MOVEISEUTENSILIOS" itemLabel="MÓVEIS E UTENSÍLIOS" />
+						<f:selectItem itemValue="ALUGUEL" itemLabel="ALUGUEL" />
+			
+						
+						<f:selectItem itemValue="OBRAMISSIONARIA" itemLabel="OBRA MISSIONÁRIA" />
+						<f:selectItem itemValue="OBRIGACOESSOCIAIS" itemLabel="OBRIGAÇÕES SOCIAIS" />
+						<f:selectItem itemValue="PAGAMENTOLUZ" itemLabel="PAGAMENTO DE LUZ" />
+				
+						<f:selectItem itemValue="PAGAMENTOAGUA" itemLabel="PAGAMENTO DE AGUA" />
+						<f:selectItem itemValue="PAGAMENTOGAS" itemLabel="PAGAMENTO DE GAS" />
+						<f:selectItem itemValue="PAGAMENTOTELEFONE" itemLabel="PAGAMENTO DE TELEFONE" />
+						
+			
+						<f:selectItem itemValue="ALIMENTACAO" itemLabel="ALIMENTACAO" />
+						<f:selectItem itemValue="EVANGELIZACAO" itemLabel="EVANGELIZACAO" />
+						<f:selectItem itemValue="DESPESASDIVERSAS" itemLabel="DESPESAS DIVERSAS" />
+						
+					</h:selectOneMenu>
+					<h:outputLabel value="descrição  da despesa:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					/>
+					<p:inputText maxlength="50" size="30"
+					value="#{despesaspagasdaigrejabean.despesaPagaDaIgreja.descricaoDespesaDaIgreja}">
+					</p:inputText>
+					
+					<h:outputLabel value="Valor da despesa:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="50" size="30"
+					value="#{despesaspagasdaigrejabean.despesaPagaDaIgreja.valorDespescaDaIgreja}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+					
+					<p:commandButton value="registrar despesa paga"
+						style="background-color:#FAF0E6;color:#006400;"
+					actionListener="#{despesaspagasdaigrejabean.registrarDespesaPaga}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+			</div>
+		</h:form>
+	</p:dialog>
+	
+	</ui:define>
+
+</ui:composition>
+
+

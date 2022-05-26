@@ -1,0 +1,112 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the compra_das_criancas database table.
+ * 
+ */
+@Entity
+@Table(name="compra_das_criancas")
+@NamedQuery(name="CompraDasCrianca.findAll", query="SELECT c FROM CompraDasCrianca c")
+public class CompraDasCrianca implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataCompraCrianca;
+	private String descricao;
+	private String numeroNota;
+	private int tipodecompra;
+	private BigDecimal valorCompraCrianca;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public CompraDasCrianca() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_compra_crianca")
+	public Date getDataCompraCrianca() {
+		return this.dataCompraCrianca;
+	}
+
+	public void setDataCompraCrianca(Date dataCompraCrianca) {
+		this.dataCompraCrianca = dataCompraCrianca;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="numero_nota")
+	public String getNumeroNota() {
+		return this.numeroNota;
+	}
+
+	public void setNumeroNota(String numeroNota) {
+		this.numeroNota = numeroNota;
+	}
+
+
+	public int getTipodecompra() {
+		return this.tipodecompra;
+	}
+
+	public void setTipodecompra(int tipodecompra) {
+		this.tipodecompra = tipodecompra;
+	}
+
+
+	@Column(name="valor_compra_crianca")
+	public BigDecimal getValorCompraCrianca() {
+		return this.valorCompraCrianca;
+	}
+
+	public void setValorCompraCrianca(BigDecimal valorCompraCrianca) {
+		this.valorCompraCrianca = valorCompraCrianca;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

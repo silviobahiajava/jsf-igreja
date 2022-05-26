@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Souza Web Sistemas</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="/image/favicon.png" />
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+<style>
+* { margin:0; padding:0;}
+	#slide {
+width:100%;
+overflow: hidden;
+height: 300px;
+margin: 50px auto;
+box-shadow: 0 0 8px #000;
+position: relative;
+}
+	#slide img {
+position: absolute;
+z-index: 1;
+display: none;
+left: 0;
+}
+	#slide p {
+z-index:2;
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+padding: 10px;
+font-family: Arial;
+font-size: 14px;
+background: rgba(0,0,0,0.5);
+color: #fff;
+
+}
+
+</style>
+
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+</head>
+<body>
+
+
+
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span>SouzaWeb Sistemas</span></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container">
+ 			<h3>SouzaWeb Sistemas</h3>
+ 			
+ 		<!--  
+ 			<figure id="slide">
+ 			
+ 			 		<a href="http://localhost:8080/souzawebsistemas/comercial/lojas">
+ 			 	  		<img 
+		 			 		src="/image/FOTOS/IGREJA1.jpg"/>
+ 			 		</a>
+ 			 		<a href="http://localhost:8080/souzawebsistemas/comercial/padarias">
+	 			 	    <img src="/image/FOTOS/ESCOLA1.jpg"/>
+ 			 	    </a>
+ 			 		<a href="http://localhost:8080/souzawebsistemas/comercial/lanchonetes">
+	 			 	    <img src="/image/FOTOS/PADARIA1.jpg"/>
+ 			 		</a>
+ 			 		<a href="http://localhost:8080/souzawebsistemas/cristao/igrejas">
+		 			 		<img 
+		 			 			src="/image/FOTOS/LOJA1.jpg"/>
+ 			 			</a>
+ 			 		
+ 			 </figure>
+ 			-->
+ 			 
+ 			 <figure id="slide">
+ 			
+ 			 		<a href="http://localhost:8080/souzawebsistemas/comercial/lojas">
+ 			 	  		<img 
+		 			 		src="/image/FOTOS/IGREJA1.jpg"/>
+ 			 		</a>
+ 			 		<a href="http://localhost:8080/souzawebsistemas/comercial/padarias">
+	 			 	    <img src="/image/FOTOS/ESCOLA1.jpg"/>
+ 			 	    </a>
+ 			 		<a href="http://localhost:8080/souzawebsistemas/comercial/lanchonetes">
+	 			 	    <img src="/image/FOTOS/PADARIA1.jpg"/>
+ 			 		</a>
+ 			 		<a href="http://localhost:8080/souzawebsistemas/cristao/igrejas">
+		 			 		<img 
+		 			 			src="/image/FOTOS/LOJA1.jpg"/>
+ 			 			</a>
+ 			 		
+ 			 </figure>
+         </div>
+		
+	</section>
+
+
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+
+		$(document).ready(function() {
+			$(".navbar-toggle").click(function() {
+				$(".sidebar").toggleClass("sidebar-open");
+			})
+		});
+	</script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		alert("ola mundo");
+		$(document).ready(function(){
+		  $("#slide img:eq(0)").addClass("ativo").show();
+		  var texto = $(".ativo").attr("alt");
+		  $("#slide").prepend("<p>"+texto+"</p>");
+		  setInterval(slide,3000);
+		  function slide(){
+			if($(".ativo").next().size()){
+			  $(".ativo").fadeOut().removeClass("ativo").next().fadeIn().addClass("ativo");
+			}else{
+					$(".ativo").fadeOut().removeClass("ativo");
+					$("#slide img:eq(0)").fadeIn().addClass("ativo");
+					var texto = $(".ativo").attr("alt");
+					$("#slide p").hide().html(texto).delay(500).fadeIn();
+				}
+		}
+		  
+	});
+	</script>
+</body>
+</html>

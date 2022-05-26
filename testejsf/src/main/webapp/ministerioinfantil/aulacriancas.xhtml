@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+
+		<p:panel header="lista de chamada">
+		
+<!-- 		   <p:outputLabel value="Classe:"  -->
+<!-- 		   style="color:#994422;font-size:20px;" -->
+<!-- 		   /> -->
+<!-- 				<p:selectOneMenu filter="true" value="#{aulaEscolinhaCriancaBean.aula.classe}" -->
+<!-- 					converter="omnifaces.SelectItemsConverter" required="true" -->
+<!-- 					requiredMessage="Por favor selecione a classe deste aluno"> -->
+<!-- 					<f:selectItem noSelectionOption="true" -->
+<!-- 						itemLabel="Selecione uma classe para este aluno" /> -->
+<!-- 					<f:selectItems value="#{aulaEscolinhaCriancaBean.classes}" var="classe" -->
+<!-- 						itemValue="#{classe}" itemLabel="#{classe.nomeClasse}" /> -->
+<!-- 						<p:ajax  -->
+<!-- 							listener="#{aulaEscolinhaCriancaBean.popular}"  -->
+<!-- 							update=":formListagem:matriculados :formListagem:totalMatriculados :mensagem" -->
+<!-- 							event="change"/> -->
+<!-- 				</p:selectOneMenu> -->
+			<p:dataTable id="matriculados"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{aulaEscolinhaCriancaBean.matriculados}" var="matriculado" rows="5">
+				<p:column headerText="Nome" sortBy="#{matriculado.crianca.nome}"
+					style="color:#994422;font-size:15px;"
+					filterBy="#{matriculado.crianca.nome}">
+					<h:outputText value="#{matriculado.crianca.nome}" />
+				</p:column>
+				<p:column headerText="Opções"
+				style="color:#994422;font-size:15px;">
+					<p:commandButton value="presença"
+						style="color:#992244;font-size:20px;"
+						actionListener="#{aulaEscolinhaCriancaBean.definirPresenca(matriculado)}"
+						update=":formListagem:presente :mensagem :formListagem:totalPresentes">
+					</p:commandButton>
+					<p:commandButton value="falta"
+					   style="color:#4682b4;font-size:20px;"
+						actionListener="#{aulaEscolinhaCriancaBean.definirFalta(matriculado)}"
+						update=":formListagem:falta :mensagem :formListagem:totalAusentes">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:dataTable id="presente" emptyMessage="Nenhum registro encontrado."
+				style="width:450px;margin-top:20px;" 
+				
+				paginator="true"
+				value="#{aulaEscolinhaCriancaBean.presentes}" var="presente" rows="5">
+				<p:column headerText="Nome"
+					style="color:#994422;font-size:15px;"
+					sortBy="#{presente.matriculado.crianca.nome}"
+					filterBy="#{presente.matriculado.crianca.nome}">
+					<h:outputText value="#{presente.matriculado.crianca.nome}" />
+				</p:column>
+			</p:dataTable>
+			<p:dataTable id="falta" emptyMessage="Nenhum registro encontrado"
+				style="width:450px;margin-left:520px;margin-top:-150px;"
+				paginator="true" value="#{aulaEscolinhaCriancaBean.ausentes}" var="ausente" rows="5">
+				<p:column headerText="Nome"
+					style="color:#994422;font-size:15px;"
+					sortBy="#{ausente.matriculado.crianca.nome}" filterBy="#{ausente.matriculado.crianca.nome}">
+					<h:outputText value="#{ausente.matriculado.crianca.nome}" />
+				</p:column>
+			</p:dataTable>	
+			<h:panelGrid columns="2">
+				<h:outputLabel value="matriculados" />
+			<h:outputText value="#{aulaEscolinhaCriancaBean.totalDeMatriculados}" id="totalMatriculados"/>
+			
+			<h:outputLabel value="ausentes" />
+			<h:outputText value="#{aulaEscolinhaCriancaBean.totalDeAlunosAusentes}" id="totalAusentes"/>
+			
+			<h:outputLabel value="presentes" />
+			<h:outputText value="#{aulaEscolinhaCriancaBean.totalDeAlunosPresentes}" id="totalPresentes"/>
+			
+			
+			
+			
+			
+			
+			
+			<h:outputLabel value="data da aula" />
+			<p:calendar value="#{aulaEscolinhaCriancaBean.aula.dataAula}"/>
+			
+			</h:panelGrid>
+			<p:commandButton value="resumo"
+			actionListener="#{aulaEscolinhaCriancaBean.salvar}"
+			update=":mensagem"/>
+			
+		</p:panel>
+
+	</h:form>
+</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>

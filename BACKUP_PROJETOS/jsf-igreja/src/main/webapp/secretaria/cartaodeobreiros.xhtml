@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="corpo">
+	<h3 style="color:#4169E1">CARTÃO DE MINISTROS</h3>
+				
+		<h:form id="formListagem">
+			<p:panel header="Listagem de Membros pra fazer carterinha">
+				
+			
+				
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					styleClass="tabelaconteudo"
+					paginator="true" value="#{cartaodeobreiroBean.membros}" var="obreiro"
+					rows="5">
+					<f:facet name="header">
+						<h:outputLabel value="pesquisar por codigo" />
+						<p:inputText value="#{cartaodeobreiroBean.membro.codigo}">
+							<p:ajax event="blur" update=":formListagem:tabela" listener="#{cartaodeobreiroBean.listarmembroPorCodigo}"/>
+						</p:inputText>
+					</f:facet>
+					
+					<p:column headerText="codigo" 
+						width="30"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" 
+						>
+						<h:outputText value="#{obreiro.codigo}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="Nome" sortBy="#{obreiro.nome}"
+						width="30"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{obreiro.nome}">
+						<h:outputText value="#{obreiro.nome}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Cargo" width="30"
+						style="color:black;font-size:14px;font-style:italic;font-weight:bold"
+						>
+						<h:outputText value="#{obreiro.cargoEnum.descricao}"
+							style="color:black;font-size:14px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="congregacao" width="30"
+						style="color:black;font-size:14px;font-style:italic;font-weight:bold">
+						<h:outputText value="#{obreiro.congregacao}"
+							style="color:black;font-size:14px;font-style:italic;font-weight:bold" />
+					</p:column>
+					
+					<p:column headerText="foto do membro"
+						style="color:black;font-size:10px;font-style:italic;font-weight:bold"
+						width="30">
+						<p:graphicImage cache="false" width="50" height="50"
+							url="http://localhost:8081/uploads/#{obreiro.codigo}.jpg" />
+
+					</p:column>
+					
+				</p:dataTable>
+				
+					 <h:panelGrid id="painel" columns="4">
+					  
+			  		 	
+
+							 
+							<p:commandButton value="VISUALIZAR CARTÃO DE OBREIROS"
+							action="#{cartaodeobreiroBean.mostrarCartaoDeObreirosNaWeb}"
+							onclick="this.form.target='_blank'"
+								ajax="false"
+							 />
+							 
+
+						<p:commandButton value="IMPRIMIR"
+							actionListener="#{cartaodeobreiroBean.gerarCartaodeObreiro}"
+							update=":mensagem"
+							/>
+								<p:button 
+				value="voltar"
+				outcome="/secretaria/membros.xhtml">
+			</p:button>	
+							
+							
+							
+							
+							
+			   </h:panelGrid>
+			
+				
+				
+			</p:panel>
+			
+			<p:button 
+				value="voltar"
+				style="background-color:#FAF0E6;color:#006400;font-size:12px;"
+				outcome="/secretaria/membros.xhtml">
+			</p:button>
+		</h:form>
+
+		
+		
+
+	</ui:define>
+
+</ui:composition>
+
+
+

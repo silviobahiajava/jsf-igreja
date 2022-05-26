@@ -1,0 +1,77 @@
+package daos;
+
+import java.util.List;
+
+import javax.persistence.Persistence;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+
+import entidades.AlunosMatriculadosEscolaDominical;
+import entidades.AulaEscolaDominical;
+import entidades.ClasseEscolaDominical;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+
+public class AlunoMatriculadoDao extends GenericDaoHibernate<AlunosMatriculadosEscolaDominical> {
+	 
+	public EntityManager conexao() {
+		EntityManagerFactory emf=jakarta.persistence.Persistence.createEntityManagerFactory("Cursos-PU");
+		EntityManager em = emf.createEntityManager();
+		return em;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<AlunosMatriculadosEscolaDominical> buscarPorClasse(Long classeCodigo) {
+		Session sessao = utils.HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = ((Criteria) sessao).createCriteria(AlunosMatriculadosEscolaDominical.class);
+			consulta.add(Restrictions.eq("classe.codigo", classeCodigo));
+			// consulta.addOrder(Order.asc("nome"));
+			List<AlunosMatriculadosEscolaDominical> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+		
+		/*Criteria q = s.createCriteria(Author.class);
+		q.createCriteria("books").add(Restrictions.like("title", "%Hibernate%"));
+		List authors = q.list();
+		*/
+		
+		/*
+		 * 
+		 * CriteriaBuilder cb = em.getCriteriaBuilder();
+CriteriaQuery<Author> cq = cb.createQuery(Author.class);
+Root<Author> root = cq.from(Author.class);
+SetJoin<Author, Book> books = root.join(Author_.books);
+ 
+ParameterExpression<String> paramTitle = cb.parameter(String.class);
+cq.where(cb.like(books.get(Book_.title), paramTitle));
+ 
+TypedQuery<Author> q = em.createQuery(cq);
+q.setParameter(paramTitle, "%Hibernate%");
+List<Author> authors = q.getResultList();
+		 * 
+		 * 
+		 * 
+		 */
+		
+	}
+	
+public List<AlunosMatriculadosEscolaDominical>getByClasse(Long codigo_classe){
+	EntityManager em = conexao();
+	CriteriaBuilder cb = em.getCriteriaBuilder();
+	cb.createQuery(AlunosMatriculadosEscolaDominical.class)
+}
+	
+	   
+	
+}

@@ -1,0 +1,9 @@
+package br.com.jsf_igreja.secretaria.model;
+
+public class Membro {
+
+private String nome;
+	
+	private String nacionalidade;
+	private String natualidade;
+}

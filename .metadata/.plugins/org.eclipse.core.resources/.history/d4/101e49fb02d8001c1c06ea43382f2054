@@ -1,0 +1,14 @@
+package meucursoJPA.model.administrativo;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+@Generated(value="Dali", date="2022-05-20T03:05:51.018-0300")
+@StaticMetamodel(FuncaoUsuario.class)
+public class FuncaoUsuario_ {
+	public static volatile SingularAttribute<FuncaoUsuario, Long> codigo;
+	public static volatile ListAttribute<FuncaoUsuario, Usuario> usuarios;
+	public static volatile SingularAttribute<FuncaoUsuario, String> descricao;
+}

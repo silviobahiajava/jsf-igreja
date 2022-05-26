@@ -1,0 +1,119 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the evento database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
+public class Evento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String data;
+	private String horario;
+	private String local;
+	private String nome;
+	private List<Convidado> convidados1;
+	private List<Convidado> convidados2;
+
+	public Evento() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getId() {
+		return this.id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public String getData() {
+		return this.data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+
+	public String getHorario() {
+		return this.horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+
+	public String getLocal() {
+		return this.local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	//bi-directional many-to-one association to Convidado
+	@OneToMany(mappedBy="evento")
+	public List<Convidado> getConvidados1() {
+		return this.convidados1;
+	}
+
+	public void setConvidados1(List<Convidado> convidados1) {
+		this.convidados1 = convidados1;
+	}
+
+	public Convidado addConvidados1(Convidado convidados1) {
+		getConvidados1().add(convidados1);
+		convidados1.setEvento(this);
+
+		return convidados1;
+	}
+
+	public Convidado removeConvidados1(Convidado convidados1) {
+		getConvidados1().remove(convidados1);
+		convidados1.setEvento(null);
+
+		return convidados1;
+	}
+
+
+	//bi-directional many-to-many association to Convidado
+	@ManyToMany
+	@JoinTable(
+		name="evento_convidados"
+		, joinColumns={
+			@JoinColumn(name="evento_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="convidados_id")
+			}
+		)
+	public List<Convidado> getConvidados2() {
+		return this.convidados2;
+	}
+
+	public void setConvidados2(List<Convidado> convidados2) {
+		this.convidados2 = convidados2;
+	}
+
+}

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\souza\Desktop\PROJETOS GIT\JSFHIBERNATESERGIODELFINO"/>
+			<item value="C:\Users\souza\Desktop\jpa\live-destrinchando-jpql-jpa-master"/>
+			<item value="C:\Users\souza\Desktop\modelos\live-mapeamento-relacionamentos-jpa-master"/>
+			<item value="C:\Users\souza\Documents\drogariadelfino\ProgramacaoWeb"/>
+			<item value="C:\Users\souza\Desktop\ECLIPSE1\Java-JSF1-Projeto-Aula02-master"/>
+			<item value="C:\Users\souza\Desktop\ECLIPSEMARS\projetos-mars\igreja3\iadmif"/>
+			<item value="C:\Users\souza\Desktop\ECLIPSE1\projetos_eclipse1\cursoweb"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="C:\Users\souza\Desktop\ECLIPSE1\Java-JSF1-Projeto-Aula02-master\src\main\java\daos\GenericDaoHibernate.java"/>
+			<item value="C:\Users\souza\Desktop\ECLIPSE1\Java-JSF1-Projeto-Aula02-master"/>
+			<item value="C:\Users\souza\Desktop\eclipse_2022\modelo-igreja-jsf"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+		</list>
+		<list key="groupId">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="br.com.souzawebsistemas.jsf-igreja"/>
+			<item value="br.com.souzawebsistemascomjpa2.2"/>
+		</list>
+		<list key="name">
+			<item value="Jsf-Igreja"/>
+			<item value="souzawebsitemas com jpa2.2"/>
+		</list>
+		<list key="artifactId">
+			<item value="jsf-igreja"/>
+			<item value="souzawebsistemascomjpa2.2"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="1.0"/>
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="br.com.souza.web.igreja"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="igreja"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+</section>

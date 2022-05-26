@@ -1,0 +1,50 @@
+package souzawebsistemascomjpa.model;
+
+import java.util.List;
+
+import jakarta.persistence.*;
+
+
+
+@Entity
+@Table(name="aluno")
+public class Aluno extends GenericDomain{
+
+    
+    private static final long serialVersionUID = 1L;
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    private String nome;
+
+    @ManyToMany(mappedBy = "alunos")
+    private List<Curso> cursos;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+    
+    
+}

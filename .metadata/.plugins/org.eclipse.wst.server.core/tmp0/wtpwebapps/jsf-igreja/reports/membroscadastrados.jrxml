@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membroscadastrados" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a050f0a-2827-460e-8508-823151997c57">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[aWdyZWphdGVzdGUxLm1lbWJybyBBUyAsNDcsMzEsZjc0MmJjOWYtNmUwOC00ZmVjLTkzMDMtMzky
+NGU2N2Y3YjViOw==]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="cartaoDB"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT igrejateste1.membro.codigo,
+	igrejateste1.membro.nome
+FROM igrejateste1.membro]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="membro"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="membro"/>
+	</field>
+	<group name="codigo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+	</group>
+	<group name="nome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="90">
+			<image>
+				<reportElement x="0" y="10" width="80" height="50" uuid="2d389fc9-8825-402a-94a7-992bb59b01f0"/>
+				<imageExpression><![CDATA[
+"C:/Users/SOUZAWEB SISTEMAS/Desktop/MEUS PROJETOS/sistemaparaigreja/CARTERINHAS/logomissaoefe3.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="152" y="10" width="251" height="30" forecolor="#F51714" uuid="310f3933-15a3-4e08-9bbe-cb2a5b826fd9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Assembléia de Deus Missão e Fé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="30" width="139" height="15" uuid="c91aab3f-7e1a-4c26-bd93-9b243f024401">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[rua Francisco Serpelone,509]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="50" width="159" height="15" uuid="283de6a1-2c9a-4a47-8e93-f5e069becb65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[Jd.Eldorado-Rolândia-PR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="40" width="200" height="30" forecolor="#120303" uuid="3e2ee4a7-5275-454f-a87a-857335fd9866"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[LISTAGEM DE MEMBROS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="-20" y="35" width="50" height="15" uuid="1dd79f15-0e78-4c40-b3c6-1f456cb52ae7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="35" width="50" height="15" uuid="49841044-d26b-4128-a01b-1c1e8436ac8d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="35" width="83" height="15" uuid="3b039fac-9465-403d-8907-f2a89afa6d56">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[Data Nascimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="35" width="70" height="15" uuid="4e10485f-8725-42d5-b6e6-ee458c02ca6d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[Data batismo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="35" width="60" height="15" uuid="48dcfd15-3ea4-4157-8781-ed20d1c12590">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[naturalidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="35" width="40" height="15" uuid="8f27c33d-95c7-46d2-9278-5cc8bf6dfb24">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<text><![CDATA[cargo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="-20" y="0" width="51" height="19" uuid="d1586a58-1539-499f-8005-693af7e74fa0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="160" height="19" uuid="9c6dd757-ab3d-4253-8181-0794d12b87e1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="303" y="16" width="80" height="1" uuid="01a2d360-fd5d-47fa-a233-acc552769bfa">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="400" y="16" width="80" height="1" uuid="be8e6870-1e34-42d4-b6c7-ea42913e8fd2">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="490" y="15" width="80" height="1" uuid="cf092855-755c-4618-b35a-69c022f706cf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="220" y="16" width="70" height="1" uuid="f8ad7a1b-fff0-42df-84c5-c0322935b6fb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

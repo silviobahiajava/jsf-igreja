@@ -1,0 +1,94 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the entrada_produto database table.
+ * 
+ */
+@Entity
+@Table(name="entrada_produto")
+@NamedQuery(name="EntradaProduto.findAll", query="SELECT e FROM EntradaProduto e")
+public class EntradaProduto implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataEntrada;
+	private String observacao;
+	private List<EntradaItem> entradaItems;
+	private Funcionario funcionario;
+
+	public EntradaProduto() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_entrada")
+	public Date getDataEntrada() {
+		return this.dataEntrada;
+	}
+
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+
+
+	public String getObservacao() {
+		return this.observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+
+	//bi-directional many-to-one association to EntradaItem
+	@OneToMany(mappedBy="entradaProduto")
+	public List<EntradaItem> getEntradaItems() {
+		return this.entradaItems;
+	}
+
+	public void setEntradaItems(List<EntradaItem> entradaItems) {
+		this.entradaItems = entradaItems;
+	}
+
+	public EntradaItem addEntradaItem(EntradaItem entradaItem) {
+		getEntradaItems().add(entradaItem);
+		entradaItem.setEntradaProduto(this);
+
+		return entradaItem;
+	}
+
+	public EntradaItem removeEntradaItem(EntradaItem entradaItem) {
+		getEntradaItems().remove(entradaItem);
+		entradaItem.setEntradaProduto(null);
+
+		return entradaItem;
+	}
+
+
+	//bi-directional many-to-one association to Funcionario
+	@ManyToOne
+	public Funcionario getFuncionario() {
+		return this.funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+}

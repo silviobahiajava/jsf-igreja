@@ -1,0 +1,106 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the contribuicao_das_criancas database table.
+ * 
+ */
+@Entity
+@Table(name="contribuicao_das_criancas")
+@NamedQuery(name="ContribuicaoDasCrianca.findAll", query="SELECT c FROM ContribuicaoDasCrianca c")
+public class ContribuicaoDasCrianca implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigInteger contribuinteCodigo;
+	private Date dataPrevistaPraContribuir;
+	private BigDecimal valorQuePodeContribuir;
+	private CampanhaDasCrianca campanhaDasCrianca;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public ContribuicaoDasCrianca() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="contribuinte_codigo")
+	public BigInteger getContribuinteCodigo() {
+		return this.contribuinteCodigo;
+	}
+
+	public void setContribuinteCodigo(BigInteger contribuinteCodigo) {
+		this.contribuinteCodigo = contribuinteCodigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_prevista_pra_contribuir")
+	public Date getDataPrevistaPraContribuir() {
+		return this.dataPrevistaPraContribuir;
+	}
+
+	public void setDataPrevistaPraContribuir(Date dataPrevistaPraContribuir) {
+		this.dataPrevistaPraContribuir = dataPrevistaPraContribuir;
+	}
+
+
+	@Column(name="valor_que_pode_contribuir")
+	public BigDecimal getValorQuePodeContribuir() {
+		return this.valorQuePodeContribuir;
+	}
+
+	public void setValorQuePodeContribuir(BigDecimal valorQuePodeContribuir) {
+		this.valorQuePodeContribuir = valorQuePodeContribuir;
+	}
+
+
+	//bi-directional many-to-one association to CampanhaDasCrianca
+	@ManyToOne
+	@JoinColumn(name="campanha_codigo")
+	public CampanhaDasCrianca getCampanhaDasCrianca() {
+		return this.campanhaDasCrianca;
+	}
+
+	public void setCampanhaDasCrianca(CampanhaDasCrianca campanhaDasCrianca) {
+		this.campanhaDasCrianca = campanhaDasCrianca;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

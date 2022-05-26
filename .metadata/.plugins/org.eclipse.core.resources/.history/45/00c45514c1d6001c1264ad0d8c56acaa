@@ -1,0 +1,167 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the conta_a_pagar database table.
+ * 
+ */
+@Entity
+@Table(name="conta_a_pagar")
+@NamedQuery(name="ContaAPagar.findAll", query="SELECT c FROM ContaAPagar c")
+public class ContaAPagar implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte aPagar;
+	private String credor;
+	private Date dataVencimento;
+	private String descricao;
+	private byte pago;
+	private String situacaoDaConta;
+	private byte temDesconto;
+	private BigDecimal totalapagar;
+	private BigDecimal valor;
+	private BigDecimal valorComDesconto;
+	private List<Compra> compras;
+
+	public ContaAPagar() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="a_pagar")
+	public byte getAPagar() {
+		return this.aPagar;
+	}
+
+	public void setAPagar(byte aPagar) {
+		this.aPagar = aPagar;
+	}
+
+
+	public String getCredor() {
+		return this.credor;
+	}
+
+	public void setCredor(String credor) {
+		this.credor = credor;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_vencimento")
+	public Date getDataVencimento() {
+		return this.dataVencimento;
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	public byte getPago() {
+		return this.pago;
+	}
+
+	public void setPago(byte pago) {
+		this.pago = pago;
+	}
+
+
+	@Column(name="situacao_da_conta")
+	public String getSituacaoDaConta() {
+		return this.situacaoDaConta;
+	}
+
+	public void setSituacaoDaConta(String situacaoDaConta) {
+		this.situacaoDaConta = situacaoDaConta;
+	}
+
+
+	@Column(name="tem_desconto")
+	public byte getTemDesconto() {
+		return this.temDesconto;
+	}
+
+	public void setTemDesconto(byte temDesconto) {
+		this.temDesconto = temDesconto;
+	}
+
+
+	public BigDecimal getTotalapagar() {
+		return this.totalapagar;
+	}
+
+	public void setTotalapagar(BigDecimal totalapagar) {
+		this.totalapagar = totalapagar;
+	}
+
+
+	public BigDecimal getValor() {
+		return this.valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+
+	@Column(name="valor_com_desconto")
+	public BigDecimal getValorComDesconto() {
+		return this.valorComDesconto;
+	}
+
+	public void setValorComDesconto(BigDecimal valorComDesconto) {
+		this.valorComDesconto = valorComDesconto;
+	}
+
+
+	//bi-directional many-to-one association to Compra
+	@OneToMany(mappedBy="contaAPagar")
+	public List<Compra> getCompras() {
+		return this.compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public Compra addCompra(Compra compra) {
+		getCompras().add(compra);
+		compra.setContaAPagar(this);
+
+		return compra;
+	}
+
+	public Compra removeCompra(Compra compra) {
+		getCompras().remove(compra);
+		compra.setContaAPagar(null);
+
+		return compra;
+	}
+
+}

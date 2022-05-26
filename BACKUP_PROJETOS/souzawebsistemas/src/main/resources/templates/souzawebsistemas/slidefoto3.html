@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Souza Web Sistemas</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="/image/favicon.png" />
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+<style>
+ #fotos{
+ margin:0 auto;
+ width:600px;
+ height:300;
+ margin-top:150px;
+ }
+ #fotos ul{
+ margin:0;
+ padding:0;
+ list-style:none;
+ }
+ body{
+ 	 background: url('/image/FOTOS/FUNDO4.jpg')no-repeat;
+ 	 background-size:cover;
+ }
+</style>
+
+	
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">SouzaWeb Sistemas</h1>
+    <p class="lead">Desenvolvemos sistemas personalizados </p>
+  </div>
+</div>
+
+	<section class="layout-content" layout:fragment="corpo">
+ 
+	 
+		<div class="container-fluid   col-lg-6 mb-5 mb-lg-0  thumbnail" id="fotos">
+ 			<ul>
+ 				<li>
+ 				  	<a href="http://localhost:8080/souzawebsistemas/educacao/escolas">
+ 						<img 
+	 			 			src="/image/FOTOS/ESCOLA1.jpg"
+	 			 			class="media-object  img-responsive img-thumbnail  w-100 rounded-4 shadow-4">
+	 			 			
+	 			 	</a>
+	 			 	<div class="right-caption">
+	 			 	 sistema para gerenciamento de escolas
+	 			 	</div>
+ 				</li>
+ 				
+ 				<li>
+ 					<a href="http://localhost:8080/souzawebsistemas/cristao/igrejas">
+ 					    <img 
+	 			 			src="/image/FOTOS/IGREJA1.jpg"
+	 			 			class="media-object  img-responsive img-thumbnail w-100 rounded-4 shadow-4">
+	 			 	</a>
+ 				</li>
+ 				
+ 				<li>
+ 					<a href="http://localhost:8080/souzawebsistemas/comercial/padarias">
+ 					   <img 
+	 			 			src="/image/FOTOS/PADARIA1.jpg"
+	 			 			class="media-object  img-responsive img-thumbnail w-100 rounded-4 shadow-4">
+	 			 	</a>
+ 				</li>
+ 				<li>
+ 					<a href="http://localhost:8080/souzawebsistemas/comercial/lanchonetes">
+ 					   <img 
+	 			 			src="/image/FOTOS/lanchonete02.jpg"
+	 			 			class="media-object  img-responsive img-thumbnail w-100 rounded-4 shadow-4">
+	 			 	</a>
+ 				</li>
+ 				<li>
+ 					<a href="http://localhost:8080/souzawebsistemas/comercial/lojas">
+ 					   <img 
+	 			 			src="/image/FOTOS/LOJA1.jpg"
+	 			 			class="media-object  img-responsive img-thumbnail w-100 rounded-4 shadow-4">
+	 			 	</a>
+ 				</li>
+ 			
+ 			</ul>
+ 		</div>
+		
+	</section>
+
+
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+
+		$(document).ready(function() {
+			$(".navbar-toggle").click(function() {
+				$(".sidebar").toggleClass("sidebar-open");
+			})
+		});
+	</script>
+ 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> 
+<!--  - 	<script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script> -->
+	<script type="text/javascript" src="/js/jquery.cycle.all.js"></script>
+	
+	<script type="text/javascript">
+	//alert("obrigado Jesus")
+	$(document).ready(function() {
+		alert("obrigado Jesus");
+	 	$("#fotos ul").cycle({
+		 	fx:'zoom'
+		 });
+	});
+	
+	</script>
+
+
+</body>
+</html>

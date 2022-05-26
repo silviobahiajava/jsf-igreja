@@ -1,0 +1,130 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the campanha_da_igreja database table.
+ * 
+ */
+@Entity
+@Table(name="campanha_da_igreja")
+@NamedQuery(name="CampanhaDaIgreja.findAll", query="SELECT c FROM CampanhaDaIgreja c")
+public class CampanhaDaIgreja implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataCampanha;
+	private String nomeCampanhaIgreja;
+	private String objetivoCampanhaIgreja;
+	private BigDecimal valorCampanhaIgreja;
+	private Grupo grupo;
+	private Lancamento lancamento;
+	private List<ContribuicaoDaIgreja> contribuicaoDaIgrejas;
+
+	public CampanhaDaIgreja() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_campanha")
+	public Date getDataCampanha() {
+		return this.dataCampanha;
+	}
+
+	public void setDataCampanha(Date dataCampanha) {
+		this.dataCampanha = dataCampanha;
+	}
+
+
+	@Column(name="nome_campanha_igreja")
+	public String getNomeCampanhaIgreja() {
+		return this.nomeCampanhaIgreja;
+	}
+
+	public void setNomeCampanhaIgreja(String nomeCampanhaIgreja) {
+		this.nomeCampanhaIgreja = nomeCampanhaIgreja;
+	}
+
+
+	@Column(name="objetivo_campanha_igreja")
+	public String getObjetivoCampanhaIgreja() {
+		return this.objetivoCampanhaIgreja;
+	}
+
+	public void setObjetivoCampanhaIgreja(String objetivoCampanhaIgreja) {
+		this.objetivoCampanhaIgreja = objetivoCampanhaIgreja;
+	}
+
+
+	@Column(name="valor_campanha_igreja")
+	public BigDecimal getValorCampanhaIgreja() {
+		return this.valorCampanhaIgreja;
+	}
+
+	public void setValorCampanhaIgreja(BigDecimal valorCampanhaIgreja) {
+		this.valorCampanhaIgreja = valorCampanhaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+
+	//bi-directional many-to-one association to ContribuicaoDaIgreja
+	@OneToMany(mappedBy="campanhaDaIgreja")
+	public List<ContribuicaoDaIgreja> getContribuicaoDaIgrejas() {
+		return this.contribuicaoDaIgrejas;
+	}
+
+	public void setContribuicaoDaIgrejas(List<ContribuicaoDaIgreja> contribuicaoDaIgrejas) {
+		this.contribuicaoDaIgrejas = contribuicaoDaIgrejas;
+	}
+
+	public ContribuicaoDaIgreja addContribuicaoDaIgreja(ContribuicaoDaIgreja contribuicaoDaIgreja) {
+		getContribuicaoDaIgrejas().add(contribuicaoDaIgreja);
+		contribuicaoDaIgreja.setCampanhaDaIgreja(this);
+
+		return contribuicaoDaIgreja;
+	}
+
+	public ContribuicaoDaIgreja removeContribuicaoDaIgreja(ContribuicaoDaIgreja contribuicaoDaIgreja) {
+		getContribuicaoDaIgrejas().remove(contribuicaoDaIgreja);
+		contribuicaoDaIgreja.setCampanhaDaIgreja(null);
+
+		return contribuicaoDaIgreja;
+	}
+
+}

@@ -1,0 +1,68 @@
+package testes.teste_secretaria;
+
+import javax.swing.JOptionPane;
+
+import br.com.jsf_igreja.secretaria.model.*;
+import br.com.jsf_igreja.secretaria.repository.ContatoRepository;
+import br.com.jsf_igreja.secretaria.repository.DocumentacaoRepository;
+import br.com.jsf_igreja.secretaria.repository.EnderecoRepository;
+import br.com.jsf_igreja.secretaria.repository.FiliacaoRepository;
+import br.com.jsf_igreja.secretaria.repository.MembroRepository;
+import enums.CargoEnum;
+import enums.Congregacao;
+import enums.EstadoCivilEnum;
+import enums.EstadosBrasileirosEnum;
+import jakarta.persistence.EntityManager;
+import utils.ConexaoBanco;
+
+
+public class TesteMembro {
+
+	   //fazendo cadastros one to one
+	   public static void cadastrarMembro() {
+		  
+		  EntityManager em=ConexaoBanco.conectar();
+		  
+		   Endereco endereco=new Endereco();
+		   endereco.setEndreco("Rua Jos� Makocsi");
+		   endereco.setNumero("115");
+		   endereco.setBairro("Erdei");
+		   endereco.setCidade("Rolandia");
+		   endereco.setEstadoEnum(EstadosBrasileirosEnum.PR);
+		   EnderecoRepository.salvar(endereco);
+		   
+		   Filiacao filiacao=new Filiacao();
+		   filiacao.setNomeMae("Ivanildes Silva");
+		   filiacao.setNomePai("Luiz Carlos");
+		    FiliacaoRepository.salvar(filiacao);
+		   
+		    Documentacao documentacao=new Documentacao();
+		    documentacao.setCpf("0521861866");
+		    documentacao.setRg("25566888");
+		    DocumentacaoRepository.salvar(documentacao);
+		    
+		    Contato contato=new Contato();
+		    contato.setCelular("43 996554112");
+		    contato.setEmail("maria@gmail.com");
+		    contato.setFacebook("maria@hotmail.com");
+		    contato.setSkype("122maria74");
+		    ContatoRepository.salvar(contato);
+		    
+		   Membro membro=new Membro();
+		   membro.setNome("Silvio Silva de Souza");
+		   membro.setNacionalidade("BRASILEIRA");
+		   membro.setNatualidade("Itabuna");
+		   membro.setEstadosBrasileirosEnum(EstadosBrasileirosEnum.BA);
+		   membro.setCargoEnum(CargoEnum.DIACONIZA);
+		   membro.setCongregacaoEnum(Congregacao.MONTECARLOS);
+		   
+		   membro.setEndereco(endereco);
+		  membro.setFiliacao(filiacao);
+		  membro.setDocumentacao(documentacao);
+		  membro.setContato(contato);
+		  MembroRepository.salvar(membro);
+		  em.getTransaction().commit();
+		  
+ 	   }
+
+}

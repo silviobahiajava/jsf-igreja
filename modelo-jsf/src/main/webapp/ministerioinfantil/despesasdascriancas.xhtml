@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			
+			
+				
+		<h:form id="formListagem">
+		<p:panel header="Despesas do Ministério Infantil">
+			
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{despesaCriancaBean.listaDespesaCrianca}" var="despesa" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						actionListener="#{despesaCriancaBean.novo}" update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data:" sortBy="#{despesa.dataPagamentoDespesaCrianca}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{despesa.dataPagamentoDespesaCrianca}">
+						<h:outputText value="#{despesa.dataPagamentoDespesaCrianca}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+				
+				<p:column headerText="Valor:" sortBy="#{despesa.valorDespescaCrianca}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{despesa.valorDespescaCrianca}">
+					<h:outputText value="#{despesa.valorDespescaCrianca}" 
+					style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+					
+					
+				
+				<p:column headerText="Descricao" sortBy="#{despesa.descricao}"
+					
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{despesa.descricao}">
+					<h:outputText value="#{despesa.descricao}" 
+					style="color: #000080;font-size:12px;"/>
+				</p:column>
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="registro de despesas pagas" widgetVar="dialogo"
+		position="left"
+		
+		hideEffect="puff" showEffect="puff" 
+		style="background-color:#ADD8E6;margin-left:1px"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data de pagamento:" 
+				style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="30" size="30"
+					effect="fold"
+					value="#{despesaCriancaBean.despesaCrianca.dataPagamentoDespesaCrianca}" 
+					locale="pt_BR"/>
+					
+					
+        
+				
+					
+					<h:outputLabel value="Valor:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="30" size="30"
+					value="#{despesaCriancaBean.despesaCrianca.valorDespescaCrianca}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					<h:outputLabel value="Descrição:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					/>
+				<p:inputText maxlength="50" size="30"
+					value="#{despesaCriancaBean.despesaCrianca.descricao}" />
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{despesaCriancaBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+					
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="corpo">
+				
+		<h:form id="formListagem">
+			<p:panel header="Meu Cartão de Membro">
+				<h:panelGrid columns="2">
+
+					<h:outputLabel value="numero do cartão"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						
+						<p:inputText value="#{meucartaoBean.m.codigo}"/>
+						
+					<h:outputLabel value="cpf" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold;margin-left:5px;"
+					/>
+					<p:inputMask mask="999.999.999-99" value="#{meucartaoBean.m.cpf}" maxlength="15" size="15"/>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1">
+					<p:commandButton value="pesquisar"
+						actionListener="#{meucartaoBean.buscar}"
+						oncomplete="PF('dialogo').show();"
+						update=":formListagem:cartao" />
+				</h:panelGrid>
+				
+			</p:panel>
+			<p:dialog
+			 position="left"
+			header="Meu Cartão" 
+			 widgetVar="dialogo"
+			 width="left"
+			hideEffect="puff" showEffect="puff" 
+			style="background-color:#ADD8E6;margin-left:1px;"
+			draggable="false" resizable="false" closable="false">
+				<p:panel id="cartao">
+				
+				<p:graphicImage 
+							cache="false" 
+							width="50" 
+							height="50" 
+							url="http://localhost:8080/uploads/#{meucartaoBean.m.codigo}.jpg"/> 
+					<h:panelGrid columns="2">
+						<h:outputLabel value="nome"/>
+						<h:outputText value="#{meucartaoBean.m.nome}"/>
+						
+						<h:outputLabel value="rg"/>
+						<h:outputText value="#{meucartaoBean.m.rg}"/>
+						
+						<h:outputLabel value="cpf"/>
+						<h:outputText value="#{meucartaoBean.m.cpf}"/>
+						
+						<h:outputLabel value="nome do pai"/>
+						<h:outputText value="#{meucartaoBean.m.nomedopai}" />
+						
+						<h:outputLabel value="nome da mãe"/>
+						<h:outputText value="#{meucartaoBean.m.nomedamae}"/>
+						
+						<h:outputLabel value="data nascimento"/>
+						<h:outputText value="#{meucartaoBean.m.dataNascimento}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+							
+							<h:outputLabel value="data batismo "/>
+						<h:outputText value="#{meucartaoBean.m.dataBatismo}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+							
+						<h:outputLabel value="cargo"/>
+						<h:outputText value="#{meucartaoBean.m.cargo.descricao}" />
+						
+						<h:outputLabel value="congregação"/>
+						<h:outputText value="#{meucartaoBean.m.congregacao.descricao}" />
+						
+						<h:outputLabel value="expedido em "/>
+						<h:outputText value="#{meucartaoBean.data}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+							
+							
+							<h:outputLabel value="validade"/>
+						<h:outputText value="25/12/2020"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+							
+					</h:panelGrid>
+			
+			</p:panel>
+			</p:dialog>
+			
+			
+			
+ 
+			<p:button 
+				value="voltar"
+				style="background-color:#FAF0E6;color:#006400;font-size:12px;"
+				outcome="/secretaria/secretaria.xhtml">
+			</p:button>
+		</h:form>
+
+		
+	</ui:define>
+
+</ui:composition>
+ 
+
+

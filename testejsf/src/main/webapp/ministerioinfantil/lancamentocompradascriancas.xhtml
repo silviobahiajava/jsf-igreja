@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	
+		<h:form id="formListagem">
+		<p:panel header="Compras para  registrar no Livro Caixa do Ministério Infantil" style="background-color:red">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{lancamentocompracriancasBean.listaCompras}" var="item" rows="5">
+				
+
+				<p:column headerText="Data" sortBy="#{item}"
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{item.dataCompraCrianca}">
+						<h:outputText value="#{item.dataCompraCrianca}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Num.º Pedido" sortBy="#{item.numeroNota}"
+						width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{item.numeroNota}">
+					<h:outputText value="#{item.numeroNota}" style="color: #000080;font-size:12px;"/>
+				</p:column>
+				
+				<p:column headerText="Valor" sortBy="#{item.valorCompraCrianca}"
+				style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{item.valorCompraCrianca}">
+					<h:outputText value="#{item.valorCompraCrianca}" style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="descricao" sortBy="#{item.descricao}"
+				style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" style="color: #000080;font-size:12px;"/>
+				</p:column>
+				
+				
+				
+				<p:column headerText="Opções" style="background-color:#C0C0C0;color:red;font-size:12px;" >
+					<p:commandButton icon="ui-icon-plus"
+						style="background-color:#FAF0E6;color:#006400;"
+						value="registrar no caixa"
+						actionListener="#{lancamentocompracriancasBean.adicionarCompras}"
+						update=":mensagem :formlancamento:painelcompralancamento :formListagem:tabela ">
+						<f:attribute name="compraSelecionada" value="#{item}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+	<h:form id="formlancamento">
+ <p:panel header="Compras pra lançar no caixa" id="painelcompralancamento">
+			<p:dataTable id="tabelacompralancamento"
+				style="width:600px;margin-top:40px;margin-lefr:300px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{lancamentocompracriancasBean.listaComprasLancamento}" var="compra" rows="5"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Descrição" style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					width="50">
+					<h:outputText value="#{compra.descricao}"  style="color: #000080;font-size:12px;"/>
+				</p:column>
+
+				<p:column headerText="Valor" style="background-color:#C0C0C0;color:red;font-size:12px;"
+					width="30" > 
+					<h:outputText value="#{compra.valorCompraCrianca}" style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Data:" style="background-color:#C0C0C0;color:red;font-size:12px;"
+					width="30" >
+					<h:outputText value="#{compra.dataCompraCrianca}" style="color: #000080;font-size:12px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				
+
+<!-- 				<p:column headerText="Opções"> -->
+<!-- 					<p:commandButton icon="ui-icon-minus" -->
+<!-- 						actionListener="#{vendaBean.remover}" -->
+<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			</p:dataTable>
+			<p:panelGrid id="total" columns="2" rendered="false">
+				<h:outputLabel value="total" style="color: #000080;font-size:12px;"/>
+				<h:outputText value="#{lancamentocompradascriancasBean.compra.lancamento.despesa}" style="color: #000080;font-size:12px;">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			</p:panelGrid>
+			<h:panelGrid columns="2">	
+					<p:commandButton value="confirmar lançamento no livro caixa"
+					actionListener="#{lancamentocompracriancasBean.salvarLancamentoDeCompras}"
+					update=":mensagem " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					/>
+			</h:panelGrid>
+		
+		</p:panel>
+
+		</h:form>	
+	
+     
+	</ui:define>
+
+</ui:composition>
+
+

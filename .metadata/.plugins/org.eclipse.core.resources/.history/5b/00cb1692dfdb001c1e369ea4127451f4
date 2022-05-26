@@ -1,0 +1,113 @@
+package br.com.jsf_igreja.secretaria.model;
+
+import enums.CargoEnum;
+import enums.Congregacao;
+import enums.EstadoCivil;
+import enums.EstadosBrasileirosEnum;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+public class Membro {
+
+   private String nome;
+	private String nacionalidade;
+	private String natualidade;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="contato_codigo")
+	private Contato contato;///classe
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="filiacao_codigo")
+	private Filiacao filiacao;
+	
+	@Enumerated(EnumType.STRING)
+	private EstadoCivil estadoCivilEnum;//enum
+	
+	@Enumerated(EnumType.STRING)
+	private CargoEnum cargoEnum;//enum
+	
+	@Enumerated(EnumType.STRING)
+	private Congregacao congregacaoEnum;//enum
+	
+	@Enumerated(EnumType.STRING)
+	private EstadosBrasileirosEnum estadosBrasileirosEnum;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+	public String getNatualidade() {
+		return natualidade;
+	}
+
+	public void setNatualidade(String natualidade) {
+		this.natualidade = natualidade;
+	}
+
+	public Contato getContato() {
+		return contato;
+	}
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+	public Filiacao getFiliacao() {
+		return filiacao;
+	}
+
+	public void setFiliacao(Filiacao filiacao) {
+		this.filiacao = filiacao;
+	}
+
+	public EstadoCivil getEstadoCivilEnum() {
+		return estadoCivilEnum;
+	}
+
+	public void setEstadoCivilEnum(EstadoCivil estadoCivilEnum) {
+		this.estadoCivilEnum = estadoCivilEnum;
+	}
+
+	public CargoEnum getCargoEnum() {
+		return cargoEnum;
+	}
+
+	public void setCargoEnum(CargoEnum cargoEnum) {
+		this.cargoEnum = cargoEnum;
+	}
+
+	public Congregacao getCongregacaoEnum() {
+		return congregacaoEnum;
+	}
+
+	public void setCongregacaoEnum(Congregacao congregacaoEnum) {
+		this.congregacaoEnum = congregacaoEnum;
+	}
+
+	public EstadosBrasileirosEnum getEstadosBrasileirosEnum() {
+		return estadosBrasileirosEnum;
+	}
+
+	public void setEstadosBrasileirosEnum(EstadosBrasileirosEnum estadosBrasileirosEnum) {
+		this.estadosBrasileirosEnum = estadosBrasileirosEnum;
+	}
+	
+	
+	
+	
+}

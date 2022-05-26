@@ -1,0 +1,90 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the despesa database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Despesa.findAll", query="SELECT d FROM Despesa d")
+public class Despesa implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataLancamento;
+	private String descricaoDespesa;
+	private String tipoDeDespesa;
+	private BigDecimal valorDaDespesa;
+	private Grupo grupo;
+
+	public Despesa() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_lancamento")
+	public Date getDataLancamento() {
+		return this.dataLancamento;
+	}
+
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+
+	@Column(name="descricao_despesa")
+	public String getDescricaoDespesa() {
+		return this.descricaoDespesa;
+	}
+
+	public void setDescricaoDespesa(String descricaoDespesa) {
+		this.descricaoDespesa = descricaoDespesa;
+	}
+
+
+	@Column(name="tipo_de_despesa")
+	public String getTipoDeDespesa() {
+		return this.tipoDeDespesa;
+	}
+
+	public void setTipoDeDespesa(String tipoDeDespesa) {
+		this.tipoDeDespesa = tipoDeDespesa;
+	}
+
+
+	@Column(name="valor_da_despesa")
+	public BigDecimal getValorDaDespesa() {
+		return this.valorDaDespesa;
+	}
+
+	public void setValorDaDespesa(BigDecimal valorDaDespesa) {
+		this.valorDaDespesa = valorDaDespesa;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+}

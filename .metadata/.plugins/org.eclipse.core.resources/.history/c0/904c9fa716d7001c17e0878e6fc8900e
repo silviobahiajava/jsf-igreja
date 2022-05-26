@@ -1,0 +1,57 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the alunos_presente_escola_dominical database table.
+ * 
+ */
+@Entity
+@Table(name="alunos_presente_escola_dominical")
+@NamedQuery(name="AlunosPresenteEscolaDominical.findAll", query="SELECT a FROM AlunosPresenteEscolaDominical a")
+public class AlunosPresenteEscolaDominical implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private AulaEscolaDominical aulaEscolaDominical;
+	private Matriculado matriculado;
+
+	public AlunosPresenteEscolaDominical() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	//bi-directional many-to-one association to AulaEscolaDominical
+	@ManyToOne
+	@JoinColumn(name="aula_codigo")
+	public AulaEscolaDominical getAulaEscolaDominical() {
+		return this.aulaEscolaDominical;
+	}
+
+	public void setAulaEscolaDominical(AulaEscolaDominical aulaEscolaDominical) {
+		this.aulaEscolaDominical = aulaEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Matriculado
+	@ManyToOne
+	public Matriculado getMatriculado() {
+		return this.matriculado;
+	}
+
+	public void setMatriculado(Matriculado matriculado) {
+		this.matriculado = matriculado;
+	}
+
+}

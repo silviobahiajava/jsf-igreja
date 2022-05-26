@@ -1,0 +1,14 @@
+127.0.0.1 - - [22/May/2022:13:51:23 -0300] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [22/May/2022:14:34:53 -0300] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [22/May/2022:15:01:44 -0300] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [22/May/2022:15:21:58 -0300] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [22/May/2022:15:24:01 -0300] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [22/May/2022:15:24:01 -0300] "GET /favicon.ico HTTP/1.1" 404 762
+127.0.0.1 - - [22/May/2022:15:26:53 -0300] "GET /souzawebsistemas/igrejas/secretaria HTTP/1.1" 404 794
+127.0.0.1 - - [22/May/2022:15:26:53 -0300] "GET /favicon.ico HTTP/1.1" 404 762
+127.0.0.1 - - [22/May/2022:15:27:00 -0300] "GET /souzawebsistemas HTTP/1.1" 404 767
+127.0.0.1 - - [22/May/2022:15:27:00 -0300] "GET /favicon.ico HTTP/1.1" 404 762
+127.0.0.1 - - [22/May/2022:15:37:24 -0300] "GET /jsf-livraria/inicio.xhtml HTTP/1.1" 500 28716
+127.0.0.1 - - [22/May/2022:15:38:07 -0300] "GET /jsf-livraria/public/autenticacao.xhtml HTTP/1.1" 200 1746
+127.0.0.1 - - [22/May/2022:15:38:08 -0300] "GET /jsf-livraria/javax.faces.resource/theme.css.xhtml?ln=primefaces-blitzer HTTP/1.1" 200 18604
+127.0.0.1 - - [22/May/2022:15:39:31 -0300] "GET /jsf-livraria/public/principal.xhtml HTTP/1.1" 500 43604

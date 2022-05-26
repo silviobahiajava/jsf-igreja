@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	     <p:panel header="despesas da igreja">
+			<h:form id="formCadastro">
+			
+				
+				<h:panelGrid columns="2">
+					<h:outputLabel value="codigo:" 
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold" />
+					<h:outputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{tipodespesaigrejaBean.tipoDespesaIgreja.codigo}" />
+						
+					<h:outputLabel value="descrção:" 
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="50" size="50"
+						id="descricao"
+						style="color:green;font-size:12px;"
+						value="#{tipodespesaigrejaBean.tipoDespesaIgreja.descricao}" />
+			</h:panelGrid>
+			 <p:commandButton value="cadastrar novo tipo de despesa"
+						actionListener="#{tipodespesaigrejaBean.cadastrar}"
+						update=":mensagem  :formCadastro" 
+						style="background-color:#FAF0E6;color:#006400;"/>
+			
+						<p:button value="voltar"
+							outcome="/igreja/listagemdedespesasdaigreja.xhtml">
+						</p:button>
+			</h:form>
+			</p:panel>
+		
+		
+
+	</ui:define>
+
+</ui:composition>
+
+
+

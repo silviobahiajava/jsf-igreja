@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+		<p:panel header="Ofertas para  registrar no Livro Caixa">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{lancamentoOfertaBean.listaOfertas}" var="item" rows="5">
+				
+
+				<p:column headerText="Data " 
+					width="30">
+					<h:outputText value="#{item.dataOferta}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+					
+					
+				<p:column headerText="Valor" 
+					width="30"
+					>
+					<h:outputText value="#{item.valorOferta}" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				<p:column headerText="Opções"
+					width="60">
+					<p:commandButton icon="ui-icon-plus"
+						actionListener="#{lancamentoOfertaBean.adicionarOfertas}"
+						update=":mensagem :formlancamento:painelofertalancamento :formListagem:tabela ">
+						<f:attribute name="ofertaSelecionada" value="#{item}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+	<h:form id="formlancamento">
+ <p:panel header="Lançar no livro caixA" id="painelofertalancamento">
+			<p:dataTable id="tabelaofertalancamento"
+				style="width:600px;margin-top:40px;margin-left:1px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{lancamentoOfertaBean.listaOfertasLancamento}" var="oferta" rows="5"
+				paginatorPosition="bottom">
+				
+				<p:column headerText="Data "
+				 width="30">
+					<h:outputText value="#{oferta.dataOferta}" />
+				</p:column>
+				
+				
+
+				<p:column headerText="Valor"
+					width="30">
+					<h:outputText value="#{oferta.valorOferta}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				
+
+				
+
+<!-- 				<p:column headerText="Opções"> -->
+<!-- 					<p:commandButton icon="ui-icon-minus" -->
+<!-- 						actionListener="#{vendaBean.remover}" -->
+<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			</p:dataTable>
+			<p:panelGrid id="total" columns="2">
+				<h:outputLabel value="total" />
+				<h:outputText value="#{lancamentoOfertaBean.lancamento.receita}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			
+			
+			</p:panelGrid>
+			<h:panelGrid>	
+					<p:commandButton value="Salvar"
+					actionListener="#{lancamentoOfertaBean.salvarLancamentoDeOfertas}"
+					update=":mensagem " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		
+		</p:panel>
+
+		</h:form>	
+	
+     
+	</ui:define>
+
+</ui:composition>
+
+

@@ -1,0 +1,9 @@
+package br.com.jsf_igreja.secretaria.model;
+import jakarta.persistence.*;
+import utils.GenericDomain;
+public class Filiacao extends GenericDomain{
+
+	private static final long serialVersionUID = 1L;
+	private String nomePai;
+	private String nomeMae;
+}

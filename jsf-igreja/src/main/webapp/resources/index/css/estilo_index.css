@@ -1,0 +1,17 @@
+@CHARSET "utf-8"";
+
+	body{
+            background-image: url(fotoigreja1.jpg);
+            margin:auto;
+	}
+	.topo{
+	height: 30px;
+	background-color:#000000;
+}
+.topoint{
+	width: 100%;
+	max-width: 1040px;
+	height: 30px;
+	background-color: green;
+	margin: auto;
+}

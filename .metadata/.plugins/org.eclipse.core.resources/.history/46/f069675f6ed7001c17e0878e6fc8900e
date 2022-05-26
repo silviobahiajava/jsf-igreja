@@ -1,0 +1,329 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the boleto_pagamento_clientes database table.
+ * 
+ */
+@Entity
+@Table(name="boleto_pagamento_clientes")
+@NamedQuery(name="BoletoPagamentoCliente.findAll", query="SELECT b FROM BoletoPagamentoCliente b")
+public class BoletoPagamentoCliente implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigDecimal acrescimo;
+	private String bairroSacado;
+	private String cepSacado;
+	private String cidadeSacado;
+	private Date dataDocumento;
+	private Date dataGeracaoBoleto;
+	private Date dataVencimento;
+	private BigDecimal deducao;
+	private BigDecimal desconto;
+	private String digitoNossoNumero;
+	private String documentoCedente;
+	private String documentoSacado;
+	private String enderecoSacado;
+	private String estadoSacado;
+	private String localPreferidoPagamento;
+	private String localidadeSacado;
+	private BigDecimal mora;
+	private String nomeCedente;
+	private String nomeSacado;
+	private String nossoNumero;
+	private String numeroDocumento;
+	private String numeroLocalidade;
+	private String numeroSacado;
+	private byte pessoaFisica;
+	private byte pessoaJuridica;
+	private BigDecimal valorBoleto;
+	private BigDecimal valorcobrado;
+
+	public BoletoPagamentoCliente() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public BigDecimal getAcrescimo() {
+		return this.acrescimo;
+	}
+
+	public void setAcrescimo(BigDecimal acrescimo) {
+		this.acrescimo = acrescimo;
+	}
+
+
+	@Column(name="bairro_sacado")
+	public String getBairroSacado() {
+		return this.bairroSacado;
+	}
+
+	public void setBairroSacado(String bairroSacado) {
+		this.bairroSacado = bairroSacado;
+	}
+
+
+	@Column(name="cep_sacado")
+	public String getCepSacado() {
+		return this.cepSacado;
+	}
+
+	public void setCepSacado(String cepSacado) {
+		this.cepSacado = cepSacado;
+	}
+
+
+	@Column(name="cidade_sacado")
+	public String getCidadeSacado() {
+		return this.cidadeSacado;
+	}
+
+	public void setCidadeSacado(String cidadeSacado) {
+		this.cidadeSacado = cidadeSacado;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_documento")
+	public Date getDataDocumento() {
+		return this.dataDocumento;
+	}
+
+	public void setDataDocumento(Date dataDocumento) {
+		this.dataDocumento = dataDocumento;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_geracao_boleto")
+	public Date getDataGeracaoBoleto() {
+		return this.dataGeracaoBoleto;
+	}
+
+	public void setDataGeracaoBoleto(Date dataGeracaoBoleto) {
+		this.dataGeracaoBoleto = dataGeracaoBoleto;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_vencimento")
+	public Date getDataVencimento() {
+		return this.dataVencimento;
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+
+	public BigDecimal getDeducao() {
+		return this.deducao;
+	}
+
+	public void setDeducao(BigDecimal deducao) {
+		this.deducao = deducao;
+	}
+
+
+	public BigDecimal getDesconto() {
+		return this.desconto;
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+		this.desconto = desconto;
+	}
+
+
+	@Column(name="digito_nosso_numero")
+	public String getDigitoNossoNumero() {
+		return this.digitoNossoNumero;
+	}
+
+	public void setDigitoNossoNumero(String digitoNossoNumero) {
+		this.digitoNossoNumero = digitoNossoNumero;
+	}
+
+
+	@Column(name="documento_cedente")
+	public String getDocumentoCedente() {
+		return this.documentoCedente;
+	}
+
+	public void setDocumentoCedente(String documentoCedente) {
+		this.documentoCedente = documentoCedente;
+	}
+
+
+	@Column(name="documento_sacado")
+	public String getDocumentoSacado() {
+		return this.documentoSacado;
+	}
+
+	public void setDocumentoSacado(String documentoSacado) {
+		this.documentoSacado = documentoSacado;
+	}
+
+
+	@Column(name="endereco_sacado")
+	public String getEnderecoSacado() {
+		return this.enderecoSacado;
+	}
+
+	public void setEnderecoSacado(String enderecoSacado) {
+		this.enderecoSacado = enderecoSacado;
+	}
+
+
+	@Column(name="estado_sacado")
+	public String getEstadoSacado() {
+		return this.estadoSacado;
+	}
+
+	public void setEstadoSacado(String estadoSacado) {
+		this.estadoSacado = estadoSacado;
+	}
+
+
+	@Column(name="local_preferido_pagamento")
+	public String getLocalPreferidoPagamento() {
+		return this.localPreferidoPagamento;
+	}
+
+	public void setLocalPreferidoPagamento(String localPreferidoPagamento) {
+		this.localPreferidoPagamento = localPreferidoPagamento;
+	}
+
+
+	@Column(name="localidade_sacado")
+	public String getLocalidadeSacado() {
+		return this.localidadeSacado;
+	}
+
+	public void setLocalidadeSacado(String localidadeSacado) {
+		this.localidadeSacado = localidadeSacado;
+	}
+
+
+	public BigDecimal getMora() {
+		return this.mora;
+	}
+
+	public void setMora(BigDecimal mora) {
+		this.mora = mora;
+	}
+
+
+	@Column(name="nome_cedente")
+	public String getNomeCedente() {
+		return this.nomeCedente;
+	}
+
+	public void setNomeCedente(String nomeCedente) {
+		this.nomeCedente = nomeCedente;
+	}
+
+
+	@Column(name="nome_sacado")
+	public String getNomeSacado() {
+		return this.nomeSacado;
+	}
+
+	public void setNomeSacado(String nomeSacado) {
+		this.nomeSacado = nomeSacado;
+	}
+
+
+	@Column(name="nosso_numero")
+	public String getNossoNumero() {
+		return this.nossoNumero;
+	}
+
+	public void setNossoNumero(String nossoNumero) {
+		this.nossoNumero = nossoNumero;
+	}
+
+
+	@Column(name="numero_documento")
+	public String getNumeroDocumento() {
+		return this.numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
+	}
+
+
+	@Column(name="numero_localidade")
+	public String getNumeroLocalidade() {
+		return this.numeroLocalidade;
+	}
+
+	public void setNumeroLocalidade(String numeroLocalidade) {
+		this.numeroLocalidade = numeroLocalidade;
+	}
+
+
+	@Column(name="numero_sacado")
+	public String getNumeroSacado() {
+		return this.numeroSacado;
+	}
+
+	public void setNumeroSacado(String numeroSacado) {
+		this.numeroSacado = numeroSacado;
+	}
+
+
+	@Column(name="pessoa_fisica")
+	public byte getPessoaFisica() {
+		return this.pessoaFisica;
+	}
+
+	public void setPessoaFisica(byte pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
+	}
+
+
+	@Column(name="pessoa_juridica")
+	public byte getPessoaJuridica() {
+		return this.pessoaJuridica;
+	}
+
+	public void setPessoaJuridica(byte pessoaJuridica) {
+		this.pessoaJuridica = pessoaJuridica;
+	}
+
+
+	@Column(name="valor_boleto")
+	public BigDecimal getValorBoleto() {
+		return this.valorBoleto;
+	}
+
+	public void setValorBoleto(BigDecimal valorBoleto) {
+		this.valorBoleto = valorBoleto;
+	}
+
+
+	public BigDecimal getValorcobrado() {
+		return this.valorcobrado;
+	}
+
+	public void setValorcobrado(BigDecimal valorcobrado) {
+		this.valorcobrado = valorcobrado;
+	}
+
+}

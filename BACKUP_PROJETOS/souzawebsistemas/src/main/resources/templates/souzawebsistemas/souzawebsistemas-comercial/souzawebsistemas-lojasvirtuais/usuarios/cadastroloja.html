@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+   <title>Souza Web Sistemas</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="/image/favicon.png" />
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+<style type="text/css">
+
+ body{
+ 	 background: url('/image/FOTOS/FUNDO3.jpg')no-repeat;
+ 	 background-size:cover;
+ }
+ .lblcadastro{
+ color:white;
+ }
+</style>
+	
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Cadastre sua loja e comece a usar nosso sistema de lojas virtuais e aumente as vendas</h1>
+    
+    <div class="container">
+		   <div class="row">
+				<div class="col-xs-12 col-md-12 col-lg-12">
+					<h3>Cadastro de Membros</h3>
+				</div>
+			</div>
+		<form action="/estabelecimentos/cadastrar" 
+			th:object="${estabelecimento}" 
+			enctype="multipart/form-data"
+			method="POST">
+		<div class="row">
+				<div class="col-xs-12 col-md-3 col-lg-3   lblcadastro"  >
+					<label for="nomeFantasia">nome fantasia
+					</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9 " >
+					 <input type="text" name="nomeFantasia"
+						th:field="*{nomeFantasia}"  class="form-control"
+						id="nomeFantasia" aria-describedby="nomeFantasia" />
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3 lblcadastro"  >
+					<label for="razaoSocial">razão social</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9" >
+					 <input type="text" name="razaoSocial"
+						th:field="*{razaoSocial}"  class="form-control"
+						id="razaoSocial" aria-describedby="razaoSocial" />
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3  lblcadastro"  >
+					<label for="endereco">endereco</label>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9" >
+					 <input type="text" name="endereco"
+						th:field="*{endereco}"  class="form-control"
+						id="endereco" aria-describedby="endereco" />
+				</div>
+				
+				
+				
+				
+		</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-3 col-lg-3  lblcadastro"  >
+					<label for="email">email</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="email"
+						th:field="*{email}" class="form-control" id="email"
+						aria-describedby="email" />
+				</div>
+			<div class="col-xs-12 col-md-3 col-lg-3  lblcadastro"  >
+					<label for="senha">senha</label>
+				</div>
+				
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="text" name="senha"
+						th:field="*{senha}" class="form-control" id="email"
+						aria-describedby="senha" />
+				</div>
+				
+			</div>	
+			<div class="row">
+			 <div class="col-xs-12 col-md-3 col-lg-3"  >
+					<label for="logo">logo</label>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3"  >
+					<input type="file"
+						name="file" 
+						class="form-control" id="file"
+						aria-describedby="file" />
+				</div>
+			
+			
+			</div>
+			
+			
+				
+				
+				
+				
+          
+				
+				
+				<div class="row">
+				<div class="col-xs-12 col-md-3 col-lg-3" >
+					<button type="submit" class="btn btn-primary">cadastrar</button>
+				</div>
+				<div class="col-xs-12 col-md-3 col-lg-3" >
+					<a href="http://localhost:8080/estabelecimentos/listarestabelecimentos">testes</a>
+				</div>
+				</div>
+				
+			</form>
+		
+	</div>
+ 
+
+
+
+  <!-- Jumbotron -->
+
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

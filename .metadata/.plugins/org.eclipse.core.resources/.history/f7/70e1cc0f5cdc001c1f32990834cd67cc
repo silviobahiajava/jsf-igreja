@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	<f:metadata>
+		<f:viewAction action="#{membroinativoBean.listar}"/>
+	</f:metadata>
+	 <h3 style="color:#4169E1">DESLIGADOS DO ROL DE MEMBROS</h3>
+	
+		<h:form id="formListagem">
+			<p:panel header="Listagem de Membros que estão em disciplina ou fora de comunhão">
+				<h:panelGrid columns="3">
+
+					<h:outputLabel value="pesquisar membros inativos por motivo:" for="motivo"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:selectOneMenu id="motivo" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						value="#{membroinativoBean.membro.motivoExclusaoDeMembrosEnum}" 
+						>
+						<f:selectItem  itemLabel="INFORME O MOTIVO DA SAÍDA" />
+						<f:selectItem itemValue="SAUDOSALEMBRANCA" itemLabel="SAUDOSA LEMBRANÇA" />
+						<f:selectItem itemValue="MUDANCADEIGREJA" itemLabel="MUDANÇA DE IGREJA" />
+						<f:selectItem itemValue="MUDANCADECIDADE" itemLabel="MUDANÇA DE CIDADE" />
+						<f:selectItem itemValue="DISCIPLINA" itemLabel="DISCIPLINA" />
+						<f:selectItem itemValue="DESVIADO" itemLabel="DESVIADO" />
+						<f:selectItem itemValue="OUTROSMOTIVOS" itemLabel="OUTROS MOTIVOS" />
+						
+						</h:selectOneMenu>
+					<p:commandButton icon="ui-icon-search"
+						actionListener="#{membroinativoBean.buscarMembroInativoPorJustificativaDeExclusao}"
+						update=":formListagem:tabela" />
+				</h:panelGrid>
+				
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{membroinativoBean.membros}" var="membro"
+					rows="5">
+					<f:facet name="header">
+					<h:outputLabel value="não fazem mais parte do rol de membros desta igreja" />
+					</f:facet>
+					
+					
+					
+					<p:column headerText="Nome" sortBy="#{membro.nome}"
+						width="40"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{membro.nome}">
+						<h:outputText value="#{membro.nome}"
+							style="color:red;font-size:9px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Cargo" 
+						width="20"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						>
+						<h:outputText value="#{membro.cargo.descricao}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="congregacao" width="30"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						>
+						<h:outputText value="#{membro.congregacao.descricao}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					
+					<p:column headerText="motivo da saída" width="30"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{membro.motivoExclusaoDeMembrosEnum.descricao}"
+						>
+						<h:outputText value="#{membro.motivoExclusaoDeMembrosEnum.descricao}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					
+					
+					
+
+					<p:column headerText="Opções" width="30"
+					style="color:red;font-size:9px;font-style:italic;font-weight:bold" >
+						
+
+						
+							<p:button value="editar"
+								style="font-size:12px;color:white;"
+							outcome="/secretaria/edicaodemembros.xhtml">
+							<f:param name="codigo" value="#{membro.codigo}"/>
+							</p:button>
+							
+							
+							<p:commandButton value="excluir"
+							 style="font-size:12px;color:white;"
+							actionListener="#{membroinativoBean.excluirMembroInativo}"
+							update=":mensagem :formListagem:tabela"
+							>
+							<f:attribute name="membroInativoSelecionado" value="#{membro}" />
+							</p:commandButton>
+							
+						
+					</p:column>
+				</p:dataTable>
+
+				
+			</p:panel>
+			
+			<p:button 
+				value="voltar"
+				style="background-color:#FAF0E6;color:#006400;font-size:12px;"
+				outcome="/secretaria/secretaria.xhtml">
+			</p:button>
+		</h:form>
+		
+
+		
+		
+	</ui:define>
+
+</ui:composition>
+
+
+

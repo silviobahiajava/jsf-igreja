@@ -1,0 +1,10 @@
+package br.com.jsf_igreja.secretaria.model;
+
+import jakarta.persistence.*;
+import utils.GenericDomain;
+@Entity
+@Table(name="documentacao")
+public class Documentacao extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+
+}

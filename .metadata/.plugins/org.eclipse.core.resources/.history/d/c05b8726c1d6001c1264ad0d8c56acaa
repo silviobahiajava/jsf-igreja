@@ -1,0 +1,79 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+
+/**
+ * The persistent class for the entrada_item database table.
+ * 
+ */
+@Entity
+@Table(name="entrada_item")
+@NamedQuery(name="EntradaItem.findAll", query="SELECT e FROM EntradaItem e")
+public class EntradaItem implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private int quantidade;
+	private BigDecimal valorProduto;
+	private EntradaProduto entradaProduto;
+	private Produto produto;
+
+	public EntradaItem() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public int getQuantidade() {
+		return this.quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+	@Column(name="valor_produto")
+	public BigDecimal getValorProduto() {
+		return this.valorProduto;
+	}
+
+	public void setValorProduto(BigDecimal valorProduto) {
+		this.valorProduto = valorProduto;
+	}
+
+
+	//bi-directional many-to-one association to EntradaProduto
+	@ManyToOne
+	@JoinColumn(name="entrada_codigo")
+	public EntradaProduto getEntradaProduto() {
+		return this.entradaProduto;
+	}
+
+	public void setEntradaProduto(EntradaProduto entradaProduto) {
+		this.entradaProduto = entradaProduto;
+	}
+
+
+	//bi-directional many-to-one association to Produto
+	@ManyToOne
+	public Produto getProduto() {
+		return this.produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+}

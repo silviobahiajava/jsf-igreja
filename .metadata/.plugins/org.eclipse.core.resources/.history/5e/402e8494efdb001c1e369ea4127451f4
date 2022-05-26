@@ -1,0 +1,11 @@
+package testes;
+
+import testes.teste_igreja.GeradorDeTabelas;
+
+public class UsaTestes {
+
+	public static void main(String[] args) {
+		GeradorDeTabelas.gerarTabelas();
+	}
+
+}

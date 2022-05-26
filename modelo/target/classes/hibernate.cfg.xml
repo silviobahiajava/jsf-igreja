@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- Version 8 MySQL hiberante-cfg.xml example for Hibernate 5 -->
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <!-- property name="connection.driver_class">com.mysql.jdbc.Driver</property -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/igreja?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;useSSL=false</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123456</property>
+    <property name="connection.pool_size">3</property>
+    <!--property name="dialect">org.hibernate.dialect.MySQLDialect</property-->
+    <property name="current_session_context_class">thread</property>
+    <property name="show_sql">true</property>
+    <property name="format_sql">true</property>
+    <property name="hbm2ddl.auto">update</property>
+
+
+
+		<mapping class="entidades.AulaEscolaDominical"/>
+			 <mapping class="entidades.AlunosAusentesDaEscolaDominical"/>
+			  <mapping class="entidades.AlunosMatriculadosEscolaDominical"/>
+            <mapping class="entidades.AlunosPresentesNaEscolaDominical"/>
+            <mapping class="entidades.ClasseEscolaDominical"/>
+           <mapping class="entidades.Contato"/>
+
+            <mapping class="entidades.DespesaCrianca"/>
+             <mapping class="entidades.Filiacao"/>
+              <mapping class="entidades.Membro"/>
+                 <mapping class="entidades.Compra"/>
+
+                <mapping class="entidades.Loja"/>
+            <mapping class="entidades.EstabelecimentoDeCompra"/>
+
+              <mapping class="entidades.Produto"/>
+              <mapping class="entidades.CategoriaDeMovimentacao"/>
+              <mapping class="entidades.MovimentacaoFinanceira"/>
+
+
+
+              <mapping class="entidades.BalancoGeral"/>
+              <mapping class="entidades.BalancoFinanceiro"/>
+              <mapping class="entidades.Lancamento"/>
+               <mapping class="entidades.Grupo"/>
+              <mapping class="entidades.Dizimo"/>
+              <mapping class="entidades.Endereco"/>
+              <mapping class="entidades.Usuario"/>
+              <mapping class="entidades.FuncaoUsuario"/>
+               <mapping class="entidades.DataLancamento"/>
+               <mapping class="entidades.Oferta"/>
+
+                <mapping class="entidades.CriancaMatriculadaNaEscolinha"/>
+               <mapping class="entidades.CriancaMatriculadaNaEscolinhaPresente"/>
+              <mapping class="entidades.AulaEscolinhaCrianca"/>
+               <mapping class="entidades.CriancaMatriculadaNaEscolinhaAusente"/>
+               <mapping class="entidades.Crianca"/>
+
+               <mapping class="entidades.Receita"/>
+               <mapping class="entidades.Despesa"/>
+
+                <mapping class="entidades.Campanha"/>
+                <mapping class="entidades.CampanhaDaIgreja"/>
+               <!-- <mapping class="entidades.ContribuinteDaIgreja"/>-->
+                 <mapping class="entidades.ContribuicaoDaIgreja"/>
+                 <mapping class="entidades.Contribuicao"/>
+                 <mapping class="entidades.Vendas"/>
+                 <mapping class="entidades.CampanhaDasCriancas"/>
+                 <mapping class="entidades.ContribuicaoDasCriancas"/>
+
+                 <mapping class="entidades.Curriculo"/>
+                 <mapping class="entidades.EmpresaCurriculo"/>
+                  <mapping class="entidades.FotoMembro"/>
+                   <mapping class="entidades.Cargo"/>
+
+
+                   <mapping class="entidades.ContasParaPagar"/>
+                   <mapping class="entidades.ContasPagas"/>
+                   <mapping class="entidades.Pagamento"/>
+                   <mapping class="entidades.ContaAPagar"/>
+                   <mapping class="entidades.LancamentoLivroCaixa"/>
+                   <mapping class="entidades.CompraIgreja"/>
+                   <mapping class="entidades.CompraDosVaroes"/>
+                    <mapping class="entidades.CompraDasCriancas"/>
+                    <mapping class="entidades.CompraDaMissao"/>
+                   <mapping class="entidades.BoletoDePagamentoDeClientes"/>
+                   <mapping class="entidades.ContaBancaria"/>
+                    <mapping class="entidades.Aniversario"/>
+
+                   <mapping class="entidades.OfertaDasCriancas"/>
+                    <mapping class="entidades.OfertaDaIgreja"/>
+                    <mapping class="entidades.OfertaDosVaroes"/>
+                    <mapping class="entidades.OfertaEscolaDominical"/>
+                     <mapping class="entidades.DizimoDaIgreja"/>
+                     <mapping class="entidades.CampanhaDoPeCriancas"/>
+                     <mapping class="entidades.TipoDespesaIgreja"/>
+                    <mapping class="entidades.DespesaDaIgreja"/>
+                    <mapping class="entidades.DespesasPagasDaIgreja"/>
+                    <mapping class="entidades.DespesasPendentesDaIgreja"/>
+                     <mapping class="entidades.DizimoLancado"/>
+
+
+                     <mapping class="entidades.Cliente"/>
+                     <mapping class="entidades.PagamentoCliente"/>
+                     <mapping class="entidades.Parcela"/>
+                     <mapping class="entidades.ParcelaCliente"/>
+                     <mapping class="entidades.PedidoRevista"/>
+                     <mapping class="entidades.CompraEscolaDominical"/>
+                     <mapping class="entidades.MembroInativo"/>
+
+                      <mapping class="entidades.CurriculoProfissional"/>
+                     <mapping class="entidades.CursoProfissional"/>
+                     <mapping class="entidades.ExperienciaProfissional"/>
+
+
+                       <mapping class="entidades.MateriaPrima"/>
+                     <mapping class="entidades.ItemCompraMateriaPrima"/>
+                     <mapping class="entidades.EstoqueMateriaPrima"/>
+                     <mapping class="entidades.CompraMateriaPrima"/>
+                     <mapping class="entidades.ProdutoFabricado"/>
+
+
+
+	</session-factory>
+
+</hibernate-configuration>

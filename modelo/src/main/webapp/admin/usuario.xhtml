@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/templates/modelo.xhtml">
+	<ui:define name="conteudo">
+	<div style="background-color:#778899;height:900px;position: relative" class="ui-fluid">
+	
+		<div class="ui-fluid"
+				style="background-color: blue; width: 360px; height: 120px; margin-left: 80px; position: relative; margin-top: 20px;">
+				<p:outputLabel
+					value="Assembléia de Deus Missão e Fé"
+					style="color: #8B0000; position: relative; left: 10px; top: 90px; font-style: italic; font-weight: bold">
+					
+				</p:outputLabel>
+				
+
+
+				<p:graphicImage library="fotos" name="logoigreja5.jpg"
+					style="position:absolute;top:5px;left:10px;" />
+			</div> 
+	 
+	 
+	<div class="ui-fluid">
+		<h:form id="formListagem">
+			<p:panel header="Listagem de usuarios do sistema">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{usuarioBean.usuarios}" var="user"
+					rows="5">
+					<f:facet name="header">
+						<p:commandButton value="cadastrar novo usuário do sistema"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{usuarioBean.novo}"
+							 update=":formCadastro:painel"
+							style="color:#992244;" />
+					</f:facet>
+					<p:column headerText="login" sortBy="#{user.login}"
+						style="color:green;font-size:20px" width="150" height="100"
+						filterBy="#{user.login}">
+						<h:outputText value="#{user.login}"
+							style="color:red;font-size:14px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="Função" 
+						style="color:green;font-size:20px;" width="100">
+						<h:outputText value="#{user.funcaoUsuario.descricao}"
+							style="color:red;font-size:14px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Opções" width="50">
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{usuarioBean.excluir}"
+							update=":mensagem :formListagem:tabela">
+							<p:confirm header="Confirmação"
+								message="Deseja mesmo excluir este usuário?" icon="ui-icon-alert" />
+							<f:attribute name="usuarioSelecionado" value="#{user}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{usuarioBean.editar}"
+							update=":formCadastro:painel" 
+							oncomplete="PF('dialogo').show();">
+							<f:attribute name="usuarioSelecionado" value="#{user}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+       </div>
+       <div class="ui-fluid">
+		<p:dialog
+		  	
+			 header="Cadastro de Usuarios do Sistema" widgetVar="dialogo"
+			hideEffect="puff" showEffect="puff" style="background-color:#C0C0C0"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formCadastro">
+				<h:panelGrid id="painel" columns="2" style="background-color:#C0C0C0;">
+					<p:outputLabel value="codigo:" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder" />
+					<h:outputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{usuarioBean.usuario.codigo}" />
+						
+					<p:outputLabel value="Funcao :" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder" />
+					<p:inputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{usuarioBean.funcao.descricao}" />
+						
+						<p:outputLabel value="Login" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+						<p:inputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{usuarioBean.usuario.login}" />
+					 
+					    <p:outputLabel value="cpf" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+						<p:inputMask mask="999.999.999-99" maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{usuarioBean.usuario.cpf}" />
+					
+					   
+					
+					<p:outputLabel value="Senha" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+						<p:password maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{usuarioBean.usuario.senha}" />
+					
+				
+				</h:panelGrid>
+				
+				                <h:panelGrid columns="2">
+                	 <p:commandButton value="Salvar"
+						actionListener="#{usuarioBean.salvar}"
+						update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+                </h:panelGrid>
+			</h:form>
+		</p:dialog>
+		</div>
+</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>
+

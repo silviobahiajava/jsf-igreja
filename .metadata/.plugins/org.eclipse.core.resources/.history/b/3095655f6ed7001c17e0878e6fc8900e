@@ -1,0 +1,169 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the campanha_do_pe_crianca database table.
+ * 
+ */
+@Entity
+@Table(name="campanha_do_pe_crianca")
+@NamedQuery(name="CampanhaDoPeCrianca.findAll", query="SELECT c FROM CampanhaDoPeCrianca c")
+public class CampanhaDoPeCrianca implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigInteger contribuinteCodigo;
+	private Date dataPagamento;
+	private String descricao;
+	private int numeroParcelasPagas;
+	private String objetivoCampanha;
+	private BigDecimal taxaContribuicao;
+	private BigInteger trocoParaOfertaCodigo;
+	private BigDecimal trocoPraDevolver;
+	private BigDecimal valorPraPagar;
+	private BigDecimal valorRecebido;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public CampanhaDoPeCrianca() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="contribuinte_codigo")
+	public BigInteger getContribuinteCodigo() {
+		return this.contribuinteCodigo;
+	}
+
+	public void setContribuinteCodigo(BigInteger contribuinteCodigo) {
+		this.contribuinteCodigo = contribuinteCodigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_pagamento")
+	public Date getDataPagamento() {
+		return this.dataPagamento;
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="numero_parcelas_pagas")
+	public int getNumeroParcelasPagas() {
+		return this.numeroParcelasPagas;
+	}
+
+	public void setNumeroParcelasPagas(int numeroParcelasPagas) {
+		this.numeroParcelasPagas = numeroParcelasPagas;
+	}
+
+
+	@Column(name="objetivo_campanha")
+	public String getObjetivoCampanha() {
+		return this.objetivoCampanha;
+	}
+
+	public void setObjetivoCampanha(String objetivoCampanha) {
+		this.objetivoCampanha = objetivoCampanha;
+	}
+
+
+	@Column(name="taxa_contribuicao")
+	public BigDecimal getTaxaContribuicao() {
+		return this.taxaContribuicao;
+	}
+
+	public void setTaxaContribuicao(BigDecimal taxaContribuicao) {
+		this.taxaContribuicao = taxaContribuicao;
+	}
+
+
+	@Column(name="troco_para_oferta_codigo")
+	public BigInteger getTrocoParaOfertaCodigo() {
+		return this.trocoParaOfertaCodigo;
+	}
+
+	public void setTrocoParaOfertaCodigo(BigInteger trocoParaOfertaCodigo) {
+		this.trocoParaOfertaCodigo = trocoParaOfertaCodigo;
+	}
+
+
+	@Column(name="troco_pra_devolver")
+	public BigDecimal getTrocoPraDevolver() {
+		return this.trocoPraDevolver;
+	}
+
+	public void setTrocoPraDevolver(BigDecimal trocoPraDevolver) {
+		this.trocoPraDevolver = trocoPraDevolver;
+	}
+
+
+	@Column(name="valor_pra_pagar")
+	public BigDecimal getValorPraPagar() {
+		return this.valorPraPagar;
+	}
+
+	public void setValorPraPagar(BigDecimal valorPraPagar) {
+		this.valorPraPagar = valorPraPagar;
+	}
+
+
+	@Column(name="valor_recebido")
+	public BigDecimal getValorRecebido() {
+		return this.valorRecebido;
+	}
+
+	public void setValorRecebido(BigDecimal valorRecebido) {
+		this.valorRecebido = valorRecebido;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

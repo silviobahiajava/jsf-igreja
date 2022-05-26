@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+		<p:panel header="Compras para  registrar no Livro Caixa da Igreja" >
+		
+				
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:180px;margin-left:5px;"
+				paginator="true" value="#{lancamentocomprasdaigrejaBean.listaDeCompras}" 
+				var="item" rows="5">
+				<f:facet name="header">
+					<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data da compra" sortBy="#{item}"
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:10px;" 
+						filterBy="#{item.dataCompraIgreja}">
+						<h:outputText value="#{item.dataCompraIgreja}"
+							style="color: #000080;font-size:16px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Numero do pedido ou da nota" sortBy="#{item.numeroNota}"
+						width="30"
+					style="background-color:#C0C0C0;color:red;font-size:10px;" 
+					filterBy="#{item.numeroNota}">
+					<h:outputText value="#{item.numeroNota}" style="color: #000080;font-size:10px;"/>
+				</p:column>
+				
+				<p:column headerText="Valor da compra" sortBy="#{item.valorCompraIgreja}"
+					width="30"
+				style="background-color:#C0C0C0;color:red;font-size:10px;" 
+					filterBy="#{item.valorCompraIgreja}">
+					<h:outputText value="#{item.valorCompraIgreja}" style="color: #000080;font-size:10px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="descricao" sortBy="#{item.descricao}"
+					width="30"
+				style="background-color:#C0C0C0;color:red;font-size:10px;" 
+					filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" style="color: #000080;font-size:10px;"/>
+				</p:column>
+				
+				
+				<p:column headerText="Opções" 
+					width="30"
+				style="background-color:#C0C0C0;color:red;font-size:10px;"  >
+					<p:commandButton icon="ui-icon-plus"
+						style="background-color:#FAF0E6;color:#006400;"
+						value="registrar no caixa"
+						actionListener="#{lancamentocomprasdaigrejaBean.adicionarCompras}"
+						update=":mensagem :formlancamento:painelcompralancamento :formListagem:tabela ">
+						<f:attribute name="compraSelecionada" value="#{item}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+	<h:form id="formlancamento">
+ <p:panel header="Compras para lancar no livro caixa" id="painelcompralancamento">
+			<p:dataTable id="tabelacompralancamento"
+				style="width:600px;margin-top:40px;margin-lefr:300px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{lancamentocomprasdaigrejaBean.listaDeComprasPraLancamento}" var="compra" rows="5"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Descrição" style="background-color:#C0C0C0;color:red;font-size:14px;" >
+					<h:outputText value="#{compra.descricao}"  style="color: #000080;font-size:16px;"/>
+				</p:column>
+
+				<p:column headerText="Valor da Compra" style="background-color:#C0C0C0;color:red;font-size:14px;" > 
+					<h:outputText value="#{compra.valorCompraIgreja}" style="color: #000080;font-size:16px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Data da Compra" style="background-color:#C0C0C0;color:red;font-size:14px;" >
+					<h:outputText value="#{compra.valorCompraIgreja}" style="color: #000080;font-size:16px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				
+
+<!-- 				<p:column headerText="Opções"> -->
+<!-- 					<p:commandButton icon="ui-icon-minus" -->
+<!-- 						actionListener="#{vendaBean.remover}" -->
+<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			</p:dataTable>
+			<p:panelGrid id="total" columns="2">
+				<h:outputLabel value="total" style="color: #000080;font-size:16px;"/>
+				<h:outputText value="#{lancamentocomprasdaigrejaBean.lancamento.despesa}" style="color: #000080;font-size:16px;">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			</p:panelGrid>
+			<h:panelGrid columns="2">	
+					<p:commandButton value="confirmar lançamento no livro caixa"
+					style="background-color:#FAF0E6;color:#006400;"
+					actionListener="#{lancamentocomprasdaigrejaBean.salvarLancamentoDeCompras}"
+					update=":mensagem " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+		
+		</p:panel>
+
+		</h:form>	
+	
+    
+	</ui:define>
+
+</ui:composition>
+
+

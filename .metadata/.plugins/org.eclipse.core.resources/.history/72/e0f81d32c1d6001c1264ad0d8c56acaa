@@ -1,0 +1,80 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+
+/**
+ * The persistent class for the item_compra_materia_prima database table.
+ * 
+ */
+@Entity
+@Table(name="item_compra_materia_prima")
+@NamedQuery(name="ItemCompraMateriaPrima.findAll", query="SELECT i FROM ItemCompraMateriaPrima i")
+public class ItemCompraMateriaPrima implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigDecimal precoParcial;
+	private int quantidade;
+	private CompraMateriaPrima compraMateriaPrima;
+	private MateriaPrima materiaPrima;
+
+	public ItemCompraMateriaPrima() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="preco_parcial")
+	public BigDecimal getPrecoParcial() {
+		return this.precoParcial;
+	}
+
+	public void setPrecoParcial(BigDecimal precoParcial) {
+		this.precoParcial = precoParcial;
+	}
+
+
+	public int getQuantidade() {
+		return this.quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+	//bi-directional many-to-one association to CompraMateriaPrima
+	@ManyToOne
+	@JoinColumn(name="compra_materia_prima_codigo")
+	public CompraMateriaPrima getCompraMateriaPrima() {
+		return this.compraMateriaPrima;
+	}
+
+	public void setCompraMateriaPrima(CompraMateriaPrima compraMateriaPrima) {
+		this.compraMateriaPrima = compraMateriaPrima;
+	}
+
+
+	//bi-directional many-to-one association to MateriaPrima
+	@ManyToOne
+	@JoinColumn(name="materia_prima_codigo")
+	public MateriaPrima getMateriaPrima() {
+		return this.materiaPrima;
+	}
+
+	public void setMateriaPrima(MateriaPrima materiaPrima) {
+		this.materiaPrima = materiaPrima;
+	}
+
+}

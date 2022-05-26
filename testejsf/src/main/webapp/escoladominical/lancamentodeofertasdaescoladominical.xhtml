@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			 
+		<h:form id="formListagem">
+		<p:panel header="Ofertas para  registrar no Livro Caixa da Igreja" >
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{lancamentodeofertadaescoladominicalBean.listaDeOfertasEscolaDominical}" var="item" rows="5">
+				<f:facet name="header">
+					<p:button
+							value="voltar"
+							outcome="escoladominical"/>
+				</f:facet>
+				
+
+				<p:column headerText="Data de entrega da   oferta" sortBy="#{item.dataOfertaEescolaDominical}"
+						width="150"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{item.dataOfertaEescolaDominical}">
+						<h:outputText value="#{item.dataOfertaEescolaDominical}"
+							style="color: #000080;font-size:16px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					
+				<p:column headerText="Valor total da oferta" sortBy="#{item.valorOfertaEscolaDominical}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{item.valorOfertaEscolaDominical}">
+					<h:outputText value="#{item.valorOfertaEscolaDominical}" style="color: #000080;font-size:16px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				
+				<p:column headerText="Opções"
+				style="background-color:#C0C0C0;color:red;font-size:12px;">
+					<p:commandButton icon="ui-icon-plus"
+						style="background-color:#FAF0E6;color:#006400;"
+						value="registrar no caixa"
+						actionListener="#{lancamentodeofertadaescoladominicalBean.adicionarOferta}"
+						update=":mensagem :formlancamento:painelcompralancamento :formListagem:tabela :formlancamento:total">
+						<f:attribute name="ofertaSelecionada" value="#{item}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+	<h:form id="formlancamento">
+ <p:panel header="ofertas pra lançar no livro caixa da Escola Bíblica Dominical" id="painelcompralancamento">
+			<p:dataTable id="tabelacompralancamento"
+				style="width:600px;margin-top:40px;margin-lefr:300px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{lancamentodeofertadaescoladominicalBean.listaDeOfertasEscolaDomincialLancamento}" var="oferta" rows="5"
+				paginatorPosition="bottom">
+
+				
+
+				<p:column headerText="Valor da oferta" style="background-color:#C0C0C0;color:red;font-size:12px;" >
+					<h:outputText value="#{oferta.valorOfertaEscolaDominical}" style="color: #000080;font-size:16px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Data da Oferta" style="background-color:#C0C0C0;color:red;font-size:12px;" >
+					<h:outputText value="#{oferta.dataOfertaEescolaDominical}" style="color: #000080;font-size:16px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				
+
+<!-- 				<p:column headerText="Opções"> -->
+<!-- 					<p:commandButton icon="ui-icon-minus" -->
+<!-- 						actionListener="#{vendaBean.remover}" -->
+<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			</p:dataTable>
+			<p:panelGrid id="total" columns="2" rendered="false">
+				<h:outputLabel value="total" style="color: #000080;font-size:16px;" />
+				<h:outputText value="#{lancamentoofertadaigrejaBean.oferta.lancamento.receita}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			</p:panelGrid>
+			<h:panelGrid columns="2">	
+					<p:commandButton value="confirmar lançamento no livro caixa"
+					style="background-color:#FAF0E6;color:#006400;"
+					actionListener="#{lancamentodeofertadaescoladominicalBean.salvarLancamentoDeOfertaDaEscolaDominical}"
+					update=":mensagem " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+				style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+		
+		</p:panel>
+
+		</h:form>	
+	
+     
+	</ui:define>
+
+</ui:composition>
+
+

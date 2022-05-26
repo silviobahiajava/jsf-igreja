@@ -1,0 +1,195 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the compra database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Compra.findAll", query="SELECT c FROM Compra c")
+public class Compra implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataCompra;
+	private String descricao;
+	private String numeroPedido;
+	private String observacao;
+	private BigDecimal precodacompra;
+	private String tipoCompra;
+	private String tipoPagamento;
+	private ContaAPagar contaAPagar;
+	private ContasPaga contasPaga;
+	private DataLancamento dataLancamento;
+	private Grupo grupo;
+	private Lancamento lancamento;
+	private LancamentoLivrocaixa lancamentoLivrocaixa;
+	private Loja loja;
+
+	public Compra() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_compra")
+	public Date getDataCompra() {
+		return this.dataCompra;
+	}
+
+	public void setDataCompra(Date dataCompra) {
+		this.dataCompra = dataCompra;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="numero_pedido")
+	public String getNumeroPedido() {
+		return this.numeroPedido;
+	}
+
+	public void setNumeroPedido(String numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+
+
+	public String getObservacao() {
+		return this.observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+
+	public BigDecimal getPrecodacompra() {
+		return this.precodacompra;
+	}
+
+	public void setPrecodacompra(BigDecimal precodacompra) {
+		this.precodacompra = precodacompra;
+	}
+
+
+	@Column(name="tipo_compra")
+	public String getTipoCompra() {
+		return this.tipoCompra;
+	}
+
+	public void setTipoCompra(String tipoCompra) {
+		this.tipoCompra = tipoCompra;
+	}
+
+
+	@Column(name="tipo_pagamento")
+	public String getTipoPagamento() {
+		return this.tipoPagamento;
+	}
+
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+
+	//bi-directional many-to-one association to ContaAPagar
+	@ManyToOne
+	public ContaAPagar getContaAPagar() {
+		return this.contaAPagar;
+	}
+
+	public void setContaAPagar(ContaAPagar contaAPagar) {
+		this.contaAPagar = contaAPagar;
+	}
+
+
+	//bi-directional many-to-one association to ContasPaga
+	@ManyToOne
+	@JoinColumn(name="contas_pagas_codigo")
+	public ContasPaga getContasPaga() {
+		return this.contasPaga;
+	}
+
+	public void setContasPaga(ContasPaga contasPaga) {
+		this.contasPaga = contasPaga;
+	}
+
+
+	//bi-directional many-to-one association to DataLancamento
+	@ManyToOne
+	@JoinColumn(name="data_lancamento_compra_codigo")
+	public DataLancamento getDataLancamento() {
+		return this.dataLancamento;
+	}
+
+	public void setDataLancamento(DataLancamento dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+
+	//bi-directional many-to-one association to LancamentoLivrocaixa
+	@ManyToOne
+	@JoinColumn(name="lancamento_livro_caixa_codigo")
+	public LancamentoLivrocaixa getLancamentoLivrocaixa() {
+		return this.lancamentoLivrocaixa;
+	}
+
+	public void setLancamentoLivrocaixa(LancamentoLivrocaixa lancamentoLivrocaixa) {
+		this.lancamentoLivrocaixa = lancamentoLivrocaixa;
+	}
+
+
+	//bi-directional many-to-one association to Loja
+	@ManyToOne
+	public Loja getLoja() {
+		return this.loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
+
+}

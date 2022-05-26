@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/Users/souza/Desktop/modelos/JPA2.2/hibernate-core-6.0.1.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/hibernate/hibernate-entitymanager/5.6.9.Final/hibernate-entitymanager-5.6.9.Final.jar"/>
+  <path value="C:/Users/souza/Desktop/modelos/JPA2.2/javax.persistence-api-2.2.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/hibernate/hibernate-core/5.6.9.Final/hibernate-core-5.6.9.Final.jar"/>
+  <path value="C:/Users/souza/Desktop/modelos/JPA2.2/hibernate-entitymanager-5.6.9.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar"/>
+  <path value="C:/Users/souza/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.0/jakarta.inject-api-2.0.0.jar"/>
+  <path value="C:/Users/souza/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.1.Final/hibernate-commons-annotations-6.0.1.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/jboss/logging/jboss-logging/3.4.3.Final/jboss-logging-3.4.3.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/antlr/antlr4-runtime/4.10/antlr4-runtime-4.10.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/hibernate/orm/hibernate-core/6.0.1.Final/hibernate-core-6.0.1.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.1.1.Final/jboss-transaction-api_1.2_spec-1.1.1.Final.jar"/>
+  <path value="C:/Users/souza/.m2/repository/com/sun/faces/jsf-impl/2.2.17/jsf-impl-2.2.17.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/meta-inf/html_basic.tld" project="iadmif"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/meta-inf/jsf_core.tld" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/meta-inf/mojarra_ext.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/meta-inf/mojarra_ext.tld" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/composite.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/facelets_jsf_core.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/html_basic.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/jstl-core.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/jstl-fn.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/mojarra_ext.taglib.xml" project="iadmif"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-jsf-impl-2.2.17.jar/com/sun/faces/metadata/taglib/ui.taglib.xml" project="iadmif"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/Users/souza/.m2/repository/com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar"/>
+  <path value="C:/Users/souza/.m2/repository/net/bytebuddy/byte-buddy/1.12.9/byte-buddy-1.12.9.jar"/>
+  <path value="C:/Users/souza/.m2/repository/org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.jar"/>
+  <path value="C:/Users/souza/.m2/repository/com/sun/faces/jsf-api/2.2.17/jsf-api-2.2.17.jar"/>
+  <path value="C:/Users/souza/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar"/>
+  <path value="C:/Users/souza/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+  <path value="C:/Users/souza/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.0/jakarta.transaction-api-2.0.0.jar"/>
+  <path value="C:/Users/souza/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar"/>
+  <path value="C:/Users/souza/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar"/>
+ </paths>
+ <validation>
+  <el/>
+ </validation>
+ <aliases/>
+ <includes/>
+ <uris>
+  <uri value="http://java.sun.com/jsf/core">
+   <prefix>f</prefix>
+  </uri>
+  <uri value="http://java.sun.com/jsf/html">
+   <prefix>h</prefix>
+  </uri>
+ </uris>
+</kb-project>

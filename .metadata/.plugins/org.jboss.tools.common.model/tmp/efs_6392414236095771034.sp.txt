@@ -1,0 +1,368 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	
+<f:metadata>
+	<f:viewParam name="codigo" value="#{membroBean3.codigoMembro}" required="true"
+		requiredMessage="O campo código do membro é obrigatório" />
+	<f:viewAction action="#{membroBean3.carregarEdicao}" />
+</f:metadata>
+
+	<ui:define name="corpo">
+	<h3 style="color:#4169E1">ALTERAÇÃO DE CADASTRO DE MEMBROS</h3>
+	
+		
+		
+		
+	
+			<h:form id="formCadastro" enctype="multipart/form-data">
+				<p:tabView widgetVar="tab" id="tab">
+				<p:tab title="observações">
+					<h:outputLabel value="observações" />
+				</p:tab>
+				
+				<p:tab title="dados pessoais">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="codigo:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+					<h:outputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.codigo}" />
+						
+					<h:outputLabel value="Nome:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="100" size="80"
+						id="nome"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.nome}" />
+						
+						<h:outputLabel value="nome da mãe" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+						<p:inputText maxlength="100" size="80"
+						id="nomedamae"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.nomeMae}" />
+						
+						<h:outputLabel value="nome do pai" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+						<p:inputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						id="nomedopai"
+						value="#{membroBean3.membro.nomePai}" />
+						
+						<h:outputLabel value="Data de nascimento:" for="datanascimento"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:calendar id="datanascimento" 
+						mask="true"
+						pattern="dd/MM/yyyy"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.dataNascimento}">
+					</p:calendar>
+					<h:outputLabel value="Natural de  :" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					for="cidadenascimento"/>
+						<p:inputText id="cidadenascimento" style="color:blue"
+						value="#{membroBean3.membro.natualidade}">
+					</p:inputText>
+					
+					<h:outputLabel value="Estado:" for="estado"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:selectOneMenu id="estado" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						value="#{membroBean3.membro.estadosBrasileirosEnum}" 
+						>
+						<f:selectItem  itemLabel="SELECIONE O ESTADO" />
+						<f:selectItem itemValue="AC" itemLabel="ACRE" />
+						<f:selectItem itemValue="AM" itemLabel="AMAZONAS" />
+						<f:selectItem itemValue="PA" itemLabel="PARÁ" />
+						<f:selectItem itemValue="RO" itemLabel="RO" />
+						<f:selectItem itemValue="RR" itemLabel="RR" />
+						
+						<f:selectItem itemValue="AP" itemLabel="AP" />
+						<f:selectItem itemValue="BA" itemLabel="BA" />
+						<f:selectItem itemValue="RN" itemLabel="RN" />
+						<f:selectItem itemValue="RS" itemLabel="RS" />
+						<f:selectItem itemValue="PB" itemLabel="PB" />
+						
+						<f:selectItem itemValue="PI" itemLabel="PI" />
+						<f:selectItem itemValue="PR" itemLabel="PR" />
+						<f:selectItem itemValue="SC" itemLabel="SC" />
+						<f:selectItem itemValue="SP" itemLabel="SP" />
+						<f:selectItem itemValue="RJ" itemLabel="RJ" />
+						
+						<f:selectItem itemValue="MG" itemLabel="MG" />
+						<f:selectItem itemValue="ES" itemLabel="ES" />
+						<f:selectItem itemValue="AL" itemLabel="AL" />
+						<f:selectItem itemValue="PE" itemLabel="PE" />
+						<f:selectItem itemValue="CE" itemLabel="CE" />
+						
+						<f:selectItem itemValue="MT" itemLabel="MT" />
+						<f:selectItem itemValue="SE" itemLabel="SE" />
+
+					</h:selectOneMenu>
+               
+					
+						
+					<h:outputLabel value="Estado civil:" for="estadocivil"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+					<h:selectOneMenu id="estadocivil" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						value="#{membroBean3.membro.estadoCivil}" 
+						>
+						<f:selectItem  itemLabel="SELECIONE" />
+						<f:selectItem itemValue="CASADO" itemLabel="CASADO" />
+						<f:selectItem itemValue="DIVORCIADO" itemLabel="DIVORCIADO" />
+						<f:selectItem itemValue="SOLTEIRO" itemLabel="SOLTEIRO" />
+						<f:selectItem itemValue="VIUVO" itemLabel="VIUVO" />
+					</h:selectOneMenu>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="dados eclesiásticos">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Congregação:" for="igreja"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:selectOneMenu id="igreja" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						value="#{membroBean3.membro.congregacao}" 
+						>
+						<f:selectItem  itemLabel="SELECIONE" />
+						<f:selectItem itemValue="SEDE" itemLabel="SEDE" />
+						<f:selectItem itemValue="FRANCISQUINE" itemLabel="FRANCISQUINE" />
+						<f:selectItem itemValue="MONTECARLOS" itemLabel="MONTE CARLOS" />
+
+					</h:selectOneMenu>
+					<h:outputLabel value="Data de batismo:" for="databatismo"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:calendar id="databatismo" 
+						mask="true"
+						pattern="dd/MM/yyyy"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.dataBatismo}">
+					</p:calendar>
+					
+					
+					<h:outputLabel value="Cargo:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" 
+						/>
+				<p:selectOneMenu filter="true"
+					value="#{membroBean3.membro.cargo}"
+					converter="omnifaces.SelectItemsConverter"
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+					>
+					<f:selectItem noSelectionOption="true"
+						itemLabel="selecione o cargo" />
+					<f:selectItems value="#{membroBean3.cargos}" var="m"
+						itemValue="#{m}" itemLabel="#{m.descricao}" />
+						
+				</p:selectOneMenu>
+					
+					
+					
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="documentação">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="RG:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText mask="99.999.999-99" value="#{membroBean3.membro.rg}"
+						id="rg"
+						style="color:green;font-size:12px;" />
+
+					<h:outputLabel value="CPF:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputMask mask="999.999.999-99" value="#{membroBean3.membro.cpf}"
+						style="color:green;font-size:12px;">
+						</p:inputMask>
+					</h:panelGrid>
+				</p:tab>
+				
+				
+				<p:tab title="endereço">
+					<h3>endereço sem CEP</h3>
+				
+					<h:panelGrid columns="2">
+					
+						<h:outputLabel value="rua"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						
+						<h:inputText value="#{membroBean3.endereco.endereco}" size="50"
+							maxlength="100" id="rua2" style="color:green;font-size:12px;" />
+						
+						<h:outputLabel value="numero"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+						
+						<h:inputText value="#{membroBean3.endereco.numero}" size="5"
+							maxlength="7" id="numero2" style="color:green;font-size:12px;" />
+						
+						<h:outputLabel value="bairro"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:selectOneMenu id="bairro" 
+						style="color:red;font-size:14px;font-style:italic;font-weight:bold"
+						value="#{membroBean3.membro.bairroEnum}" 
+						>
+						<f:selectItem  itemLabel="SELECIONE O BAIRRO" />
+						
+						<f:selectItem itemValue="CENTRO" itemLabel="CENTRO" />
+						<f:selectItem itemValue="CIDADEVERDE" itemLabel="CIDADE VERDE" />
+						<f:selectItem itemValue="CONJUNTOAVICACAO" itemLabel="CONJUNTO AVIAÇÃO" />
+						<f:selectItem itemValue="MONTECARLOS" itemLabel="MONTE CARLOS" />
+						<f:selectItem itemValue="CONUNTOHABITACIONALSANFERNANDO" itemLabel="CONJUNTO HABITACIONAL SANT FERNANDO" />
+						<f:selectItem itemValue="CONJUNTOHABITACIONALSANTIAGO" itemLabel="CONJUNTO HABITACIONAL SANTIAGO" />
+				
+						<f:selectItem itemValue="DISTRITOINDUSTRIAL" itemLabel="DISTRITO INDUSTRIAL" />
+						<f:selectItem itemValue="JARDIMALTODABOAVISTA" itemLabel="JARDIM ALTO DA BOA VISTA" />
+						<f:selectItem itemValue="JARDIMAMERICA" itemLabel="JARDIM AMÉRICA "/>
+						<f:selectItem itemValue="JARDIMCASAGRANDE" itemLabel="ARDIM CASA GRANDE" />
+						
+						<f:selectItem itemValue="JARDIMCAVIUNA " itemLabe="JARDIM CAVIUNA" />
+						
+						<f:selectItem itemValue="JARDIMDOLALGO" itemLabel="JARDIM DO LAGO" />
+						<f:selectItem itemValue="JARDIMELDORADO" itemLabel="JARDIM ELDORADO" />
+						<f:selectItem itemValue="JARDIMEUROPA" itemLabel="JARDIM EUROPA" />
+						<f:selectItem itemValue="JARDIMNOBRE" itemLabel="JARDIM NOBRE" />
+						<f:selectItem itemValue="JARDIMNOVOHORIZONTE" itemLabel="JARDIM NOVO JORIZONTE" />
+						<f:selectItem itemValue="JARDIMROLSANGELO" itemLabel="JARDIM ROSÂNGELO" />
+						<f:selectItem itemValue="JARDIMJOSEERDEI" itemLabel="JARDIM JOSÉ ERDEI" />
+						
+						<f:selectItem itemValue="JARDIMITALIA" itemLabel="JARDIM ITÁLIA" />
+						<f:selectItem itemValue="JARDIMPIONEIROS" itemLabel="JARDIM PIONEIROS" />
+						<f:selectItem itemValue="LOTESRUALHAREAPENNACCHI" itemLabel="LOTES RUA H ÁREA PENNACHI" />
+						<f:selectItem  itemValue="MANOELMULLER"  itemLabel="MANOEL MULLER"/>
+						<f:selectItem  itemValue="MONTECARLO"  itemLabel="MONTE CARLO"/>
+						
+						<f:selectItem  itemValue="PADREANGELO"  itemLabel="PADRE ÂNGELO"/>
+						<f:selectItem  itemValue="PARQUEINDROLAND"  itemLabel="PARQUE IND. ROLAND"/>
+						<f:selectItem  itemValue="PARQUEINDUSTRIAL"  itemLabel="PARQIE INDUSTRIAL"/>
+						<f:selectItem  itemValue="PARQUEINDUSTRIALBANDEIRANTES"  itemLabel="PARQUE INDUSTRIAL BANDEIRANTES"/>
+						<f:selectItem  itemValue="PARQUEINDUSTRIALCAFEZAL"  itemLabel="PADRE INDUSTRIAL CAFEZAL"/>
+						
+						<f:selectItem  itemValue="PARQUEINDUSTRIALMONTESINAI"  itemLabel="PARQUE INDUSTRIAL MONTE SINAI"/>
+						<f:selectItem  itemValue="RESIDENCIALMONTECARLO"  itemLabel="RESIDENCIAL MONTE CARLO"/>
+						
+						<f:selectItem  itemValue="ROLANDIARUAL"  itemLabel="ROLÂNDIA RURAL"/>
+						<f:selectItem  itemValue="VILAOLIVEIRA"  itemLabel="VILA OLIVEIRA"/>
+						<f:selectItem  itemValue="ZONARURAL"  itemLabel="ZONA RUAL"/>
+						
+						<f:selectItem itemValue="BAIRRODEAPUCARANA" itemLabel="BAIRRO DE APUCARANA" />
+						<f:selectItem itemValue="BAIRRODEARAPONGAS" itemLabel="BAIRRO DE ARAPONGAS"/>
+						<f:selectItem itemValue="BAIRRODECAMBE" itemLabel="BAIRRO DE CAMBÉ" />
+						<f:selectItem itemValue="BAIRRODELONDRINA" itemLabel="BAIRRO DE LONDRINA" />
+						
+						
+						
+						
+	
+		
+
+					</h:selectOneMenu>
+						<h:outputLabel value="cidade"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<h:selectOneMenu id="cidade" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						value="#{membroBean3.membro.cidadeEnum}" 
+						>
+						<f:selectItem  itemLabel="SELECIONE A CIDADE " />
+						<f:selectItem itemValue="APUCARANA" itemLabel="APUCARANA" />
+						<f:selectItem itemValue="ARAPONGAS" itemLabel="ARAPONGAS"/>
+						<f:selectItem itemValue="CAMBE" itemLabel="CAMBÉ" />
+						<f:selectItem itemValue="LONDRINA" itemLabel="LONDRINA" />
+						<f:selectItem itemValue="ROLANDIA" itemLabel="ROLÂNDIA" />
+						</h:selectOneMenu>
+						
+						
+							
+					
+					
+				</h:panelGrid>
+				
+				</p:tab>
+				
+			
+			</p:tabView>
+			<p:commandButton value="sei o cep" type="button" onclick="PF('dlgCep').show();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+     <!-- formCep:pnlEndereco" referenced from "formCadastro:formCep:cep" -->
+			<p:dialog header="cep" widgetVar="dlgCep" hideEffect="puff"
+				position="left"
+				showEffect="puff" sposition="left" width="280"
+				style="background-color:#ADD8E6;margin-left:1px;" draggable="false"
+				resizable="false" closable="false">
+				
+					<h:panelGrid id="pnlCep" columns="2">
+						<h:outputLabel value="cep"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:inputMask mask="99999-999" value="#{membroBean3.endereco.cep}"
+							id="cep" style="color:green;font-size:12px;">
+							<p:ajax listener="#{membroBean3.pegarEndereco}"
+								update=":mensagem :formCadastro:pnlEndereco" />
+						</p:inputMask>
+					</h:panelGrid>
+					<h:panelGrid columns="2" id="pnlEndereco"
+						style="background-color:yellow;width:400px;">
+						<h:outputLabel value="rua"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+
+						<h:outputText value="#{membroBean3.endereco.endereco}" size="50"
+							maxlength="100" id="rua" style="color:green;font-size:12px;" />
+
+						<h:outputLabel value="numero"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+
+						<h:inputText value="#{membroBean3.endereco.numero}" size="5"
+							maxlength="7" id="numero" style="color:green;font-size:12px;" />
+
+						<h:outputLabel value="bairro"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+
+						<h:outputText value="#{membroBean3.endereco.bairro}" size="50"
+							maxlength="100" style="color:green;font-size:12px;" id="bairro" />
+						<h:outputLabel value="cidade"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<p:spacer width="10" />
+						<h:outputText value="#{membroBean3.endereco.cidade}" size="50"
+							maxlength="100" style="color:green;font-size:12px;" id="cidade" />
+						<p:spacer width="10" />
+						<h:outputLabel value="estado"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<h:outputText value="#{membroBean3.endereco.estado}" size="50"
+							maxlength="100" style="color:green;font-size:12px;" id="uf" />
+
+
+					</h:panelGrid>
+					
+                  <p:panelGrid columns="1">
+                  	 <p:commandButton value="fechar" type="button" onclick="PF('dlgCep').hide();" 
+					style="background-color:#FAF0E6;color:#006400;"/>
+                  
+                  </p:panelGrid>
+                  
+				
+
+
+			</p:dialog>
+
+			
+
+
+
+
+			<p:commandButton value="Salvar"
+						actionListener="#{membroBean3.salvar}"
+						update=":mensagem  :formCadastro" 
+						/>
+			
+						<p:button value="voltar"
+							outcome="/secretaria/listagemdemembros.xhtml">
+						</p:button>
+			</h:form>
+		
+	</ui:define>
+
+</ui:composition>
+
+
+

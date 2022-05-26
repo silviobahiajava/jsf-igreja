@@ -1,0 +1,68 @@
+package daos;
+
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+import cadastrocursos.model.Modulo;
+import entidades.Compra;
+import entidades.Lancamento;
+import entidades.Receita;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+
+public class ReceitaDao extends GenericDaoHibernate<Receita>{
+	/*@SuppressWarnings("unchecked")
+	public List<Receita> buscarReceitaPorData(Date dataLancamento) {
+		List<Receita> receitas = null;
+
+		Session sessao = utils.HibernateUtil.getFabricaDeSessoes().openSession();
+		if (dataLancamento != null) {
+
+		}
+		try {
+			Query consulta = sessao.createQuery("from Receita where dataLancamento=? ");
+			consulta.setParameter(0, dataLancamento);
+			receitas = consulta.list();
+		} catch (RuntimeException e) {
+			throw e;
+		} finally {
+			sessao.close();
+		}
+		return receitas;
+	}*/
+	
+	/*@SuppressWarnings("unchecked")
+	public List<Receita> buscarReceitaPorCodigo(Long codigo) {
+		List<Receita> receitas = null;
+
+		Session sessao = utils.HibernateUtil.getFabricaDeSessoes().openSession();
+		if (codigo != null) {
+
+		}
+		try {
+			Query consulta = sessao.createQuery("from Receita where grupo.codigo=? ");
+			consulta.setParameter(0, codigo);
+			receitas = consulta.list();
+		} catch (RuntimeException e) {
+			throw e;
+		} finally {
+			sessao.close();
+		}
+		return receitas;
+	}*/
+	
+	public List<Receita> buscarReceitaPorData(Date dataLancamento) {
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+		  EntityManager em = emf.createEntityManager();
+	    TypedQuery<Receita> query = em.createQuery(
+	        "SELECT r FROM Receita r WHERE r.dataLancamento = :dataLancamento", Receita.class);
+	     query.setParameter("dataLancamento", dataLancamento).getSingleResult();
+	     List<Receita> listaReceita = query.getResultList();
+	     return listaReceita;
+	  } 
+}

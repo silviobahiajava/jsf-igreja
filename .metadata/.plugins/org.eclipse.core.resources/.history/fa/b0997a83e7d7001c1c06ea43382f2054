@@ -1,0 +1,110 @@
+package meucursoJPA.model.secretaria;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the classe database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Classe.findAll", query="SELECT c FROM Classe c")
+public class Classe extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private List<Aluno> alunos;
+	private List<AulaEscolaDominical> aulaEscolaDominicals;
+	private List<Matriculado> matriculados;
+
+	public Classe() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	//bi-directional many-to-one association to Aluno
+	@OneToMany(mappedBy="classe")
+	public List<Aluno> getAlunos() {
+		return this.alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public Aluno addAluno(Aluno aluno) {
+		getAlunos().add(aluno);
+		aluno.setClasse(this);
+
+		return aluno;
+	}
+
+	public Aluno removeAluno(Aluno aluno) {
+		getAlunos().remove(aluno);
+		aluno.setClasse(null);
+
+		return aluno;
+	}
+
+
+	//bi-directional many-to-one association to AulaEscolaDominical
+	@OneToMany(mappedBy="classe")
+	public List<AulaEscolaDominical> getAulaEscolaDominicals() {
+		return this.aulaEscolaDominicals;
+	}
+
+	public void setAulaEscolaDominicals(List<AulaEscolaDominical> aulaEscolaDominicals) {
+		this.aulaEscolaDominicals = aulaEscolaDominicals;
+	}
+
+	public AulaEscolaDominical addAulaEscolaDominical(AulaEscolaDominical aulaEscolaDominical) {
+		getAulaEscolaDominicals().add(aulaEscolaDominical);
+		aulaEscolaDominical.setClasse(this);
+
+		return aulaEscolaDominical;
+	}
+
+	public AulaEscolaDominical removeAulaEscolaDominical(AulaEscolaDominical aulaEscolaDominical) {
+		getAulaEscolaDominicals().remove(aulaEscolaDominical);
+		aulaEscolaDominical.setClasse(null);
+
+		return aulaEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Matriculado
+	@OneToMany(mappedBy="classe")
+	public List<Matriculado> getMatriculados() {
+		return this.matriculados;
+	}
+
+	public void setMatriculados(List<Matriculado> matriculados) {
+		this.matriculados = matriculados;
+	}
+
+	public Matriculado addMatriculado(Matriculado matriculado) {
+		getMatriculados().add(matriculado);
+		matriculado.setClasse(this);
+
+		return matriculado;
+	}
+
+	public Matriculado removeMatriculado(Matriculado matriculado) {
+		getMatriculados().remove(matriculado);
+		matriculado.setClasse(null);
+
+		return matriculado;
+	}
+
+}

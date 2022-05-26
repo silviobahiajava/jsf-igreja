@@ -1,0 +1,103 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the movimentacao_financeira database table.
+ * 
+ */
+@Entity
+@Table(name="movimentacao_financeira")
+@NamedQuery(name="MovimentacaoFinanceira.findAll", query="SELECT m FROM MovimentacaoFinanceira m")
+public class MovimentacaoFinanceira implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataMovimentacao;
+	private String descricao;
+	private String tipoMovimentacao;
+	private BigDecimal valor;
+	private BalancoFinanceiro balancoFinanceiro;
+	private CategoriaMovimentacaoFinanceira categoriaMovimentacaoFinanceira;
+
+	public MovimentacaoFinanceira() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_movimentacao")
+	public Date getDataMovimentacao() {
+		return this.dataMovimentacao;
+	}
+
+	public void setDataMovimentacao(Date dataMovimentacao) {
+		this.dataMovimentacao = dataMovimentacao;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="tipo_movimentacao")
+	public String getTipoMovimentacao() {
+		return this.tipoMovimentacao;
+	}
+
+	public void setTipoMovimentacao(String tipoMovimentacao) {
+		this.tipoMovimentacao = tipoMovimentacao;
+	}
+
+
+	public BigDecimal getValor() {
+		return this.valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+
+	//bi-directional many-to-one association to BalancoFinanceiro
+	@ManyToOne
+	@JoinColumn(name="balanco_codigo")
+	public BalancoFinanceiro getBalancoFinanceiro() {
+		return this.balancoFinanceiro;
+	}
+
+	public void setBalancoFinanceiro(BalancoFinanceiro balancoFinanceiro) {
+		this.balancoFinanceiro = balancoFinanceiro;
+	}
+
+
+	//bi-directional many-to-one association to CategoriaMovimentacaoFinanceira
+	@ManyToOne
+	@JoinColumn(name="categoria_movimentacao_codigo")
+	public CategoriaMovimentacaoFinanceira getCategoriaMovimentacaoFinanceira() {
+		return this.categoriaMovimentacaoFinanceira;
+	}
+
+	public void setCategoriaMovimentacaoFinanceira(CategoriaMovimentacaoFinanceira categoriaMovimentacaoFinanceira) {
+		this.categoriaMovimentacaoFinanceira = categoriaMovimentacaoFinanceira;
+	}
+
+}

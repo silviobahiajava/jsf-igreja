@@ -1,0 +1,118 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the boleto_cliente_processo database table.
+ * 
+ */
+@Entity
+@Table(name="boleto_cliente_processo")
+@NamedQuery(name="BoletoClienteProcesso.findAll", query="SELECT b FROM BoletoClienteProcesso b")
+public class BoletoClienteProcesso implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private int agencia;
+	private int carteira;
+	private String digitoAgencia;
+	private String digitoNossoNumero;
+	private String digitoNumeroConta;
+	private String nossoNumero;
+	private int numeroConta;
+	private String numeroDocumento;
+
+	public BoletoClienteProcesso() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public int getAgencia() {
+		return this.agencia;
+	}
+
+	public void setAgencia(int agencia) {
+		this.agencia = agencia;
+	}
+
+
+	public int getCarteira() {
+		return this.carteira;
+	}
+
+	public void setCarteira(int carteira) {
+		this.carteira = carteira;
+	}
+
+
+	@Column(name="digito_agencia")
+	public String getDigitoAgencia() {
+		return this.digitoAgencia;
+	}
+
+	public void setDigitoAgencia(String digitoAgencia) {
+		this.digitoAgencia = digitoAgencia;
+	}
+
+
+	@Column(name="digito_nosso_numero")
+	public String getDigitoNossoNumero() {
+		return this.digitoNossoNumero;
+	}
+
+	public void setDigitoNossoNumero(String digitoNossoNumero) {
+		this.digitoNossoNumero = digitoNossoNumero;
+	}
+
+
+	@Column(name="digito_numero_conta")
+	public String getDigitoNumeroConta() {
+		return this.digitoNumeroConta;
+	}
+
+	public void setDigitoNumeroConta(String digitoNumeroConta) {
+		this.digitoNumeroConta = digitoNumeroConta;
+	}
+
+
+	@Column(name="nosso_numero")
+	public String getNossoNumero() {
+		return this.nossoNumero;
+	}
+
+	public void setNossoNumero(String nossoNumero) {
+		this.nossoNumero = nossoNumero;
+	}
+
+
+	@Column(name="numero_conta")
+	public int getNumeroConta() {
+		return this.numeroConta;
+	}
+
+	public void setNumeroConta(int numeroConta) {
+		this.numeroConta = numeroConta;
+	}
+
+
+	@Column(name="numero_documento")
+	public String getNumeroDocumento() {
+		return this.numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
+	}
+
+}

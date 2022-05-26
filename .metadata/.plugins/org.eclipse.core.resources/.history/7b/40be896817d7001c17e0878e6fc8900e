@@ -1,0 +1,80 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the dizimo database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Dizimo.findAll", query="SELECT d FROM Dizimo d")
+public class Dizimo implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataDizimo;
+	private BigInteger dizimistaCodigo;
+	private BigDecimal valorDizimo;
+	private Lancamento lancamento;
+
+	public Dizimo() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_dizimo")
+	public Date getDataDizimo() {
+		return this.dataDizimo;
+	}
+
+	public void setDataDizimo(Date dataDizimo) {
+		this.dataDizimo = dataDizimo;
+	}
+
+
+	@Column(name="dizimista_codigo")
+	public BigInteger getDizimistaCodigo() {
+		return this.dizimistaCodigo;
+	}
+
+	public void setDizimistaCodigo(BigInteger dizimistaCodigo) {
+		this.dizimistaCodigo = dizimistaCodigo;
+	}
+
+
+	@Column(name="valor_dizimo")
+	public BigDecimal getValorDizimo() {
+		return this.valorDizimo;
+	}
+
+	public void setValorDizimo(BigDecimal valorDizimo) {
+		this.valorDizimo = valorDizimo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

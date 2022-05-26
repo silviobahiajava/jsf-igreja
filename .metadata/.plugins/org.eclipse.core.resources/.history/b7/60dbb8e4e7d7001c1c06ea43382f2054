@@ -1,0 +1,114 @@
+package meucursoJPA.model.secretaria;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+import meucursoJPA.model.escoladominical.Matriculado;
+
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the aluno_ausente_escola_dominical database table.
+ * 
+ */
+@Entity
+@Table(name="aluno_ausente_escola_dominical")
+@NamedQuery(name="AlunoAusenteEscolaDominical.findAll", query="SELECT a FROM AlunoAusenteEscolaDominical a")
+public class AlunoAusenteEscolaDominical extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataAula;
+	private AulaEscolaDominical aulaEscolaDominical;
+	private Matriculado matriculado1;
+	private Matriculado matriculado2;
+	private List<Aula> aulas;
+
+	public AlunoAusenteEscolaDominical() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_aula")
+	public Date getDataAula() {
+		return this.dataAula;
+	}
+
+	public void setDataAula(Date dataAula) {
+		this.dataAula = dataAula;
+	}
+
+
+	//bi-directional many-to-one association to AulaEscolaDominical
+	@ManyToOne
+	@JoinColumn(name="aula_codigo")
+	public AulaEscolaDominical getAulaEscolaDominical() {
+		return this.aulaEscolaDominical;
+	}
+
+	public void setAulaEscolaDominical(AulaEscolaDominical aulaEscolaDominical) {
+		this.aulaEscolaDominical = aulaEscolaDominical;
+	}
+
+
+	//bi-directional many-to-one association to Matriculado
+	@ManyToOne
+	@JoinColumn(name="matriculado_codigo")
+	public Matriculado getMatriculado1() {
+		return this.matriculado1;
+	}
+
+	public void setMatriculado1(Matriculado matriculado1) {
+		this.matriculado1 = matriculado1;
+	}
+
+
+	//bi-directional one-to-one association to Matriculado
+	@OneToOne
+	@JoinColumn(name="aula_codigo", referencedColumnName="aula_codigo")
+	public Matriculado getMatriculado2() {
+		return this.matriculado2;
+	}
+
+	public void setMatriculado2(Matriculado matriculado2) {
+		this.matriculado2 = matriculado2;
+	}
+
+
+	//bi-directional many-to-one association to Aula
+	@OneToMany(mappedBy="alunoAusenteEscolaDominical")
+	public List<Aula> getAulas() {
+		return this.aulas;
+	}
+
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
+	}
+
+	public Aula addAula(Aula aula) {
+		getAulas().add(aula);
+		aula.setAlunoAusenteEscolaDominical(this);
+
+		return aula;
+	}
+
+	public Aula removeAula(Aula aula) {
+		getAulas().remove(aula);
+		aula.setAlunoAusenteEscolaDominical(null);
+
+		return aula;
+	}
+
+}

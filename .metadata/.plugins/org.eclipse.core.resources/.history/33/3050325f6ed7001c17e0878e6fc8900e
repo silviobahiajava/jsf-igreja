@@ -1,0 +1,94 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the curso database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Curso.findAll", query="SELECT c FROM Curso c")
+public class Curso implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String nome;
+	private List<Matricula> matriculas;
+	private List<Modulo> modulos;
+
+	public Curso() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	//bi-directional many-to-one association to Matricula
+	@OneToMany(mappedBy="curso")
+	public List<Matricula> getMatriculas() {
+		return this.matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+
+	public Matricula addMatricula(Matricula matricula) {
+		getMatriculas().add(matricula);
+		matricula.setCurso(this);
+
+		return matricula;
+	}
+
+	public Matricula removeMatricula(Matricula matricula) {
+		getMatriculas().remove(matricula);
+		matricula.setCurso(null);
+
+		return matricula;
+	}
+
+
+	//bi-directional many-to-one association to Modulo
+	@OneToMany(mappedBy="curso")
+	public List<Modulo> getModulos() {
+		return this.modulos;
+	}
+
+	public void setModulos(List<Modulo> modulos) {
+		this.modulos = modulos;
+	}
+
+	public Modulo addModulo(Modulo modulo) {
+		getModulos().add(modulo);
+		modulo.setCurso(this);
+
+		return modulo;
+	}
+
+	public Modulo removeModulo(Modulo modulo) {
+		getModulos().remove(modulo);
+		modulo.setCurso(null);
+
+		return modulo;
+	}
+
+}

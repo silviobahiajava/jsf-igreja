@@ -1,0 +1,256 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the curriculo database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Curriculo.findAll", query="SELECT c FROM Curriculo c")
+public class Curriculo implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String bairro;
+	private int cargoPretendido;
+	private String cep;
+	private String cidade;
+	private byte desempregado;
+	private String email;
+	private String endereco;
+	private String estado;
+	private String estadoCivil;
+	private String idade;
+	private String informacoesAdicionais;
+	private String nomeCompleto;
+	private String nomeCurso;
+	private String nomeEscola;
+	private String numeroEndereco;
+	private String objetivoCurriculo;
+	private String perfilProfissional;
+	private String profisaoAtual;
+	private String telefoneCelular;
+	private String telefoneResidencial;
+	private EmpresaCurriculo empresaCurriculo;
+
+	public Curriculo() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getBairro() {
+		return this.bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+
+	@Column(name="cargo_pretendido")
+	public int getCargoPretendido() {
+		return this.cargoPretendido;
+	}
+
+	public void setCargoPretendido(int cargoPretendido) {
+		this.cargoPretendido = cargoPretendido;
+	}
+
+
+	public String getCep() {
+		return this.cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+
+	public String getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+
+	public byte getDesempregado() {
+		return this.desempregado;
+	}
+
+	public void setDesempregado(byte desempregado) {
+		this.desempregado = desempregado;
+	}
+
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getEndereco() {
+		return this.endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	@Column(name="estado_civil")
+	public String getEstadoCivil() {
+		return this.estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+
+	public String getIdade() {
+		return this.idade;
+	}
+
+	public void setIdade(String idade) {
+		this.idade = idade;
+	}
+
+
+	@Column(name="informacoes_adicionais")
+	public String getInformacoesAdicionais() {
+		return this.informacoesAdicionais;
+	}
+
+	public void setInformacoesAdicionais(String informacoesAdicionais) {
+		this.informacoesAdicionais = informacoesAdicionais;
+	}
+
+
+	@Column(name="nome_completo")
+	public String getNomeCompleto() {
+		return this.nomeCompleto;
+	}
+
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+
+
+	@Column(name="nome_curso")
+	public String getNomeCurso() {
+		return this.nomeCurso;
+	}
+
+	public void setNomeCurso(String nomeCurso) {
+		this.nomeCurso = nomeCurso;
+	}
+
+
+	@Column(name="nome_escola")
+	public String getNomeEscola() {
+		return this.nomeEscola;
+	}
+
+	public void setNomeEscola(String nomeEscola) {
+		this.nomeEscola = nomeEscola;
+	}
+
+
+	@Column(name="numero_endereco")
+	public String getNumeroEndereco() {
+		return this.numeroEndereco;
+	}
+
+	public void setNumeroEndereco(String numeroEndereco) {
+		this.numeroEndereco = numeroEndereco;
+	}
+
+
+	@Column(name="objetivo_curriculo")
+	public String getObjetivoCurriculo() {
+		return this.objetivoCurriculo;
+	}
+
+	public void setObjetivoCurriculo(String objetivoCurriculo) {
+		this.objetivoCurriculo = objetivoCurriculo;
+	}
+
+
+	@Column(name="perfil_profissional")
+	public String getPerfilProfissional() {
+		return this.perfilProfissional;
+	}
+
+	public void setPerfilProfissional(String perfilProfissional) {
+		this.perfilProfissional = perfilProfissional;
+	}
+
+
+	@Column(name="profisao_atual")
+	public String getProfisaoAtual() {
+		return this.profisaoAtual;
+	}
+
+	public void setProfisaoAtual(String profisaoAtual) {
+		this.profisaoAtual = profisaoAtual;
+	}
+
+
+	@Column(name="telefone_celular")
+	public String getTelefoneCelular() {
+		return this.telefoneCelular;
+	}
+
+	public void setTelefoneCelular(String telefoneCelular) {
+		this.telefoneCelular = telefoneCelular;
+	}
+
+
+	@Column(name="telefone_residencial")
+	public String getTelefoneResidencial() {
+		return this.telefoneResidencial;
+	}
+
+	public void setTelefoneResidencial(String telefoneResidencial) {
+		this.telefoneResidencial = telefoneResidencial;
+	}
+
+
+	//bi-directional many-to-one association to EmpresaCurriculo
+	@ManyToOne
+	@JoinColumn(name="empresa_codigo")
+	public EmpresaCurriculo getEmpresaCurriculo() {
+		return this.empresaCurriculo;
+	}
+
+	public void setEmpresaCurriculo(EmpresaCurriculo empresaCurriculo) {
+		this.empresaCurriculo = empresaCurriculo;
+	}
+
+}

@@ -1,0 +1,472 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Pesquisa de membros</h1>
+
+
+		<h:form id="formListagem">
+			<p:growl id="mensagem" />
+			<p:panel header="Listagem de Membros">
+
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					styleClass="tabelaconteudo" paginator="true"
+					value="#{membroBean.membros}" var="membro" rows="5">
+					<f:facet name="header">
+						<p:commandButton value="adicionar mais um membro"
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{membroBean.novo}"
+							update=":formCadastro:tab
+							 :formCadastro:tab:fotocarregada " />
+
+						<p:button value="cartão de membros"
+							outcome="secretaria/cartaodemembros.xhtml">
+						</p:button>
+
+						<p:button value="cartão de obreiros"
+							outcome="./WEB-INF/secretaria/cartaodeobreiros.xhtml">
+						</p:button>
+
+
+
+
+
+					</f:facet>
+<!-- 					<p:column headerText="codigo" width="10" -->
+<!-- 						filterBy="#{membro.codigo}" sortBy="#{membro.codigo}" -->
+<!-- 						style="color:red;font-size:10px;font-style:italic;font-weight:bold"> -->
+<!-- 						<h:outputText value="#{membro.codigo}" -->
+<!-- 							style="color:red;font-size:10px;font-style:italic;font-weight:bold" /> -->
+<!-- 					</p:column> -->
+					<p:column headerText="Nome" sortBy="#{membro.nome}" width="20"
+						style="color:red;font-size:10px;font-style:italic;font-weight:bold"
+						filterBy="#{membro.nome}">
+						<h:outputText value="#{membro.nome}"
+							style="color:red;font-size:10px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+<!-- 					<p:column headerText="Cargo" width="30" -->
+<!-- 						style="color:red;font-size:10px;font-style:italic;font-weight:bold"> -->
+<!-- 						<h:outputText value="#{membro.cargoEnum}" -->
+<!-- 							style="color:red;font-size:10px;font-style:italic;font-weight:bold" /> -->
+<!-- 					</p:column> -->
+
+<!-- 					<p:column headerText="congregacao" width="30" -->
+<!-- 						style="color:red;font-size:10px;font-style:italic;font-weight:bold"> -->
+<!-- 						<h:outputText value="#{membro.congregacao.descricao}" -->
+<!-- 							style="color:red;font-size:12px;font-style:italic;font-weight:bold" /> -->
+<!-- 					</p:column> -->
+
+					<p:column headerText="foto do membro"
+						style="color:red;font-size:10px;font-style:italic;font-weight:bold"
+						width="20">
+						<p:graphicImage cache="false" width="50" height="50"
+							url="http://localhost:8081/uploads/#{membro.codigo}.jpg" />
+
+					</p:column>
+
+<!-- 					<p:column headerText="Opções" width="20" -->
+<!-- 						style="color:red;font-size:10px;font-style:italic;font-weight:bold"> -->
+<!-- 						<p:commandButton icon="ui-icon-trash" -->
+<!-- 							actionListener="#{membroBean.excluir}" -->
+<!-- 							update=":formListagem:mensagem :formListagem:tabela"> -->
+<!-- 							<p:confirm header="Confirmação" -->
+<!-- 								message="Deseja excluir o estado?" icon="ui-icon-alert" /> -->
+<!-- 							<f:attribute name="membroSelecionado" value="#{membro}" /> -->
+<!-- 						</p:commandButton> -->
+
+<!-- 						<p:commandButton icon="ui-icon-pencil" -->
+<!-- 							actionListener="#{membroBean.editar}" -->
+<!-- 							update=":formCadastro:tab  -->
+<!-- 							:formCadastro:tab:fotocarregada" -->
+<!-- 							oncomplete="PF('dialogo').show();"> -->
+<!-- 							<f:attribute name="membroSelecionado" value="#{membro}" /> -->
+<!-- 						</p:commandButton> -->
+<!-- 					</p:column> -->
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
+		</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+		<p:dialog header="Cadastro de Membros" widgetVar="dialogo"
+			style="margin-top:-30px;"
+			position="left" width="400" hideEffect="puff" showEffect="rpuff"
+			draggable="true" resizable="false" closable="false" responsive="true">
+			<h:form id="formCadastro" enctype="multipart/form-data">
+				<p:growl id="msgCadastro" />
+				<p:tabView id="tab">
+					<p:tab title="dados pessoais"
+						titleStyle="color:blue;background-color:white">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+								<h:outputLabel value="codigo:"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<h:outputText maxlength="50" size="50"
+									style="color:green;font-size:12px;"
+									value="#{membroBean.membro.codigo}" />
+
+								<h:outputLabel value="Nome:"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<p:inputText maxlength="100" size="80" id="nome"
+									style="color:green;font-size:12px;"
+									value="#{membroBean.membro.nome}" />
+								<h:outputLabel value="Data de nascimento:" for="datanascimento"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<p:calendar id="datanascimento" mask="true" pattern="dd/MM/yyyy"
+									style="color:green;font-size:12px;"
+									value="#{membroBean.membro.dataNascimento}">
+								</p:calendar>
+								<h:outputLabel value="Estado civil:" for="estadocivil"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<h:selectOneMenu id="estadocivil"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+									value="#{membroBean.membro.estadoCivil}">
+									<f:selectItem itemLabel="SELECIONE" />
+									<f:selectItem itemValue="CASADO" itemLabel="CASADO" />
+									<f:selectItem itemValue="DIVORCIADO" itemLabel="DIVORCIADO" />
+									<f:selectItem itemValue="SOLTEIRO" itemLabel="SOLTEIRO" />
+									<f:selectItem itemValue="VIUVO" itemLabel="VIUVO" />
+								</h:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</p:tab>
+
+
+					<p:tab titleStyle="color:blue;background-color:white"
+						title="filiação">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+								<h:outputLabel value=" da mãe" />
+								<p:inputText maxlength="100" size="80" id="nomedamae"
+									style="color:green;font-size:12px;"
+									value="#{membroBean.membro.nomeMae}" />
+								<h:outputLabel value="nome do pai"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<p:inputText maxlength="100" size="80"
+									style="color:green;font-size:12px;" id="nomedopai"
+									value="#{membroBean.membro.nomePai}" />
+
+							</p:panelGrid>
+						</div>
+
+					</p:tab>
+
+
+					<p:tab title="documentação"
+						titleStyle="color:blue;background-color:white">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+								<h:outputLabel value="RG:"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<p:inputText mask="99.999.999-99"
+									value="#{membroBean.membro.rg}" id="rg"
+									style="color:green;font-size:12px;" />
+								<h:outputLabel value="CPF:"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<p:inputMask mask="999.999.999-99"
+									value="#{membroBean.membro.cpf}"
+									style="color:green;font-size:12px;">
+								</p:inputMask>
+							</p:panelGrid>
+						</div>
+					</p:tab>
+
+					<p:tab title="naturalidade"
+						titleStyle="color:blue;background-color:white">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+								<h:outputLabel value="Natural de  :"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+									for="cidadenascimento" />
+								<p:inputText id="cidadenascimento" style="color:blue"
+									value="#{membroBean.membro.natualidade}">
+								</p:inputText>
+								<h:outputLabel value="Estado:" for="estado"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<h:selectOneMenu id="estado"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+									value="#{membroBean.membro.estadosBrasileirosEnum}">
+									<f:selectItem itemLabel="SELECIONE O ESTADO" />
+									<f:selectItem itemValue="AC" itemLabel="ACRE" />
+									<f:selectItem itemValue="AM" itemLabel="AMAZONAS" />
+									<f:selectItem itemValue="PA" itemLabel="PARÁ" />
+									<f:selectItem itemValue="RO" itemLabel="RO" />
+									<f:selectItem itemValue="RR" itemLabel="RR" />
+									<f:selectItem itemValue="AP" itemLabel="AP" />
+									<f:selectItem itemValue="BA" itemLabel="BA" />
+									<f:selectItem itemValue="RN" itemLabel="RN" />
+									<f:selectItem itemValue="RS" itemLabel="RS" />
+									<f:selectItem itemValue="PB" itemLabel="PB" />
+									<f:selectItem itemValue="PI" itemLabel="PI" />
+									<f:selectItem itemValue="PR" itemLabel="PR" />
+									<f:selectItem itemValue="SC" itemLabel="SC" />
+									<f:selectItem itemValue="SP" itemLabel="SP" />
+									<f:selectItem itemValue="RJ" itemLabel="RJ" />
+									<f:selectItem itemValue="MG" itemLabel="MG" />
+									<f:selectItem itemValue="ES" itemLabel="ES" />
+									<f:selectItem itemValue="AL" itemLabel="AL" />
+									<f:selectItem itemValue="PE" itemLabel="PE" />
+									<f:selectItem itemValue="CE" itemLabel="CE" />
+									<f:selectItem itemValue="MT" itemLabel="MT" />
+									<f:selectItem itemValue="SE" itemLabel="SE" />
+								</h:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</p:tab>
+
+
+					<p:tab title="dados eclesiasticos"
+						titleStyle="color:blue;background-color:white">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+								<h:outputLabel value="Congregação:" for="igreja"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<h:selectOneMenu id="igreja"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+									value="#{membroBean.membro.congregacao}">
+									<f:selectItem itemLabel="SELECIONE" />
+									<f:selectItem itemValue="SEDE" itemLabel="SEDE" />
+									<f:selectItem itemValue="FRANCISQUINE" itemLabel="FRANCISQUINE" />
+									<f:selectItem itemValue="MONTECARLOS" itemLabel="MONTE CARLOS" />
+								</h:selectOneMenu>
+
+
+
+
+								<h:outputLabel value="Cargo:"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<h:selectOneMenu id="cargo"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+									value="#{membroBean.membro.cargoEnum}">
+									<f:selectItem itemLabel="MEMRO" />
+									<f:selectItem itemValue="COOPERADOR" itemLabel="COOPERADOR" />
+									<f:selectItem itemValue="DIACONO" itemLabel="DIACONO" />
+									<f:selectItem itemValue="PRESBITERO" itemLabel="PRESBITERO" />
+									<f:selectItem itemValue="EVANGELISTA" itemLabel="EVANGELISTA" />
+									<f:selectItem itemValue="PASTOR" itemLabel="PASTOR" />
+									<f:selectItem itemValue="BISPO" itemLabel="BISPO" />
+									<f:selectItem itemValue="DIACONIZA" itemLabel="DIACONIZA" />
+								</h:selectOneMenu>
+							</p:panelGrid>
+						</div>
+					</p:tab>
+					<p:tab title="foto" titleStyle="color:blue;background-color:white">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+								<p:fileUpload label="procurar foto" id="foto" auto="true"
+									mode="advanced" fileUploadListener="#{membroBean.upload}"
+									update=":formListagem:mensagem :formCadastro:tab" />
+								<p:graphicImage style="margin-left:15px" cache="false"
+									id="fotocarregada" value="#{imagemBean.foto}" width="150"
+									height="150">
+									<f:param name="caminho" value="#{membroBean.membro.caminho}" />
+								</p:graphicImage>
+							</p:panelGrid>
+						</div>
+					</p:tab>
+
+
+					<p:tab title="endereco">
+						<div class="ui-fluid">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="panelgrid-noborder"
+								columnClasses="ui-grid-col-4, ui-grid-col-8">
+
+								<p:commandButton value="sei o cep" type="button"
+									onclick="PF('seiocep').show();"
+									style="background-color:#FAF0E6;color:#006400;" />
+								<p:commandButton value="não sei o cep" type="button"
+									onclick="PF('naoseiocep').show();"
+									style="background-color:#FAF0E6;color:#006400;" />
+							</p:panelGrid>
+						</div>
+						<p:dialog header="Cadastro com cep" widgetVar="seiocep"
+							width="400"
+							position="left"
+							hideEffect="puff" showEffect="puff" resonsive="true"
+							draggable="false" resizable="false" closable="false">
+                           <h:panelGrid columns="2">
+                           		<h:outputLabel value="cep"
+										style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+                           		<p:inputMask mask="99999-999" value="#{membroBean.endereco.cep}"
+								id="cep" style="color:green;font-size:12px;">
+								<p:ajax listener="#{membroBean.pegarEndereco}"
+									update=":formListagem:mensagem :formCadastro:tab:end" />
+							</p:inputMask>
+                           </h:panelGrid>
+							
+							<h:panelGrid columns="2" id="end"
+								style="background-color:#C0C0C0">
+								
+									
+
+
+									<h:outputLabel value="rua"
+										style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+									
+									<h:outputText value="#{membroBean.endereco.endereco}" size="50"
+										maxlength="100" id="rua" style="color:green;font-size:12px;" />
+									
+									<h:outputLabel value="numero"
+										style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+									
+									<h:inputText value="#{membroBean.endereco.numero}" size="5"
+										maxlength="7" id="numero" style="color:green;font-size:12px;" />
+									 
+									<h:outputLabel value="bairro"
+										style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+									
+									<h:outputText value="#{membroBean.endereco.bairro}" size="50"
+										maxlength="100" style="color:green;font-size:12px;"
+										id="bairro" />
+								
+
+								
+									
+									<h:outputLabel value="cidade"
+										style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+
+									<h:outputText value="#{membroBean.endereco.cidade}" size="50"
+										maxlength="100" style="color:green;font-size:12px;"
+										id="cidade" />
+									
+									<h:outputLabel value="estado"
+										style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+									<h:outputText value="#{membroBean.endereco.estado}" size="50"
+										maxlength="100" style="color:green;font-size:12px;" id="uf" />
+								
+
+							</h:panelGrid>
+							<p:commandButton value="fechar" type="button"
+								onclick="PF('seiocep').hide();"
+								style="background-color:#FAF0E6;color:#006400;" />
+						</p:dialog>
+
+
+
+
+
+						<p:dialog header="cadastro sem cep" widgetVar="naoseiocep"
+							width="400"
+							responsive="true"
+							position="left"
+							hideEffect="puff" showEffect="puff" draggable="false"
+							resizable="false" closable="false">
+							<h:panelGrid columns="2" id="end2"
+								style="background-color:#C0C0C0">
+
+								<h:outputLabel value="rua"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								
+								<p:inputText value="#{membroBean.endereco.endereco}" size="50"
+									maxlength="100" id="rua2" style="color:green;font-size:12px;" />
+								
+								<h:outputLabel value="numero"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								
+								<h:inputText value="#{membroBean.endereco.numero}" size="5"
+									maxlength="7" id="numero2" style="color:green;font-size:12px;" />
+								
+								<h:outputLabel value="bairro"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								
+								<p:inputText value="#{membroBean.endereco.bairro}" size="50"
+									maxlength="100" style="color:green;font-size:12px;"
+									id="bairro2" />
+
+
+
+
+								<h:outputLabel value="cidade"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								
+								<p:inputText value="#{membroBean.endereco.cidade}" size="50"
+									maxlength="100" style="color:green;font-size:12px;"
+									id="cidade2" />
+								
+
+								<h:outputLabel value="estado"
+									style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+								<p:inputText value="#{membroBean.endereco.estado}" size="50"
+									maxlength="100" style="color:green;font-size:12px;" id="uf2" />
+
+
+							</h:panelGrid>
+							<p:commandButton value="fechar" type="button"
+								onclick="PF('naoseiocep').hide();"
+								style="background-color:#FAF0E6;color:#006400;" />
+						</p:dialog>
+					</p:tab>
+				</p:tabView>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{membroBean.salvar}"
+						update=":formListagem:mensagem  :formCadastro:tab :formListagem:tabela"
+						style="background-color:#FAF0E6;color:#006400;" />
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"
+						style="background-color:#FAF0E6;color:#006400;" />
+				</h:panelGrid>
+
+				<p:outputLabel for="tipo" value="tipo de cadastro:" />
+				<p:selectOneRadio id="tipo"
+					value="#{membroBean.membro.tipoCadastro}">
+					<f:selectItem itemLabel="ATIVO" itemValue="ATIVO" />
+					<f:selectItem itemLabel="INATIVO" itemValue="INATIVO" />
+					<p:ajax event="change" listener="#{membroBean.pegarTipoCadastro}"
+						update=":formCadastro:msgCadastro" />
+				</p:selectOneRadio>
+
+
+			</h:form>
+		</p:dialog>
+
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,68 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the dizimo_lancado database table.
+ * 
+ */
+@Entity
+@Table(name="dizimo_lancado")
+@NamedQuery(name="DizimoLancado.findAll", query="SELECT d FROM DizimoLancado d")
+public class DizimoLancado implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataLancamento;
+	private byte[] dizimista;
+	private BigDecimal valorDizimo;
+
+	public DizimoLancado() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_lancamento")
+	public Date getDataLancamento() {
+		return this.dataLancamento;
+	}
+
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+
+	@Lob
+	public byte[] getDizimista() {
+		return this.dizimista;
+	}
+
+	public void setDizimista(byte[] dizimista) {
+		this.dizimista = dizimista;
+	}
+
+
+	@Column(name="valor_dizimo")
+	public BigDecimal getValorDizimo() {
+		return this.valorDizimo;
+	}
+
+	public void setValorDizimo(BigDecimal valorDizimo) {
+		this.valorDizimo = valorDizimo;
+	}
+
+}

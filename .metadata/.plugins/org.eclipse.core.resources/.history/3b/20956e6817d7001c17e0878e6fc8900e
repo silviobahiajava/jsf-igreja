@@ -1,0 +1,117 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the compra_materia_prima database table.
+ * 
+ */
+@Entity
+@Table(name="compra_materia_prima")
+@NamedQuery(name="CompraMateriaPrima.findAll", query="SELECT c FROM CompraMateriaPrima c")
+public class CompraMateriaPrima implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataCompra;
+	private String descricao;
+	private int quantidadeComprada;
+	private BigDecimal valorTotalCompra;
+	private Grupo grupo;
+	private List<ItemCompraMateriaPrima> itemCompraMateriaPrimas;
+
+	public CompraMateriaPrima() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_compra")
+	public Date getDataCompra() {
+		return this.dataCompra;
+	}
+
+	public void setDataCompra(Date dataCompra) {
+		this.dataCompra = dataCompra;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="quantidade_comprada")
+	public int getQuantidadeComprada() {
+		return this.quantidadeComprada;
+	}
+
+	public void setQuantidadeComprada(int quantidadeComprada) {
+		this.quantidadeComprada = quantidadeComprada;
+	}
+
+
+	@Column(name="valor_total_compra")
+	public BigDecimal getValorTotalCompra() {
+		return this.valorTotalCompra;
+	}
+
+	public void setValorTotalCompra(BigDecimal valorTotalCompra) {
+		this.valorTotalCompra = valorTotalCompra;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to ItemCompraMateriaPrima
+	@OneToMany(mappedBy="compraMateriaPrima")
+	public List<ItemCompraMateriaPrima> getItemCompraMateriaPrimas() {
+		return this.itemCompraMateriaPrimas;
+	}
+
+	public void setItemCompraMateriaPrimas(List<ItemCompraMateriaPrima> itemCompraMateriaPrimas) {
+		this.itemCompraMateriaPrimas = itemCompraMateriaPrimas;
+	}
+
+	public ItemCompraMateriaPrima addItemCompraMateriaPrima(ItemCompraMateriaPrima itemCompraMateriaPrima) {
+		getItemCompraMateriaPrimas().add(itemCompraMateriaPrima);
+		itemCompraMateriaPrima.setCompraMateriaPrima(this);
+
+		return itemCompraMateriaPrima;
+	}
+
+	public ItemCompraMateriaPrima removeItemCompraMateriaPrima(ItemCompraMateriaPrima itemCompraMateriaPrima) {
+		getItemCompraMateriaPrimas().remove(itemCompraMateriaPrima);
+		itemCompraMateriaPrima.setCompraMateriaPrima(null);
+
+		return itemCompraMateriaPrima;
+	}
+
+}

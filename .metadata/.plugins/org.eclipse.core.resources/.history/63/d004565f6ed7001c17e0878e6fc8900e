@@ -1,0 +1,69 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the parcela database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Parcela.findAll", query="SELECT p FROM Parcela p")
+public class Parcela extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	
+	private Date dataVencimentoDaParcela;
+	private int numerodaparcela;
+	private double valorDaParcela;
+	private Pagamento pagamento;
+
+	public Parcela() {
+	}
+
+
+	
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_vencimento_da_parcela")
+	public Date getDataVencimentoDaParcela() {
+		return this.dataVencimentoDaParcela;
+	}
+
+	public void setDataVencimentoDaParcela(Date dataVencimentoDaParcela) {
+		this.dataVencimentoDaParcela = dataVencimentoDaParcela;
+	}
+
+
+	public int getNumerodaparcela() {
+		return this.numerodaparcela;
+	}
+
+	public void setNumerodaparcela(int numerodaparcela) {
+		this.numerodaparcela = numerodaparcela;
+	}
+
+
+	@Column(name="valor_da_parcela")
+	public double getValorDaParcela() {
+		return this.valorDaParcela;
+	}
+
+	public void setValorDaParcela(double valorDaParcela) {
+		this.valorDaParcela = valorDaParcela;
+	}
+
+
+	//bi-directional many-to-one association to Pagamento
+	@ManyToOne
+	public Pagamento getPagamento() {
+		return this.pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
+}

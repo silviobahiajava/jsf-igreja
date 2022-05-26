@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:50px;"
+				paginator="true" value="#{compradamissaoBean.compras}" var="compra" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						actionListener="#{compradamissaoBean.novo}" update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data" 
+					width="30"
+					>
+					<h:outputText value="#{compra.dataCompraMissao}">
+						<f:convertDateTime  
+						 locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Tipo" sortBy="#{compra.tipoCompra}"
+					width="30"
+					filterBy="#{compra.tipoCompra}">
+					<h:outputText value="#{compra.tipoCompra}" />
+				</p:column>
+					
+					<p:column headerText="Num.º Pedido" sortBy="#{compra.numeroNota}"
+						width="50"
+					filterBy="#{compra.numeroNota}">
+					<h:outputText value="#{compra.numeroNota}" />
+				</p:column>
+				<p:column headerText="Valor" sortBy="#{compra.valorCompraMissao}"
+					width="30"
+					filterBy="#{compra.valorCompraMissao}">
+					<h:outputText value="#{compra.valorCompraMissao}" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Descricao" sortBy="#{compra.descricao}"
+					width="50"
+					filterBy="#{compra.descricao}">
+					<h:outputText value="#{compra.descricao}" />
+				</p:column>
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	
+
+	<p:dialog header="registro de compras" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" style="background-color:#993300"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<p:outputLabel value="Data da compra:" style="color:yellow;font-size:12px;"/>
+				<p:calendar maxlength="30" size="30"
+					effect="fold"
+					value="#{compradamissaoBean.compra.dataCompraMissao}" 
+					locale="pt_BR"/>
+					
+					<p:outputLabel  value="compra a vista:" 
+						style="color:yellow;font-size:12px;"/>
+        <p:selectBooleanCheckbox value="#{compradamissaoBean.compra.compraAvistaMissao}">
+           
+        </p:selectBooleanCheckbox>
+        
+        	<p:outputLabel  value="compra a prazo:" 
+        	style="color:yellow;font-size:12px;"/>
+        <p:selectBooleanCheckbox value="#{compradamissaoBean.compra.compraAprazoMissao}">
+        </p:selectBooleanCheckbox>
+        
+					<p:outputLabel value="Numero do pedido:" style="color:yellow;font-size:12px;"/>
+				<p:inputText maxlength="50" size="30"
+					value="#{compradamissaoBean.compra.numeroNota}" />
+					
+					<p:outputLabel value="Valor da compra:" style="color:yellow;font-size:12px;"/>
+				<p:inputText maxlength="50" size="30"
+					value="#{compradamissaoBean.compra.valorCompraMissao}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					<p:outputLabel value="Descrição:" style="color:yellow;font-size:12px;"/>
+				<p:inputText maxlength="50" size="30"
+					value="#{compradamissaoBean.compra.descricao}" />
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{compradamissaoBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

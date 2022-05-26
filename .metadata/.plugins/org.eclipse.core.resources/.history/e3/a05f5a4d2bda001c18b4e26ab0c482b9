@@ -1,0 +1,43 @@
+package daos;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import cadastrocursos.model.Curso;
+import cadastrocursos.model.Modulo;
+import entidades.AlunosMatriculadosEscolaDominical;
+import entidades.AulaEscolaDominical;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+
+public class AlunoMatriculadoDao extends GenericDaoHibernate<AlunosMatriculadosEscolaDominical> {
+
+	@SuppressWarnings("unchecked")
+	public List<AlunosMatriculadosEscolaDominical> buscarPorClasse(Long classeCodigo) {
+		Session sessao = utils.HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(AlunosMatriculadosEscolaDominical.class);
+			consulta.add(Restrictions.eq("classe.codigo", classeCodigo));
+			// consulta.addOrder(Order.asc("nome"));
+			List<AlunosMatriculadosEscolaDominical> resultado = consulta.list();
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
+
+	//funciona
+	   public  AlunoMatriculadoEscolaDominical getAlunoPorClasse(EntityManager em,Long codigo) {
+		   
+		 //onde o id do Modulo seja igual ao id passado na pesquisa
+	    	String jpql="select obj.classe from AlunoMatriculadoEscolaDominical obj where obj.codigo='"+codigo+"' ";
+	    	TypedQuery<ClasseEscolaDominical> typedQuery = em.createQuery(jpql,ClasseEscolaDominical.class);
+	    	ClasseEscolaDominical curso = typedQuery.getSingleResult();
+	    	System.out.println("curso escolhido "+curso.getNome());
+		  } 
+}

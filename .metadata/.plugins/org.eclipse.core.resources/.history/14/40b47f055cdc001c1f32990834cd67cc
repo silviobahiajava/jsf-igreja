@@ -1,0 +1,263 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	<f:metadata>
+		<f:viewAction action="#{membroBean3.listar}"/>
+	</f:metadata>
+	
+	<h3 style="color:#4169E1">LISTA DE MEMBROS ATIVOS DA IGREJA</h3>
+	
+		<h:form id="formListagem">
+			<p:panel header="Listagem de Membros">
+				
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{membroBean3.membros}" var="membro"
+					rows="5">
+					<f:facet name="header">
+							<h:button value="cadastrar novo membro"
+							 		style="font-size:11px;color:blue"
+								outcome="/secretaria/inclusaodemembros.xhtml">
+							</h:button>
+							
+							<h:button value="gerar carterinha de todos membros"
+								style="font-size:11px;color:blue"
+								outcome="/secretaria/cartaodemembros.xhtml">
+							</h:button>
+							<h:button value="membros inativos"
+								style="font-size:11px;color:blue"
+								outcome="/secretaria/listagemdemembrosinativos.xhtml">
+							</h:button>
+							<h:button value="voltar"
+								style="font-size:11px;color:blue"
+								outcome="/secretaria/secretaria.xhtml">
+							</h:button>
+					</f:facet>
+					
+				<p:column headerText="codigo"
+						width="20" 
+						style="color:red;font-size:9px;font-style:italic;font-weight:bold"  
+						> 
+ 						<h:outputText value="#{membro.codigo}" 
+ 							style="color:red;font-size:9px;font-style:italic;font-weight:bold" /> 
+ 					</p:column>  
+					
+					<p:column headerText="Nome" sortBy="#{membro.nome}"
+						width="40"
+						style="color:red;font-size:11px;font-style:italic;font-weight:bold"
+						filterBy="#{membro.nome}">
+						<h:outputText value="#{membro.nome}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					
+					
+					<p:column headerText="foto" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						width="60">
+						
+						<p:graphicImage 
+							cache="false" 
+							width="60" 
+							height="60" 
+							url="http://localhost:8081/uploads/#{membro.codigo}.jpg"/> 
+					</p:column>
+
+					<p:column headerText="Opções" width="90"
+					style="color:red;font-size:9px;font-style:italic;font-weight:bold" >
+						
+							<p:commandButton 
+								value="detalhes"
+							actionListener="#{membroBean3.verDetalhes}"
+							update=":formCadastro:painel" 
+							oncomplete="PF('dialogo').show();">
+							<f:attribute name="membroSelecionado" value="#{membro}" />
+						</p:commandButton>
+						
+							<p:button 
+								value="alterar cadastro"
+							outcome="/secretaria/edicaodemembros.xhtml">
+							<f:param name="codigo" value="#{membro.codigo}"/>
+							</p:button>
+							
+							<p:commandButton value="alterar foto"
+							actionListener="#{membroBean3.editar}"
+							update=":formEditar:painelEditar 
+							:formEditar:fotocarregada"
+							oncomplete="PF('dialogoeditar').show();">
+							<f:attribute name="membroSelecionado" value="#{membro}" />
+						</p:commandButton>
+							<p:button 
+								value="excluir membro"
+							outcome="/secretaria/exclusaodemembros.xhtml">
+							<f:param name="codigo" value="#{membro.codigo}"/>
+							</p:button>
+							
+							<p:button 
+								value="certificado de batismo"
+							outcome="/secretaria/certificadodebatismo.xhtml">
+							<f:param name="codigo" value="#{membro.codigo}"/>
+							</p:button>
+							
+							
+							
+					</p:column>
+					
+					
+				</p:dataTable>
+
+				
+			</p:panel>
+			
+			
+			
+			
+			
+			<p:button 
+				value="voltar"
+				style="background-color:#FAF0E6;color:#006400;font-size:11px;"
+				outcome="/secretaria/secretaria.xhtml">
+			</p:button>
+		</h:form>
+
+		<p:dialog header="Detalhes do Membro" widgetVar="dialogo"
+			position="left"
+			hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formCadastro">
+				
+				<h:panelGrid id="painel" columns="1"
+					style="background-color:#C0C0C0;">
+					<p:graphicImage 
+							cache="false" 
+							width="180" 
+							height="180" 
+							url="http://localhost:8081/uploads/#{membroBean3.membro.codigo}.jpg"/>
+
+					<h:outputLabel value="codigo:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:outputText maxlength="100" size="80"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.codigo}" />
+
+					<h:outputLabel value="Nome:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:outputText maxlength="50" size="50"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.nome}" />
+						
+						<h:outputLabel value="Cargo:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:outputText maxlength="50" size="50"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.cargo.descricao}" />
+						
+						<h:outputLabel value="Congregação:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:outputText maxlength="50" size="50"
+						style="color:green;font-size:12px;"
+						value="#{membroBean3.membro.congregacao.descricao}" />
+						
+						<h:outputLabel value="Data de Batismo:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						<h:outputText value="#{membroBean3.membro.dataBatismo}"
+							style="color: #000080;font-size:16px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+							<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+								
+					/>
+					
+				</h:panelGrid>
+				
+			</h:form>
+		</p:dialog>
+
+	<p:dialog
+			 header="editar foto" 
+			 widgetVar="dialogoeditar"
+			 position="left"
+			hideEffect="puff" showEffect="puff" 
+			style="background-color:#ADD8E6;margin-left:1px;"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formEditar" enctype="multipart/form-data">
+			   <h:panelGrid columns="2"
+			   	id="painelEditar"
+                 style="background-color:#F4A460">
+					<p:fileUpload 
+						label="procurar foto"
+						id="foto" 
+						auto="true" 
+						mode="advanced"
+						fileUploadListener="#{membroBean3.upload}" update=":mensagem :formEditar:fotocarregada" />
+						
+                   <p:graphicImage style="margin-left:1px"
+                      cache="false"
+                   		id="fotocarregada" 
+                   		value="#{imagemBean.foto}"
+                   		width="100"
+                   		height="100">
+                   	<f:param name="caminho" value="#{membroBean3.membro.caminho}"/>
+                   </p:graphicImage>
+                   </h:panelGrid>
+                   <h:panelGrid columns="2">
+                   		<p:commandButton value="Salvar"
+						actionListener="#{membroBean3.salvar}"
+						update=":mensagem  :formEditar:painelEditar :formListagem:tabela" 
+						style="background-color:#FAF0E6;color:#006400;"/>
+						
+						<p:commandButton value="fechar" type="button" onclick="PF('dialogoeditar').hide();" 
+							style="background-color:#FAF0E6;color:#006400;"/>
+                   
+                   </h:panelGrid>
+                
+			</h:form>
+		</p:dialog>
+		
+		
+		
+		<p:dialog
+			 header="editar foto" 
+			 widgetVar="dialogoInativo"
+			 position="left"
+			hideEffect="puff" showEffect="puff" 
+			style="background-color:#ADD8E6;margin-left:1px;"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formInativo">
+			   <h:panelGrid columns="1"
+			   	id="painelInativo"
+                 >
+					
+               
+                   
+
+
+                   		<p:commandButton value="excluir membro"
+						actionListener="#{membroBean3.excluirMembro}"
+						update=":mensagem   :formListagem:tabela" 
+						>
+						
+						</p:commandButton>
+						
+						<p:commandButton value="fechar" type="button" onclick="PF('dialogoInativo').hide();" 
+							style="background-color:#FAF0E6;color:#006400;"/>
+                   
+                   </h:panelGrid>
+                
+			</h:form>
+		</p:dialog>
+		
+		
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+

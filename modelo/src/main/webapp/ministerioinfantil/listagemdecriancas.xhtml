@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		
+		
+		<h:form id="formListagem">
+			<p:panel header="Listagem de crianças">
+				
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					paginator="true" value="#{criancaBean.criancas}" var="cri"
+					rows="5">
+					<f:facet name="header">
+							<p:button value="matricula nova criança"
+								outcome="/ministerioinfantil/inclusaodecriancas.xhtml">
+							</p:button>
+							
+					</f:facet>
+					
+					<p:column headerText="codigo" 
+						width="30"
+						style="color:red;font-size:10px;font-style:italic;font-weight:bold" 
+						>
+						<h:outputText value="#{cri.codigo}"
+							style="color:red;font-size:10px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="Nome" sortBy="#{cri.nome}"
+						width="30"
+						style="color:red;font-size:10px;font-style:italic;font-weight:bold"
+						filterBy="#{cri.nome}">
+						<h:outputText value="#{cri.nome}"
+							style="color:red;font-size:10px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="idade" 
+						width="30"
+						style="color:red;font-size:10px;font-style:italic;font-weight:bold"
+						>
+						<h:outputText value="#{cri.idade}"
+							style="color:red;font-size:10px;font-style:italic;font-weight:bold" />
+					</p:column>
+
+					<p:column headerText="Opções" width="30"
+					style="color:red;font-size:10px;font-style:italic;font-weight:bold" >
+							<p:button value="editar"
+							outcome="/ministerioinfantil/edicaodecriancas.xhtml">
+							<f:param name="codigo" value="#{cri.codigo}"/>
+							</p:button>
+							
+							
+							
+						
+					</p:column>
+				</p:dataTable>
+
+				
+			</p:panel>
+		</h:form>
+		
+
+	</ui:define>
+
+</ui:composition>
+
+
+

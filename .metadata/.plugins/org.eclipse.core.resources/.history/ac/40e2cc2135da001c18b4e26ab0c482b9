@@ -1,0 +1,59 @@
+package daos;
+
+import org.hibernate.Criteria;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
+
+import cadastrocursos.model.Modulo;
+import entidades.Usuario;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import utils.HibernateUtil;
+
+public class UsuarioDao extends GenericDaoHibernate<Usuario> {
+	/*public Usuario autenticar(String login, String senha) {
+		Session sessao = utils.HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			Query query = sessao.createQuery("select Usuario  from Usuario u where u.login=:login and u.senha=:senha");
+			// long contador=(long) query.uniqueResult();
+			((Object) query).setString("login", login);
+			((Object) query).setString("senha", senha);
+			Usuario user = (Usuario) query.uniqueResult();
+			return user;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}*/
+
+	
+	/*public Usuario autenticarUsuario(String cpf, String senha) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+
+		try {
+			Criteria consulta = sessao.createCriteria(Usuario.class);
+			sessao.createQ
+
+			consulta.add(Restrictions.eq("cpf", cpf));
+
+
+			consulta.add(Restrictions.eq("senha", senha));
+			Usuario resultado = (Usuario) consulta.uniqueResult();
+
+			return resultado;
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}*/
+	
+	 public  Usuario getModuloPorNome(String cpf,String senha) {
+		    TypedQuery<Modulo> query = em.createQuery(
+		        "SELECT m FROM Modulo m WHERE m.nome = :nome", Modulo.class);
+		    return query.setParameter("nome", nome).getSingleResult();
+		  } 
+}

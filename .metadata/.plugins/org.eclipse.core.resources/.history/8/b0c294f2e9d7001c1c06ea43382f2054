@@ -1,0 +1,87 @@
+package meucursoJPA.model.escoladominical;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the aluno database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Aluno.findAll", query="SELECT a FROM Aluno a")
+public class Aluno extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Classe classe;
+	private Membro membro;
+	private List<Aula> aulas;
+
+	public Aluno() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	//bi-directional many-to-one association to Classe
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="codigo"),
+		
+		})
+	public Classe getClasse() {
+		return this.classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+
+	//bi-directional one-to-one association to Membro
+	@OneToOne
+	@JoinColumn(name="codigo", referencedColumnName="codigo")
+	public Membro getMembro() {
+		return this.membro;
+	}
+
+	public void setMembro(Membro membro) {
+		this.membro = membro;
+	}
+
+
+	//bi-directional many-to-one association to Aula
+	@OneToMany(mappedBy="aluno")
+	public List<Aula> getAulas() {
+		return this.aulas;
+	}
+
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
+	}
+
+	public Aula addAula(Aula aula) {
+		getAulas().add(aula);
+		aula.setAluno(this);
+
+		return aula;
+	}
+
+	public Aula removeAula(Aula aula) {
+		getAulas().remove(aula);
+		aula.setAluno(null);
+
+		return aula;
+	}
+
+}

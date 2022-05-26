@@ -1,0 +1,42 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the tipo_despesa_igreja database table.
+ * 
+ */
+@Entity
+@Table(name="tipo_despesa_igreja")
+@NamedQuery(name="TipoDespesaIgreja.findAll", query="SELECT t FROM TipoDespesaIgreja t")
+public class TipoDespesaIgreja implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String descricao;
+
+	public TipoDespesaIgreja() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+}

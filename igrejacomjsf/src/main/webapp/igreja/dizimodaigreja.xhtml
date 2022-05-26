@@ -1,0 +1,138 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	
+		
+		<h:form id="formListagem">
+		<p:panel header="Listagem dos dizimos">
+			
+		  	
+		  	
+		  
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:10px;margin-left:1px;"
+				paginator="true" value="#{dizimodaigrejaBean.dizimos}" var="dizimo" rows="5">
+				<f:facet name="header">
+					<p:commandButton value=" Novo Dízimo" oncomplete="PF('dialogo').show();"
+						
+						actionListener="#{dizimodaigrejaBean.novo}" update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						<p:button value="FAZER LANÇAMENTO" href="/igreja/lancamentodizimosdaigreja.xhtml">
+							<p:graphicImage library="fotos" name="financeiro01.jpg"/>
+						</p:button>
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+							
+				</f:facet>
+
+				<p:column headerText="Data de entrega do Dízimo" sortBy="#{dizimo.dataDizimoIgreja}"
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{dizimo.dataDizimoIgreja}">
+						<h:outputText value="#{dizimo.dataDizimoIgreja}"
+							style="color: #000080;font-size:16px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="dizimista" sortBy="#{dizimo.dizimistaIgreja.nome}"
+						width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{dizimo.dizimistaIgreja.nome}">
+					<h:outputText value="#{dizimo.dizimistaIgreja.nome}" 
+					style="color: #000080;font-size:12px;"/>
+				</p:column>
+				<p:column headerText="Valor do dizimo" sortBy="#{dizimo.valorDizimoIgreja}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{dizimo.valorDizimoIgreja}">
+					<h:outputText value="#{dizimo.valorDizimoIgreja}" 
+					style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				<p:column headerText="Opções"
+				width="30"
+				style="background-color:#C0C0C0;color:red;font-size:12px;" >
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{ofertaBean.editar}"
+						update=":formCadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="dizimoSelecionado" value="#{dizimo}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+          
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="novo Dízimo" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" 
+		sposition="left"
+		width="280"
+		style="background-color:#ADD8E6;margin-left:1px;"
+		
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data do dizimo:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar 
+					effect="fold"
+					value="#{dizimodaigrejaBean.dizimo.dataDizimoIgreja}" 
+					 pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					
+					<h:outputLabel value="dizimista:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" 
+						/>
+				<p:selectOneMenu filter="true"
+					value="#{dizimodaigrejaBean.dizimo.dizimistaIgreja}"
+					converter="omnifaces.SelectItemsConverter"
+					>
+					<f:selectItem noSelectionOption="true"
+						itemLabel="selecione o dizimista" />
+					<f:selectItems value="#{dizimodaigrejaBean.dizimistas}" var="d"
+						itemValue="#{d}" itemLabel="#{d.nome}" />
+				</p:selectOneMenu>
+					
+					<h:outputLabel value="Valor do dizimo:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="50" size="30"
+					value="#{dizimodaigrejaBean.dizimo.valorDizimoIgreja}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+					actionListener="#{dizimodaigrejaBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" 
+					/>
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+					/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

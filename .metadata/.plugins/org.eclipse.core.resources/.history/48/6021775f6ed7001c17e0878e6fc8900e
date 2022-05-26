@@ -1,0 +1,102 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the campanha database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Campanha.findAll", query="SELECT c FROM Campanha c")
+public class Campanha implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataCampanha;
+	private String nomeCampanha;
+	private String objetivoCampanha;
+	private BigDecimal valorCampanha;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public Campanha() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_campanha")
+	public Date getDataCampanha() {
+		return this.dataCampanha;
+	}
+
+	public void setDataCampanha(Date dataCampanha) {
+		this.dataCampanha = dataCampanha;
+	}
+
+
+	@Column(name="nome_campanha")
+	public String getNomeCampanha() {
+		return this.nomeCampanha;
+	}
+
+	public void setNomeCampanha(String nomeCampanha) {
+		this.nomeCampanha = nomeCampanha;
+	}
+
+
+	@Column(name="objetivo_campanha")
+	public String getObjetivoCampanha() {
+		return this.objetivoCampanha;
+	}
+
+	public void setObjetivoCampanha(String objetivoCampanha) {
+		this.objetivoCampanha = objetivoCampanha;
+	}
+
+
+	@Column(name="valor_campanha")
+	public BigDecimal getValorCampanha() {
+		return this.valorCampanha;
+	}
+
+	public void setValorCampanha(BigDecimal valorCampanha) {
+		this.valorCampanha = valorCampanha;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

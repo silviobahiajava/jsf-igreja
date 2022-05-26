@@ -1,0 +1,140 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+				  
+			
+			 
+			 
+		<h:form id="formListagem">
+		<p:panel header="dízimos para  registrar no Livro Caixa da Igreja" >
+		
+		   
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:10px;margin-left:1px;"
+				paginator="true" value="#{lancamentodizimodaigrejaBean.listaDeDizimos}" var="item" rows="5">
+				<f:facet name="header">
+				
+								<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data de entrega do Dízimo" 
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:14px;" >
+					<h:outputText value="#{item.dataDizimoIgreja}" 
+						style="color: #000080;font-size:14px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+					
+					
+				<p:column headerText="Valor do dizimo" sortBy="#{item.valorDizimoIgreja}"
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:14px;" 
+					filterBy="#{item.valorDizimoIgreja}">
+					<h:outputText value="#{item.valorDizimoIgreja}" 
+						style="color: #000080;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				
+				<p:column headerText="Opções" 
+					width="30"
+				style="background-color:#C0C0C0;color:red;font-size:14px;" >
+					<p:commandButton icon="ui-icon-plus"
+						style="color: #000080;font-size:14px;"
+						value="registrar no caixa"
+						actionListener="#{lancamentodizimodaigrejaBean.adicionarDizimos}"
+						update=":mensagem :formlancamento:paineldizimolancamento :formListagem:tabela :formlancamento:total">
+						<f:attribute name="dizimoSelecionado" value="#{item}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+ 			
+			
+		</p:panel>
+	</h:form>
+	<p:spacer height="120"/>
+	
+	
+	<h:form id="formlancamento">
+ <p:panel header="dizimos da igreja para lancar no livro caixa" id="paineldizimolancamento">
+       
+			<p:dataTable id="tabelacompralancamento"
+				style="width:600px;margin-top:10px;margin-left:300px;"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{lancamentodizimodaigrejaBean.listaDeDizimosPraLancamento}" var="dizimo" rows="5"
+				paginatorPosition="bottom">
+				<f:facet name="header">
+					<h:link outcome="financeiro">
+									<p:graphicImage name="images/ofertapq1.jpg"  library="adamantium-layout"/>
+					   			</h:link>
+				</f:facet>
+
+				
+
+				<p:column headerText="Valor do dízimo" 
+				width="30"
+				style="background-color:#C0C0C0;color:red;font-size:14px;" >
+					<h:outputText value="#{dizimo.valorDizimoIgreja}" 
+						style="color: #000080;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Data de entrega do dízimo" 
+				style="background-color:#C0C0C0;color:red;font-size:14px;" 
+					width="30" >
+					<h:outputText value="#{dizimo.dataDizimoIgreja}" 
+						style="color: #000080;font-size:14px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				
+
+<!-- 				<p:column headerText="Opções"> -->
+<!-- 					<p:commandButton icon="ui-icon-minus" -->
+<!-- 						actionListener="#{vendaBean.remover}" -->
+<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			</p:dataTable>
+			
+			
+			<p:panelGrid id="total" columns="2" rendered="false">
+				<h:outputLabel value="total" style="color: #000080;font-size:10px;" />
+				<h:outputText value="#{lancamentodizimodaigrejaBean.dizimo.lancamento.receita}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+			</p:panelGrid>
+			<h:panelGrid columns="2">	
+					<p:commandButton value="confirmar lançamento no livro caixa"
+					style="background-color:#FAF0E6;color:#006400;"
+					actionListener="#{lancamentodizimodaigrejaBean.salvarLancamentoDeDizimos}"
+					update=":mensagem " />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+				style="background-color:#FAF0E6;color:#006400;"/>
+			</h:panelGrid>
+		
+		</p:panel>
+
+		</h:form>	
+	
+    
+	</ui:define>
+
+</ui:composition>
+
+

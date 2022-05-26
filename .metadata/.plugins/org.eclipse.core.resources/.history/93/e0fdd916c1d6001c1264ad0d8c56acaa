@@ -1,0 +1,92 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the contribuicao database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Contribuicao.findAll", query="SELECT c FROM Contribuicao c")
+public class Contribuicao implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigInteger contribuinteCodigo;
+	private Date dataContribuicao;
+	private BigDecimal valorContribuicao;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public Contribuicao() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="contribuinte_codigo")
+	public BigInteger getContribuinteCodigo() {
+		return this.contribuinteCodigo;
+	}
+
+	public void setContribuinteCodigo(BigInteger contribuinteCodigo) {
+		this.contribuinteCodigo = contribuinteCodigo;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_contribuicao")
+	public Date getDataContribuicao() {
+		return this.dataContribuicao;
+	}
+
+	public void setDataContribuicao(Date dataContribuicao) {
+		this.dataContribuicao = dataContribuicao;
+	}
+
+
+	@Column(name="valor_contribuicao")
+	public BigDecimal getValorContribuicao() {
+		return this.valorContribuicao;
+	}
+
+	public void setValorContribuicao(BigDecimal valorContribuicao) {
+		this.valorContribuicao = valorContribuicao;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

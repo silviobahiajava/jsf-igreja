@@ -1,0 +1,248 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.math.BigInteger;
+import java.util.List;
+
+
+/**
+ * The persistent class for the cliente database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String bairroCliente;
+	private String cep;
+	private String cidadeCliente;
+	private String cpfCliente;
+	private Date dataCadastro;
+	private BigInteger documentacaoCodigo;
+	private String emailCliente;
+	private String logradouroCliente;
+	private String nomeCliente;
+	private String numeroLogradouroCliente;
+	private List<Documentacao> documentacaos;
+	private List<Pagamento> pagamentos;
+	private List<PagamentoCliente> pagamentoClientes;
+	private List<Telefone> telefones;
+
+	public Cliente() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="bairro_cliente")
+	public String getBairroCliente() {
+		return this.bairroCliente;
+	}
+
+	public void setBairroCliente(String bairroCliente) {
+		this.bairroCliente = bairroCliente;
+	}
+
+
+	public String getCep() {
+		return this.cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+
+	@Column(name="cidade_cliente")
+	public String getCidadeCliente() {
+		return this.cidadeCliente;
+	}
+
+	public void setCidadeCliente(String cidadeCliente) {
+		this.cidadeCliente = cidadeCliente;
+	}
+
+
+	@Column(name="cpf_cliente")
+	public String getCpfCliente() {
+		return this.cpfCliente;
+	}
+
+	public void setCpfCliente(String cpfCliente) {
+		this.cpfCliente = cpfCliente;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_cadastro")
+	public Date getDataCadastro() {
+		return this.dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+
+	@Column(name="documentacao_codigo")
+	public BigInteger getDocumentacaoCodigo() {
+		return this.documentacaoCodigo;
+	}
+
+	public void setDocumentacaoCodigo(BigInteger documentacaoCodigo) {
+		this.documentacaoCodigo = documentacaoCodigo;
+	}
+
+
+	@Column(name="email_cliente")
+	public String getEmailCliente() {
+		return this.emailCliente;
+	}
+
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
+	}
+
+
+	@Column(name="logradouro_cliente")
+	public String getLogradouroCliente() {
+		return this.logradouroCliente;
+	}
+
+	public void setLogradouroCliente(String logradouroCliente) {
+		this.logradouroCliente = logradouroCliente;
+	}
+
+
+	@Column(name="nome_cliente")
+	public String getNomeCliente() {
+		return this.nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+
+	@Column(name="numero_logradouro_cliente")
+	public String getNumeroLogradouroCliente() {
+		return this.numeroLogradouroCliente;
+	}
+
+	public void setNumeroLogradouroCliente(String numeroLogradouroCliente) {
+		this.numeroLogradouroCliente = numeroLogradouroCliente;
+	}
+
+
+	//bi-directional many-to-one association to Documentacao
+	@OneToMany(mappedBy="cliente")
+	public List<Documentacao> getDocumentacaos() {
+		return this.documentacaos;
+	}
+
+	public void setDocumentacaos(List<Documentacao> documentacaos) {
+		this.documentacaos = documentacaos;
+	}
+
+	public Documentacao addDocumentacao(Documentacao documentacao) {
+		getDocumentacaos().add(documentacao);
+		documentacao.setCliente(this);
+
+		return documentacao;
+	}
+
+	public Documentacao removeDocumentacao(Documentacao documentacao) {
+		getDocumentacaos().remove(documentacao);
+		documentacao.setCliente(null);
+
+		return documentacao;
+	}
+
+
+	//bi-directional many-to-one association to Pagamento
+	@OneToMany(mappedBy="cliente")
+	public List<Pagamento> getPagamentos() {
+		return this.pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+
+	public Pagamento addPagamento(Pagamento pagamento) {
+		getPagamentos().add(pagamento);
+		pagamento.setCliente(this);
+
+		return pagamento;
+	}
+
+	public Pagamento removePagamento(Pagamento pagamento) {
+		getPagamentos().remove(pagamento);
+		pagamento.setCliente(null);
+
+		return pagamento;
+	}
+
+
+	//bi-directional many-to-one association to PagamentoCliente
+	@OneToMany(mappedBy="cliente")
+	public List<PagamentoCliente> getPagamentoClientes() {
+		return this.pagamentoClientes;
+	}
+
+	public void setPagamentoClientes(List<PagamentoCliente> pagamentoClientes) {
+		this.pagamentoClientes = pagamentoClientes;
+	}
+
+	public PagamentoCliente addPagamentoCliente(PagamentoCliente pagamentoCliente) {
+		getPagamentoClientes().add(pagamentoCliente);
+		pagamentoCliente.setCliente(this);
+
+		return pagamentoCliente;
+	}
+
+	public PagamentoCliente removePagamentoCliente(PagamentoCliente pagamentoCliente) {
+		getPagamentoClientes().remove(pagamentoCliente);
+		pagamentoCliente.setCliente(null);
+
+		return pagamentoCliente;
+	}
+
+
+	//bi-directional many-to-one association to Telefone
+	@OneToMany(mappedBy="cliente")
+	public List<Telefone> getTelefones() {
+		return this.telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+	public Telefone addTelefone(Telefone telefone) {
+		getTelefones().add(telefone);
+		telefone.setCliente(this);
+
+		return telefone;
+	}
+
+	public Telefone removeTelefone(Telefone telefone) {
+		getTelefones().remove(telefone);
+		telefone.setCliente(null);
+
+		return telefone;
+	}
+
+}

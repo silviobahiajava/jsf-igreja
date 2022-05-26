@@ -1,0 +1,139 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the despesas_pagas_da_igreja database table.
+ * 
+ */
+@Entity
+@Table(name="despesas_pagas_da_igreja")
+@NamedQuery(name="DespesasPagasDaIgreja.findAll", query="SELECT d FROM DespesasPagasDaIgreja d")
+public class DespesasPagasDaIgreja implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataPagamentoDespesaDaIgreja;
+	private Date dataVencimentoDespesaDaIgreja;
+	private String descricaoDespesaDaIgreja;
+	private String situacaoDaDespesaEnum;
+	private String tipoDespesaEnum;
+	private BigDecimal valorDespescaDaIgreja;
+	private DespesaDaIgreja despesaDaIgreja;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public DespesasPagasDaIgreja() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_pagamento_despesa_da_igreja")
+	public Date getDataPagamentoDespesaDaIgreja() {
+		return this.dataPagamentoDespesaDaIgreja;
+	}
+
+	public void setDataPagamentoDespesaDaIgreja(Date dataPagamentoDespesaDaIgreja) {
+		this.dataPagamentoDespesaDaIgreja = dataPagamentoDespesaDaIgreja;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_vencimento_despesa_da_igreja")
+	public Date getDataVencimentoDespesaDaIgreja() {
+		return this.dataVencimentoDespesaDaIgreja;
+	}
+
+	public void setDataVencimentoDespesaDaIgreja(Date dataVencimentoDespesaDaIgreja) {
+		this.dataVencimentoDespesaDaIgreja = dataVencimentoDespesaDaIgreja;
+	}
+
+
+	@Column(name="descricao_despesa_da_igreja")
+	public String getDescricaoDespesaDaIgreja() {
+		return this.descricaoDespesaDaIgreja;
+	}
+
+	public void setDescricaoDespesaDaIgreja(String descricaoDespesaDaIgreja) {
+		this.descricaoDespesaDaIgreja = descricaoDespesaDaIgreja;
+	}
+
+
+	@Column(name="situacao_da_despesa_enum")
+	public String getSituacaoDaDespesaEnum() {
+		return this.situacaoDaDespesaEnum;
+	}
+
+	public void setSituacaoDaDespesaEnum(String situacaoDaDespesaEnum) {
+		this.situacaoDaDespesaEnum = situacaoDaDespesaEnum;
+	}
+
+
+	@Column(name="tipo_despesa_enum")
+	public String getTipoDespesaEnum() {
+		return this.tipoDespesaEnum;
+	}
+
+	public void setTipoDespesaEnum(String tipoDespesaEnum) {
+		this.tipoDespesaEnum = tipoDespesaEnum;
+	}
+
+
+	@Column(name="valor_despesca_da_igreja")
+	public BigDecimal getValorDespescaDaIgreja() {
+		return this.valorDespescaDaIgreja;
+	}
+
+	public void setValorDespescaDaIgreja(BigDecimal valorDespescaDaIgreja) {
+		this.valorDespescaDaIgreja = valorDespescaDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to DespesaDaIgreja
+	@ManyToOne
+	@JoinColumn(name="despesa_da_igreja_codigo")
+	public DespesaDaIgreja getDespesaDaIgreja() {
+		return this.despesaDaIgreja;
+	}
+
+	public void setDespesaDaIgreja(DespesaDaIgreja despesaDaIgreja) {
+		this.despesaDaIgreja = despesaDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

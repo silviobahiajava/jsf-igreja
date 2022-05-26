@@ -1,0 +1,230 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the pagamento database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Pagamento.findAll", query="SELECT p FROM Pagamento p")
+public class Pagamento extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+
+
+	private String bairroCliente;
+	private String celular;
+	private String cep;
+	private String cidadeCliente;
+	private String cpfCliente;
+	private Date dataProcesso;
+	private String emailCliente;
+	private String logradouroCliente;
+	private String nomeCliente;
+	private String numeroLogradouroCliente;
+	private String telefone;
+	private String tipoProcesoEnum;
+	private BigDecimal valor;
+	private double valorTotal;
+	private Cliente cliente;
+	private Matricula matricula;
+	private List<Parcela> parcelas;
+
+	public Pagamento() {
+	}
+
+
+
+
+
+
+	@Column(name="bairro_cliente")
+	public String getBairroCliente() {
+		return this.bairroCliente;
+	}
+
+	public void setBairroCliente(String bairroCliente) {
+		this.bairroCliente = bairroCliente;
+	}
+
+
+	public String getCelular() {
+		return this.celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+
+	public String getCep() {
+		return this.cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+
+	@Column(name="cidade_cliente")
+	public String getCidadeCliente() {
+		return this.cidadeCliente;
+	}
+
+	public void setCidadeCliente(String cidadeCliente) {
+		this.cidadeCliente = cidadeCliente;
+	}
+
+
+	@Column(name="cpf_cliente")
+	public String getCpfCliente() {
+		return this.cpfCliente;
+	}
+
+	public void setCpfCliente(String cpfCliente) {
+		this.cpfCliente = cpfCliente;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_processo")
+	public Date getDataProcesso() {
+		return this.dataProcesso;
+	}
+
+	public void setDataProcesso(Date dataProcesso) {
+		this.dataProcesso = dataProcesso;
+	}
+
+
+	@Column(name="email_cliente")
+	public String getEmailCliente() {
+		return this.emailCliente;
+	}
+
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
+	}
+
+
+	@Column(name="logradouro_cliente")
+	public String getLogradouroCliente() {
+		return this.logradouroCliente;
+	}
+
+	public void setLogradouroCliente(String logradouroCliente) {
+		this.logradouroCliente = logradouroCliente;
+	}
+
+
+	@Column(name="nome_cliente")
+	public String getNomeCliente() {
+		return this.nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+
+	@Column(name="numero_logradouro_cliente")
+	public String getNumeroLogradouroCliente() {
+		return this.numeroLogradouroCliente;
+	}
+
+	public void setNumeroLogradouroCliente(String numeroLogradouroCliente) {
+		this.numeroLogradouroCliente = numeroLogradouroCliente;
+	}
+
+
+	public String getTelefone() {
+		return this.telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+
+	@Column(name="tipo_proceso_enum")
+	public String getTipoProcesoEnum() {
+		return this.tipoProcesoEnum;
+	}
+
+	public void setTipoProcesoEnum(String tipoProcesoEnum) {
+		this.tipoProcesoEnum = tipoProcesoEnum;
+	}
+
+
+	public BigDecimal getValor() {
+		return this.valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+
+	@Column(name="valor_total")
+	public double getValorTotal() {
+		return this.valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+
+	//bi-directional many-to-one association to Cliente
+	@ManyToOne
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	//bi-directional many-to-one association to Matricula
+	@ManyToOne
+	@JoinColumn(name="matricula_id")
+	public Matricula getMatricula() {
+		return this.matricula;
+	}
+
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+
+
+	//bi-directional many-to-one association to Parcela
+	@OneToMany(mappedBy="pagamento")
+	public List<Parcela> getParcelas() {
+		return this.parcelas;
+	}
+
+	public void setParcelas(List<Parcela> parcelas) {
+		this.parcelas = parcelas;
+	}
+
+	public Parcela addParcela(Parcela parcela) {
+		getParcelas().add(parcela);
+		parcela.setPagamento(this);
+
+		return parcela;
+	}
+
+	public Parcela removeParcela(Parcela parcela) {
+		getParcelas().remove(parcela);
+		parcela.setPagamento(null);
+
+		return parcela;
+	}
+
+}

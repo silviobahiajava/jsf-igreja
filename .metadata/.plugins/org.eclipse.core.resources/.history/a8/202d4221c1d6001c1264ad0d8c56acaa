@@ -1,0 +1,91 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the despesa_crianca database table.
+ * 
+ */
+@Entity
+@Table(name="despesa_crianca")
+@NamedQuery(name="DespesaCrianca.findAll", query="SELECT d FROM DespesaCrianca d")
+public class DespesaCrianca implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataPagamentoDespesaCrianca;
+	private String descricao;
+	private BigDecimal valorDespescaCrianca;
+	private Grupo grupo;
+	private Lancamento lancamento;
+
+	public DespesaCrianca() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_pagamento_despesa_crianca")
+	public Date getDataPagamentoDespesaCrianca() {
+		return this.dataPagamentoDespesaCrianca;
+	}
+
+	public void setDataPagamentoDespesaCrianca(Date dataPagamentoDespesaCrianca) {
+		this.dataPagamentoDespesaCrianca = dataPagamentoDespesaCrianca;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="valor_despesca_crianca")
+	public BigDecimal getValorDespescaCrianca() {
+		return this.valorDespescaCrianca;
+	}
+
+	public void setValorDespescaCrianca(BigDecimal valorDespescaCrianca) {
+		this.valorDespescaCrianca = valorDespescaCrianca;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+}

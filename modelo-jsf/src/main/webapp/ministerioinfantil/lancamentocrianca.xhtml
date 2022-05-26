@@ -1,0 +1,377 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+               
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+		<h:form id="formListagem">
+			<p:panel 
+			 	
+				header="FINANCEIRO DO MINISTÉRIO INFANTIL" style="color:red;">
+				<h:panelGrid rendered="#{lancamentoBean2.caixaAberto==true}" id="aberto">
+					<h:outputLabel value="CAIXA ABERTO" style="color:green"/>
+				</h:panelGrid>
+				
+				<h:panelGrid rendered="#{lancamentoBean2.caixaFechado==true}" id="fechado">
+					<h:outputLabel value="CAIXA FECHADO" style="color:red"/>
+				</h:panelGrid>
+				
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					styleClass="tabelaconteudo"
+					paginator="true"
+					value="#{lancamentoBean2.lancamentos}" var="lance" rows="5">
+					<f:facet name="header">
+						
+					     
+						 
+					   		
+					
+						<p:commandButton value="lançar no caixa"
+						 	
+							oncomplete="PF('dialogo').show();"
+							actionListener="#{lancamentoBean2.novo}"
+							update=":formCadastro:painel" />
+							<p:spacer width="10"/>
+							 <p:commandButton value="abrir caixa " 
+					   		actionListener="#{lancamentoBean2.abrirLivroCaixa}" 
+					   		update=":mensagem :formListagem:aberto"/>
+							<p:spacer width="10"/>
+<!-- 					   		 <p:commandButton value="abrir  pela primeira vez "  -->
+<!-- 							oncomplete="PF('dialogoAbertura').show();" -->
+<!-- 					   		update=":formAbertura:painelAbertura"/> -->
+<!-- 					   		<p:spacer width="10"/> -->
+					   		<p:commandButton value="fechar caixa " 
+					   		actionListener="#{lancamentoBean2.fecharLivroCaixa}" 
+					   		update=":mensagem :formListagem:statusdocaixa :formListagem:fechado"/>
+					   		<p:spacer width="10"/>
+					   		<p:button
+							value="voltar"
+							outcome="financeiro"/>
+					   		
+					   		
+					   		
+					</f:facet>
+						<p:spacer height="300"/>
+					<p:column headerText="Data" sortBy="#{lance.data}"
+						width="30"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{lance.data}">
+						<h:outputText value="#{lance.data}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Histórico" sortBy="#{lance.historico}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						width="40" filterBy="#{lance.historico}">
+						<h:outputText value="#{lance.historico}"
+							style="color: #000080;font-size:12px;" />
+					</p:column>
+					<p:column headerText="Receita" sortBy="#{lance.receita}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;"
+						width="30" filterBy="#{lance.receita}">
+						<h:outputText value="#{lance.receita}"
+							style="color: #000080;font-size:12px;">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Despesa" sortBy="#{lance.despesa}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;"
+						 width="30" filterBy="#{lance.despesa}">
+						<h:outputText value="#{lance.despesa}"
+							style="color: #000080;font-size:12px;">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Saldo" sortBy="#{lance.saldo}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						width="30" filterBy="#{lance.saldo}">
+						<h:outputText value="#{lance.saldo}"
+							style="color: #000080;font-size:12px;">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:column>
+
+					
+
+
+
+
+					
+					
+					<f:facet name="footer">
+						<h:panelGroup>
+<!-- 							<p:outputLabel value="codigo" /> -->
+<!-- 							<p:inputText value="#{lancamentoBean2.codigo}" /> -->
+							<p:commandButton value="MOSTRAR BALANÇO GERAL"
+								icon="ui-icon-search" 
+								actionListener="#{lancamentoBean2.fazerBalancoGeral}"
+								update=":formListagem:painelResumo" />
+								
+								<p:commandButton value="MOSTRAR BALANÇO MENSAL"
+								icon="ui-icon-search" 
+								actionListener="#{lancamentoBean2.fazerBalancoMensalPorGrupo}"
+								update=":mensagem :formListagem:painelBalancoMensal" />
+								
+								<p:commandButton value="MOSTRAR SALDO MENSAL"
+								icon="ui-icon-search" 
+								actionListener="#{lancamentoBean2.buscarLancamentoMensalPorGrupo}"
+								update=":formListagem:saldomensal" />
+						</h:panelGroup>
+						
+					</f:facet>
+				</p:dataTable>
+             
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</p:panel>
+			<p:panel id="statusdocaixa">
+				<h:outputText value="#{lancamentoBean2.statusCaixa}"/>
+			</p:panel>
+			<p:panel id="painelResumo" style="background-color:#C0C0C0">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="total de receitas(entradas)" style="color:blue;font-size:14px;"/>
+					<h:outputText value="#{lancamentoBean2.valorReceita}" style="color:blue;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+					<h:outputLabel value="total de despesas(saída)" style="color:blue;font-size:14px;"/>
+					<h:outputText value="#{lancamentoBean2.valorDespesa}" style="color:blue;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</h:panelGrid>
+				<h:panelGrid rendered="#{lancamentoBean2.saldopositivo==true}">
+					
+					<h:outputText value="SALDO POSITIVO  #{lancamentoBean2.valorSaldo}"
+							style="color:blue;font-size:14px;">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+						
+						
+				</h:panelGrid>
+				
+				<h:panelGrid rendered="#{lancamentoBean2.saldonegativo==true}">
+					
+					<h:outputText value="SALDO NEGATIVO  #{lancamentoBean2.valorSaldo}"
+							style="color:red;font-size:14px;">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+				</h:panelGrid>
+			</p:panel>
+			
+			<p:panel id="painelSaldoInicial">
+				<h:panelGrid rendered="#{lancamentoBean2.semSaldoInicial==true}" columns="3">
+					
+					<h:outputLabel value="saldo inicial" style="color:blue;font-size:10px;"/>
+					 <p:inputText value="#{lancamentoBean2.saldoInicial}"
+							style="color:red;font-size:10px;">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</p:inputText> 
+						<p:commandButton value="registrar saldo inicial"
+								icon="ui-icon-search" style="color:#992244;"
+								actionListener="#{lancamentoBean2.registrarSaldoInicial}"
+								update=":mensagem :formListagem:tabela" />
+				</h:panelGrid>
+			</p:panel>
+			
+			<p:panel id="saldomensal" style="background-color:#C0C0C0;">
+					<h:outputText value="SALDO DO MÊS  #{lancamentoBean2.saldoMensal}"
+							style="color:blue;font-size:14px;font-style:bold">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+			</p:panel>
+			
+			
+			<p:panel id="painelBalancoMensal" style="background-color:#C0C0C0">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="RECEITA DO MÊS" style="color:blue;font-size:14px;"/>
+					<h:outputText value="#{lancamentoBean2.receitaMensal}" style="color:blue;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+					
+					
+					<h:outputLabel value="DESPESA DO MÊS " style="color:blue;font-size:14px;"/>
+					<h:outputText value="#{lancamentoBean2.despesaMensal}" style="color:blue;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				
+				
+					<h:outputLabel value="SALDO DO MÊS " style="color:blue;font-size:14px;"/>
+					<h:outputText value="#{lancamentoBean2.saldoMensal}" style="color:blue;font-size:14px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+					
+				</h:panelGrid>
+				
+			</p:panel>
+			
+			
+			
+		</h:form>
+		<!-- 
+      cores para o dialog
+      #00CCCC
+    -->
+    
+<!--     <p:dialog header="Abertura de caixa" widgetVar="dialogoAbertura" -->
+<!--     	position="left" -->
+<!-- 		hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6;margin-left:1px;" -->
+<!-- 		draggable="false" resizable="false" closable="false"> -->
+<!-- 		<h:form id="formAbertura"> -->
+<!-- 			<h:panelGrid id="painelAbertura" columns="2"> -->
+<!-- 				<h:outputLabel value="Data de abertura do caixa:"  -->
+<!-- 					style="color:red;font-size:14px;font-style:italic;font-weight:bold" -->
+<!-- 				/> -->
+<!-- 				<p:calendar maxlength="50" size="30" -->
+<!-- 					effect="fold" -->
+<!-- 					value="#{lancamentoBean2.lancamento.data}"  -->
+<!-- 					 pattern="dd/MM/yyyy HH:mm" locale="pt_BR" -->
+<!-- 						timeZone="America/Sao_Paulo" /> -->
+						
+<!-- 						<h:outputLabel value="Valor de abertura:"  -->
+<!-- 						style="color:red;font-size:14px;font-style:italic;font-weight:bold" -->
+<!-- 						/> -->
+<!-- 				<p:inputText maxlength="50" size="30" -->
+<!-- 					value="#{lancamentoBean2.lancamento.saldoInicial}"> -->
+<!-- 						<f:convertNumber locale="pt_BR" minFractionDigits="2" /> -->
+<!-- 					</p:inputText> -->
+					
+<!-- 					 <p:commandButton value="sair"  -->
+<!-- 					 		actionListener="#{lancamentoBean2.abrirLivroCaixaPelaPrimeiraVez}" -->
+<!-- 					 		update=":mensagem :formListagem:tabela" -->
+<!-- 					   		oncomplete="PF('dialogoAbertura').hide();"/> -->
+					 
+<!-- 					   		 <p:commandButton value="sair"  -->
+<!-- 					   		oncomplete="PF('dialogoAbertura').hide();"/> -->
+				
+				
+<!-- 		</h:panelGrid> -->
+<!-- 		</h:form> -->
+<!-- 		</p:dialog> -->
+    
+		<p:dialog header="Lançamentos no Livro Caixa da Igreja"
+			position="left"
+			widgetVar="dialogo" hideEffect="puff" showEffect="puff"
+		style="background-color:#FFDEAD;font-color:#800000;margin-left:1px;"
+			draggable="false" resizable="false" closable="false">
+			<h:form id="formCadastro">
+				<h:panelGrid id="painel" columns="4">
+					<h:outputLabel value="tipo de lancamento:" for="tipo"
+						style="color:#A52A2A;font-size:15px;" />
+					<h:selectOneMenu id="tipo" style="color:brown;font-size:15px;"
+						value="#{lancamentoBean2.lancamento.tipo}" required="true"
+						requiredMessage="informe o tipo de lançamento">
+						<f:selectItem itemLabel="selecione o tipo movimentacao financeira" 
+						/>
+						<f:selectItem itemValue="RECEITA" itemLabel="RECEITA OU ENTRADA" />
+						<f:selectItem itemValue="DESPESA" itemLabel="DESPESAS OU SAÍDA" />
+						<f:ajax render="@form" execute="@form" />
+					</h:selectOneMenu>
+					
+
+					
+					
+				</h:panelGrid>
+				
+					<!-- se o usuário escolher RECEITA OU ENTRADA -->
+				<h:panelGrid columns="2"
+					>
+					<h:outputLabel value="tipo de receita:" for="tiporeceita"
+						style="color:#A52A2A;font-size:30px;" />
+					<p:selectOneMenu id="tiporeceita" style="color:yellow"
+						value="#{lancamentoBean2.lancamento.tipoReceita}" required="true"
+						requiredMessage="selecione o tipo de receita ou entrada">
+						<f:selectItem itemLabel="selecione o tipo de receita" />
+						<f:selectItem itemValue="DIZIMOS" itemLabel="DIZIMOS"/>
+						<f:selectItem itemValue="OFERTAS" itemLabel="OFERTAS" />
+						<f:selectItem itemValue="CAMPANHA" itemLabel="CAMPANHA"/>
+						<f:selectItem itemValue="CONTRIBUICAO" itemLabel="CONTRIBUICAO" />
+						<f:ajax render="@form" execute="@form" />
+					</p:selectOneMenu>
+					
+					<!-- se o usuário escolher DESPESAS OU SAÍDA -->
+				</h:panelGrid>
+				<h:panelGrid columns="2"
+					>
+					<p:outputLabel value="tipo de despesa:" for="tipodespesa"
+						style="color:#A52A2A;font-size:30px;" />
+					<p:selectOneMenu id="tipodespesa" style="color:yellow"
+						value="#{lancamentoBean2.lancamento.tipoDespesa}" required="true"
+						requiredMessage="informe o tipo de despesa">
+						<f:selectItem itemLabel="selecione o tipo de despesa" />
+						<f:selectItem itemValue="COMPRA" itemLabel="COMPRA" />
+						<f:selectItem itemValue="PAGAMENTOAGUA"
+							itemLabel="PAGAMENTO DE AGUA" />
+						<f:selectItem itemValue="PAGAMENTOLUZ"
+							itemLabel="PAGAMENTO DE LUZ" />
+						<f:selectItem itemValue="DESPESACONGRESSO"
+							itemLabel="DESPESAS COM CONGRESSO" />
+						<f:selectItem itemValue="DESPESAEBF" itemLabel="DESPESAS COM EBF" />
+						<f:ajax render="@form" execute="@form" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+								
+              <!-- esolhendo tipos de despesa-->
+              	<!-- se o usuário escolher o tipo de despesa COMPRA -->
+				<h:panelGrid columns="2"
+					>
+					<h:commandLink action="/ministerioinfantil/lancamentocompradascriancas.xhtml"
+						value="lançamento de compras do Ministéiro Infantil" style="color:red;font-size:20px;" />
+				</h:panelGrid>
+				
+				
+				<h:panelGrid columns="2"
+					>
+					<h:commandLink action="/igreja/lancamentodeofertasdaigreja.xhtml"
+						value="lançamento de oferta do Ministério Infantil" style="color:red;font-size:20px;" />
+				</h:panelGrid>
+				
+				<!-- se o usuário escolher o tipo de despesa PAGAMENTO DE ÁGUA -->
+				
+<!-- 				<h:panelGrid columns="2" -->
+<!-- 					rendered="#{lancamentocomprasdosvaroesBean.lancamento.tipoDespesa.descricao.contains('PAGAMENTO DE AGUA')}"> -->
+<!-- 					<p:outputLabel value="Data do pagamento de agua:" -->
+<!-- 						for="datapagamentoagua" style="color:#A52A2A;font-size:30px;" /> -->
+<!-- 					<p:calendar id="datapagamentoagua" style="color:yellow"> -->
+<!-- 					</p:calendar> -->
+<!-- 				</h:panelGrid> -->
+				
+				
+				
+				
+<!-- 				<h:panelGrid columns="2" -->
+<!-- 					rendered="#{lancamentocomprasdosvaroesBean.lancamento.tipoReceita.descricao.contains('OFERTAS')}"> -->
+<!-- 					<h:commandLink action="/pages/lancamentoofertas.xhtml" -->
+<!-- 						value="lançamento de ofertas" style="color:red;font-size:20px;" /> -->
+<!-- 				</h:panelGrid> -->
+				
+<!-- 				<h:panelGrid columns="2" -->
+<!-- 					rendered="#{lancamentoBean2.lancamento.tipoReceita.descricao.contains('CAMPANHA')}"> -->
+<!-- 					<h:commandLink action="/pages/lancamentocampanha.xhtml" -->
+<!-- 						value="lançamento de campanhas" style="color:red;font-size:20px;" /> -->
+<!-- 				</h:panelGrid> -->
+				
+<!-- 				<h:panelGrid columns="2" -->
+<!-- 					rendered="#{lancamentoBean2.lancamento.tipoReceita.descricao.contains('CONTRIBUICAO')}"> -->
+<!-- 					<h:commandLink action="/pages/lancamentocontribuicao.xhtml" -->
+<!-- 						value="lançamento de contribuição" style="color:red;font-size:20px;" /> -->
+<!-- 				</h:panelGrid> -->
+
+			</h:form>
+		</p:dialog>
+		
+		
+	</ui:define>
+
+</ui:composition>
+
+

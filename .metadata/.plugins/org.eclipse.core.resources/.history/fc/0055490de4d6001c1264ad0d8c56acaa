@@ -1,0 +1,135 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the teste_data database table.
+ * 
+ */
+@Entity
+@Table(name="teste_data")
+@NamedQuery(name="TesteData.findAll", query="SELECT t FROM TesteData t")
+public class TesteData extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte[] curriculo;
+	private Date data;
+	private Date dataCadastro;
+	private Date dataLocal;
+	private Date dataSql;
+	private String dataStr;
+	private Date dataTeste;
+	private String nome;
+	private String nomeImagem;
+
+	public TesteData() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Lob
+	public byte[] getCurriculo() {
+		return this.curriculo;
+	}
+
+	public void setCurriculo(byte[] curriculo) {
+		this.curriculo = curriculo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	public Date getData() {
+		return this.data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_cadastro")
+	public Date getDataCadastro() {
+		return this.dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_local")
+	public Date getDataLocal() {
+		return this.dataLocal;
+	}
+
+	public void setDataLocal(Date dataLocal) {
+		this.dataLocal = dataLocal;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_sql")
+	public Date getDataSql() {
+		return this.dataSql;
+	}
+
+	public void setDataSql(Date dataSql) {
+		this.dataSql = dataSql;
+	}
+
+
+	@Column(name="data_str")
+	public String getDataStr() {
+		return this.dataStr;
+	}
+
+	public void setDataStr(String dataStr) {
+		this.dataStr = dataStr;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_teste")
+	public Date getDataTeste() {
+		return this.dataTeste;
+	}
+
+	public void setDataTeste(Date dataTeste) {
+		this.dataTeste = dataTeste;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	@Column(name="nome_imagem")
+	public String getNomeImagem() {
+		return this.nomeImagem;
+	}
+
+	public void setNomeImagem(String nomeImagem) {
+		this.nomeImagem = nomeImagem;
+	}
+
+}

@@ -1,0 +1,98 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the pagamento_cliente database table.
+ * 
+ */
+@Entity
+@Table(name="pagamento_cliente")
+@NamedQuery(name="PagamentoCliente.findAll", query="SELECT p FROM PagamentoCliente p")
+public class PagamentoCliente extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataProcesso;
+	private String tipoProcessoEnum;
+	private double valorTotal;
+	private Cliente cliente;
+	private List<ParcelaCliente> parcelaClientes;
+
+	public PagamentoCliente() {
+	}
+
+
+	
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_processo")
+	public Date getDataProcesso() {
+		return this.dataProcesso;
+	}
+
+	public void setDataProcesso(Date dataProcesso) {
+		this.dataProcesso = dataProcesso;
+	}
+
+
+	@Column(name="tipo_processo_enum")
+	public String getTipoProcessoEnum() {
+		return this.tipoProcessoEnum;
+	}
+
+	public void setTipoProcessoEnum(String tipoProcessoEnum) {
+		this.tipoProcessoEnum = tipoProcessoEnum;
+	}
+
+
+	@Column(name="valor_total")
+	public double getValorTotal() {
+		return this.valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+
+	//bi-directional many-to-one association to Cliente
+	@ManyToOne
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	//bi-directional many-to-one association to ParcelaCliente
+	@OneToMany(mappedBy="pagamentoCliente")
+	public List<ParcelaCliente> getParcelaClientes() {
+		return this.parcelaClientes;
+	}
+
+	public void setParcelaClientes(List<ParcelaCliente> parcelaClientes) {
+		this.parcelaClientes = parcelaClientes;
+	}
+
+	public ParcelaCliente addParcelaCliente(ParcelaCliente parcelaCliente) {
+		getParcelaClientes().add(parcelaCliente);
+		parcelaCliente.setPagamentoCliente(this);
+
+		return parcelaCliente;
+	}
+
+	public ParcelaCliente removeParcelaCliente(ParcelaCliente parcelaCliente) {
+		getParcelaClientes().remove(parcelaCliente);
+		parcelaCliente.setPagamentoCliente(null);
+
+		return parcelaCliente;
+	}
+
+}

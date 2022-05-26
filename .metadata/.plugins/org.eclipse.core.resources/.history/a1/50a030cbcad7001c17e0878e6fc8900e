@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="meucursoJPA" transaction-type="RESOURCE_LOCAL">
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<non-jta-data-source>meucursoJPAConnection</non-jta-data-source>
+	 <class>meucursoJPA.model.GenericDomain</class>
+		<class>meucursoJPA.model.ministerioinfantil.AulaEscolinhaCrianca</class>
+		<class>meucursoJPA.model.BoletoPagamentoCliente</class>
+		<class>meucursoJPA.model.CampanhaDasCrianca</class>
+		<class>meucursoJPA.model.CampanhaDoPeCrianca</class>
+	
+		<class>meucursoJPA.model.CategoriaMovimentacaoFinanceira</class>
+<!-- 		<class>meucursoJPA.model.Classe</class> -->
+		<class>meucursoJPA.model.ContribuicaoDasCrianca</class>
+		
+		<class>meucursoJPA.model.ministerioinfantil.Crianca</class>
+		<class>meucursoJPA.model.ministerioinfantil.CriancaMatriculadaNaEscolinha</class>
+		<class>meucursoJPA.model.ministerioinfantil.CriancaMatriculadaNaEscolinhaAusente</class>
+		<class>meucursoJPA.model.CriancaNaEscolinhaPresente</class>
+		<class>meucursoJPA.model.ministerioinfantil.DespesaCrianca</class>
+		
+		<class>meucursoJPA.model.DocumentacaoMembro</class>
+		<class>meucursoJPA.model.EntradaItem</class>
+		<class>meucursoJPA.model.EntradaProduto</class>
+		<class>meucursoJPA.model.Estabelecimento</class>
+		<class>meucursoJPA.model.Evento</class>
+		<class>meucursoJPA.model.Filicacao</class>
+		<class>meucursoJPA.model.Funcionario</class>
+		<class>meucursoJPA.model.ItensVenda</class>
+		<class>meucursoJPA.model.LancamentoLivrocaixa</class>
+		<class>meucursoJPA.model.Matricula</class>
+		
+		<properties>
+<!--                        <property name="hibernate.archive.autodetection" value="class" />   -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3307/meucursoJPA?createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="123456"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	
+	</persistence-unit>
+</persistence>

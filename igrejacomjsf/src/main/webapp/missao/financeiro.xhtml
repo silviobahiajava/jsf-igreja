@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	<h:form>
+		
+				
+				
+				<h:link outcome="ofertadamissao">
+					<p:graphicImage name="images/oferta02.jpg"  library="adamantium-layout"/>
+				</h:link>
+				<p:spacer width="10"/>
+				<h:link outcome="contribuicaodamissao">
+					<p:graphicImage name="images/contribuicao01.jpg"  library="adamantium-layout"/>
+				</h:link>
+				<p:spacer width="10"/>
+				<h:link outcome="despesasdamissao">
+					<p:graphicImage name="images/despesapendente04.jpg"  library="adamantium-layout"/>
+				</h:link>
+				<p:spacer width="10"/>
+				<h:link outcome="lancamentomissao">
+					<p:graphicImage name="images/livrocaixa01.jpg"  library="adamantium-layout"/>
+				</h:link>
+				
+		
+		</h:form>
+	</ui:define>
+</ui:composition>

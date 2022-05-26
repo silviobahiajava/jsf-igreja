@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			<p:spacer height="120"/>
+
+
+
+			<h:form id="formListagem">
+				<p:panel header="Ofertas para  registrar no Livro Caixa da Igreja">
+
+					
+					
+						<p:dataTable id="tabela"
+							style="margin-top:180px;margin-left:5px;"
+							emptyMessage="Nenhum registro encontrado." paginator="true"
+							value="#{lancamentocontribuicaodaigrejaBean.listaDeContribuicoes}"
+							var="item" rows="5">
+							<f:facet name="header">
+								<p:button
+							value="voltar"
+							outcome="financeiro"/>
+							</f:facet>
+
+
+							<p:column headerText="Data da  contribuição"
+								sortBy="#{item.dataPrevistaPraContribuir}" width="30"
+								style="background-color:#C0C0C0;color:red;font-size:14px;"
+								filterBy="#{item.dataPrevistaPraContribuir}">
+								<h:outputText value="#{item.dataPrevistaPraContribuir}"
+									style="color: #000080;font-size:14px;">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+										timeZone="America/Sao_Paulo" />
+								</h:outputText>
+							</p:column>
+
+
+							<p:column headerText="Valor previsto para contribuição"
+								width="30"
+								sortBy="#{item.valorQuePodeContribuir}"
+								style="background-color:#C0C0C0;color:red;font-size:14px;"
+								filterBy="#{item.valorQuePodeContribuir}">
+								<h:outputText value="#{item.valorQuePodeContribuir}"
+									style="color: #000080;font-size:14px;">
+									<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+								</h:outputText>
+							</p:column>
+
+
+
+							<p:column headerText="Opções"
+								width="30"
+								style="background-color:#C0C0C0;color:red;font-size:14px;">
+								<p:commandButton icon="ui-icon-plus"
+									style="color: #000080;font-size:14px;"
+									value="registrar no caixa"
+									actionListener="#{lancamentocontribuicaodaigrejaBean.adicionarContribuicoes}"
+									update=":mensagem :formlancamento:painelcompralancamento :formListagem:tabela :formlancamento:total">
+									<f:attribute name="contribuicaoSelecionada" value="#{item}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					
+
+				</p:panel>
+			</h:form>
+
+			<h:form id="formlancamento">
+				<p:panel header="contribuições pra registrar  no livro caixa"
+					id="painelcompralancamento">
+					<p:dataTable id="tabelacompralancamento"
+						style="width:600px;margin-top:40px;margin-lefr:300px;"
+						emptyMessage="Nenhum registro encontrado." paginator="true"
+						value="#{lancamentocontribuicaodaigrejaBean.listaDeContribuicoesPraLancamento}"
+						var="contribuicao" rows="5" paginatorPosition="bottom">
+
+
+
+						<p:column headerText="Valor da contribuicao"
+							style="background-color:#C0C0C0;color:red;font-size:14px;">
+							<h:outputText value="#{contribuicao.valorQuePodeContribuir}"
+								style="color: #000080;font-size:16px;">
+								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Data de entrega da contribuição"
+							style="background-color:#C0C0C0;color:red;font-size:14px;">
+							<h:outputText value="#{contribuicao.dataPrevistaPraContribuir}"
+								style="color: #000080;font-size:16px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+						</p:column>
+
+
+
+						<!-- 				<p:column headerText="Opções"> -->
+						<!-- 					<p:commandButton icon="ui-icon-minus" -->
+						<!-- 						actionListener="#{vendaBean.remover}" -->
+						<!-- 						update=":formulario:tabelaCesta :formulario:painelFinalizacao"> -->
+						<!-- 						<f:attribute name="itemSelecionado" value="#{itemVenda}" /> -->
+						<!-- 					</p:commandButton> -->
+						<!-- 				</p:column> -->
+					</p:dataTable>
+					<p:panelGrid id="total" columns="2" rendered="false">
+						<h:outputLabel value="total"
+							style="color: #000080;font-size:16px;" />
+						<h:outputText
+							value="#{lancamentocontribuicaodaigrejaBean.contribuicao.lancamento.receita}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton value="confirmar lançamento no livro caixa"
+							style="background-color:#FAF0E6;color:#006400;"
+							actionListener="#{lancamentocontribuicaodaigrejaBean.salvarLancamentoDeContribuicoes}"
+							update=":mensagem " />
+						<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"
+							style="background-color:#FAF0E6;color:#006400;" />
+					</h:panelGrid>
+
+				</p:panel>
+
+			</h:form>
+		
+
+	</ui:define>
+
+</ui:composition>
+
+

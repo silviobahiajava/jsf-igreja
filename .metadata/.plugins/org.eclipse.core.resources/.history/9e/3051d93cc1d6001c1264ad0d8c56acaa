@@ -1,0 +1,128 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
+
+
+/**
+ * The persistent class for the materia_prima database table.
+ * 
+ */
+@Entity
+@Table(name="materia_prima")
+@NamedQuery(name="MateriaPrima.findAll", query="SELECT m FROM MateriaPrima m")
+public class MateriaPrima implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String descricao;
+	private BigDecimal precoTotal;
+	private BigDecimal precoUnitario;
+	private short quantidadeComprada;
+	private List<ItemCompraMateriaPrima> itemCompraMateriaPrimas;
+	private Grupo grupo;
+	private ProdutoFabricado produtoFabricado;
+
+	public MateriaPrima() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+
+	@Column(name="preco_total")
+	public BigDecimal getPrecoTotal() {
+		return this.precoTotal;
+	}
+
+	public void setPrecoTotal(BigDecimal precoTotal) {
+		this.precoTotal = precoTotal;
+	}
+
+
+	@Column(name="preco_unitario")
+	public BigDecimal getPrecoUnitario() {
+		return this.precoUnitario;
+	}
+
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
+		this.precoUnitario = precoUnitario;
+	}
+
+
+	@Column(name="quantidade_comprada")
+	public short getQuantidadeComprada() {
+		return this.quantidadeComprada;
+	}
+
+	public void setQuantidadeComprada(short quantidadeComprada) {
+		this.quantidadeComprada = quantidadeComprada;
+	}
+
+
+	//bi-directional many-to-one association to ItemCompraMateriaPrima
+	@OneToMany(mappedBy="materiaPrima")
+	public List<ItemCompraMateriaPrima> getItemCompraMateriaPrimas() {
+		return this.itemCompraMateriaPrimas;
+	}
+
+	public void setItemCompraMateriaPrimas(List<ItemCompraMateriaPrima> itemCompraMateriaPrimas) {
+		this.itemCompraMateriaPrimas = itemCompraMateriaPrimas;
+	}
+
+	public ItemCompraMateriaPrima addItemCompraMateriaPrima(ItemCompraMateriaPrima itemCompraMateriaPrima) {
+		getItemCompraMateriaPrimas().add(itemCompraMateriaPrima);
+		itemCompraMateriaPrima.setMateriaPrima(this);
+
+		return itemCompraMateriaPrima;
+	}
+
+	public ItemCompraMateriaPrima removeItemCompraMateriaPrima(ItemCompraMateriaPrima itemCompraMateriaPrima) {
+		getItemCompraMateriaPrimas().remove(itemCompraMateriaPrima);
+		itemCompraMateriaPrima.setMateriaPrima(null);
+
+		return itemCompraMateriaPrima;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to ProdutoFabricado
+	@ManyToOne
+	@JoinColumn(name="produto_fabricado_codigo")
+	public ProdutoFabricado getProdutoFabricado() {
+		return this.produtoFabricado;
+	}
+
+	public void setProdutoFabricado(ProdutoFabricado produtoFabricado) {
+		this.produtoFabricado = produtoFabricado;
+	}
+
+}

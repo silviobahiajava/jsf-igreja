@@ -1,0 +1,132 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the estabelecimento database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Estabelecimento.findAll", query="SELECT e FROM Estabelecimento e")
+public class Estabelecimento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String email;
+	private String endereco;
+	private String nomeFantasia;
+	private String nomedaimagem;
+	private String razaoSocial;
+	private String senha;
+	private List<Usuario> usuarios1;
+	private List<Usuario> usuarios2;
+
+	public Estabelecimento() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getEndereco() {
+		return this.endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
+	@Column(name="nome_fantasia")
+	public String getNomeFantasia() {
+		return this.nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
+
+	public String getNomedaimagem() {
+		return this.nomedaimagem;
+	}
+
+	public void setNomedaimagem(String nomedaimagem) {
+		this.nomedaimagem = nomedaimagem;
+	}
+
+
+	@Column(name="razao_social")
+	public String getRazaoSocial() {
+		return this.razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+
+
+	public String getSenha() {
+		return this.senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+
+	//bi-directional many-to-many association to Usuario
+	@ManyToMany(mappedBy="estabelecimentos")
+	public List<Usuario> getUsuarios1() {
+		return this.usuarios1;
+	}
+
+	public void setUsuarios1(List<Usuario> usuarios1) {
+		this.usuarios1 = usuarios1;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="estabelecimento")
+	public List<Usuario> getUsuarios2() {
+		return this.usuarios2;
+	}
+
+	public void setUsuarios2(List<Usuario> usuarios2) {
+		this.usuarios2 = usuarios2;
+	}
+
+	public Usuario addUsuarios2(Usuario usuarios2) {
+		getUsuarios2().add(usuarios2);
+		usuarios2.setEstabelecimento(this);
+
+		return usuarios2;
+	}
+
+	public Usuario removeUsuarios2(Usuario usuarios2) {
+		getUsuarios2().remove(usuarios2);
+		usuarios2.setEstabelecimento(null);
+
+		return usuarios2;
+	}
+
+}

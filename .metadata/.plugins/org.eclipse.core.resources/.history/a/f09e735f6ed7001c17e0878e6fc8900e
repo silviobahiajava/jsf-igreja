@@ -1,0 +1,201 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the membro database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Membro.findAll", query="SELECT m FROM Membro m")
+public class Membro extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	private Date aniversario;
+	private BigInteger codigo;
+	private String cpf;
+	private byte[] documentacaoMembro;
+	private BigInteger enderecoCodigo;
+	private String estadoCivil;
+	private String estadosBrasileiros;
+	private BigInteger filiacaoCodigo;
+	private byte[] foto;
+	private String nacionalidade;
+	private String naturalidade;
+	private String nome;
+	private String nomedaimagem;
+	private String rg;
+	private Cartaomembro cartaomembro;
+	private Contato contato;
+	private DocumentacaoMembro documentacaoMembroBean;
+
+	public Membro() {
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getAniversario() {
+		return this.aniversario;
+	}
+
+	public void setAniversario(Date aniversario) {
+		this.aniversario = aniversario;
+	}
+
+
+	
+
+
+	public String getCpf() {
+		return this.cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+
+	@Lob
+	@Column(name="documentacao_membro")
+	public byte[] getDocumentacaoMembro() {
+		return this.documentacaoMembro;
+	}
+
+	public void setDocumentacaoMembro(byte[] documentacaoMembro) {
+		this.documentacaoMembro = documentacaoMembro;
+	}
+
+
+	@Column(name="endereco_codigo")
+	public BigInteger getEnderecoCodigo() {
+		return this.enderecoCodigo;
+	}
+
+	public void setEnderecoCodigo(BigInteger enderecoCodigo) {
+		this.enderecoCodigo = enderecoCodigo;
+	}
+
+
+	@Column(name="estado_civil")
+	public String getEstadoCivil() {
+		return this.estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+
+	@Column(name="estados_brasileiros")
+	public String getEstadosBrasileiros() {
+		return this.estadosBrasileiros;
+	}
+
+	public void setEstadosBrasileiros(String estadosBrasileiros) {
+		this.estadosBrasileiros = estadosBrasileiros;
+	}
+
+
+	@Column(name="filiacao_codigo")
+	public BigInteger getFiliacaoCodigo() {
+		return this.filiacaoCodigo;
+	}
+
+	public void setFiliacaoCodigo(BigInteger filiacaoCodigo) {
+		this.filiacaoCodigo = filiacaoCodigo;
+	}
+
+
+	@Lob
+	public byte[] getFoto() {
+		return this.foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+
+	public String getNacionalidade() {
+		return this.nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+
+	public String getNaturalidade() {
+		return this.naturalidade;
+	}
+
+	public void setNaturalidade(String naturalidade) {
+		this.naturalidade = naturalidade;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getNomedaimagem() {
+		return this.nomedaimagem;
+	}
+
+	public void setNomedaimagem(String nomedaimagem) {
+		this.nomedaimagem = nomedaimagem;
+	}
+
+
+	public String getRg() {
+		return this.rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+
+	//bi-directional many-to-one association to Cartaomembro
+	@ManyToOne
+	@JoinColumn(name="cartaodemembro_codigo")
+	public Cartaomembro getCartaomembro() {
+		return this.cartaomembro;
+	}
+
+	public void setCartaomembro(Cartaomembro cartaomembro) {
+		this.cartaomembro = cartaomembro;
+	}
+
+
+	//bi-directional many-to-one association to Contato
+	@ManyToOne
+	public Contato getContato() {
+		return this.contato;
+	}
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+
+	//bi-directional many-to-one association to DocumentacaoMembro
+	@ManyToOne
+	@JoinColumn(name="documentacao_membro_codigo")
+	public DocumentacaoMembro getDocumentacaoMembroBean() {
+		return this.documentacaoMembroBean;
+	}
+
+	public void setDocumentacaoMembroBean(DocumentacaoMembro documentacaoMembroBean) {
+		this.documentacaoMembroBean = documentacaoMembroBean;
+	}
+
+}

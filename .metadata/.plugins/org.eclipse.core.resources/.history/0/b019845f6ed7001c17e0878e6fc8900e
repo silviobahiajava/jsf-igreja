@@ -1,0 +1,248 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the membroinativo database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Membroinativo.findAll", query="SELECT m FROM Membroinativo m")
+public class Membroinativo implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private BigInteger codigoMotivoInatividade;
+	private String congregacao;
+	private String cpf;
+	private Date dataBatismo;
+	private Date dataNascimento;
+	private BigInteger enderecoCodigo;
+	private String estadoCivil;
+	private String estadosBrasileirosEnum;
+	private BigInteger filiacaoCodigo;
+	private byte[] foto;
+	private BigInteger membroCodigo;
+	private String motivoSaida;
+	private String nacionalidade;
+	private String natualidade;
+	private String nome;
+	private String nomedamae;
+	private String nomedopai;
+	private String rg;
+	private String tipoCargo;
+	private Contato contato;
+
+	public Membroinativo() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="codigo_motivo_inatividade")
+	public BigInteger getCodigoMotivoInatividade() {
+		return this.codigoMotivoInatividade;
+	}
+
+	public void setCodigoMotivoInatividade(BigInteger codigoMotivoInatividade) {
+		this.codigoMotivoInatividade = codigoMotivoInatividade;
+	}
+
+
+	public String getCongregacao() {
+		return this.congregacao;
+	}
+
+	public void setCongregacao(String congregacao) {
+		this.congregacao = congregacao;
+	}
+
+
+	public String getCpf() {
+		return this.cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_batismo")
+	public Date getDataBatismo() {
+		return this.dataBatismo;
+	}
+
+	public void setDataBatismo(Date dataBatismo) {
+		this.dataBatismo = dataBatismo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_nascimento")
+	public Date getDataNascimento() {
+		return this.dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+
+	@Column(name="endereco_codigo")
+	public BigInteger getEnderecoCodigo() {
+		return this.enderecoCodigo;
+	}
+
+	public void setEnderecoCodigo(BigInteger enderecoCodigo) {
+		this.enderecoCodigo = enderecoCodigo;
+	}
+
+
+	@Column(name="estado_civil")
+	public String getEstadoCivil() {
+		return this.estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+
+	@Column(name="estados_brasileiros_enum")
+	public String getEstadosBrasileirosEnum() {
+		return this.estadosBrasileirosEnum;
+	}
+
+	public void setEstadosBrasileirosEnum(String estadosBrasileirosEnum) {
+		this.estadosBrasileirosEnum = estadosBrasileirosEnum;
+	}
+
+
+	@Column(name="filiacao_codigo")
+	public BigInteger getFiliacaoCodigo() {
+		return this.filiacaoCodigo;
+	}
+
+	public void setFiliacaoCodigo(BigInteger filiacaoCodigo) {
+		this.filiacaoCodigo = filiacaoCodigo;
+	}
+
+
+	@Lob
+	public byte[] getFoto() {
+		return this.foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+
+	@Column(name="membro_codigo")
+	public BigInteger getMembroCodigo() {
+		return this.membroCodigo;
+	}
+
+	public void setMembroCodigo(BigInteger membroCodigo) {
+		this.membroCodigo = membroCodigo;
+	}
+
+
+	@Column(name="motivo_saida")
+	public String getMotivoSaida() {
+		return this.motivoSaida;
+	}
+
+	public void setMotivoSaida(String motivoSaida) {
+		this.motivoSaida = motivoSaida;
+	}
+
+
+	public String getNacionalidade() {
+		return this.nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+
+	public String getNatualidade() {
+		return this.natualidade;
+	}
+
+	public void setNatualidade(String natualidade) {
+		this.natualidade = natualidade;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getNomedamae() {
+		return this.nomedamae;
+	}
+
+	public void setNomedamae(String nomedamae) {
+		this.nomedamae = nomedamae;
+	}
+
+
+	public String getNomedopai() {
+		return this.nomedopai;
+	}
+
+	public void setNomedopai(String nomedopai) {
+		this.nomedopai = nomedopai;
+	}
+
+
+	public String getRg() {
+		return this.rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+
+	@Column(name="tipo_cargo")
+	public String getTipoCargo() {
+		return this.tipoCargo;
+	}
+
+	public void setTipoCargo(String tipoCargo) {
+		this.tipoCargo = tipoCargo;
+	}
+
+
+	//bi-directional many-to-one association to Contato
+	@ManyToOne
+	public Contato getContato() {
+		return this.contato;
+	}
+
+	public void setContato(Contato contato) {
+		this.contato = contato;
+	}
+
+}

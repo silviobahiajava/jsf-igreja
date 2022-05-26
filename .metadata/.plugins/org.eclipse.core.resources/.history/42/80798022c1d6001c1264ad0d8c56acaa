@@ -1,0 +1,179 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the despesa_da_igreja database table.
+ * 
+ */
+@Entity
+@Table(name="despesa_da_igreja")
+@NamedQuery(name="DespesaDaIgreja.findAll", query="SELECT d FROM DespesaDaIgreja d")
+public class DespesaDaIgreja implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataPagamentoDespesaDaIgreja;
+	private Date dataVencimentoDespesaDaIgreja;
+	private String descricaoDespesaDaIgreja;
+	private String situacaoDaDespesaEnum;
+	private String tipoDespesaEnum;
+	private BigDecimal valorDespescaDaIgreja;
+	private Grupo grupo;
+	private Lancamento lancamento;
+	private List<DespesasPagasDaIgreja> despesasPagasDaIgrejas;
+	private List<DespesasPendentesDaIgreja> despesasPendentesDaIgrejas;
+
+	public DespesaDaIgreja() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_pagamento_despesa_da_igreja")
+	public Date getDataPagamentoDespesaDaIgreja() {
+		return this.dataPagamentoDespesaDaIgreja;
+	}
+
+	public void setDataPagamentoDespesaDaIgreja(Date dataPagamentoDespesaDaIgreja) {
+		this.dataPagamentoDespesaDaIgreja = dataPagamentoDespesaDaIgreja;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_vencimento_despesa_da_igreja")
+	public Date getDataVencimentoDespesaDaIgreja() {
+		return this.dataVencimentoDespesaDaIgreja;
+	}
+
+	public void setDataVencimentoDespesaDaIgreja(Date dataVencimentoDespesaDaIgreja) {
+		this.dataVencimentoDespesaDaIgreja = dataVencimentoDespesaDaIgreja;
+	}
+
+
+	@Column(name="descricao_despesa_da_igreja")
+	public String getDescricaoDespesaDaIgreja() {
+		return this.descricaoDespesaDaIgreja;
+	}
+
+	public void setDescricaoDespesaDaIgreja(String descricaoDespesaDaIgreja) {
+		this.descricaoDespesaDaIgreja = descricaoDespesaDaIgreja;
+	}
+
+
+	@Column(name="situacao_da_despesa_enum")
+	public String getSituacaoDaDespesaEnum() {
+		return this.situacaoDaDespesaEnum;
+	}
+
+	public void setSituacaoDaDespesaEnum(String situacaoDaDespesaEnum) {
+		this.situacaoDaDespesaEnum = situacaoDaDespesaEnum;
+	}
+
+
+	@Column(name="tipo_despesa_enum")
+	public String getTipoDespesaEnum() {
+		return this.tipoDespesaEnum;
+	}
+
+	public void setTipoDespesaEnum(String tipoDespesaEnum) {
+		this.tipoDespesaEnum = tipoDespesaEnum;
+	}
+
+
+	@Column(name="valor_despesca_da_igreja")
+	public BigDecimal getValorDespescaDaIgreja() {
+		return this.valorDespescaDaIgreja;
+	}
+
+	public void setValorDespescaDaIgreja(BigDecimal valorDespescaDaIgreja) {
+		this.valorDespescaDaIgreja = valorDespescaDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+
+	//bi-directional many-to-one association to DespesasPagasDaIgreja
+	@OneToMany(mappedBy="despesaDaIgreja")
+	public List<DespesasPagasDaIgreja> getDespesasPagasDaIgrejas() {
+		return this.despesasPagasDaIgrejas;
+	}
+
+	public void setDespesasPagasDaIgrejas(List<DespesasPagasDaIgreja> despesasPagasDaIgrejas) {
+		this.despesasPagasDaIgrejas = despesasPagasDaIgrejas;
+	}
+
+	public DespesasPagasDaIgreja addDespesasPagasDaIgreja(DespesasPagasDaIgreja despesasPagasDaIgreja) {
+		getDespesasPagasDaIgrejas().add(despesasPagasDaIgreja);
+		despesasPagasDaIgreja.setDespesaDaIgreja(this);
+
+		return despesasPagasDaIgreja;
+	}
+
+	public DespesasPagasDaIgreja removeDespesasPagasDaIgreja(DespesasPagasDaIgreja despesasPagasDaIgreja) {
+		getDespesasPagasDaIgrejas().remove(despesasPagasDaIgreja);
+		despesasPagasDaIgreja.setDespesaDaIgreja(null);
+
+		return despesasPagasDaIgreja;
+	}
+
+
+	//bi-directional many-to-one association to DespesasPendentesDaIgreja
+	@OneToMany(mappedBy="despesaDaIgreja")
+	public List<DespesasPendentesDaIgreja> getDespesasPendentesDaIgrejas() {
+		return this.despesasPendentesDaIgrejas;
+	}
+
+	public void setDespesasPendentesDaIgrejas(List<DespesasPendentesDaIgreja> despesasPendentesDaIgrejas) {
+		this.despesasPendentesDaIgrejas = despesasPendentesDaIgrejas;
+	}
+
+	public DespesasPendentesDaIgreja addDespesasPendentesDaIgreja(DespesasPendentesDaIgreja despesasPendentesDaIgreja) {
+		getDespesasPendentesDaIgrejas().add(despesasPendentesDaIgreja);
+		despesasPendentesDaIgreja.setDespesaDaIgreja(this);
+
+		return despesasPendentesDaIgreja;
+	}
+
+	public DespesasPendentesDaIgreja removeDespesasPendentesDaIgreja(DespesasPendentesDaIgreja despesasPendentesDaIgreja) {
+		getDespesasPendentesDaIgrejas().remove(despesasPendentesDaIgreja);
+		despesasPendentesDaIgreja.setDespesaDaIgreja(null);
+
+		return despesasPendentesDaIgreja;
+	}
+
+}

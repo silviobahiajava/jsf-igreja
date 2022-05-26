@@ -1,0 +1,231 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the empresa_curriculo database table.
+ * 
+ */
+@Entity
+@Table(name="empresa_curriculo")
+@NamedQuery(name="EmpresaCurriculo.findAll", query="SELECT e FROM EmpresaCurriculo e")
+public class EmpresaCurriculo implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String antipenultimaEmpresa;
+	private Date dataAdmissaoAntipenultimaEmpresa;
+	private Date dataAdmissaoPenultimaEmpresa;
+	private Date dataAdmissaoultimaEmpresa;
+	private Date dataDemissaoAntipenultimaEmpresa;
+	private Date dataDemissaoPenultimaEmpresa;
+	private Date dataDemissaoultimaEmpresa;
+	private String funcoesAntiPenultimaEmpresa;
+	private String funcoesPenultimaEmpresa;
+	private String funcoesUltimaEmpresa;
+	private String penultimaEmpresa;
+	private int profissaoAntipenultimaEmpresa;
+	private int profissaoPenultimaEmpresa;
+	private int profissaoUltimaEmpresa;
+	private String ultimaEmpresa;
+	private List<Curriculo> curriculos;
+
+	public EmpresaCurriculo() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="antipenultima_empresa")
+	public String getAntipenultimaEmpresa() {
+		return this.antipenultimaEmpresa;
+	}
+
+	public void setAntipenultimaEmpresa(String antipenultimaEmpresa) {
+		this.antipenultimaEmpresa = antipenultimaEmpresa;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_admissao_antipenultima_empresa")
+	public Date getDataAdmissaoAntipenultimaEmpresa() {
+		return this.dataAdmissaoAntipenultimaEmpresa;
+	}
+
+	public void setDataAdmissaoAntipenultimaEmpresa(Date dataAdmissaoAntipenultimaEmpresa) {
+		this.dataAdmissaoAntipenultimaEmpresa = dataAdmissaoAntipenultimaEmpresa;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_admissao_penultima_empresa")
+	public Date getDataAdmissaoPenultimaEmpresa() {
+		return this.dataAdmissaoPenultimaEmpresa;
+	}
+
+	public void setDataAdmissaoPenultimaEmpresa(Date dataAdmissaoPenultimaEmpresa) {
+		this.dataAdmissaoPenultimaEmpresa = dataAdmissaoPenultimaEmpresa;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_admissaoultima_empresa")
+	public Date getDataAdmissaoultimaEmpresa() {
+		return this.dataAdmissaoultimaEmpresa;
+	}
+
+	public void setDataAdmissaoultimaEmpresa(Date dataAdmissaoultimaEmpresa) {
+		this.dataAdmissaoultimaEmpresa = dataAdmissaoultimaEmpresa;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_demissao_antipenultima_empresa")
+	public Date getDataDemissaoAntipenultimaEmpresa() {
+		return this.dataDemissaoAntipenultimaEmpresa;
+	}
+
+	public void setDataDemissaoAntipenultimaEmpresa(Date dataDemissaoAntipenultimaEmpresa) {
+		this.dataDemissaoAntipenultimaEmpresa = dataDemissaoAntipenultimaEmpresa;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_demissao_penultima_empresa")
+	public Date getDataDemissaoPenultimaEmpresa() {
+		return this.dataDemissaoPenultimaEmpresa;
+	}
+
+	public void setDataDemissaoPenultimaEmpresa(Date dataDemissaoPenultimaEmpresa) {
+		this.dataDemissaoPenultimaEmpresa = dataDemissaoPenultimaEmpresa;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_demissaoultima_empresa")
+	public Date getDataDemissaoultimaEmpresa() {
+		return this.dataDemissaoultimaEmpresa;
+	}
+
+	public void setDataDemissaoultimaEmpresa(Date dataDemissaoultimaEmpresa) {
+		this.dataDemissaoultimaEmpresa = dataDemissaoultimaEmpresa;
+	}
+
+
+	@Column(name="funcoes_anti_penultima_empresa")
+	public String getFuncoesAntiPenultimaEmpresa() {
+		return this.funcoesAntiPenultimaEmpresa;
+	}
+
+	public void setFuncoesAntiPenultimaEmpresa(String funcoesAntiPenultimaEmpresa) {
+		this.funcoesAntiPenultimaEmpresa = funcoesAntiPenultimaEmpresa;
+	}
+
+
+	@Column(name="funcoes_penultima_empresa")
+	public String getFuncoesPenultimaEmpresa() {
+		return this.funcoesPenultimaEmpresa;
+	}
+
+	public void setFuncoesPenultimaEmpresa(String funcoesPenultimaEmpresa) {
+		this.funcoesPenultimaEmpresa = funcoesPenultimaEmpresa;
+	}
+
+
+	@Column(name="funcoes_ultima_empresa")
+	public String getFuncoesUltimaEmpresa() {
+		return this.funcoesUltimaEmpresa;
+	}
+
+	public void setFuncoesUltimaEmpresa(String funcoesUltimaEmpresa) {
+		this.funcoesUltimaEmpresa = funcoesUltimaEmpresa;
+	}
+
+
+	@Column(name="penultima_empresa")
+	public String getPenultimaEmpresa() {
+		return this.penultimaEmpresa;
+	}
+
+	public void setPenultimaEmpresa(String penultimaEmpresa) {
+		this.penultimaEmpresa = penultimaEmpresa;
+	}
+
+
+	@Column(name="profissao_antipenultima_empresa")
+	public int getProfissaoAntipenultimaEmpresa() {
+		return this.profissaoAntipenultimaEmpresa;
+	}
+
+	public void setProfissaoAntipenultimaEmpresa(int profissaoAntipenultimaEmpresa) {
+		this.profissaoAntipenultimaEmpresa = profissaoAntipenultimaEmpresa;
+	}
+
+
+	@Column(name="profissao_penultima_empresa")
+	public int getProfissaoPenultimaEmpresa() {
+		return this.profissaoPenultimaEmpresa;
+	}
+
+	public void setProfissaoPenultimaEmpresa(int profissaoPenultimaEmpresa) {
+		this.profissaoPenultimaEmpresa = profissaoPenultimaEmpresa;
+	}
+
+
+	@Column(name="profissao_ultima_empresa")
+	public int getProfissaoUltimaEmpresa() {
+		return this.profissaoUltimaEmpresa;
+	}
+
+	public void setProfissaoUltimaEmpresa(int profissaoUltimaEmpresa) {
+		this.profissaoUltimaEmpresa = profissaoUltimaEmpresa;
+	}
+
+
+	@Column(name="ultima_empresa")
+	public String getUltimaEmpresa() {
+		return this.ultimaEmpresa;
+	}
+
+	public void setUltimaEmpresa(String ultimaEmpresa) {
+		this.ultimaEmpresa = ultimaEmpresa;
+	}
+
+
+	//bi-directional many-to-one association to Curriculo
+	@OneToMany(mappedBy="empresaCurriculo")
+	public List<Curriculo> getCurriculos() {
+		return this.curriculos;
+	}
+
+	public void setCurriculos(List<Curriculo> curriculos) {
+		this.curriculos = curriculos;
+	}
+
+	public Curriculo addCurriculo(Curriculo curriculo) {
+		getCurriculos().add(curriculo);
+		curriculo.setEmpresaCurriculo(this);
+
+		return curriculo;
+	}
+
+	public Curriculo removeCurriculo(Curriculo curriculo) {
+		getCurriculos().remove(curriculo);
+		curriculo.setEmpresaCurriculo(null);
+
+		return curriculo;
+	}
+
+}

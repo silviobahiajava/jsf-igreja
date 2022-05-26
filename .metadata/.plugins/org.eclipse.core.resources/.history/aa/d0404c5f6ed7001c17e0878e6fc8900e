@@ -1,0 +1,130 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the balanco_financeiro database table.
+ * 
+ */
+@Entity
+@Table(name="balanco_financeiro")
+@NamedQuery(name="BalancoFinanceiro.findAll", query="SELECT b FROM BalancoFinanceiro b")
+public class BalancoFinanceiro implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private Date dataFinal;
+	private Date dataIncial;
+	private BigDecimal resultado;
+	private BigDecimal valorEntrada;
+	private BigDecimal valorSaida;
+	private BalancoGeral balancoGeral;
+	private List<MovimentacaoFinanceira> movimentacaoFinanceiras;
+
+	public BalancoFinanceiro() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_final")
+	public Date getDataFinal() {
+		return this.dataFinal;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_incial")
+	public Date getDataIncial() {
+		return this.dataIncial;
+	}
+
+	public void setDataIncial(Date dataIncial) {
+		this.dataIncial = dataIncial;
+	}
+
+
+	public BigDecimal getResultado() {
+		return this.resultado;
+	}
+
+	public void setResultado(BigDecimal resultado) {
+		this.resultado = resultado;
+	}
+
+
+	@Column(name="valor_entrada")
+	public BigDecimal getValorEntrada() {
+		return this.valorEntrada;
+	}
+
+	public void setValorEntrada(BigDecimal valorEntrada) {
+		this.valorEntrada = valorEntrada;
+	}
+
+
+	@Column(name="valor_saida")
+	public BigDecimal getValorSaida() {
+		return this.valorSaida;
+	}
+
+	public void setValorSaida(BigDecimal valorSaida) {
+		this.valorSaida = valorSaida;
+	}
+
+
+	//bi-directional many-to-one association to BalancoGeral
+	@ManyToOne
+	@JoinColumn(name="balanco_geral_codigo")
+	public BalancoGeral getBalancoGeral() {
+		return this.balancoGeral;
+	}
+
+	public void setBalancoGeral(BalancoGeral balancoGeral) {
+		this.balancoGeral = balancoGeral;
+	}
+
+
+	//bi-directional many-to-one association to MovimentacaoFinanceira
+	@OneToMany(mappedBy="balancoFinanceiro")
+	public List<MovimentacaoFinanceira> getMovimentacaoFinanceiras() {
+		return this.movimentacaoFinanceiras;
+	}
+
+	public void setMovimentacaoFinanceiras(List<MovimentacaoFinanceira> movimentacaoFinanceiras) {
+		this.movimentacaoFinanceiras = movimentacaoFinanceiras;
+	}
+
+	public MovimentacaoFinanceira addMovimentacaoFinanceira(MovimentacaoFinanceira movimentacaoFinanceira) {
+		getMovimentacaoFinanceiras().add(movimentacaoFinanceira);
+		movimentacaoFinanceira.setBalancoFinanceiro(this);
+
+		return movimentacaoFinanceira;
+	}
+
+	public MovimentacaoFinanceira removeMovimentacaoFinanceira(MovimentacaoFinanceira movimentacaoFinanceira) {
+		getMovimentacaoFinanceiras().remove(movimentacaoFinanceira);
+		movimentacaoFinanceira.setBalancoFinanceiro(null);
+
+		return movimentacaoFinanceira;
+	}
+
+}

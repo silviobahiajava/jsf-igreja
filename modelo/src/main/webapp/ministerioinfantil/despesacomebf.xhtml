@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			 
+		<h:form id="formListagem">
+		
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:50px;margin-left:1px;"
+				paginator="true" value="#{despesaComEBFBean.listaDespesasEBF}" var="ebf" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						style="background-color:#FAF0E6;color:#006400;"
+						actionListener="#{despesaComEBFBean.novo}" update=":formCadastro:painel" />
+						
+
+
+				</f:facet>
+
+				<p:column headerText="Data de pagamento" 
+					width="30"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" >
+					<h:outputText value="#{ebf.dataDespesa}" 
+						style="color: #000080;font-size:12px;">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				
+				
+					
+					
+				<p:column headerText="Valor da despesa" sortBy="#{ebf.valor}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{ebf.valor}">
+					<h:outputText value="#{ebf.valor}"  style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Descricao" sortBy="#{ebf.descricao}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{ebf.descricao}">
+					<h:outputText value="#{ebf.descricao}"  style="color: #000080;font-size:12px;"/>
+				</p:column>
+				
+				
+				
+				<p:column headerText="Oservação" sortBy="#{ebf.observacao}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;"
+					filterBy="#{ebf.observacao}">
+					<h:outputText value="#{ebf.observacao}"  style="color: #000080;font-size:12px;"/>
+				</p:column>
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="registro de compras do Ministério Infantil" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data de pagamento:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:calendar maxlength="30" size="30"
+					effect="fold"
+					value="#{despesaComEBFBean.despesaEBF.dataDespesa}" 
+					locale="pt_BR"/>
+					
+					
+					<h:outputLabel value="Valor:" style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:inputText maxlength="50" size="30"
+					value="#{despesaComEBFBean.despesaEBF.valor}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					<h:outputLabel value="Descrição:" style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+					<p:inputText maxlength="50" size="30"
+					value="#{despesaComEBFBean.despesaEBF.descricao}" />
+					
+					<h:outputLabel value="oservação:" style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+					<p:inputText maxlength="50" size="30"
+					value="#{despesaComEBFBean.despesaEBF.observacao}" />
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{despesaComEBFBean.salvar}"
+					
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+				/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

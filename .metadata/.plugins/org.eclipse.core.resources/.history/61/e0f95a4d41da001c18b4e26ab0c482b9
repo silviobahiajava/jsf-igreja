@@ -1,0 +1,143 @@
+package daos;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import cadastrocursos.model.Curso;
+import entidades.Pagamento;
+import entidades.Parcela;
+import entidades.Receita;
+import entidades.Usuario;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+
+public class ParcelaDao extends GenericDaoHibernate<Parcela>{
+	@SuppressWarnings("unchecked")
+	public Parcela buscarParcela(Date dataVencimentoDaParcela,double valorDaParcela,int numerodaparcela,String emailCliente) {
+		/*Session sessao = utils.HibernateUtil.getFabricaDeSessoes().openSession();
+		try {
+			//Query query = sessao.createQuery("select nome from membro where day(dataNascimento)=:dia and  month(dataNascimento)=:mes");
+			Query query = sessao.createQuery("from Parcela where dataVencimentoDaParcela = ? and valorDaParcela=? and numerodaparcela =? "
+					+ "and pagamento.emailCliente = ? ");
+			query.setParameter(0,dataVencimentoDaParcela);
+			query.setParameter(1, valorDaParcela);
+			query.setParameter(2, numerodaparcela);
+			query.setParameter(3, emailCliente);
+			Parcela parcela=(Parcela) query.uniqueResult();
+			return parcela;
+
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}*/
+		
+		 EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+		  EntityManager em = emf.createEntityManager();
+		    TypedQuery<Parcela> query = em.createQuery(
+		        "SELECT p FROM Parcela p WHERE p.dataVencimentoDaParcela = :dataVencimentoDaParcela and p.numerodaparcela =:numerodaparcela and p.valorDaParcela", Parcela.class);
+		     query.setParameter("dataVencimentoDaParcela", dataVencimentoDaParcela);
+		     query.setParameter("numerodaparcela", numerodaparcela);
+		     query.setParameter("valorDaParcela",valorDaParcela);
+			return query.getSingleResult();
+	}
+	
+	//ESTE M�TODO FUNCIONA PERFEITAMENTE
+		@SuppressWarnings("unchecked")
+		public Parcela buscarParcelaPorDataVencimentoEmail(Date dataVencimentoDaParcela,String emailCliente) {
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+			  EntityManager em = emf.createEntityManager();
+			    TypedQuery<Parcela> query = em.createQuery(
+			        "SELECT p FROM Parcela p WHERE p.dataVencimentoDaParcela = :dataVencimentoDaParcela and p.emailCliente =:emailCliente", Parcela.class);
+			     query.setParameter("dataVencimentoDaParcela", dataVencimentoDaParcela);
+			     query.setParameter("emailCliente", emailCliente);
+				return query.getSingleResult();
+		}
+		
+		
+		public Parcela buscarPorCpfNumeroParcela(String cpf,int numerodaparcela) {
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+			  EntityManager em = emf.createEntityManager();
+			    TypedQuery<Parcela> query = em.createQuery(
+			        "SELECT p FROM Parcela p WHERE p.cpf = :cpf and p.numerodaparcela =:numerodaparcela", Parcela.class);
+			     query.setParameter("cpf", cpf);
+			     query.setParameter("numerodaparcela", numerodaparcela);
+				return query.getSingleResult();
+		}
+	
+		public List<Parcela> buscarPorPagamento(Long codigopagamento) {
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+			  EntityManager em = emf.createEntityManager();
+		    TypedQuery<Parcela> query = em.createQuery(
+		        "SELECT r FROM Receita r WHERE r.dataLancamento = :dataLancamento", Parcela.class);
+		     query.setParameter("codigopagamento", codigopagamento).getSingleResult();
+		     List<Parcela> listaParcela = query.getResultList();
+		     return listaParcela;
+		}
+		
+		
+		public Pagamento buscarPorCpf(String cpf) {
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+			  EntityManager em = emf.createEntityManager();
+			String jpql="select p.pagamento from Parcela p where p.cpf='"+cpf+"' ";
+	    	TypedQuery<Pagamento> typedQuery = em.createQuery(jpql,Pagamento.class);
+	    	Pagamento pagamento = typedQuery.getSingleResult();
+	    	System.out.println("curso escolhido "+pagamento.getNomeCliente());
+	    	return pagamento;
+		}
+		
+		//eq � usado pra numeros ilike � usado pra String
+		public Parcela buscarPorCodigoPagamentoNumeroParcela(Long codigopagamento,int numeroparcela) {
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+			  EntityManager em = emf.createEntityManager();
+			String jpql="select p.pagamento from Parcela p where p.cpf='"+cpf+"' ";
+	    	TypedQuery<Pagamento> typedQuery = em.createQuery(jpql,Pagamento.class);
+	    	Pagamento pagamento = typedQuery.getSingleResult();
+	    	System.out.println("curso escolhido "+pagamento.getNomeCliente());
+	    	return pagamento;
+		}
+		
+		
+		public Parcela buscarPorNomeNumeroParcela(String nomeCliente,int numeroparcela) {
+			EntityManagerFactory emf=Persistence.createEntityManagerFactory("a");
+			  EntityManager em = emf.createEntityManager();
+			String jpql="SELECT p FROM Parcela p WHERE where p.nomeCliente='"+nomeCliente+"' and  p.numeroparcela='"+numeroparcela+"' ";
+	    	TypedQuery<Pagamento> typedQuery = em.createQuery(jpql,Pagamento.class);
+	    	Pagamento pagamento = typedQuery.getSingleResult();
+	    	System.out.println("curso escolhido "+pagamento.getNomeCliente());
+	    	return pagamento;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*public List<Cidade> buscarPorEstado(Long estadoCodigo) {
+			Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+			try {
+				Criteria consulta = sessao.createCriteria(Cidade.class);
+				consulta.add(Restrictions.eq("estado.codigo", estadoCodigo));	
+				consulta.addOrder(Order.asc("nome"));
+				List<Cidade> resultado = consulta.list();
+				return resultado;
+			} catch (RuntimeException erro) {
+				throw erro;
+			} finally {
+				sessao.close();
+			}
+		}
+	*/
+}

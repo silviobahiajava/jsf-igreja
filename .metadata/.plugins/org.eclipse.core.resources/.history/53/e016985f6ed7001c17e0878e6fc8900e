@@ -1,0 +1,58 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the crianca_matriculada_na_escolinha_ausente database table.
+ * 
+ */
+@Entity
+@Table(name="crianca_matriculada_na_escolinha_ausente")
+@NamedQuery(name="CriancaMatriculadaNaEscolinhaAusente.findAll", query="SELECT c FROM CriancaMatriculadaNaEscolinhaAusente c")
+public class CriancaMatriculadaNaEscolinhaAusente implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private AulaEscolinhaCrianca aulaEscolinhaCrianca;
+	private CriancaMatriculadaNaEscolinha criancaMatriculadaNaEscolinha;
+
+	public CriancaMatriculadaNaEscolinhaAusente() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	//bi-directional many-to-one association to AulaEscolinhaCrianca
+	@ManyToOne
+	@JoinColumn(name="aula_codigo")
+	public AulaEscolinhaCrianca getAulaEscolinhaCrianca() {
+		return this.aulaEscolinhaCrianca;
+	}
+
+	public void setAulaEscolinhaCrianca(AulaEscolinhaCrianca aulaEscolinhaCrianca) {
+		this.aulaEscolinhaCrianca = aulaEscolinhaCrianca;
+	}
+
+
+	//bi-directional many-to-one association to CriancaMatriculadaNaEscolinha
+	@ManyToOne
+	@JoinColumn(name="matriculado_codigo")
+	public CriancaMatriculadaNaEscolinha getCriancaMatriculadaNaEscolinha() {
+		return this.criancaMatriculadaNaEscolinha;
+	}
+
+	public void setCriancaMatriculadaNaEscolinha(CriancaMatriculadaNaEscolinha criancaMatriculadaNaEscolinha) {
+		this.criancaMatriculadaNaEscolinha = criancaMatriculadaNaEscolinha;
+	}
+
+}

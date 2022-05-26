@@ -1,0 +1,139 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the loja database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Loja.findAll", query="SELECT l FROM Loja l")
+public class Loja implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String bairro;
+	private String cep;
+	private String cidade;
+	private String cnpj;
+	private String estado;
+	private String logradouro;
+	private String nomeLoja;
+	private String numero;
+	private List<Compra> compras;
+
+	public Loja() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public String getBairro() {
+		return this.bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+
+	public String getCep() {
+		return this.cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+
+	public String getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+
+	public String getCnpj() {
+		return this.cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	public String getLogradouro() {
+		return this.logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+
+	@Column(name="nome_loja")
+	public String getNomeLoja() {
+		return this.nomeLoja;
+	}
+
+	public void setNomeLoja(String nomeLoja) {
+		this.nomeLoja = nomeLoja;
+	}
+
+
+	public String getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
+	//bi-directional many-to-one association to Compra
+	@OneToMany(mappedBy="loja")
+	public List<Compra> getCompras() {
+		return this.compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public Compra addCompra(Compra compra) {
+		getCompras().add(compra);
+		compra.setLoja(this);
+
+		return compra;
+	}
+
+	public Compra removeCompra(Compra compra) {
+		getCompras().remove(compra);
+		compra.setLoja(null);
+
+		return compra;
+	}
+
+}

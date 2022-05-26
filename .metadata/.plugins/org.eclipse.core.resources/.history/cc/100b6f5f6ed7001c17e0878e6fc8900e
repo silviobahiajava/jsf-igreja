@@ -1,0 +1,70 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the categoria_movimentacao_financeira database table.
+ * 
+ */
+@Entity
+@Table(name="categoria_movimentacao_financeira")
+@NamedQuery(name="CategoriaMovimentacaoFinanceira.findAll", query="SELECT c FROM CategoriaMovimentacaoFinanceira c")
+public class CategoriaMovimentacaoFinanceira implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String nomeMovimentacao;
+	private List<MovimentacaoFinanceira> movimentacaoFinanceiras;
+
+	public CategoriaMovimentacaoFinanceira() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="nome_movimentacao")
+	public String getNomeMovimentacao() {
+		return this.nomeMovimentacao;
+	}
+
+	public void setNomeMovimentacao(String nomeMovimentacao) {
+		this.nomeMovimentacao = nomeMovimentacao;
+	}
+
+
+	//bi-directional many-to-one association to MovimentacaoFinanceira
+	@OneToMany(mappedBy="categoriaMovimentacaoFinanceira")
+	public List<MovimentacaoFinanceira> getMovimentacaoFinanceiras() {
+		return this.movimentacaoFinanceiras;
+	}
+
+	public void setMovimentacaoFinanceiras(List<MovimentacaoFinanceira> movimentacaoFinanceiras) {
+		this.movimentacaoFinanceiras = movimentacaoFinanceiras;
+	}
+
+	public MovimentacaoFinanceira addMovimentacaoFinanceira(MovimentacaoFinanceira movimentacaoFinanceira) {
+		getMovimentacaoFinanceiras().add(movimentacaoFinanceira);
+		movimentacaoFinanceira.setCategoriaMovimentacaoFinanceira(this);
+
+		return movimentacaoFinanceira;
+	}
+
+	public MovimentacaoFinanceira removeMovimentacaoFinanceira(MovimentacaoFinanceira movimentacaoFinanceira) {
+		getMovimentacaoFinanceiras().remove(movimentacaoFinanceira);
+		movimentacaoFinanceira.setCategoriaMovimentacaoFinanceira(null);
+
+		return movimentacaoFinanceira;
+	}
+
+}

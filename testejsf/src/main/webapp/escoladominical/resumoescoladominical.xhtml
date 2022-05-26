@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+
+		<h:form id="formListagem">
+
+			<p:panel header="resumo">
+
+				<p:toolbar>
+					<f:facet name="header">
+						<h:outputLabel value="aulas" />
+					</f:facet>
+				</p:toolbar>
+				<h:panelGrid columns="3">
+
+					<p:outputLabel value="data da aula"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:calendar value="#{resumoBean.aula.dataAula}" />
+					<p:commandButton value="resumo da aula"
+						actionListener="#{resumoBean.buscar}"
+						update=":formListagem:tabelaResumo" />
+				</h:panelGrid>
+				<p:dataTable id="tabelaResumo"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{resumoBean.aulas}" var="resumo" ronws="5">
+					<f:facet name="header">
+						
+						<p:button
+							value="voltar"
+							outcome="escoladominical"/>
+							
+					</f:facet>
+					
+					<p:column headerText="classe" sortBy="#{resumo.classe.nomeClasse}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{resumo.classe.nomeClasse}">
+						<h:outputText value="#{resumo.classe.nomeClasse}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="matriculados"
+						sortBy="#{resumo.totalMatriculado}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{resumo.totalMatriculado}">
+						<h:outputText value="#{resumo.totalMatriculado}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="ausentes"
+						sortBy="#{resumo.totalAlunosAusentes}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{resumo.totalAlunosAusentes}">
+						<h:outputText value="#{resumo.totalAlunosAusentes}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="presentes"
+						sortBy="#{resumo.totalAlunosPresentes}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{resumo.totalAlunosPresentes}">
+						<h:outputText value="#{resumo.totalAlunosPresentes}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="revistas" sortBy="#{resumo.totalRevistas}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{resumo.totalRevistas}">
+						<h:outputText value="#{resumo.totalRevistas}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					</p:column>
+					<p:column headerText="ofertas" sortBy="#{resumo.totalOfertas}"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						filterBy="#{resumo.totalOfertas}">
+						<h:outputText value="#{resumo.totalOfertas}"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+

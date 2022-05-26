@@ -1,0 +1,34 @@
+package br.com.jsf_igreja.secretaria.model;
+
+import enums.CargoEnum;
+import enums.Congregacao;
+import enums.EstadoCivil;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+public class Membro {
+
+   private String nome;
+	private String nacionalidade;
+	private String natualidade;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="contato_codigo")
+	private Contato contato;///classe
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="filiacao_codigo")
+	private Filiacao filiacao;
+	
+	@Enumerated(EnumType.STRING)
+	private EstadoCivil estadoCivil;//enum
+	
+	@Enumerated(EnumType.STRING)
+	private CargoEnum cargoEnum;//enum
+	
+	@Enumerated(EnumType.STRING)
+	private Congregacao congregacao;//enum
+	
+}

@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+
+		<h:form id="formListagem">
+		<p:panel header="Alunos Matriculados">
+		
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{matriculadoBean.matriculados}" var="aluno" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo Aluno" 
+						oncomplete="PF('dialogo').show();"
+						actionListener="#{matriculadoBean.novo}" 
+						update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="escoladominical"/>
+				</f:facet>
+
+				<p:column headerText="aluno" sortBy="#{aluno.membro.nome}"
+					width="50"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{aluno.membro.nome}">
+					<h:outputText value="#{aluno.membro.nome}" />
+				</p:column>
+				<p:column headerText="classe" sortBy="#{aluno.classe.nomeClasse}"
+					width="50"
+					style="color:#994422;font-size:12px;"
+					filterBy="#{aluno.classe.nomeClasse}">
+					<h:outputText value="#{aluno.classe.nomeClasse}" />
+				</p:column>
+			
+
+				
+
+				<p:column headerText="Opções"
+					width="50">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{matriculadoBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						
+						
+						<p:confirm header="Confirmação" message="Deseja excluir este aluno?"
+							icon="ui-icon-alert" />
+						<f:attribute name="alunoSelecionado" value="#{aluno}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{matriculadoBean.editar}"
+						update=":formCadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="alunoSelecionado" value="#{aluno}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		
+			
+				
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog 
+		header="Matrícula de alunos" 
+		widgetVar="dialogo"
+		width="300"
+		position="left"
+		hideEffect="puff" showEffect="puff" style="background-color:#C0C0C0;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<p:outputLabel value="aluno:" 
+				style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+				
+				<p:selectOneMenu filter="true"
+					value="#{matriculadoBean.matriculado.membro}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Por favor selecione o nome do novo  aluno">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="nome do aluno" />
+					<f:selectItems value="#{matriculadoBean.membros}" var="membro"
+						itemValue="#{membro}" itemLabel="#{membro.nome}" />
+				</p:selectOneMenu>
+					
+					
+						<p:outputLabel value="Classe:" 
+						style="color:#FF8C00;font-style:italic;font-weight:bolder"/>
+				<p:selectOneMenu filter="true"
+					value="#{matriculadoBean.matriculado.classe}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="Por favor selecione a classe deste aluno">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione uma classe para este aluno" />
+					<f:selectItems value="#{matriculadoBean.classes}" var="classe"
+						itemValue="#{classe}" itemLabel="#{classe.nomeClasse}" />
+				</p:selectOneMenu>
+				
+				
+					
+					
+					
+					
+
+				
+					
+				
+				
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="matricular aluno "
+					actionListener="#{matriculadoBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	</ui:define>
+
+</ui:composition>
+
+

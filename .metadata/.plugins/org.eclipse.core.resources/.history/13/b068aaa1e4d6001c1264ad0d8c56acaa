@@ -1,0 +1,91 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the parcela_cliente database table.
+ * 
+ */
+@Entity
+@Table(name="parcela_cliente")
+@NamedQuery(name="ParcelaCliente.findAll", query="SELECT p FROM ParcelaCliente p")
+public class ParcelaCliente extends GenericDomain {
+	private static final long serialVersionUID = 1L;
+	
+	private Date dataPagamentoDaParcela;
+	private Date dataVencimentoDaParcela;
+	private int numerodaparcela;
+	private double valorDaParcela;
+	private PagamentoCliente pagamentoCliente;
+
+	public ParcelaCliente() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_pagamento_da_parcela")
+	public Date getDataPagamentoDaParcela() {
+		return this.dataPagamentoDaParcela;
+	}
+
+	public void setDataPagamentoDaParcela(Date dataPagamentoDaParcela) {
+		this.dataPagamentoDaParcela = dataPagamentoDaParcela;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_vencimento_da_parcela")
+	public Date getDataVencimentoDaParcela() {
+		return this.dataVencimentoDaParcela;
+	}
+
+	public void setDataVencimentoDaParcela(Date dataVencimentoDaParcela) {
+		this.dataVencimentoDaParcela = dataVencimentoDaParcela;
+	}
+
+
+	public int getNumerodaparcela() {
+		return this.numerodaparcela;
+	}
+
+	public void setNumerodaparcela(int numerodaparcela) {
+		this.numerodaparcela = numerodaparcela;
+	}
+
+
+	@Column(name="valor_da_parcela")
+	public double getValorDaParcela() {
+		return this.valorDaParcela;
+	}
+
+	public void setValorDaParcela(double valorDaParcela) {
+		this.valorDaParcela = valorDaParcela;
+	}
+
+
+	//bi-directional many-to-one association to PagamentoCliente
+	@ManyToOne
+	@JoinColumn(name="pagamento_codigo")
+	public PagamentoCliente getPagamentoCliente() {
+		return this.pagamentoCliente;
+	}
+
+	public void setPagamentoCliente(PagamentoCliente pagamentoCliente) {
+		this.pagamentoCliente = pagamentoCliente;
+	}
+
+}

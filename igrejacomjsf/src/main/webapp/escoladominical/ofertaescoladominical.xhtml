@@ -1,0 +1,138 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+	
+		<h:form id="formListagem">
+		<p:panel header="ofertas da escola dominical">
+			  <p:toolbar>
+		  <f:facet name="header">
+		  	<h:outputLabel value="aulas" />
+		  </f:facet>
+		  </p:toolbar>
+		  <h:panelGrid columns="3">
+					<p:outputLabel value="pesquisar por data"/>
+		  		<p:calendar value="#{ofertaescoladominicalBean.oferta.dataOfertaEescolaDominical}"/>
+		  		
+				<p:commandButton value="pesquisar ofertas" actionListener="#{ofertaescoladominicalBean.buscar}" 
+		  		update=":formListagem:tabela"/>
+		  	</h:panelGrid>
+		
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{ofertaescoladominicalBean.ofertas}" var="oferta" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Registrar oferta" oncomplete="PF('dialogo').show();"
+						actionListener="#{ofertaescoladominicalBean.novo}" update=":formCadastro:painel" />
+						
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="escoladominical"/>
+						
+				</f:facet>
+
+				<p:column headerText="Data" sortBy="#{oferta.dataOfertaEescolaDominical}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{oferta.dataOfertaEescolaDominical}">
+						<h:outputText value="#{oferta.dataOfertaEescolaDominical}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="classe" sortBy="#{oferta.classe.nomeClasse}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{oferta.classe.nomeClasse}">
+					<h:outputText value="#{oferta.classe.nomeClasse}" 
+					style="color: #000080;font-size:12px;"/>
+				</p:column>
+				<p:column headerText="total da oferta" sortBy="#{oferta.valorOfertaEscolaDominical}"
+					width="150"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{oferta.valorOfertaEscolaDominical}">
+					<h:outputText value="#{oferta.valorOfertaEscolaDominical}" 
+					style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				<p:column headerText="Opções"
+				style="background-color:#C0C0C0;color:red;font-size:12px;" >
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{ofertaescoladominicalBean.editar}"
+						update=":formCadastro:painel" oncomplete="PF('oferta').show();">
+						<f:attribute name="ofertaSelecionada" value="#{oferta}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Registro de Ofertas" widgetVar="dialogo"
+		hideEffect="puff" showEffect="puff" style="background-color:#ADD8E6"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data da oferta:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="30" size="30"
+					effect="fold"
+					value="#{ofertaescoladominicalBean.oferta.dataOfertaEescolaDominical}" 
+					 pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					
+					<h:outputLabel value="classe:"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" 
+						/>
+				<p:selectOneMenu filter="true"
+					value="#{ofertaescoladominicalBean.oferta.classe}"
+					converter="omnifaces.SelectItemsConverter"
+					>
+					<f:selectItem noSelectionOption="true"
+						itemLabel="selecione a classe" />
+					<f:selectItems value="#{ofertaescoladominicalBean.classesDaEscolaDominical}" var="classe"
+						itemValue="#{classe}" itemLabel="#{classe.nomeClasse}" />
+				</p:selectOneMenu>
+					
+					<h:outputLabel value="Valor da oferta:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="30" size="30"
+					value="#{ofertaescoladominicalBean.oferta.valorOfertaEscolaDominical}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+			
+					<p:commandButton value="Salvar"
+					actionListener="#{ofertaescoladominicalBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" 
+					/>
+					
+				<p:commandButton 
+					value="Fechar" 
+					oncomplete="PF('dialogo').hide();" 
+				/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

@@ -1,0 +1,55 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the foto_membro database table.
+ * 
+ */
+@Entity
+@Table(name="foto_membro")
+@NamedQuery(name="FotoMembro.findAll", query="SELECT f FROM FotoMembro f")
+public class FotoMembro implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte[] imagem;
+	private BigInteger membroCodigo;
+
+	public FotoMembro() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Lob
+	public byte[] getImagem() {
+		return this.imagem;
+	}
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+
+
+	@Column(name="membro_codigo")
+	public BigInteger getMembroCodigo() {
+		return this.membroCodigo;
+	}
+
+	public void setMembroCodigo(BigInteger membroCodigo) {
+		this.membroCodigo = membroCodigo;
+	}
+
+}

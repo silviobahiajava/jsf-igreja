@@ -1,0 +1,78 @@
+package meucursoJPA.model.secretaria;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the aula database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Aula.findAll", query="SELECT a FROM Aula a")
+public class Aula extends meucursoJPA4.model.GenericDomain implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private java.math.BigInteger moduloId;
+	private String nome;
+	private Aluno aluno;
+	private AlunoAusenteEscolaDominical alunoAusenteEscolaDominical;
+
+	public Aula() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="modulo_id")
+	public java.math.BigInteger getModuloId() {
+		return this.moduloId;
+	}
+
+	public void setModuloId(java.math.BigInteger moduloId) {
+		this.moduloId = moduloId;
+	}
+
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	//bi-directional many-to-one association to Aluno
+	@ManyToOne
+	@JoinColumn(name="codigo")
+	public Aluno getAluno() {
+		return this.aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+
+	//bi-directional many-to-one association to AlunoAusenteEscolaDominical
+	@ManyToOne
+	@JoinColumn(name="codigo", referencedColumnName="aula_codigo")
+	public AlunoAusenteEscolaDominical getAlunoAusenteEscolaDominical() {
+		return this.alunoAusenteEscolaDominical;
+	}
+
+	public void setAlunoAusenteEscolaDominical(AlunoAusenteEscolaDominical alunoAusenteEscolaDominical) {
+		this.alunoAusenteEscolaDominical = alunoAusenteEscolaDominical;
+	}
+
+}

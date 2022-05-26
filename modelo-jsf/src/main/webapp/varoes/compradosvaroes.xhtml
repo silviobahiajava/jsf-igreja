@@ -1,0 +1,148 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			
+			
+					
+		<h:form id="formListagem">
+		<p:panel header="Registro de compras do grupo de varões">
+		
+			
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				styleClass="tabelaconteudo"
+				paginator="true" value="#{compradosvaroesBean.compras}" var="compra" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						style="background-color:#FAF0E6;color:#006400;"
+						actionListener="#{compradosvaroesBean.novo}" update=":formCadastro:painel" />
+						<h:button value="compraspendentes" outcome="/varoes/compraspendentesdosvaroes.xhtml"
+							
+							>
+						</h:button>
+						<h:button value="compraspagas" outcome="/varoes/compraspagasdosvaroes.xhtml"
+							>
+						</h:button>
+						
+						<h:button value="lancamentos" outcome="/varoes/lancamentovarao.xhtml"
+							
+							>
+						</h:button>
+						
+						<h:button value="compraspendentes" outcome="/varoes/compraspendentesdosvaroes.xhtml"
+							>
+						</h:button>
+						
+						<h:button value="orcamentos" outcome="/igreja/despesasdaigreja.xhtml"
+							>
+						</h:button>
+				</f:facet>
+
+				<p:column headerText="Data da compra" sortBy="#{compra.dataCompraVarao}"
+					width="30"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{compra.dataCompraVarao}">
+					<h:outputText value="#{compra.dataCompraVarao}" style="color:green;font-size:12px;">
+						<f:convertDateTime  
+						 locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Tipo de compra" sortBy="#{compra.tipoCompra}"
+					width="30"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{compra.tipoCompra}">
+					<h:outputText value="#{compra.tipoCompra}" style="color:green;font-size:12px;"/>
+				</p:column>
+					
+					<p:column headerText="Num.º Pedido" sortBy="#{compra.numeroNota}"
+						width="50"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{compra.numeroNota}">
+					<h:outputText value="#{compra.numeroNota}" style="color:green;font-size:12px;"/>
+				</p:column>
+				<p:column headerText="Valor" sortBy="#{compra.valorCompraVarao}"
+					width="30"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{compra.valorCompraVarao}">
+					<h:outputText value="#{compra.valorCompraVarao}" style="color:green;font-size:12px;" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Descricao" sortBy="#{compra.descricao}"
+					width="50"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{compra.descricao}">
+					<h:outputText value="#{compra.descricao}" style="color:green;font-size:12px;"/>
+				</p:column>
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="registro de compras" widgetVar="dialogo"
+		position="left"
+		hideEffect="puff" showEffect="puff" 
+		style="background-color:#ADD8E6;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<p:outputLabel value="Data da compra:" style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+				<p:calendar maxlength="50" size="30"
+					effect="fold"
+					value="#{compradosvaroesBean.compra.dataCompraVarao}" 
+					locale="pt_BR"/>
+					
+					<p:outputLabel  value="compra a vista:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+        <p:selectBooleanCheckbox value="#{compradosvaroesBean.compra.compraAvistaVarao}">
+           
+        </p:selectBooleanCheckbox>
+        
+        	<p:outputLabel  value="compra a prazo:" 
+        	style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+        <p:selectBooleanCheckbox value="#{compradosvaroesBean.compra.compraAprazoVarao}">
+        </p:selectBooleanCheckbox>
+        
+					<p:outputLabel value="Num.º  Pedido:" style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+				<p:inputText maxlength="50" size="30"
+					value="#{compradosvaroesBean.compra.numeroNota}" />
+					
+					<p:outputLabel value="Valor:" style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+				<p:inputText maxlength="30" size="30"
+					value="#{compradosvaroesBean.compra.valorCompraVarao}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					<p:outputLabel value="Descrição:" style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+				<p:inputText maxlength="50" size="50"
+					value="#{compradosvaroesBean.compra.descricao}" />
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{compradosvaroesBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	
+	</ui:define>
+
+</ui:composition>
+
+

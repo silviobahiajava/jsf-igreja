@@ -1,0 +1,89 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.math.BigInteger;
+
+
+/**
+ * The persistent class for the aniversario database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Aniversario.findAll", query="SELECT a FROM Aniversario a")
+public class Aniversario implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte adulto;
+	private BigInteger aniversarianteAdultoCodigo;
+	private byte crianca;
+	private Date dataAniversario;
+	private Crianca criancaBean;
+
+	public Aniversario() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	public byte getAdulto() {
+		return this.adulto;
+	}
+
+	public void setAdulto(byte adulto) {
+		this.adulto = adulto;
+	}
+
+
+	@Column(name="aniversariante_adulto_codigo")
+	public BigInteger getAniversarianteAdultoCodigo() {
+		return this.aniversarianteAdultoCodigo;
+	}
+
+	public void setAniversarianteAdultoCodigo(BigInteger aniversarianteAdultoCodigo) {
+		this.aniversarianteAdultoCodigo = aniversarianteAdultoCodigo;
+	}
+
+
+	public byte getCrianca() {
+		return this.crianca;
+	}
+
+	public void setCrianca(byte crianca) {
+		this.crianca = crianca;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_aniversario")
+	public Date getDataAniversario() {
+		return this.dataAniversario;
+	}
+
+	public void setDataAniversario(Date dataAniversario) {
+		this.dataAniversario = dataAniversario;
+	}
+
+
+	//bi-directional many-to-one association to Crianca
+	@ManyToOne
+	@JoinColumn(name="aniversariante_infantil_codigo")
+	public Crianca getCriancaBean() {
+		return this.criancaBean;
+	}
+
+	public void setCriancaBean(Crianca criancaBean) {
+		this.criancaBean = criancaBean;
+	}
+
+}

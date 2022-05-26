@@ -1,0 +1,154 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			
+					
+		<h:form id="formListagem">
+		<p:panel header="Listagem de contribuições">
+			  
+		  
+		  	
+						
+					
+		
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				style="margin-top:50px;"
+				paginator="true" value="#{campanhadopecriancasBean.campanhas}" var="contribuicao" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Nova contribuiçao" oncomplete="PF('dialogo').show();"
+						actionListener="#{campanhadopecriancasBean.novo}" update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data" sortBy="#{contribuicao.dataPagamento}"
+						
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{contribuicao.dataPagamento}">
+						<h:outputText value="#{contribuicao.dataPagamento}"
+							style="color: #000080;font-size:12px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+									timeZone="America/Sao_Paulo" />
+							</h:outputText>
+					</p:column>
+					
+					<p:column headerText="contribuintes" 
+						sortBy="#{contribuicao.contribuinte.nome}"
+						style="background-color:#C0C0C0;color:red;font-size:12px;" 
+						filterBy="#{contribuicao.contribuinte.nome}">
+					<h:outputText value="#{contribuicao.contribuinte.nome}" 
+					style="color: #000080;font-size:12px;"/>
+				</p:column>
+				<p:column headerText="Valor" 
+					
+					sortBy="#{contribuicao.valorPraPagar}"
+					style="background-color:#C0C0C0;color:red;font-size:12px;" 
+					filterBy="#{contribuicao.valorPraPagar}">
+					<h:outputText value="#{contribuicao.valorPraPagar}" 
+					style="color: #000080;font-size:12px;">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="Minisério Infantil--Campanha do Pé" widgetVar="dialogo"
+		position="left"
+		
+		hideEffect="puff" showEffect="puff" 
+		style="background-color:#ADD8E6;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<h:outputLabel value="Data:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="30" size="30"
+					effect="fold"
+					value="#{campanhadopecriancasBean.campanha.dataPagamento}" 
+					 pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						timeZone="America/Sao_Paulo" />
+					
+					<h:outputLabel value=" contribuinte:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:selectOneMenu filter="true"
+					value="#{campanhadopecriancasBean.campanha.contribuinte}"
+					converter="omnifaces.SelectItemsConverter"
+					>
+					<f:selectItem noSelectionOption="true"
+						itemLabel="selecione o contribuinte" />
+					<f:selectItems value="#{campanhadopecriancasBean.contribuintes}" var="cont"
+						itemValue="#{cont}" itemLabel="#{cont.nome}" />
+				</p:selectOneMenu>
+				
+				<h:outputLabel value="tamanho do pe:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+						
+				<p:inputText maxlength="30" size="30"
+					value="#{campanhadopecriancasBean.tamanhodope}">
+						<p:ajax 
+							listener="#{campanhadopecriancasBean.calcularValorCampanhaDoPe}"
+							event="blur"
+							update=":formCadastro:valordope" />
+					</p:inputText>
+					
+					
+						<h:outputLabel value="Valor mensal:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="30" size="30" id="valordope"
+					value="#{campanhadopecriancasBean.valorAPagarPorMes}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+					
+					<h:outputLabel value="Valor recebido:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+						/>
+				<p:inputText maxlength="30" size="30" 
+					value="#{campanhadopecriancasBean.valorRecebido}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</p:inputText>
+					
+					
+					
+				
+				
+					
+				
+			</h:panelGrid>
+			
+
+			<h:panelGrid columns="2">
+					<p:commandButton 
+					 	value="Salvar"
+						 actionListener="#{campanhadopecriancasBean.salvar}"
+						 update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+				/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+
+

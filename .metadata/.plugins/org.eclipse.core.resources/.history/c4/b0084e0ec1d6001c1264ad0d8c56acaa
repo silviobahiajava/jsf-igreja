@@ -1,0 +1,152 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the campanha_das_criancas database table.
+ * 
+ */
+@Entity
+@Table(name="campanha_das_criancas")
+@NamedQuery(name="CampanhaDasCrianca.findAll", query="SELECT c FROM CampanhaDasCrianca c")
+public class CampanhaDasCrianca implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private byte campanhaDoPe;
+	private Date dataCampanha;
+	private String nomeCampanhaDasCriancas;
+	private String objetivoCampanhaDasCriancas;
+	private byte outroTipoDeCampanha;
+	private BigDecimal valorCampanhaDasCriancas;
+	private Grupo grupo;
+	private Lancamento lancamento;
+	private List<ContribuicaoDasCrianca> contribuicaoDasCriancas;
+
+	public CampanhaDasCrianca() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="campanha_do_pe")
+	public byte getCampanhaDoPe() {
+		return this.campanhaDoPe;
+	}
+
+	public void setCampanhaDoPe(byte campanhaDoPe) {
+		this.campanhaDoPe = campanhaDoPe;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_campanha")
+	public Date getDataCampanha() {
+		return this.dataCampanha;
+	}
+
+	public void setDataCampanha(Date dataCampanha) {
+		this.dataCampanha = dataCampanha;
+	}
+
+
+	@Column(name="nome_campanha_das_criancas")
+	public String getNomeCampanhaDasCriancas() {
+		return this.nomeCampanhaDasCriancas;
+	}
+
+	public void setNomeCampanhaDasCriancas(String nomeCampanhaDasCriancas) {
+		this.nomeCampanhaDasCriancas = nomeCampanhaDasCriancas;
+	}
+
+
+	@Column(name="objetivo_campanha_das_criancas")
+	public String getObjetivoCampanhaDasCriancas() {
+		return this.objetivoCampanhaDasCriancas;
+	}
+
+	public void setObjetivoCampanhaDasCriancas(String objetivoCampanhaDasCriancas) {
+		this.objetivoCampanhaDasCriancas = objetivoCampanhaDasCriancas;
+	}
+
+
+	@Column(name="outro_tipo_de_campanha")
+	public byte getOutroTipoDeCampanha() {
+		return this.outroTipoDeCampanha;
+	}
+
+	public void setOutroTipoDeCampanha(byte outroTipoDeCampanha) {
+		this.outroTipoDeCampanha = outroTipoDeCampanha;
+	}
+
+
+	@Column(name="valor_campanha_das_criancas")
+	public BigDecimal getValorCampanhaDasCriancas() {
+		return this.valorCampanhaDasCriancas;
+	}
+
+	public void setValorCampanhaDasCriancas(BigDecimal valorCampanhaDasCriancas) {
+		this.valorCampanhaDasCriancas = valorCampanhaDasCriancas;
+	}
+
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	public Grupo getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+
+	//bi-directional many-to-one association to Lancamento
+	@ManyToOne
+	public Lancamento getLancamento() {
+		return this.lancamento;
+	}
+
+	public void setLancamento(Lancamento lancamento) {
+		this.lancamento = lancamento;
+	}
+
+
+	//bi-directional many-to-one association to ContribuicaoDasCrianca
+	@OneToMany(mappedBy="campanhaDasCrianca")
+	public List<ContribuicaoDasCrianca> getContribuicaoDasCriancas() {
+		return this.contribuicaoDasCriancas;
+	}
+
+	public void setContribuicaoDasCriancas(List<ContribuicaoDasCrianca> contribuicaoDasCriancas) {
+		this.contribuicaoDasCriancas = contribuicaoDasCriancas;
+	}
+
+	public ContribuicaoDasCrianca addContribuicaoDasCrianca(ContribuicaoDasCrianca contribuicaoDasCrianca) {
+		getContribuicaoDasCriancas().add(contribuicaoDasCrianca);
+		contribuicaoDasCrianca.setCampanhaDasCrianca(this);
+
+		return contribuicaoDasCrianca;
+	}
+
+	public ContribuicaoDasCrianca removeContribuicaoDasCrianca(ContribuicaoDasCrianca contribuicaoDasCrianca) {
+		getContribuicaoDasCriancas().remove(contribuicaoDasCrianca);
+		contribuicaoDasCrianca.setCampanhaDasCrianca(null);
+
+		return contribuicaoDasCrianca;
+	}
+
+}

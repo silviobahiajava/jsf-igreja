@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			
+		<h:form id="formListagem">
+		<p:panel header="Registro de Ofertas do Grupo de Varões">
+			
+		
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				paginator="true" value="#{ofertadosvaroesBean.ofertas}" var="oferta" rows="5">
+				<f:facet name="header">
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
+						actionListener="#{ofertadosvaroesBean.novo}" update=":formCadastro:painel" />
+						<p:spacer width="10"/>
+						<p:button
+							value="voltar"
+							outcome="financeiro"/>
+				</f:facet>
+
+				<p:column headerText="Data da oferta" sortBy="#{oferta.dataOfertaVarao}"
+					width="30"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{oferta.dataOfertaVarao}">
+					<h:outputText value="#{oferta.dataOfertaVarao}"  style="color:green;font-size:12px;">
+						<f:convertDateTime  
+						 locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				
+					
+					
+				<p:column headerText="Valor da oferta" sortBy="#{oferta.valorOfertaVarao}"
+					width="30"
+					style="background-color:#B0C4DE;color:red"
+					filterBy="#{oferta.valorOfertaVarao}">
+					<h:outputText value="#{oferta.valorOfertaVarao}" 
+					style="color:green;font-size:12px;"
+					>
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+				
+				
+			</p:dataTable>
+
+			
+		</p:panel>
+	</h:form>
+
+	<p:dialog header="registro de ofertas do Grupo de Varões" widgetVar="dialogo"
+		position="left"
+		hideEffect="puff" showEffect="puff" 
+		style="background-color:#ADD8E6;margin-left:1px;"
+		draggable="false" resizable="false" closable="false">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
+				<p:outputLabel value="Data da oferta:" 
+				style="color:red;font-size:12px;font-style:italic;font-weight:bold"
+				/>
+				<p:calendar maxlength="50" size="30"
+					effect="fold"
+					value="#{ofertadosvaroesBean.oferta.dataOfertaVarao}" 
+					locale="pt_BR"/>
+        	
+        
+					<p:outputLabel value="Valor da oferta:" 
+					style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+				<p:inputText maxlength="30" size="30"
+					value="#{ofertadosvaroesBean.oferta.valorOfertaVarao}">
+						<f:convertNumber locale="pt" minFractionDigits="2" />
+					</p:inputText>
+					
+					
+					
+					
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="2">
+
+					
+					<p:commandButton value="Salvar"
+					actionListener="#{ofertadosvaroesBean.salvar}"
+					update=":mensagem  :formCadastro:painel :formListagem:tabela" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+   
+	</ui:define>
+
+</ui:composition>
+
+

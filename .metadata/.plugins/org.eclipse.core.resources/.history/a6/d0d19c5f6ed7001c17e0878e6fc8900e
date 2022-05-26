@@ -1,0 +1,100 @@
+package meucursoJPA.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the curso_profissional database table.
+ * 
+ */
+@Entity
+@Table(name="curso_profissional")
+@NamedQuery(name="CursoProfissional.findAll", query="SELECT c FROM CursoProfissional c")
+public class CursoProfissional implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private long codigo;
+	private String cargaHorariaCurso;
+	private String dataConclusaoCurso;
+	private String dataInicioCurso;
+	private String instituicaoCurso;
+	private String nomeCurso;
+	private CurriculoProfissional curriculoProfissional;
+
+	public CursoProfissional() {
+	}
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public long getCodigo() {
+		return this.codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+
+	@Column(name="carga_horaria_curso")
+	public String getCargaHorariaCurso() {
+		return this.cargaHorariaCurso;
+	}
+
+	public void setCargaHorariaCurso(String cargaHorariaCurso) {
+		this.cargaHorariaCurso = cargaHorariaCurso;
+	}
+
+
+	@Column(name="data_conclusao_curso")
+	public String getDataConclusaoCurso() {
+		return this.dataConclusaoCurso;
+	}
+
+	public void setDataConclusaoCurso(String dataConclusaoCurso) {
+		this.dataConclusaoCurso = dataConclusaoCurso;
+	}
+
+
+	@Column(name="data_inicio_curso")
+	public String getDataInicioCurso() {
+		return this.dataInicioCurso;
+	}
+
+	public void setDataInicioCurso(String dataInicioCurso) {
+		this.dataInicioCurso = dataInicioCurso;
+	}
+
+
+	@Column(name="instituicao_curso")
+	public String getInstituicaoCurso() {
+		return this.instituicaoCurso;
+	}
+
+	public void setInstituicaoCurso(String instituicaoCurso) {
+		this.instituicaoCurso = instituicaoCurso;
+	}
+
+
+	@Column(name="nome_curso")
+	public String getNomeCurso() {
+		return this.nomeCurso;
+	}
+
+	public void setNomeCurso(String nomeCurso) {
+		this.nomeCurso = nomeCurso;
+	}
+
+
+	//bi-directional many-to-one association to CurriculoProfissional
+	@ManyToOne
+	@JoinColumn(name="curriculo_codigo")
+	public CurriculoProfissional getCurriculoProfissional() {
+		return this.curriculoProfissional;
+	}
+
+	public void setCurriculoProfissional(CurriculoProfissional curriculoProfissional) {
+		this.curriculoProfissional = curriculoProfissional;
+	}
+
+}

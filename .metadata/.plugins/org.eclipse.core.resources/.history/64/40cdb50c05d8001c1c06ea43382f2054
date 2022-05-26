@@ -1,0 +1,18 @@
+package meucursoJPA.model.administrativo;
+
+import java.math.BigInteger;
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+@Generated(value="Dali", date="2022-05-20T03:05:51.020-0300")
+@StaticMetamodel(Usuario.class)
+public class Usuario_ {
+	public static volatile SingularAttribute<Usuario, Long> codigo;
+	public static volatile SingularAttribute<Usuario, BigInteger> estabelecimentoCodigo;
+	public static volatile SingularAttribute<Usuario, byte[]> grupo;
+	public static volatile SingularAttribute<Usuario, FuncaoUsuario> funcaoUsuario;
+	public static volatile SingularAttribute<Usuario, String> cpf;
+	public static volatile SingularAttribute<Usuario, String> login;
+	public static volatile SingularAttribute<Usuario, String> senha;
+}

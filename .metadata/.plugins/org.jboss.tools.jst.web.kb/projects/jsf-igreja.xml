@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths/>
+ <validation>
+  <el>
+   <linked-el length="24" name="%0" offset="6844" path="%1"/>
+   <linked-el length="24" name="%2" offset="6138" path="%1"/>
+   <linked-el length="19" name="%3" offset="10441" path="%1"/>
+   <linked-el length="19" name="%3" offset="11965" path="%1"/>
+   <linked-el length="18" name="%3" offset="10353" path="%1"/>
+   <linked-el length="37" name="%4" offset="11539" path="%1"/>
+   <linked-el length="38" name="%5" offset="9370" path="%1"/>
+   <linked-el length="35" name="%6" offset="8933" path="%1"/>
+   <linked-el length="33" name="%7" offset="8742" path="%1"/>
+   <linked-el length="19" name="%8" offset="10441" path="%1"/>
+   <linked-el length="19" name="%8" offset="12184" path="%1"/>
+   <linked-el length="19" name="%8" offset="11965" path="%1"/>
+   <linked-el length="18" name="%8" offset="10353" path="%1"/>
+   <linked-el length="19" name="%8" offset="10879" path="%1"/>
+   <linked-el length="19" name="%8" offset="10660" path="%1"/>
+   <linked-el length="19" name="%8" offset="12403" path="%1"/>
+   <linked-el length="103" name="%9" offset="6410" path="%1"/>
+   <linked-el length="28" name="%9" offset="7760" path="%1"/>
+   <linked-el length="29" name="%10" offset="9941" path="%1"/>
+   <linked-el length="29" name="%10" offset="11460" path="%1"/>
+   <linked-el length="37" name="%10" offset="11539" path="%1"/>
+   <linked-el length="19" name="%11" offset="12184" path="%1"/>
+   <linked-el length="19" name="%11" offset="10660" path="%1"/>
+   <linked-el length="59" name="%12" offset="8462" path="%1"/>
+   <linked-el length="19" name="%13" offset="10879" path="%1"/>
+   <linked-el length="19" name="%13" offset="12403" path="%1"/>
+   <linked-el length="29" name="%14" offset="11460" path="%1"/>
+   <linked-el length="29" name="%15" offset="9941" path="%1"/>
+   <linked-el length="38" name="%16" offset="9370" path="%1"/>
+   <linked-el length="36" name="%16" offset="9128" path="%1"/>
+   <linked-el length="59" name="%16" offset="8462" path="%1"/>
+   <linked-el length="41" name="%16" offset="9170" path="%1"/>
+   <linked-el length="40" name="%16" offset="8240" path="%1"/>
+   <linked-el length="33" name="%16" offset="8742" path="%1"/>
+   <linked-el length="35" name="%16" offset="8933" path="%1"/>
+   <linked-el length="30" name="%16" offset="7491" path="%1"/>
+   <linked-el length="24" name="%17" offset="6138" path="%1"/>
+   <linked-el length="38" name="%17" offset="9370" path="%1"/>
+   <linked-el length="36" name="%17" offset="9128" path="%1"/>
+   <linked-el length="59" name="%17" offset="8462" path="%1"/>
+   <linked-el length="24" name="%17" offset="6844" path="%1"/>
+   <linked-el length="41" name="%17" offset="9170" path="%1"/>
+   <linked-el length="40" name="%17" offset="8240" path="%1"/>
+   <linked-el length="33" name="%17" offset="8742" path="%1"/>
+   <linked-el length="35" name="%17" offset="8933" path="%1"/>
+   <linked-el length="30" name="%17" offset="7491" path="%1"/>
+   <linked-el length="103" name="%18" offset="6410" path="%1"/>
+   <linked-el length="28" name="%18" offset="7760" path="%1"/>
+   <linked-el length="36" name="%19" offset="9128" path="%1"/>
+   <linked-el length="41" name="%19" offset="9170" path="%1"/>
+   <linked-el length="103" name="%20" offset="6410" path="%1"/>
+   <linked-el length="28" name="%20" offset="7760" path="%1"/>
+   <linked-el length="9" name="%20" offset="7475" path="%1"/>
+  </el>
+ </validation>
+ <aliases>
+  <alias path="treeSelectionView" value="%10"/>
+  <alias path="dataListView.selectedCar.brand" value="%12"/>
+  <alias path="dataListView.cars3" value="%0"/>
+  <alias path="document.type" value="%13"/>
+  <alias path="dataListView.cars1" value="%2"/>
+  <alias path="dataListView.selectedCar" value="%16"/>
+  <alias path="dataListView.selectedCar.price" value="%5"/>
+  <alias path="treeSelectionView.root2" value="%14"/>
+  <alias path="treeSelectionView.root1" value="%15"/>
+  <alias path="car.brand" value="%18"/>
+  <alias path="document" value="%8"/>
+  <alias path="dataListView.selectedCar.id" value="%7"/>
+  <alias path="car.year" value="%9"/>
+  <alias
+   path="/jsf-igreja/src/main/webapp/docs/core/responsive-mode.xhtml" value="%1"/>
+  <alias path="treeSelectionView.selectedNodes1" value="%4"/>
+  <alias path="document.name" value="%3"/>
+  <alias path="dataListView.selectedCar.year" value="%6"/>
+  <alias path="dataListView.selectedCar.color" value="%19"/>
+  <alias path="car" value="%20"/>
+  <alias path="document.size" value="%11"/>
+  <alias path="dataListView" value="%17"/>
+ </aliases>
+ <includes/>
+ <uris/>
+</kb-project>

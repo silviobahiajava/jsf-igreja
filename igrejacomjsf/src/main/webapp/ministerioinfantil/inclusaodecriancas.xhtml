@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="corpo">
+			<h:form id="formCadastro">
+				<p:tabView >
+				<p:tab title="dados da criança">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Nome:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="50" size="50"
+						id="nomcriancae"
+						style="color:green;font-size:12px;"
+						value="#{criancaBean.crianca.nome}" />
+						
+							<h:outputLabel value="idade:" for="idade"
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						
+						<p:inputText maxlength="20" size="20"
+						id="idade"
+						style="color:green;font-size:12px;"
+						value="#{criancaBean.crianca.idade}" />
+					</h:panelGrid>
+				
+				</p:tab>
+				
+				<p:tab title="pais ou responsáveis">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="codigo:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<h:outputText maxlength="50" size="50"
+						style="color:green;font-size:12px;"
+						value="#{criancaBean.crianca.codigo}" />
+						
+					<h:outputLabel value="Nome do pai ou responsável:" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+					<p:inputText maxlength="50" size="50"
+						id="nomedopai"
+						style="color:green;font-size:12px;"
+						value="#{criancaBean.filiacao.nomeDoPai}" />
+						
+						<h:outputLabel value="nome da mãe ou responsável" 
+						style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+						<p:inputText maxlength="50" size="50"
+						id="nomedamae"
+						style="color:green;font-size:12px;"
+						value="#{criancaBean.filiacao.nomeDaMae}" />
+						
+						
+						
+					
+					
+					
+						
+					
+					</h:panelGrid>
+				</p:tab>
+				
+				
+				
+				
+				<p:tab title="endereço">
+					<h3>endereço </h3>
+				
+					<h:panelGrid columns="2">
+					
+						<h:outputLabel value="rua-avenida"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						
+						<p:inputText value="#{criancaBean.crianca.endereco}" size="50"
+							maxlength="100" id="rua2" style="color:green;font-size:12px;" />
+						
+						<h:outputLabel value="numero"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold"/>
+						
+						<h:inputText value="#{criancaBean.crianca.numeroEndereco}" size="10"
+							maxlength="10" id="numero2" style="color:green;font-size:12px;" />
+						
+						<h:outputLabel value="bairro"
+							style="color:red;font-size:12px;font-style:italic;font-weight:bold" />
+						
+						<p:inputText value="#{criancaBean.crianca.bairro}" size="50"
+							maxlength="50" style="color:green;font-size:12px;" id="bairro2" />
+					
+				</h:panelGrid>
+				</p:tab>
+			
+			</p:tabView>
+			
+		
+			
+			
+			
+			 <p:commandButton value="matricula"r
+						actionListener="#{criancaBean.salvar}"
+						update=":mensagem  :formCadastro" 
+						
+						/>
+			
+						<p:button value="voltar"
+							outcome="/ministerioinfantil/listagemdecriancas.xhtml">
+						</p:button>
+			</h:form>
+			
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
